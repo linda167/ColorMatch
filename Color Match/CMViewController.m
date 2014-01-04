@@ -20,6 +20,11 @@
 
 @implementation CMViewController
 
+- (NSUInteger)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationPortrait + UIInterfaceOrientationPortraitUpsideDown;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -35,6 +40,8 @@
     NSArray *row3 = [NSArray arrayWithObjects:_Cell20,_Cell21, _Cell22, nil];
     
     self.colorCellSections = [NSMutableArray arrayWithObjects:row1, row2, row3, nil];
+    
+    [self DrawVerticalConnectingLines];
 }
 
 - (void)didReceiveMemoryWarning
@@ -142,6 +149,36 @@
     
     // Trigger update of color cells
     [self UpdateColorCells];
+}
+
+-(void)DrawVerticalConnectingLines
+{
+    // We want to connect lines from the top color buttons to the bottom row of color cells
+    NSArray *topConnections = self.topColorButtons;
+    int rowCount = (int)[self.colorCellSections count];
+    NSArray *bottomConnections = [self.colorCellSections objectAtIndex:rowCount - 1];
+    
+    // We should assert that top connections and bottom connections have equal number of items
+    int itemCount = (int)[topConnections count];
+    for (int i=0; i<itemCount; i++)
+    {
+        // TODO: lindach
+        // Test drawing a line
+        UIView *topConnection = [topConnections objectAtIndex:i];
+        int topAdjustment = -13;   // Accounts for extra spacing in top button
+        int topY = topConnection.frame.origin.y + topConnection.frame.size.height + topAdjustment;
+        int xAdjustment = -1; // Account for the fact that our width is 3 pixels
+        int topX = topConnection.frame.origin.x + topConnection.frame.size.width / 2 + xAdjustment;
+        
+        UIImageView *bottomConnection = [bottomConnections objectAtIndex:i];;
+        int bottomAdjustment = 3;   // Accounts for extra spacing in bottom button
+        int bottomY = bottomConnection.frame.origin.y + bottomAdjustment;
+        
+        UIView *line = [[UIView alloc] initWithFrame:CGRectMake(topX, topY, 3, bottomY - topY)];
+        line.backgroundColor = [UIColor colorWithRed:(192/255.0) green:(192/255.0) blue:(192/255.0) alpha:1];
+        [self.view addSubview:line];
+        [self.view sendSubviewToBack:line];
+    }
 }
 
 -(void)UpdateColorCells

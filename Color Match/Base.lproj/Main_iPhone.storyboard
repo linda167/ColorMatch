@@ -100,7 +100,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fhv-Y7-P7z">
-                                <rect key="frame" x="39" y="440" width="50" height="50"/>
+                                <rect key="frame" x="39" y="436" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="EmptyCircle.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -110,7 +110,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LIK-yj-Ir9">
-                                <rect key="frame" x="39" y="498" width="50" height="50"/>
+                                <rect key="frame" x="39" y="497" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="EmptyCircle.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -132,27 +132,27 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="BlockWhite.png" translatesAutoresizingMaskIntoConstraints="NO" id="OTS-gV-3wd">
-                                <rect key="frame" x="103" y="440" width="50" height="50"/>
+                                <rect key="frame" x="103" y="436" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="BlockWhite.png" translatesAutoresizingMaskIntoConstraints="NO" id="yI1-uI-jC1">
-                                <rect key="frame" x="167" y="440" width="50" height="50"/>
+                                <rect key="frame" x="167" y="436" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="BlockWhite.png" translatesAutoresizingMaskIntoConstraints="NO" id="qgd-dp-LO1">
-                                <rect key="frame" x="231" y="440" width="50" height="50"/>
+                                <rect key="frame" x="231" y="436" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="BlockWhite.png" translatesAutoresizingMaskIntoConstraints="NO" id="bAZ-wl-lVZ">
-                                <rect key="frame" x="103" y="498" width="50" height="50"/>
+                                <rect key="frame" x="103" y="497" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="BlockWhite.png" translatesAutoresizingMaskIntoConstraints="NO" id="4Jc-T7-hYh">
-                                <rect key="frame" x="167" y="498" width="50" height="50"/>
+                                <rect key="frame" x="167" y="497" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="BlockWhite.png" translatesAutoresizingMaskIntoConstraints="NO" id="YOQ-uS-bzc">
-                                <rect key="frame" x="231" y="498" width="50" height="50"/>
+                                <rect key="frame" x="231" y="497" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
