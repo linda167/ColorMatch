@@ -18,6 +18,9 @@
 @property NSMutableArray *colorCellSections;
 @property NSMutableArray *verticalLines;
 @property NSMutableArray *horizontalLines;
+@property NSMutableArray *goalCellSections;
+@property NSMutableArray *goalTopColorsState;
+@property NSMutableArray *goalLeftColorsState;
 @end
 
 @implementation CMViewController
@@ -31,20 +34,52 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+
+    // Init color bar buttons
     self.topColorButtons = [NSArray arrayWithObjects:_Top1Button,_Top2Button, _Top3Button, nil];
     self.leftColorButtons = [NSArray arrayWithObjects:_Left1Button,_Left2Button, _Left3Button, nil];
     
+    // Init color bar states
     self.topColorsState = [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:0], [NSNumber numberWithInt:0], [NSNumber numberWithInt:0], nil];
     self.leftColorsState = [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:0], [NSNumber numberWithInt:0], [NSNumber numberWithInt:0], nil];
     
+    // Init color cell sections
     NSArray *row1 = [NSArray arrayWithObjects:_Cell00,_Cell01, _Cell02, nil];
     NSArray *row2 = [NSArray arrayWithObjects:_Cell10,_Cell11, _Cell12, nil];
     NSArray *row3 = [NSArray arrayWithObjects:_Cell20,_Cell21, _Cell22, nil];
     
     self.colorCellSections = [NSMutableArray arrayWithObjects:row1, row2, row3, nil];
     
+    // Init goal color cell sections
+    NSArray *goalRow1 = [NSArray arrayWithObjects:_Goal00,_Goal01, _Goal02, nil];
+    NSArray *goalRow2 = [NSArray arrayWithObjects:_Goal10,_Goal11, _Goal12, nil];
+    NSArray *goalRow3 = [NSArray arrayWithObjects:_Goal20,_Goal21, _Goal22, nil];
+    
+    self.goalCellSections = [NSMutableArray arrayWithObjects:goalRow1, goalRow2, goalRow3, nil];
+    
+    // Init goal color bar states
+    self.goalTopColorsState = [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:0], [NSNumber numberWithInt:0], [NSNumber numberWithInt:0], nil];
+    self.goalLeftColorsState = [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:0], [NSNumber numberWithInt:0], [NSNumber numberWithInt:0], nil];
+    
+    // Generate goal board
+    [self generateNewBoard];
+    
+    // Draw connecting lines
     [self DrawVerticalConnectingLines];
     [self DrawHorizontalConnectingLines];
+}
+
+- (void)generateNewBoard
+{
+    do
+    {
+        // Randomly generate goal color bar
+        [self RandomGenGoalStates];
+    }
+    while ([self CheckGoalSufficientDifficulty] == false);
+    
+    // Update goal cells
+    [self UpdateColorCells: self.goalCellSections :self.goalTopColorsState :self.goalLeftColorsState];
 }
 
 - (void)didReceiveMemoryWarning
@@ -112,13 +147,17 @@
     }
 }
 
-- (IBAction)GridButtonPressed:(id)sender {
-
+- (IBAction)GridButtonPressed:(id)sender
+{
     int selectedColor = (int)self.selectedColor;
-    
+    [self PressGridButtonWithColor:sender :selectedColor];
+}
+
+-(void)PressGridButtonWithColor:(UIButton *)button :(int)selectedColor
+{
     // Update color state on top and left bar
     NSNumber* wrappedSelectedColor = [NSNumber numberWithInt:selectedColor];
-    NSInteger topIndex = [self.topColorButtons indexOfObject:sender];
+    NSInteger topIndex = [self.topColorButtons indexOfObject:button];
     UIView *lineToUpdate;
     if (topIndex != NSNotFound)
     {
@@ -127,7 +166,7 @@
     }
     else
     {
-        NSInteger leftIndex = [self.leftColorButtons indexOfObject:sender];
+        NSInteger leftIndex = [self.leftColorButtons indexOfObject:button];
         // Should not be NSNotFound at ths point
         [self.leftColorsState replaceObjectAtIndex:leftIndex withObject:wrappedSelectedColor];
         lineToUpdate = [self.horizontalLines objectAtIndex:leftIndex];
@@ -137,30 +176,75 @@
     if (selectedColor == 0)
     {
         UIImage *btnImage1 = [UIImage imageNamed:@"EmptyCircle.png"];
-        [sender setImage:btnImage1 forState:UIControlStateNormal];
+        [button setImage:btnImage1 forState:UIControlStateNormal];
         lineToUpdate.backgroundColor = [self GetGrayColor];
     }
     else if (selectedColor == 1)
     {
         UIImage *btnImage1 = [UIImage imageNamed:@"FilledCircleBlue.png"];
-        [sender setImage:btnImage1 forState:UIControlStateNormal];
+        [button setImage:btnImage1 forState:UIControlStateNormal];
         lineToUpdate.backgroundColor = [self GetBlueColor];
     }
     else if (selectedColor == 2)
     {
         UIImage *btnImage1 = [UIImage imageNamed:@"FilledCircleRed.png"];
-        [sender setImage:btnImage1 forState:UIControlStateNormal];
+        [button setImage:btnImage1 forState:UIControlStateNormal];
         lineToUpdate.backgroundColor = [self GetRedColor];
     }
     else if (selectedColor == 3)
     {
         UIImage *btnImage1 = [UIImage imageNamed:@"FilledCircleYellow.png"];
-        [sender setImage:btnImage1 forState:UIControlStateNormal];
+        [button setImage:btnImage1 forState:UIControlStateNormal];
         lineToUpdate.backgroundColor = [self GetYellowColor];
     }
     
     // Trigger update of color cells
-    [self UpdateColorCells];
+    [self UpdateColorCells: self.colorCellSections :self.topColorsState :self.leftColorsState];
+}
+
+-(void)RandomGenGoalStates
+{
+    int topCount = (int)[self.goalTopColorsState count];
+    for (int i=0; i<topCount; i++)
+    {
+        int random = arc4random()%4;
+        NSNumber* wrappedNumber = [NSNumber numberWithInt:random];
+        [self.goalTopColorsState replaceObjectAtIndex:i withObject:wrappedNumber];
+    }
+    
+    int leftCount = (int)[self.goalLeftColorsState count];
+    for (int i=0; i<leftCount; i++)
+    {
+        int random = arc4random()%4;
+        NSNumber* wrappedNumber = [NSNumber numberWithInt:random];
+        [self.goalLeftColorsState replaceObjectAtIndex:i withObject:wrappedNumber];
+    }
+}
+
+-(BOOL)CheckGoalSufficientDifficulty
+{
+    // Check that we have all colors represented in the toggle states
+    bool has1 = false;
+    bool has2 = false;
+    bool has3 = false;
+    
+    for (NSNumber* number in self.goalTopColorsState){
+        int num = [number intValue];
+        if (num == 1)
+        {
+            has1 = true;
+        }
+        else if (num == 2)
+        {
+            has2 = true;
+        }
+        else if (num == 3)
+        {
+            has3 = true;
+        }
+    }
+    
+    return has1 && has2 && has3;
 }
 
 -(void)DrawVerticalConnectingLines
@@ -241,17 +325,17 @@
     self.horizontalLines = horizontalLines;
 }
 
--(void)UpdateColorCells
+-(void)UpdateColorCells:(NSMutableArray *)colorCellSections :(NSMutableArray*)topColorsState :(NSMutableArray*) leftColorsState
 {
-    int sectionsCount = (int)[self.colorCellSections count];
+    int sectionsCount = (int)[colorCellSections count];
     for (int i=0; i<sectionsCount; i++)
     {
-        NSArray *row = [self.colorCellSections objectAtIndex:i];
+        NSArray *row = [colorCellSections objectAtIndex:i];
         int rowLength = (int)[row count];
         for (int j=0; j<rowLength; j++)
         {
-            int topColor = [(NSNumber *)[self.topColorsState objectAtIndex:j] intValue];
-            int leftColor = [(NSNumber *)[self.leftColorsState objectAtIndex:i] intValue];
+            int topColor = [(NSNumber *)[topColorsState objectAtIndex:j] intValue];
+            int leftColor = [(NSNumber *)[leftColorsState objectAtIndex:i] intValue];
             
             UIImage *image;
             if (topColor == 0 && leftColor == 0)
@@ -309,4 +393,26 @@
     return [UIColor colorWithRed:(255/255.0) green:(0/255.0) blue:(0/255.0) alpha:1];
 }
 
+- (IBAction)NewBoard:(id)sender {
+    [self generateNewBoard];
+    [self resetCells];
+}
+
+-(void)resetCells
+{
+    // Clear top color buttons
+    for (int i=0; i < self.topColorButtons.count; i++)
+    {
+        UIButton *button = [self.topColorButtons objectAtIndex:i];
+        [self PressGridButtonWithColor:button :0];
+    }
+    
+    // Clear left color buttons
+    for (int i=0; i < self.leftColorButtons.count; i++)
+    {
+        UIButton *button = [self.leftColorButtons objectAtIndex:i];
+        [self PressGridButtonWithColor:button :0];
+    }
+    
+}
 @end

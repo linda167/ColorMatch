@@ -31,5 +31,15 @@
 @property (weak, nonatomic) IBOutlet UIImageView *Cell20;
 @property (weak, nonatomic) IBOutlet UIImageView *Cell21;
 @property (weak, nonatomic) IBOutlet UIImageView *Cell22;
+@property (weak, nonatomic) IBOutlet UIImageView *Goal00;
+@property (weak, nonatomic) IBOutlet UIImageView *Goal01;
+@property (weak, nonatomic) IBOutlet UIImageView *Goal02;
+@property (weak, nonatomic) IBOutlet UIImageView *Goal10;
+@property (weak, nonatomic) IBOutlet UIImageView *Goal11;
+@property (weak, nonatomic) IBOutlet UIImageView *Goal12;
+@property (weak, nonatomic) IBOutlet UIImageView *Goal20;
+@property (weak, nonatomic) IBOutlet UIImageView *Goal21;
+@property (weak, nonatomic) IBOutlet UIImageView *Goal22;
+- (IBAction)NewBoard:(id)sender;
 
 @end
