@@ -22,23 +22,28 @@
 		AF2C22471874B8B800082561 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF2C22261874B8B700082561 /* UIKit.framework */; };
 		AF2C224F1874B8B800082561 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AF2C224D1874B8B800082561 /* InfoPlist.strings */; };
 		AF2C22511874B8B800082561 /* Color_MatchTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2C22501874B8B800082561 /* Color_MatchTests.m */; };
-		AF852ADC1874B9CE005F6033 /* Blue.png in Resources */ = {isa = PBXBuildFile; fileRef = AF852AD91874B9CE005F6033 /* Blue.png */; };
-		AF852ADD1874B9CE005F6033 /* Green.png in Resources */ = {isa = PBXBuildFile; fileRef = AF852ADA1874B9CE005F6033 /* Green.png */; };
-		AF852ADE1874B9CE005F6033 /* Yellow.png in Resources */ = {isa = PBXBuildFile; fileRef = AF852ADB1874B9CE005F6033 /* Yellow.png */; };
-		AF852AE31874BCBD005F6033 /* EmptyCircle.png in Resources */ = {isa = PBXBuildFile; fileRef = AF852ADF1874BCBD005F6033 /* EmptyCircle.png */; };
-		AF852AE41874BCBD005F6033 /* FilledCircleBlue.png in Resources */ = {isa = PBXBuildFile; fileRef = AF852AE01874BCBD005F6033 /* FilledCircleBlue.png */; };
-		AF852AE51874BCBD005F6033 /* FilledCircleGreen.png in Resources */ = {isa = PBXBuildFile; fileRef = AF852AE11874BCBD005F6033 /* FilledCircleGreen.png */; };
-		AF852AE61874BCBD005F6033 /* FilledCircleYellow.png in Resources */ = {isa = PBXBuildFile; fileRef = AF852AE21874BCBD005F6033 /* FilledCircleYellow.png */; };
-		AFEB678A1874D4E00024E8F1 /* FilledCircleRed.png in Resources */ = {isa = PBXBuildFile; fileRef = AFEB67881874D4DF0024E8F1 /* FilledCircleRed.png */; };
-		AFEB678B1874D4E00024E8F1 /* Red.png in Resources */ = {isa = PBXBuildFile; fileRef = AFEB67891874D4E00024E8F1 /* Red.png */; };
-		AFEB67931874D8040024E8F1 /* BlockBlue.png in Resources */ = {isa = PBXBuildFile; fileRef = AFEB678C1874D8040024E8F1 /* BlockBlue.png */; };
-		AFEB67941874D8040024E8F1 /* BlockGreen.png in Resources */ = {isa = PBXBuildFile; fileRef = AFEB678D1874D8040024E8F1 /* BlockGreen.png */; };
-		AFEB67951874D8040024E8F1 /* BlockOrange.png in Resources */ = {isa = PBXBuildFile; fileRef = AFEB678E1874D8040024E8F1 /* BlockOrange.png */; };
-		AFEB67961874D8040024E8F1 /* BlockPurple.png in Resources */ = {isa = PBXBuildFile; fileRef = AFEB678F1874D8040024E8F1 /* BlockPurple.png */; };
-		AFEB67971874D8040024E8F1 /* BlockRed.png in Resources */ = {isa = PBXBuildFile; fileRef = AFEB67901874D8040024E8F1 /* BlockRed.png */; };
-		AFEB67981874D8040024E8F1 /* BlockWhite.png in Resources */ = {isa = PBXBuildFile; fileRef = AFEB67911874D8040024E8F1 /* BlockWhite.png */; };
-		AFEB67991874D8040024E8F1 /* BlockYellow.png in Resources */ = {isa = PBXBuildFile; fileRef = AFEB67921874D8040024E8F1 /* BlockYellow.png */; };
-		AFEB679B18750DB50024E8F1 /* White.png in Resources */ = {isa = PBXBuildFile; fileRef = AFEB679A18750DB50024E8F1 /* White.png */; };
+		AFADA21D1877D20D00FADA22 /* BlockBlue.png in Resources */ = {isa = PBXBuildFile; fileRef = AFADA2071877D20D00FADA22 /* BlockBlue.png */; };
+		AFADA21E1877D20D00FADA22 /* BlockGreen.png in Resources */ = {isa = PBXBuildFile; fileRef = AFADA2081877D20D00FADA22 /* BlockGreen.png */; };
+		AFADA21F1877D20D00FADA22 /* BlockOrange.png in Resources */ = {isa = PBXBuildFile; fileRef = AFADA2091877D20D00FADA22 /* BlockOrange.png */; };
+		AFADA2201877D20D00FADA22 /* BlockPurple.png in Resources */ = {isa = PBXBuildFile; fileRef = AFADA20A1877D20D00FADA22 /* BlockPurple.png */; };
+		AFADA2211877D20D00FADA22 /* BlockRed.png in Resources */ = {isa = PBXBuildFile; fileRef = AFADA20B1877D20D00FADA22 /* BlockRed.png */; };
+		AFADA2221877D20D00FADA22 /* BlockWhite.png in Resources */ = {isa = PBXBuildFile; fileRef = AFADA20C1877D20D00FADA22 /* BlockWhite.png */; };
+		AFADA2231877D20D00FADA22 /* BlockYellow.png in Resources */ = {isa = PBXBuildFile; fileRef = AFADA20D1877D20D00FADA22 /* BlockYellow.png */; };
+		AFADA2241877D20D00FADA22 /* Blue.png in Resources */ = {isa = PBXBuildFile; fileRef = AFADA20E1877D20D00FADA22 /* Blue.png */; };
+		AFADA2251877D20D00FADA22 /* BlueSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = AFADA20F1877D20D00FADA22 /* BlueSelected.png */; };
+		AFADA2261877D20D00FADA22 /* ButtonBar.png in Resources */ = {isa = PBXBuildFile; fileRef = AFADA2101877D20D00FADA22 /* ButtonBar.png */; };
+		AFADA2271877D20D00FADA22 /* EmptyCircle.png in Resources */ = {isa = PBXBuildFile; fileRef = AFADA2111877D20D00FADA22 /* EmptyCircle.png */; };
+		AFADA2281877D20D00FADA22 /* FilledCircleBlue.png in Resources */ = {isa = PBXBuildFile; fileRef = AFADA2121877D20D00FADA22 /* FilledCircleBlue.png */; };
+		AFADA2291877D20D00FADA22 /* FilledCircleGreen.png in Resources */ = {isa = PBXBuildFile; fileRef = AFADA2131877D20D00FADA22 /* FilledCircleGreen.png */; };
+		AFADA22A1877D20D00FADA22 /* FilledCircleRed.png in Resources */ = {isa = PBXBuildFile; fileRef = AFADA2141877D20D00FADA22 /* FilledCircleRed.png */; };
+		AFADA22B1877D20D00FADA22 /* FilledCircleYellow.png in Resources */ = {isa = PBXBuildFile; fileRef = AFADA2151877D20D00FADA22 /* FilledCircleYellow.png */; };
+		AFADA22C1877D20D00FADA22 /* Green.png in Resources */ = {isa = PBXBuildFile; fileRef = AFADA2161877D20D00FADA22 /* Green.png */; };
+		AFADA22D1877D20D00FADA22 /* Red.png in Resources */ = {isa = PBXBuildFile; fileRef = AFADA2171877D20D00FADA22 /* Red.png */; };
+		AFADA22E1877D20D00FADA22 /* RedSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = AFADA2181877D20D00FADA22 /* RedSelected.png */; };
+		AFADA22F1877D20D00FADA22 /* White.png in Resources */ = {isa = PBXBuildFile; fileRef = AFADA2191877D20D00FADA22 /* White.png */; };
+		AFADA2301877D20D00FADA22 /* WhiteSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = AFADA21A1877D20D00FADA22 /* WhiteSelected.png */; };
+		AFADA2311877D20D00FADA22 /* Yellow.png in Resources */ = {isa = PBXBuildFile; fileRef = AFADA21B1877D20D00FADA22 /* Yellow.png */; };
+		AFADA2321877D20D00FADA22 /* YellowSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = AFADA21C1877D20D00FADA22 /* YellowSelected.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,23 +77,28 @@
 		AF2C224C1874B8B800082561 /* Color MatchTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Color MatchTests-Info.plist"; sourceTree = "<group>"; };
 		AF2C224E1874B8B800082561 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AF2C22501874B8B800082561 /* Color_MatchTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Color_MatchTests.m; sourceTree = "<group>"; };
-		AF852AD91874B9CE005F6033 /* Blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Blue.png; path = ../../ColorProject/Images/Blue.png; sourceTree = "<group>"; };
-		AF852ADA1874B9CE005F6033 /* Green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Green.png; path = ../../ColorProject/Images/Green.png; sourceTree = "<group>"; };
-		AF852ADB1874B9CE005F6033 /* Yellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Yellow.png; path = ../../ColorProject/Images/Yellow.png; sourceTree = "<group>"; };
-		AF852ADF1874BCBD005F6033 /* EmptyCircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = EmptyCircle.png; path = ../../ColorProject/Images/EmptyCircle.png; sourceTree = "<group>"; };
-		AF852AE01874BCBD005F6033 /* FilledCircleBlue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = FilledCircleBlue.png; path = ../../ColorProject/Images/FilledCircleBlue.png; sourceTree = "<group>"; };
-		AF852AE11874BCBD005F6033 /* FilledCircleGreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = FilledCircleGreen.png; path = ../../ColorProject/Images/FilledCircleGreen.png; sourceTree = "<group>"; };
-		AF852AE21874BCBD005F6033 /* FilledCircleYellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = FilledCircleYellow.png; path = ../../ColorProject/Images/FilledCircleYellow.png; sourceTree = "<group>"; };
-		AFEB67881874D4DF0024E8F1 /* FilledCircleRed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = FilledCircleRed.png; path = ../../ColorProject/Images/FilledCircleRed.png; sourceTree = "<group>"; };
-		AFEB67891874D4E00024E8F1 /* Red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Red.png; path = ../../ColorProject/Images/Red.png; sourceTree = "<group>"; };
-		AFEB678C1874D8040024E8F1 /* BlockBlue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BlockBlue.png; path = ../../ColorProject/Images/BlockBlue.png; sourceTree = "<group>"; };
-		AFEB678D1874D8040024E8F1 /* BlockGreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BlockGreen.png; path = ../../ColorProject/Images/BlockGreen.png; sourceTree = "<group>"; };
-		AFEB678E1874D8040024E8F1 /* BlockOrange.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BlockOrange.png; path = ../../ColorProject/Images/BlockOrange.png; sourceTree = "<group>"; };
-		AFEB678F1874D8040024E8F1 /* BlockPurple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BlockPurple.png; path = ../../ColorProject/Images/BlockPurple.png; sourceTree = "<group>"; };
-		AFEB67901874D8040024E8F1 /* BlockRed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BlockRed.png; path = ../../ColorProject/Images/BlockRed.png; sourceTree = "<group>"; };
-		AFEB67911874D8040024E8F1 /* BlockWhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BlockWhite.png; path = ../../ColorProject/Images/BlockWhite.png; sourceTree = "<group>"; };
-		AFEB67921874D8040024E8F1 /* BlockYellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BlockYellow.png; path = ../../ColorProject/Images/BlockYellow.png; sourceTree = "<group>"; };
-		AFEB679A18750DB50024E8F1 /* White.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = White.png; path = ../../ColorProject/Images/White.png; sourceTree = "<group>"; };
+		AFADA2071877D20D00FADA22 /* BlockBlue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlockBlue.png; sourceTree = "<group>"; };
+		AFADA2081877D20D00FADA22 /* BlockGreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlockGreen.png; sourceTree = "<group>"; };
+		AFADA2091877D20D00FADA22 /* BlockOrange.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlockOrange.png; sourceTree = "<group>"; };
+		AFADA20A1877D20D00FADA22 /* BlockPurple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlockPurple.png; sourceTree = "<group>"; };
+		AFADA20B1877D20D00FADA22 /* BlockRed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlockRed.png; sourceTree = "<group>"; };
+		AFADA20C1877D20D00FADA22 /* BlockWhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlockWhite.png; sourceTree = "<group>"; };
+		AFADA20D1877D20D00FADA22 /* BlockYellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlockYellow.png; sourceTree = "<group>"; };
+		AFADA20E1877D20D00FADA22 /* Blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Blue.png; sourceTree = "<group>"; };
+		AFADA20F1877D20D00FADA22 /* BlueSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlueSelected.png; sourceTree = "<group>"; };
+		AFADA2101877D20D00FADA22 /* ButtonBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ButtonBar.png; sourceTree = "<group>"; };
+		AFADA2111877D20D00FADA22 /* EmptyCircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = EmptyCircle.png; sourceTree = "<group>"; };
+		AFADA2121877D20D00FADA22 /* FilledCircleBlue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FilledCircleBlue.png; sourceTree = "<group>"; };
+		AFADA2131877D20D00FADA22 /* FilledCircleGreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FilledCircleGreen.png; sourceTree = "<group>"; };
+		AFADA2141877D20D00FADA22 /* FilledCircleRed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FilledCircleRed.png; sourceTree = "<group>"; };
+		AFADA2151877D20D00FADA22 /* FilledCircleYellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FilledCircleYellow.png; sourceTree = "<group>"; };
+		AFADA2161877D20D00FADA22 /* Green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Green.png; sourceTree = "<group>"; };
+		AFADA2171877D20D00FADA22 /* Red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Red.png; sourceTree = "<group>"; };
+		AFADA2181877D20D00FADA22 /* RedSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RedSelected.png; sourceTree = "<group>"; };
+		AFADA2191877D20D00FADA22 /* White.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = White.png; sourceTree = "<group>"; };
+		AFADA21A1877D20D00FADA22 /* WhiteSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WhiteSelected.png; sourceTree = "<group>"; };
+		AFADA21B1877D20D00FADA22 /* Yellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Yellow.png; sourceTree = "<group>"; };
+		AFADA21C1877D20D00FADA22 /* YellowSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = YellowSelected.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -193,25 +203,31 @@
 		AF2C225A1874B95000082561 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				AFEB679A18750DB50024E8F1 /* White.png */,
-				AFEB678C1874D8040024E8F1 /* BlockBlue.png */,
-				AFEB678D1874D8040024E8F1 /* BlockGreen.png */,
-				AFEB678E1874D8040024E8F1 /* BlockOrange.png */,
-				AFEB678F1874D8040024E8F1 /* BlockPurple.png */,
-				AFEB67901874D8040024E8F1 /* BlockRed.png */,
-				AFEB67911874D8040024E8F1 /* BlockWhite.png */,
-				AFEB67921874D8040024E8F1 /* BlockYellow.png */,
-				AFEB67881874D4DF0024E8F1 /* FilledCircleRed.png */,
-				AFEB67891874D4E00024E8F1 /* Red.png */,
-				AF852ADF1874BCBD005F6033 /* EmptyCircle.png */,
-				AF852AE01874BCBD005F6033 /* FilledCircleBlue.png */,
-				AF852AE11874BCBD005F6033 /* FilledCircleGreen.png */,
-				AF852AE21874BCBD005F6033 /* FilledCircleYellow.png */,
-				AF852AD91874B9CE005F6033 /* Blue.png */,
-				AF852ADA1874B9CE005F6033 /* Green.png */,
-				AF852ADB1874B9CE005F6033 /* Yellow.png */,
+				AFADA2071877D20D00FADA22 /* BlockBlue.png */,
+				AFADA2081877D20D00FADA22 /* BlockGreen.png */,
+				AFADA2091877D20D00FADA22 /* BlockOrange.png */,
+				AFADA20A1877D20D00FADA22 /* BlockPurple.png */,
+				AFADA20B1877D20D00FADA22 /* BlockRed.png */,
+				AFADA20C1877D20D00FADA22 /* BlockWhite.png */,
+				AFADA20D1877D20D00FADA22 /* BlockYellow.png */,
+				AFADA20E1877D20D00FADA22 /* Blue.png */,
+				AFADA20F1877D20D00FADA22 /* BlueSelected.png */,
+				AFADA2101877D20D00FADA22 /* ButtonBar.png */,
+				AFADA2111877D20D00FADA22 /* EmptyCircle.png */,
+				AFADA2121877D20D00FADA22 /* FilledCircleBlue.png */,
+				AFADA2131877D20D00FADA22 /* FilledCircleGreen.png */,
+				AFADA2141877D20D00FADA22 /* FilledCircleRed.png */,
+				AFADA2151877D20D00FADA22 /* FilledCircleYellow.png */,
+				AFADA2161877D20D00FADA22 /* Green.png */,
+				AFADA2171877D20D00FADA22 /* Red.png */,
+				AFADA2181877D20D00FADA22 /* RedSelected.png */,
+				AFADA2191877D20D00FADA22 /* White.png */,
+				AFADA21A1877D20D00FADA22 /* WhiteSelected.png */,
+				AFADA21B1877D20D00FADA22 /* Yellow.png */,
+				AFADA21C1877D20D00FADA22 /* YellowSelected.png */,
 			);
 			name = Images;
+			path = ../Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -291,27 +307,32 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AFADA21F1877D20D00FADA22 /* BlockOrange.png in Resources */,
+				AFADA2281877D20D00FADA22 /* FilledCircleBlue.png in Resources */,
+				AFADA2321877D20D00FADA22 /* YellowSelected.png in Resources */,
 				AF2C22391874B8B800082561 /* Main_iPad.storyboard in Resources */,
-				AF852AE51874BCBD005F6033 /* FilledCircleGreen.png in Resources */,
-				AFEB67941874D8040024E8F1 /* BlockGreen.png in Resources */,
-				AF852ADD1874B9CE005F6033 /* Green.png in Resources */,
-				AFEB678A1874D4E00024E8F1 /* FilledCircleRed.png in Resources */,
-				AF852AE41874BCBD005F6033 /* FilledCircleBlue.png in Resources */,
-				AFEB67961874D8040024E8F1 /* BlockPurple.png in Resources */,
-				AF852AE61874BCBD005F6033 /* FilledCircleYellow.png in Resources */,
+				AFADA22F1877D20D00FADA22 /* White.png in Resources */,
 				AF2C223E1874B8B800082561 /* Images.xcassets in Resources */,
-				AFEB67991874D8040024E8F1 /* BlockYellow.png in Resources */,
-				AF852AE31874BCBD005F6033 /* EmptyCircle.png in Resources */,
-				AFEB67951874D8040024E8F1 /* BlockOrange.png in Resources */,
-				AF852ADE1874B9CE005F6033 /* Yellow.png in Resources */,
-				AF852ADC1874B9CE005F6033 /* Blue.png in Resources */,
-				AFEB67981874D8040024E8F1 /* BlockWhite.png in Resources */,
-				AFEB679B18750DB50024E8F1 /* White.png in Resources */,
-				AFEB67971874D8040024E8F1 /* BlockRed.png in Resources */,
-				AFEB678B1874D4E00024E8F1 /* Red.png in Resources */,
-				AFEB67931874D8040024E8F1 /* BlockBlue.png in Resources */,
+				AFADA22E1877D20D00FADA22 /* RedSelected.png in Resources */,
+				AFADA2311877D20D00FADA22 /* Yellow.png in Resources */,
+				AFADA2301877D20D00FADA22 /* WhiteSelected.png in Resources */,
+				AFADA2261877D20D00FADA22 /* ButtonBar.png in Resources */,
+				AFADA2241877D20D00FADA22 /* Blue.png in Resources */,
+				AFADA22D1877D20D00FADA22 /* Red.png in Resources */,
+				AFADA22B1877D20D00FADA22 /* FilledCircleYellow.png in Resources */,
 				AF2C22361874B8B800082561 /* Main_iPhone.storyboard in Resources */,
+				AFADA2251877D20D00FADA22 /* BlueSelected.png in Resources */,
+				AFADA22C1877D20D00FADA22 /* Green.png in Resources */,
+				AFADA2231877D20D00FADA22 /* BlockYellow.png in Resources */,
+				AFADA22A1877D20D00FADA22 /* FilledCircleRed.png in Resources */,
+				AFADA2271877D20D00FADA22 /* EmptyCircle.png in Resources */,
+				AFADA2291877D20D00FADA22 /* FilledCircleGreen.png in Resources */,
+				AFADA2211877D20D00FADA22 /* BlockRed.png in Resources */,
 				AF2C222D1874B8B700082561 /* InfoPlist.strings in Resources */,
+				AFADA2201877D20D00FADA22 /* BlockPurple.png in Resources */,
+				AFADA2221877D20D00FADA22 /* BlockWhite.png in Resources */,
+				AFADA21D1877D20D00FADA22 /* BlockBlue.png in Resources */,
+				AFADA21E1877D20D00FADA22 /* BlockGreen.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

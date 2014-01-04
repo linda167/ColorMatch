@@ -51,23 +51,60 @@
             button.selected = YES;
             
             if (button == _whiteButton)
+            {
                 self.selectedColor = 0;
+                UIImage *btnImage = [UIImage imageNamed:@"WhiteSelected.png"];
+                [button setImage:btnImage forState:UIControlStateNormal];
+            }
             if (button == _blueButton)
+            {
                 self.selectedColor = 1;
+                UIImage *btnImage = [UIImage imageNamed:@"BlueSelected.png"];
+                [button setImage:btnImage forState:UIControlStateNormal];
+            }
             else if (button == _redButton)
+            {
                 self.selectedColor = 2;
+                UIImage *btnImage = [UIImage imageNamed:@"RedSelected.png"];
+                [button setImage:btnImage forState:UIControlStateNormal];
+            }
             else if (button == _yellowButton)
+            {
                 self.selectedColor = 3;
+                UIImage *btnImage = [UIImage imageNamed:@"YellowSelected.png"];
+                [button setImage:btnImage forState:UIControlStateNormal];
+            }
         }
         else {
             button.selected = NO;
+            
+            if (button == _whiteButton)
+            {
+                UIImage *btnImage = [UIImage imageNamed:@"White.png"];
+                [button setImage:btnImage forState:UIControlStateNormal];
+            }
+            if (button == _blueButton)
+            {
+                UIImage *btnImage = [UIImage imageNamed:@"Blue.png"];
+                [button setImage:btnImage forState:UIControlStateNormal];
+            }
+            else if (button == _redButton)
+            {
+                UIImage *btnImage = [UIImage imageNamed:@"Red.png"];
+                [button setImage:btnImage forState:UIControlStateNormal];
+            }
+            else if (button == _yellowButton)
+            {
+                UIImage *btnImage = [UIImage imageNamed:@"Yellow.png"];
+                [button setImage:btnImage forState:UIControlStateNormal];
+            }
         }
     }
 }
 
 - (IBAction)GridButtonPressed:(id)sender {
     // Update filled color on the button being clicked
-    int selectedColor = self.selectedColor;
+    int selectedColor = (int)self.selectedColor;
     if (selectedColor == 0)
     {
         UIImage *btnImage1 = [UIImage imageNamed:@"EmptyCircle.png"];
@@ -109,11 +146,11 @@
 
 -(void)UpdateColorCells
 {
-    int sectionsCount = [self.colorCellSections count];
+    int sectionsCount = (int)[self.colorCellSections count];
     for (int i=0; i<sectionsCount; i++)
     {
         NSArray *row = [self.colorCellSections objectAtIndex:i];
-        int rowLength = [row count];
+        int rowLength = (int)[row count];
         for (int j=0; j<rowLength; j++)
         {
             int topColor = [(NSNumber *)[self.topColorsState objectAtIndex:j] intValue];
