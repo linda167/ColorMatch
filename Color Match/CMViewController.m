@@ -223,7 +223,7 @@
 
 -(BOOL)CheckGoalSufficientDifficulty
 {
-    // Check that we have all colors represented in the toggle states
+    // Check that we have all non-white colors represented in the toggle states
     bool has1 = false;
     bool has2 = false;
     bool has3 = false;
@@ -244,7 +244,42 @@
         }
     }
     
-    return has1 && has2 && has3;
+    for (NSNumber* number in self.goalLeftColorsState){
+        int num = [number intValue];
+        if (num == 1)
+        {
+            has1 = true;
+        }
+        else if (num == 2)
+        {
+            has2 = true;
+        }
+        else if (num == 3)
+        {
+            has3 = true;
+        }
+    }
+    
+    bool hasAllColors = has1 && has2 && has3;
+    if (!hasAllColors)
+    {
+        return false;
+    }
+    
+    // Check that we don't have any whites in the result
+    for (int i=0; i<self.goalTopColorsState.count; i++)
+    {
+        NSNumber* topNumber =[self.goalTopColorsState objectAtIndex:i];
+        NSNumber* leftNumber =[self.goalLeftColorsState objectAtIndex:i];
+        
+        if ([topNumber intValue] == 0 && [topNumber intValue] == [leftNumber intValue])
+        {
+            // Top and left at matching index both has white. This will end up having a white cell in the result.
+            return false;
+        }
+    }
+    
+    return true;
 }
 
 -(void)DrawVerticalConnectingLines
