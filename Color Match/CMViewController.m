@@ -699,29 +699,24 @@
 
 -(BOOL)CheckVictory
 {
-    // Check top button states
     for (int i=0; i < self.goalTopColorsState.count; i++)
     {
-        int goalColor = [(NSNumber *)[self.goalTopColorsState objectAtIndex:i] intValue];
-        GridColorButton *actualButton = [_topGridColorButtons objectAtIndex:i];
-        int actualColor = [actualButton.color intValue];
-        
-        if (goalColor != actualColor)
+        for (int j=0; j < self.goalLeftColorsState.count; j++)
         {
-            return false;
-        }
-    }
-    
-    // Check left button states
-    for (int i=0; i < self.goalLeftColorsState.count; i++)
-    {
-        int goalColor = [(NSNumber *)[self.goalLeftColorsState objectAtIndex:i] intValue];
-        GridColorButton *actualButton = [_leftGridColorButtons objectAtIndex:i];
-        int actualColor = [actualButton.color intValue];
-        
-        if (goalColor != actualColor)
-        {
-            return false;
+            int goalTopColor = [(NSNumber *)[self.goalTopColorsState objectAtIndex:i] intValue];
+            int goalLeftColor = [(NSNumber *)[self.goalLeftColorsState objectAtIndex:j] intValue];
+            int goalCombinedColor = [self CombineColors:goalTopColor :goalLeftColor];
+            
+            GridColorButton *actualTopButton = [_topGridColorButtons objectAtIndex:i];
+            int actualTopColor = [actualTopButton.color intValue];
+            GridColorButton *actualLeftButton = [_leftGridColorButtons objectAtIndex:j];
+            int actualLeftColor = [actualLeftButton.color intValue];
+            int actualCombinedColor = [self CombineColors:actualTopColor :actualLeftColor];
+            
+            if (goalCombinedColor != actualCombinedColor)
+            {
+                return false;
+            }
         }
     }
     
