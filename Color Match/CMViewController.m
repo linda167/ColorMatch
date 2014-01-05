@@ -151,6 +151,16 @@
 {
     int selectedColor = (int)self.selectedColor;
     [self PressGridButtonWithColor:sender :selectedColor];
+    
+    if ([self CheckVictory] == true)
+    {
+        // Show victory message
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Level Complete!"                                                        message:@"Nicely done!"
+            delegate: self cancelButtonTitle:@"Cancel"
+            otherButtonTitles:nil];
+        [alert addButtonWithTitle:@"Next Level"];
+        [alert show];
+    }
 }
 
 -(void)PressGridButtonWithColor:(UIButton *)button :(int)selectedColor
@@ -428,11 +438,6 @@
     return [UIColor colorWithRed:(255/255.0) green:(0/255.0) blue:(0/255.0) alpha:1];
 }
 
-- (IBAction)NewBoard:(id)sender {
-    [self generateNewBoard];
-    [self resetCells];
-}
-
 -(void)resetCells
 {
     // Clear top color buttons
@@ -449,5 +454,48 @@
         [self PressGridButtonWithColor:button :0];
     }
     
+}
+
+-(BOOL)CheckVictory
+{
+    // Check top button states
+    for (int i=0; i < self.goalTopColorsState.count; i++)
+    {
+        int goalColor = [(NSNumber *)[self.goalTopColorsState objectAtIndex:i] intValue];
+        int actualColor = [(NSNumber *)[self.topColorsState objectAtIndex:i] intValue];
+        
+        if (goalColor != actualColor)
+        {
+            return false;
+        }
+    }
+    
+    // Check left button states
+    for (int i=0; i < self.goalLeftColorsState.count; i++)
+    {
+        int goalColor = [(NSNumber *)[self.goalLeftColorsState objectAtIndex:i] intValue];
+        int actualColor = [(NSNumber *)[self.leftColorsState objectAtIndex:i] intValue];
+        
+        if (goalColor != actualColor)
+        {
+            return false;
+        }
+    }
+    
+    return true;
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1)
+    {
+        [self NextLevel];
+    }
+}
+
+- (void)NextLevel
+{
+    [self generateNewBoard];
+    [self resetCells];
 }
 @end
