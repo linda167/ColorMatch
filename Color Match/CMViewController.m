@@ -75,8 +75,13 @@
     [self startTimer];
     
     // Init moves count
+    [self initMovesCount];
+}
+
+- (void)initMovesCount
+{
     self.movesCount = 0;
-    [self updateMovesCountLabel];    
+    [self updateMovesCountLabel];
 }
 
 - (void)updateMovesCountLabel
@@ -93,6 +98,7 @@
         selector:@selector(updateTimer)
         userInfo:nil
         repeats:YES];
+    [self updateTimer];
 }
 
 - (void)updateTimer
@@ -200,8 +206,13 @@
 
 - (IBAction)GridButtonPressed:(id)sender
 {
+    // Handle selecting color
     int selectedColor = (int)self.selectedColor;
     [self PressGridButtonWithColor:sender :selectedColor];
+    
+    // Update moves count
+    self.movesCount++;
+    [self updateMovesCountLabel];
     
     if ([self CheckVictory] == true)
     {
@@ -215,7 +226,8 @@
     [self.stopWatchTimer invalidate];
     
     // Show victory message
-    NSString *victoryMessage = [@"Nicely done! \n\n Time taken: " stringByAppendingString:self.TimerLabel.text];
+    NSString *victoryMessage = [[[@"Nicely done! \n\nTime taken: " stringByAppendingString:self.TimerLabel.text] stringByAppendingString:@"\nMoves: "]
+        stringByAppendingString:self.MovesLabel.text];
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Level Complete!"                                                        message:victoryMessage
         delegate: self cancelButtonTitle:@"Cancel"
         otherButtonTitles:nil];
@@ -558,5 +570,6 @@
     [self generateNewBoard];
     [self resetCells];
     [self startTimer];
+    [self initMovesCount];
 }
 @end
