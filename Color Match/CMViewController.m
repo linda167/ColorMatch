@@ -21,6 +21,9 @@
 @property NSMutableArray *goalCellSections;
 @property NSMutableArray *goalTopColorsState;
 @property NSMutableArray *goalLeftColorsState;
+@property (strong, nonatomic) NSTimer *stopWatchTimer;
+@property (strong, nonatomic) NSDate * startTime;
+@property NSInteger movesCount;
 @end
 
 @implementation CMViewController
@@ -67,6 +70,54 @@
     // Draw connecting lines
     [self DrawVerticalConnectingLines];
     [self DrawHorizontalConnectingLines];
+    
+    // Start the timer
+    [self startTimer];
+    
+    // Init moves count
+    self.movesCount = 0;
+    [self updateMovesCountLabel];    
+}
+
+- (void)updateMovesCountLabel
+{
+    self.MovesLabel.text = [NSString stringWithFormat:@"%d", self.movesCount];
+}
+
+- (void)startTimer
+{
+    self.startTime = [NSDate date];
+    self.stopWatchTimer = [NSTimer
+        scheduledTimerWithTimeInterval:1.0
+        target:self
+        selector:@selector(updateTimer)
+        userInfo:nil
+        repeats:YES];
+}
+
+- (void)updateTimer
+{
+    // Create elapsed time
+    NSDate *currentTime = [NSDate date];
+    NSTimeInterval timeInterval = [currentTime timeIntervalSinceDate:self.startTime];
+    NSDate *timerDate = [NSDate dateWithTimeIntervalSince1970:timeInterval];
+    
+    // Create date formatter
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc ] init];
+    [dateFormatter setDateFormat:@"mm:ss"];
+    [dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0.0]];
+    
+    // Format the elapsed time
+    NSString *timeString = [dateFormatter stringFromDate:timerDate];
+    
+    // Trim off extra 0 at start if necessary
+    NSString *firstChar = [timeString substringWithRange:NSMakeRange(0, 1)];
+    if ([firstChar isEqualToString:@"0"])
+    {
+        timeString = [timeString substringFromIndex:1];
+    }
+    
+    self.TimerLabel.text = timeString;
 }
 
 - (void)generateNewBoard
@@ -154,13 +205,22 @@
     
     if ([self CheckVictory] == true)
     {
-        // Show victory message
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Level Complete!"                                                        message:@"Nicely done!"
-            delegate: self cancelButtonTitle:@"Cancel"
-            otherButtonTitles:nil];
-        [alert addButtonWithTitle:@"Next Level"];
-        [alert show];
+        [self DoVictory];
     }
+}
+
+-(void)DoVictory
+{
+    // Stop the timer
+    [self.stopWatchTimer invalidate];
+    
+    // Show victory message
+    NSString *victoryMessage = [@"Nicely done! \n\n Time taken: " stringByAppendingString:self.TimerLabel.text];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Level Complete!"                                                        message:victoryMessage
+        delegate: self cancelButtonTitle:@"Cancel"
+        otherButtonTitles:nil];
+    [alert addButtonWithTitle:@"Next Level"];
+    [alert show];
 }
 
 -(void)PressGridButtonWithColor:(UIButton *)button :(int)selectedColor
@@ -497,5 +557,6 @@
 {
     [self generateNewBoard];
     [self resetCells];
+    [self startTimer];
 }
 @end

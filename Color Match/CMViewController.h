@@ -40,5 +40,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *Goal20;
 @property (weak, nonatomic) IBOutlet UIImageView *Goal21;
 @property (weak, nonatomic) IBOutlet UIImageView *Goal22;
+@property (weak, nonatomic) IBOutlet UILabel *TimerLabel;
+@property (weak, nonatomic) IBOutlet UILabel *MovesLabel;
 
 @end
