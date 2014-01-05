@@ -12,11 +12,9 @@
 @interface CMViewController ()
 
 @property NSInteger selectedColor;
-@property NSArray *topColorButtons;
-@property NSMutableArray *topColorsState;
-@property NSArray *leftColorButtons;
-@property NSArray *gridColorButtons;
-@property NSMutableArray *leftColorsState;
+@property NSArray *allGridColorButtons;
+@property NSArray *topGridColorButtons;
+@property NSArray *leftGridColorButtons;
 @property NSMutableArray *colorCellSections;
 @property NSMutableArray *verticalLines;
 @property NSMutableArray *horizontalLines;
@@ -42,10 +40,6 @@
 
     // Init color bar buttons
     [self initGridColorButtons];
-    
-    // Init color bar states
-    self.topColorsState = [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:0], [NSNumber numberWithInt:0], [NSNumber numberWithInt:0], nil];
-    self.leftColorsState = [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:0], [NSNumber numberWithInt:0], [NSNumber numberWithInt:0], nil];
     
     // Init color cell sections
     NSArray *row1 = [NSArray arrayWithObjects:_Cell00,_Cell01, _Cell02, nil];
@@ -81,10 +75,7 @@
 
 - (void)initGridColorButtons
 {
-    self.topColorButtons = [NSArray arrayWithObjects:_Top1Button,_Top2Button, _Top3Button, nil];
-    self.leftColorButtons = [NSArray arrayWithObjects:_Left1Button,_Left2Button, _Left3Button, nil];
-    
-    self.gridColorButtons = [NSArray arrayWithObjects:
+    self.allGridColorButtons = [NSArray arrayWithObjects:
         [[GridColorButton alloc] initWithButton:_Top1Button],
         [[GridColorButton alloc] initWithButton:_Top2Button],
         [[GridColorButton alloc] initWithButton:_Top3Button],
@@ -92,6 +83,9 @@
         [[GridColorButton alloc] initWithButton:_Left2Button],
         [[GridColorButton alloc] initWithButton:_Left3Button],
         nil];
+
+    self.topGridColorButtons = [_allGridColorButtons subarrayWithRange:NSMakeRange(0, _allGridColorButtons.count / 2)];
+    self.leftGridColorButtons = [_allGridColorButtons subarrayWithRange:NSMakeRange(_allGridColorButtons.count / 2, _allGridColorButtons.count / 2)];
 }
 
 - (void)initMovesCount
@@ -229,7 +223,7 @@
 - (IBAction)GridButtonPressed:(id)sender
 {
     // Update moves count
-    for (GridColorButton* gridColorButton in _gridColorButtons)
+    for (GridColorButton* gridColorButton in _allGridColorButtons)
     {
         if (gridColorButton.button == sender)
         {
@@ -274,27 +268,26 @@
     NSNumber* wrappedSelectedColor = [NSNumber numberWithInt:selectedColor];
     
     // Update grid color button state
-    for (GridColorButton* gridColorButton in _gridColorButtons)
+    GridColorButton* gridColorButtonClicked;
+    for (GridColorButton* gridColorButton in _allGridColorButtons)
     {
         if (gridColorButton.button == button)
         {
             [gridColorButton setColor:wrappedSelectedColor];
+            gridColorButtonClicked = gridColorButton;
             break;
         }
     }
     
-    NSInteger topIndex = [self.topColorButtons indexOfObject:button];
+    NSInteger topIndex = [self.topGridColorButtons indexOfObject:gridColorButtonClicked];
     UIView *lineToUpdate;
     if (topIndex != NSNotFound)
     {
-        [self.topColorsState replaceObjectAtIndex:topIndex withObject:wrappedSelectedColor];
         lineToUpdate = [self.verticalLines objectAtIndex:topIndex];
     }
     else
     {
-        NSInteger leftIndex = [self.leftColorButtons indexOfObject:button];
-        // Should not be NSNotFound at ths point
-        [self.leftColorsState replaceObjectAtIndex:leftIndex withObject:wrappedSelectedColor];
+        NSInteger leftIndex = [self.leftGridColorButtons indexOfObject:gridColorButtonClicked];
         lineToUpdate = [self.horizontalLines objectAtIndex:leftIndex];
     }
     
@@ -316,8 +309,21 @@
         lineToUpdate.backgroundColor = [self GetYellowColor];
     }
     
+    // Get current color states
+    NSMutableArray *currentTopColorState = [[NSMutableArray alloc] init];
+    for (GridColorButton* gridColorButton in _topGridColorButtons)
+    {
+        [currentTopColorState addObject:gridColorButton.color];
+    }
+    
+    NSMutableArray *currentLeftColorState = [[NSMutableArray alloc]  init];
+    for (GridColorButton* gridColorButton in _leftGridColorButtons)
+    {
+        [currentLeftColorState addObject:gridColorButton.color];
+    }
+    
     // Trigger update of color cells
-    [self UpdateColorCells: self.colorCellSections :self.topColorsState :self.leftColorsState];
+    [self UpdateColorCells: self.colorCellSections :currentTopColorState :currentLeftColorState];
 }
 
 -(void)RandomGenGoalStates
@@ -408,7 +414,7 @@
 -(void)DrawVerticalConnectingLines
 {
     // We want to connect lines from the top color buttons to the bottom row of color cells
-    NSArray *topConnections = self.topColorButtons;
+    NSArray *topConnections = self.topGridColorButtons;
     int rowCount = (int)[self.colorCellSections count];
     NSArray *bottomConnections = [self.colorCellSections objectAtIndex:rowCount - 1];
     
@@ -418,7 +424,8 @@
     for (int i=0; i<itemCount; i++)
     {
         // Draw line
-        UIView *topConnection = [topConnections objectAtIndex:i];
+        GridColorButton *topColorButton = [topConnections objectAtIndex:i];
+        UIView *topConnection = topColorButton.button;
         int topAdjustment = -13;   // Accounts for extra spacing in top button
         int topY = topConnection.frame.origin.y + topConnection.frame.size.height + topAdjustment;
         int xAdjustment = -1; // Account for the fact that our width is 3 pixels
@@ -442,7 +449,7 @@
 -(void)DrawHorizontalConnectingLines
 {
     // We want to connect lines from the left color buttons to the rightmost column of color cells
-    NSArray *leftConnections = self.leftColorButtons;
+    NSArray *leftConnections = self.leftGridColorButtons;
     int rowCount = (int)[self.colorCellSections count];
 
     // Add rightmost cell of each row to rightConnections
@@ -461,7 +468,8 @@
     for (int i=0; i<itemCount; i++)
     {
         // Draw line
-        UIView *leftConnection = [leftConnections objectAtIndex:i];
+        GridColorButton *leftColorButton = [leftConnections objectAtIndex:i];
+        UIView *leftConnection = leftColorButton.button;
 
         int yAdjustment = -1; // Account for the fact that our width is 3 pixels
         int leftY = leftConnection.frame.origin.y + leftConnection.frame.size.height / 2 + yAdjustment;
@@ -554,16 +562,18 @@
 -(void)resetCells
 {
     // Clear top color buttons
-    for (int i=0; i < self.topColorButtons.count; i++)
+    for (int i=0; i < _topGridColorButtons.count; i++)
     {
-        UIButton *button = [self.topColorButtons objectAtIndex:i];
+        GridColorButton *gridColorButton = [_topGridColorButtons objectAtIndex:i];
+        UIButton *button = gridColorButton.button;
         [self PressGridButtonWithColor:button :0];
     }
     
     // Clear left color buttons
-    for (int i=0; i < self.leftColorButtons.count; i++)
+    for (int i=0; i < _leftGridColorButtons.count; i++)
     {
-        UIButton *button = [self.leftColorButtons objectAtIndex:i];
+        GridColorButton *gridColorButton = [_leftGridColorButtons objectAtIndex:i];
+        UIButton *button = gridColorButton.button;
         [self PressGridButtonWithColor:button :0];
     }
     
@@ -585,7 +595,8 @@
     for (int i=0; i < self.goalTopColorsState.count; i++)
     {
         int goalColor = [(NSNumber *)[self.goalTopColorsState objectAtIndex:i] intValue];
-        int actualColor = [(NSNumber *)[self.topColorsState objectAtIndex:i] intValue];
+        GridColorButton *actualButton = [_topGridColorButtons objectAtIndex:i];
+        int actualColor = [actualButton.color intValue];
         
         if (goalColor != actualColor)
         {
@@ -597,7 +608,8 @@
     for (int i=0; i < self.goalLeftColorsState.count; i++)
     {
         int goalColor = [(NSNumber *)[self.goalLeftColorsState objectAtIndex:i] intValue];
-        int actualColor = [(NSNumber *)[self.leftColorsState objectAtIndex:i] intValue];
+        GridColorButton *actualButton = [_leftGridColorButtons objectAtIndex:i];
+        int actualColor = [actualButton.color intValue];
         
         if (goalColor != actualColor)
         {
