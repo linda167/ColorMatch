@@ -408,6 +408,64 @@
         return false;
     }
     
+    // Check all rows for same colors in the row
+    for (NSNumber* leftNSNumber in self.goalLeftColorsState)
+    {
+        int leftColor = [leftNSNumber intValue];
+        int previousCombinedColor = -1;
+        bool differentColorFound = false;
+        for (NSNumber* topNSNumber in self.goalTopColorsState)
+        {
+            int topColor = [topNSNumber intValue];
+            int combinedColor = [self CombineColors:leftColor :topColor];
+            if (previousCombinedColor == -1)
+            {
+                previousCombinedColor = combinedColor;
+            }
+            else if (combinedColor != previousCombinedColor)
+            {
+                // We found a different color in the row, we're good
+                differentColorFound = true;
+                break;
+            }
+        }
+        
+        if (!differentColorFound)
+        {
+            // We found all same colors in a row, no good
+            return false;
+        }
+    }
+    
+    // Check all columns for same colors in the column
+    for (NSNumber* topNSNumber in self.goalTopColorsState)
+    {
+        int topColor = [topNSNumber intValue];
+        int previousCombinedColor = -1;
+        bool differentColorFound = false;
+        for (NSNumber* leftNSNumber in self.goalLeftColorsState)
+        {
+            int leftColor = [leftNSNumber intValue];
+            int combinedColor = [self CombineColors:leftColor :topColor];
+            if (previousCombinedColor == -1)
+            {
+                previousCombinedColor = combinedColor;
+            }
+            else if (combinedColor != previousCombinedColor)
+            {
+                // We found a different color in the row, we're good
+                differentColorFound = true;
+                break;
+            }
+        }
+        
+        if (!differentColorFound)
+        {
+            // We found all same colors in a column, no good
+            return false;
+        }
+    }
+    
     return true;
 }
 
@@ -503,40 +561,59 @@
             int topColor = [(NSNumber *)[topColorsState objectAtIndex:j] intValue];
             int leftColor = [(NSNumber *)[leftColorsState objectAtIndex:i] intValue];
             
-            UIImage *image;
-            if (topColor == 0 && leftColor == 0)
-            {
-                image = [UIImage imageNamed:@"BlockWhite.png"];
-            }
-            else if ((topColor == 1 && leftColor == 1) || (topColor == 1 && leftColor == 0) || (topColor == 0 && leftColor == 1))
-            {
-                image = [UIImage imageNamed:@"BlockBlue.png"];
-            }
-            else if ((topColor == 2 && leftColor == 2) || (topColor == 2 && leftColor == 0) || (topColor == 0 && leftColor == 2))
-            {
-                image = [UIImage imageNamed:@"BlockRed.png"];
-            }
-            else if ((topColor == 3 && leftColor == 3) || (topColor == 3 && leftColor == 0) || (topColor == 0 && leftColor == 3))
-            {
-                image = [UIImage imageNamed:@"BlockYellow.png"];
-            }
-            else if ((topColor == 1 && leftColor == 2) || (topColor == 2 && leftColor == 1))
-            {
-                image = [UIImage imageNamed:@"BlockPurple.png"];
-            }
-            else if ((topColor == 1 && leftColor == 3) || (topColor == 3 && leftColor == 1))
-            {
-                image = [UIImage imageNamed:@"BlockGreen.png"];
-            }
-            else if ((topColor == 2 && leftColor == 3) || (topColor == 3 && leftColor == 2))
-            {
-                image = [UIImage imageNamed:@"BlockOrange.png"];
-            }
+            int combinedColor = [self CombineColors:leftColor :topColor];
+            
+            UIImage *image = [self GetCellImageForColor:combinedColor];
             
             UIImageView *imageView = [row objectAtIndex:j];
             [imageView setImage:image];
         }
     }
+}
+
+/*------------------------------------------
+ Return results:
+ 0 - white
+ 1 - blue
+ 2 - Red
+ 3 - Yellow
+ 4 - Purple
+ 5 - Green
+ 6 - Orange
+ ------------------------------------------*/
+-(int)CombineColors:(int)color1 :(int)color2
+{
+    if (color1 == 0 && color2 == 0)
+    {
+        return 0;
+    }
+    else if ((color1 == 1 && color2 == 1) || (color1 == 1 && color2 == 0) || (color1 == 0 && color2 == 1))
+    {
+        return 1;
+    }
+    else if ((color1 == 2 && color2 == 2) || (color1 == 2 && color2 == 0) || (color1 == 0 && color2 == 2))
+    {
+        return 2;
+    }
+    else if ((color1 == 3 && color2 == 3) || (color1 == 3 && color2 == 0) || (color1 == 0 && color2 == 3))
+    {
+        return 3;
+    }
+    else if ((color1 == 1 && color2 == 2) || (color1 == 2 && color2 == 1))
+    {
+        return 4;
+    }
+    else if ((color1 == 1 && color2 == 3) || (color1 == 3 && color2 == 1))
+    {
+        return 5;
+    }
+    else if ((color1 == 2 && color2 == 3) || (color1 == 3 && color2 == 2))
+    {
+        return 6;
+    }
+    
+    // Should not be hit
+    return 0;
 }
 
 -(UIColor *) GetGrayColor
@@ -557,6 +634,37 @@
 -(UIColor *) GetRedColor
 {
     return [UIColor colorWithRed:(255/255.0) green:(0/255.0) blue:(0/255.0) alpha:1];
+}
+
+-(UIImage *) GetCellImageForColor:(int)color
+{
+    switch (color)
+    {
+        case 0:
+            return [UIImage imageNamed:@"BlockWhite.png"];
+            break;
+        case 1:
+            return [UIImage imageNamed:@"BlockBlue.png"];
+            break;
+        case 2:
+            return [UIImage imageNamed:@"BlockRed.png"];
+            break;
+        case 3:
+            return [UIImage imageNamed:@"BlockYellow.png"];
+            break;
+        case 4:
+            return [UIImage imageNamed:@"BlockPurple.png"];
+            break;
+        case 5:
+            return [UIImage imageNamed:@"BlockGreen.png"];
+            break;
+        case 6:
+            return [UIImage imageNamed:@"BlockOrange.png"];
+            break;
+        default:
+            return [UIImage imageNamed:@"BlockWhite.png"];
+            break;
+    }
 }
 
 -(void)resetCells
