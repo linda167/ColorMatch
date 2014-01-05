@@ -7,6 +7,7 @@
 //
 
 #import "CMViewController.h"
+#import "GridColorButton.h"
 
 @interface CMViewController ()
 
@@ -14,6 +15,7 @@
 @property NSArray *topColorButtons;
 @property NSMutableArray *topColorsState;
 @property NSArray *leftColorButtons;
+@property NSArray *gridColorButtons;
 @property NSMutableArray *leftColorsState;
 @property NSMutableArray *colorCellSections;
 @property NSMutableArray *verticalLines;
@@ -39,8 +41,7 @@
 	// Do any additional setup after loading the view, typically from a nib.
 
     // Init color bar buttons
-    self.topColorButtons = [NSArray arrayWithObjects:_Top1Button,_Top2Button, _Top3Button, nil];
-    self.leftColorButtons = [NSArray arrayWithObjects:_Left1Button,_Left2Button, _Left3Button, nil];
+    [self initGridColorButtons];
     
     // Init color bar states
     self.topColorsState = [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:0], [NSNumber numberWithInt:0], [NSNumber numberWithInt:0], nil];
@@ -76,6 +77,21 @@
     
     // Init moves count
     [self initMovesCount];
+}
+
+- (void)initGridColorButtons
+{
+    self.topColorButtons = [NSArray arrayWithObjects:_Top1Button,_Top2Button, _Top3Button, nil];
+    self.leftColorButtons = [NSArray arrayWithObjects:_Left1Button,_Left2Button, _Left3Button, nil];
+    
+    self.gridColorButtons = [NSArray arrayWithObjects:
+        [[GridColorButton alloc] initWithButton:_Top1Button],
+        [[GridColorButton alloc] initWithButton:_Top2Button],
+        [[GridColorButton alloc] initWithButton:_Top3Button],
+        [[GridColorButton alloc] initWithButton:_Left1Button],
+        [[GridColorButton alloc] initWithButton:_Left2Button],
+        [[GridColorButton alloc] initWithButton:_Left3Button],
+        nil];
 }
 
 - (void)initMovesCount
@@ -177,42 +193,59 @@
                 [button setImage:btnImage forState:UIControlStateNormal];
             }
         }
-        else {
-            button.selected = NO;
-            
-            if (button == _whiteButton)
-            {
-                UIImage *btnImage = [UIImage imageNamed:@"White.png"];
-                [button setImage:btnImage forState:UIControlStateNormal];
-            }
-            if (button == _blueButton)
-            {
-                UIImage *btnImage = [UIImage imageNamed:@"Blue.png"];
-                [button setImage:btnImage forState:UIControlStateNormal];
-            }
-            else if (button == _redButton)
-            {
-                UIImage *btnImage = [UIImage imageNamed:@"Red.png"];
-                [button setImage:btnImage forState:UIControlStateNormal];
-            }
-            else if (button == _yellowButton)
-            {
-                UIImage *btnImage = [UIImage imageNamed:@"Yellow.png"];
-                [button setImage:btnImage forState:UIControlStateNormal];
-            }
+        else
+        {
+            [self deselectColorButton:button];
         }
+    }
+}
+
+-(void)deselectColorButton:(UIButton *)button
+{
+    button.selected = NO;
+    
+    if (button == _whiteButton)
+    {
+        UIImage *btnImage = [UIImage imageNamed:@"White.png"];
+        [button setImage:btnImage forState:UIControlStateNormal];
+    }
+    if (button == _blueButton)
+    {
+        UIImage *btnImage = [UIImage imageNamed:@"Blue.png"];
+        [button setImage:btnImage forState:UIControlStateNormal];
+    }
+    else if (button == _redButton)
+    {
+        UIImage *btnImage = [UIImage imageNamed:@"Red.png"];
+        [button setImage:btnImage forState:UIControlStateNormal];
+    }
+    else if (button == _yellowButton)
+    {
+        UIImage *btnImage = [UIImage imageNamed:@"Yellow.png"];
+        [button setImage:btnImage forState:UIControlStateNormal];
     }
 }
 
 - (IBAction)GridButtonPressed:(id)sender
 {
+    // Update moves count
+    for (GridColorButton* gridColorButton in _gridColorButtons)
+    {
+        if (gridColorButton.button == sender)
+        {
+            if ([gridColorButton.color intValue] != self.selectedColor)
+            {
+                // Update moves count only if color changed
+                self.movesCount++;
+                [self updateMovesCountLabel];
+            }
+            break;
+        }
+    }
+    
     // Handle selecting color
     int selectedColor = (int)self.selectedColor;
     [self PressGridButtonWithColor:sender :selectedColor];
-    
-    // Update moves count
-    self.movesCount++;
-    [self updateMovesCountLabel];
     
     if ([self CheckVictory] == true)
     {
@@ -226,9 +259,9 @@
     [self.stopWatchTimer invalidate];
     
     // Show victory message
-    NSString *victoryMessage = [[[@"Nicely done! \n\nTime taken: " stringByAppendingString:self.TimerLabel.text] stringByAppendingString:@"\nMoves: "]
-        stringByAppendingString:self.MovesLabel.text];
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Level Complete!"                                                        message:victoryMessage
+    NSString *victoryMessage = [[[@"Nicely done! \n\nMoves: " stringByAppendingString:self.MovesLabel.text] stringByAppendingString:@"\nTime taken: "]
+        stringByAppendingString:self.TimerLabel.text];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Level Complete"                                                        message:victoryMessage
         delegate: self cancelButtonTitle:@"Cancel"
         otherButtonTitles:nil];
     [alert addButtonWithTitle:@"Next Level"];
@@ -239,6 +272,17 @@
 {
     // Update color state on top and left bar
     NSNumber* wrappedSelectedColor = [NSNumber numberWithInt:selectedColor];
+    
+    // Update grid color button state
+    for (GridColorButton* gridColorButton in _gridColorButtons)
+    {
+        if (gridColorButton.button == button)
+        {
+            [gridColorButton setColor:wrappedSelectedColor];
+            break;
+        }
+    }
+    
     NSInteger topIndex = [self.topColorButtons indexOfObject:button];
     UIView *lineToUpdate;
     if (topIndex != NSNotFound)
@@ -257,26 +301,18 @@
     // Update filled color on the button being clicked, and the color of the connecting line
     if (selectedColor == 0)
     {
-        UIImage *btnImage1 = [UIImage imageNamed:@"EmptyCircle.png"];
-        [button setImage:btnImage1 forState:UIControlStateNormal];
         lineToUpdate.backgroundColor = [self GetGrayColor];
     }
     else if (selectedColor == 1)
     {
-        UIImage *btnImage1 = [UIImage imageNamed:@"FilledCircleBlue.png"];
-        [button setImage:btnImage1 forState:UIControlStateNormal];
         lineToUpdate.backgroundColor = [self GetBlueColor];
     }
     else if (selectedColor == 2)
     {
-        UIImage *btnImage1 = [UIImage imageNamed:@"FilledCircleRed.png"];
-        [button setImage:btnImage1 forState:UIControlStateNormal];
         lineToUpdate.backgroundColor = [self GetRedColor];
     }
     else if (selectedColor == 3)
     {
-        UIImage *btnImage1 = [UIImage imageNamed:@"FilledCircleYellow.png"];
-        [button setImage:btnImage1 forState:UIControlStateNormal];
         lineToUpdate.backgroundColor = [self GetYellowColor];
     }
     
@@ -310,9 +346,17 @@
     bool has2 = false;
     bool has3 = false;
     
+    // Keep track of white cells
+    bool hasWhiteOnTop = false;
+    bool hasWhiteOnLeft = false;
+    
     for (NSNumber* number in self.goalTopColorsState){
         int num = [number intValue];
-        if (num == 1)
+        if (num == 0)
+        {
+            hasWhiteOnTop = true;
+        }
+        else if (num == 1)
         {
             has1 = true;
         }
@@ -328,7 +372,11 @@
     
     for (NSNumber* number in self.goalLeftColorsState){
         int num = [number intValue];
-        if (num == 1)
+        if (num == 0)
+        {
+            hasWhiteOnLeft = true;
+        }
+        else if (num == 1)
         {
             has1 = true;
         }
@@ -349,16 +397,9 @@
     }
     
     // Check that we don't have any whites in the result
-    for (int i=0; i<self.goalTopColorsState.count; i++)
+    if (hasWhiteOnTop && hasWhiteOnLeft)
     {
-        NSNumber* topNumber =[self.goalTopColorsState objectAtIndex:i];
-        NSNumber* leftNumber =[self.goalLeftColorsState objectAtIndex:i];
-        
-        if ([topNumber intValue] == 0 && [topNumber intValue] == [leftNumber intValue])
-        {
-            // Top and left at matching index both has white. This will end up having a white cell in the result.
-            return false;
-        }
+        return false;
     }
     
     return true;
@@ -528,6 +569,16 @@
     
 }
 
+-(void)resetActionBar
+{
+    NSArray* buttons = [NSArray arrayWithObjects:_whiteButton,_blueButton,_redButton, _yellowButton, nil];
+    
+    for (UIButton* button in buttons)
+    {
+        [self deselectColorButton:button];
+    }
+}
+
 -(BOOL)CheckVictory
 {
     // Check top button states
@@ -568,6 +619,7 @@
 - (void)NextLevel
 {
     [self generateNewBoard];
+    [self resetActionBar];
     [self resetCells];
     [self startTimer];
     [self initMovesCount];

@@ -44,6 +44,7 @@
 		AFADA2301877D20D00FADA22 /* WhiteSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = AFADA21A1877D20D00FADA22 /* WhiteSelected.png */; };
 		AFADA2311877D20D00FADA22 /* Yellow.png in Resources */ = {isa = PBXBuildFile; fileRef = AFADA21B1877D20D00FADA22 /* Yellow.png */; };
 		AFADA2321877D20D00FADA22 /* YellowSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = AFADA21C1877D20D00FADA22 /* YellowSelected.png */; };
+		AFADA23518791E4400FADA22 /* GridColorButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AFADA23418791E4400FADA22 /* GridColorButton.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,6 +100,8 @@
 		AFADA21A1877D20D00FADA22 /* WhiteSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WhiteSelected.png; sourceTree = "<group>"; };
 		AFADA21B1877D20D00FADA22 /* Yellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Yellow.png; sourceTree = "<group>"; };
 		AFADA21C1877D20D00FADA22 /* YellowSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = YellowSelected.png; sourceTree = "<group>"; };
+		AFADA23318791E4400FADA22 /* GridColorButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridColorButton.h; sourceTree = "<group>"; };
+		AFADA23418791E4400FADA22 /* GridColorButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridColorButton.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +170,8 @@
 				AF2C223B1874B8B800082561 /* CMViewController.m */,
 				AF2C223D1874B8B800082561 /* Images.xcassets */,
 				AF2C22291874B8B700082561 /* Supporting Files */,
+				AFADA23318791E4400FADA22 /* GridColorButton.h */,
+				AFADA23418791E4400FADA22 /* GridColorButton.m */,
 			);
 			path = "Color Match";
 			sourceTree = "<group>";
@@ -352,6 +357,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF2C22331874B8B800082561 /* CMAppDelegate.m in Sources */,
+				AFADA23518791E4400FADA22 /* GridColorButton.m in Sources */,
 				AF2C222F1874B8B700082561 /* main.m in Sources */,
 				AF2C223C1874B8B800082561 /* CMViewController.m in Sources */,
 			);
