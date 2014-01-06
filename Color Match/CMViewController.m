@@ -48,6 +48,7 @@ typedef struct BoardParameters
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
+    // Init board parameters for 3x3
     self.boardParameters = [self getBoardParametersForSize:3];
 
     // Init color bar buttons
