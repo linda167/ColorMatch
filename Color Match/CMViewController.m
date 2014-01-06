@@ -42,11 +42,7 @@
     [self initGridColorButtons];
     
     // Init color cell sections
-    NSArray *row1 = [NSArray arrayWithObjects:_Cell00,_Cell01, _Cell02, nil];
-    NSArray *row2 = [NSArray arrayWithObjects:_Cell10,_Cell11, _Cell12, nil];
-    NSArray *row3 = [NSArray arrayWithObjects:_Cell20,_Cell21, _Cell22, nil];
-    
-    self.colorCellSections = [NSMutableArray arrayWithObjects:row1, row2, row3, nil];
+    [self initColorCells];
     
     // Init goal color cell sections
     NSArray *goalRow1 = [NSArray arrayWithObjects:_Goal00,_Goal01, _Goal02, nil];
@@ -73,6 +69,40 @@
     [self initMovesCount];
 }
 
+- (void)initColorCells
+{
+    // Constants for 3x3 layout
+    int xOffsetForFirstColumn = 93;
+    int yOffsetForFirstRow = 63;
+    int cellWidth = 50;
+    int cellHeight = cellWidth;
+    int gridSize = 3;
+    int cellSpacing = 64;
+    
+    int xOffset = xOffsetForFirstColumn;
+    int yOffset = yOffsetForFirstRow;
+
+    self.colorCellSections = [[NSMutableArray alloc] init];
+    
+    for (int i=0; i<gridSize; i++)
+    {
+        NSMutableArray *row = [[NSMutableArray alloc] init];
+        for (int j=0; j<gridSize; j++)
+        {
+            UIImageView *cellBlock = [[UIImageView alloc] initWithFrame:CGRectMake(xOffset, yOffset, cellWidth, cellHeight)];
+            cellBlock.image=[UIImage imageNamed:@"BlockWhite.png"];
+            [_GridContainerView addSubview:cellBlock];
+            
+            [row addObject:cellBlock];
+            xOffset += cellSpacing;
+        }
+
+        [self.colorCellSections addObject:row];
+        yOffset += cellSpacing;
+        xOffset = xOffsetForFirstColumn;
+    }
+}
+
 - (void)initGridColorButtons
 {
     self.allGridColorButtons = [NSArray arrayWithObjects:
@@ -96,7 +126,7 @@
 
 - (void)updateMovesCountLabel
 {
-    self.MovesLabel.text = [NSString stringWithFormat:@"%d", self.movesCount];
+    self.MovesLabel.text = [NSString stringWithFormat:@"%ld", (long)self.movesCount];
 }
 
 - (void)startTimer
@@ -495,8 +525,8 @@
         
         UIView *line = [[UIView alloc] initWithFrame:CGRectMake(topX, topY, 3, bottomY - topY)];
         line.backgroundColor = [self GetGrayColor];
-        [self.view addSubview:line];
-        [self.view sendSubviewToBack:line];
+        [_GridContainerView addSubview:line];
+        [_GridContainerView sendSubviewToBack:line];
         
         [verticalLines addObject:line];
     }
@@ -540,8 +570,8 @@
         
         UIView *line = [[UIView alloc] initWithFrame:CGRectMake(leftX, leftY, rightX - leftX, 3)];
         line.backgroundColor = [self GetGrayColor];
-        [self.view addSubview:line];
-        [self.view sendSubviewToBack:line];
+        [_GridContainerView addSubview:line];
+        [_GridContainerView sendSubviewToBack:line];
         
         [horizontalLines addObject:line];
     }
