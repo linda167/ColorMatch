@@ -9,6 +9,15 @@
 #import "CMViewController.h"
 #import "GridColorButton.h"
 
+typedef struct BoardParameters
+{
+    int gridSize;
+    int xOffsetForFirstColorCell;
+    int yOffsetForFirstColorCell;
+    int colorCellSize;
+    int colorCellSpacing;
+} BoardParameters;
+
 @interface CMViewController ()
 
 @property NSInteger selectedColor;
@@ -24,6 +33,7 @@
 @property (strong, nonatomic) NSTimer *stopWatchTimer;
 @property (strong, nonatomic) NSDate * startTime;
 @property NSInteger movesCount;
+@property BoardParameters boardParameters;
 @end
 
 @implementation CMViewController
@@ -37,6 +47,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    
+    self.boardParameters = [self getBoardParametersForSize:3];
 
     // Init color bar buttons
     [self initGridColorButtons];
@@ -69,37 +81,43 @@
     [self initMovesCount];
 }
 
+-(BoardParameters)getBoardParametersForSize:(int)size
+{
+    struct BoardParameters boardParameters;
+    
+    // For now always return 3x3 parameters
+    boardParameters.gridSize = 3;
+    boardParameters.xOffsetForFirstColorCell = 93;
+    boardParameters.yOffsetForFirstColorCell = 63;
+    boardParameters.colorCellSize = 50;
+    boardParameters.colorCellSpacing = 64;
+    
+    return boardParameters;
+}
+
 - (void)initColorCells
 {
-    // Constants for 3x3 layout
-    int xOffsetForFirstColumn = 93;
-    int yOffsetForFirstRow = 63;
-    int cellWidth = 50;
-    int cellHeight = cellWidth;
-    int gridSize = 3;
-    int cellSpacing = 64;
-    
-    int xOffset = xOffsetForFirstColumn;
-    int yOffset = yOffsetForFirstRow;
+    int xOffset = _boardParameters.xOffsetForFirstColorCell;
+    int yOffset = _boardParameters.yOffsetForFirstColorCell;
 
     self.colorCellSections = [[NSMutableArray alloc] init];
     
-    for (int i=0; i<gridSize; i++)
+    for (int i=0; i<_boardParameters.gridSize; i++)
     {
         NSMutableArray *row = [[NSMutableArray alloc] init];
-        for (int j=0; j<gridSize; j++)
+        for (int j=0; j<_boardParameters.gridSize; j++)
         {
-            UIImageView *cellBlock = [[UIImageView alloc] initWithFrame:CGRectMake(xOffset, yOffset, cellWidth, cellHeight)];
+            UIImageView *cellBlock = [[UIImageView alloc] initWithFrame:CGRectMake(xOffset, yOffset, _boardParameters.colorCellSize, _boardParameters.colorCellSize)];
             cellBlock.image=[UIImage imageNamed:@"BlockWhite.png"];
             [_GridContainerView addSubview:cellBlock];
             
             [row addObject:cellBlock];
-            xOffset += cellSpacing;
+            xOffset += _boardParameters.colorCellSpacing;
         }
 
         [self.colorCellSections addObject:row];
-        yOffset += cellSpacing;
-        xOffset = xOffsetForFirstColumn;
+        yOffset += _boardParameters.colorCellSpacing;
+        xOffset = _boardParameters.xOffsetForFirstColorCell;
     }
 }
 
