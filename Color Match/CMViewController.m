@@ -12,18 +12,19 @@
 typedef struct BoardParameters
 {
     int gridSize;
-    int xOffsetForFirstColorCell;
-    int yOffsetForFirstColorCell;
     int colorCellSize;
     int colorCellSpacing;
+    int yOffsetForFirstTopGridButton;
+    int xOffsetForFirstLeftGridButton;
+    int emptyPaddingInGridButton;
 } BoardParameters;
 
 @interface CMViewController ()
 
 @property NSInteger selectedColor;
-@property NSArray *allGridColorButtons;
-@property NSArray *topGridColorButtons;
-@property NSArray *leftGridColorButtons;
+@property NSMutableArray *allGridColorButtons;
+@property NSMutableArray *topGridColorButtons;
+@property NSMutableArray *leftGridColorButtons;
 @property NSMutableArray *colorCellSections;
 @property NSMutableArray *verticalLines;
 @property NSMutableArray *horizontalLines;
@@ -48,8 +49,8 @@ typedef struct BoardParameters
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
-    // Init board parameters for 3x3
-    self.boardParameters = [self getBoardParametersForSize:3];
+    // Init board parameters
+    self.boardParameters = [self getBoardParametersForSize:5];
 
     // Init color bar buttons
     [self initGridColorButtons];
@@ -85,21 +86,49 @@ typedef struct BoardParameters
 -(BoardParameters)getBoardParametersForSize:(int)size
 {
     struct BoardParameters boardParameters;
+    boardParameters.gridSize = size;
     
-    // For now always return 3x3 parameters
-    boardParameters.gridSize = 3;
-    boardParameters.xOffsetForFirstColorCell = 93;
-    boardParameters.yOffsetForFirstColorCell = 63;
-    boardParameters.colorCellSize = 50;
-    boardParameters.colorCellSpacing = 64;
+    switch (size)
+    {
+        case 3:
+            boardParameters.colorCellSize = 50;
+            boardParameters.colorCellSpacing = 14;
+            boardParameters.yOffsetForFirstTopGridButton= 0;
+            boardParameters.xOffsetForFirstLeftGridButton = 29;
+            boardParameters.emptyPaddingInGridButton = 13;
+            break;
+        case 4:
+            boardParameters.colorCellSize = 40;
+            boardParameters.colorCellSpacing = 10;
+            boardParameters.yOffsetForFirstTopGridButton= 0;
+            boardParameters.xOffsetForFirstLeftGridButton = 27;
+            boardParameters.emptyPaddingInGridButton = 11;
+            break;
+        case 5:
+            boardParameters.colorCellSize = 35;
+            boardParameters.colorCellSpacing = 8;
+            boardParameters.yOffsetForFirstTopGridButton= 0;
+            boardParameters.xOffsetForFirstLeftGridButton = 20;
+            boardParameters.emptyPaddingInGridButton = 9;
+            break;
+        default:
+            [NSException raise:@"Invalid input" format:@"Invalid board size"];
+            break;
+    }
     
     return boardParameters;
 }
 
 - (void)initColorCells
 {
-    int xOffset = _boardParameters.xOffsetForFirstColorCell;
-    int yOffset = _boardParameters.yOffsetForFirstColorCell;
+    // Color cell start 1 cell away from the left, so the xOffset is calculated by offset of the first column + 1 cellspacing
+    int cellSizePlusSpace = _boardParameters.colorCellSize + _boardParameters.colorCellSpacing;
+    int xOffset_initial = _boardParameters.xOffsetForFirstLeftGridButton + cellSizePlusSpace;
+    int xOffset = xOffset_initial;
+    
+    
+    // Color cells starts 1 cell away from the top due to grid buttons
+    int yOffset = cellSizePlusSpace;
 
     self.colorCellSections = [[NSMutableArray alloc] init];
     
@@ -113,28 +142,57 @@ typedef struct BoardParameters
             [_GridContainerView addSubview:cellBlock];
             
             [row addObject:cellBlock];
-            xOffset += _boardParameters.colorCellSpacing;
+            xOffset += cellSizePlusSpace;
         }
 
         [self.colorCellSections addObject:row];
-        yOffset += _boardParameters.colorCellSpacing;
-        xOffset = _boardParameters.xOffsetForFirstColorCell;
+        yOffset += cellSizePlusSpace;
+        xOffset = xOffset_initial;
     }
 }
 
 - (void)initGridColorButtons
 {
-    self.allGridColorButtons = [NSArray arrayWithObjects:
-        [[GridColorButton alloc] initWithButton:_Top1Button],
-        [[GridColorButton alloc] initWithButton:_Top2Button],
-        [[GridColorButton alloc] initWithButton:_Top3Button],
-        [[GridColorButton alloc] initWithButton:_Left1Button],
-        [[GridColorButton alloc] initWithButton:_Left2Button],
-        [[GridColorButton alloc] initWithButton:_Left3Button],
-        nil];
+    _allGridColorButtons = [[NSMutableArray alloc] init];
+    _topGridColorButtons = [[NSMutableArray alloc] init];
+    _leftGridColorButtons = [[NSMutableArray alloc] init];
+    
+    // Color cell start 1 cell away from the left, so the xOffset is calculated by offset of the first column + 1 cellspacing
+    int cellSizePlusSpace = _boardParameters.colorCellSize + _boardParameters.colorCellSpacing;
+    int xOffset = _boardParameters.xOffsetForFirstLeftGridButton + cellSizePlusSpace;
+    int yOffset = _boardParameters.yOffsetForFirstTopGridButton;
+    
+    // Create top buttons
+    for (int i=0; i<_boardParameters.gridSize; i++)
+    {
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        button.frame = CGRectMake(xOffset, yOffset, _boardParameters.colorCellSize, _boardParameters.colorCellSize);
+        [button setImage:[UIImage imageNamed:@"EmptyCircle.png"] forState:UIControlStateNormal];
+        [button addTarget:self action:@selector(GridButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        [_GridContainerView addSubview:button];
 
-    self.topGridColorButtons = [_allGridColorButtons subarrayWithRange:NSMakeRange(0, _allGridColorButtons.count / 2)];
-    self.leftGridColorButtons = [_allGridColorButtons subarrayWithRange:NSMakeRange(_allGridColorButtons.count / 2, _allGridColorButtons.count / 2)];
+        GridColorButton *gridColorButton = [[GridColorButton alloc] initWithButton:button];
+        [_allGridColorButtons addObject:gridColorButton];
+        [_topGridColorButtons addObject:gridColorButton];
+        xOffset += cellSizePlusSpace;
+    }
+    
+    // Create left buttons
+    xOffset = _boardParameters.xOffsetForFirstLeftGridButton;
+    yOffset = cellSizePlusSpace;
+    for (int i=0; i<_boardParameters.gridSize; i++)
+    {
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        button.frame = CGRectMake(xOffset, yOffset, _boardParameters.colorCellSize, _boardParameters.colorCellSize);
+        [button setImage:[UIImage imageNamed:@"EmptyCircle.png"] forState:UIControlStateNormal];
+        [button addTarget:self action:@selector(GridButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        [_GridContainerView addSubview:button];
+
+        GridColorButton *gridColorButton = [[GridColorButton alloc] initWithButton:button];
+        [_allGridColorButtons addObject:gridColorButton];
+        [_leftGridColorButtons addObject:gridColorButton];
+        yOffset += cellSizePlusSpace;
+    }
 }
 
 - (void)initMovesCount
@@ -533,7 +591,7 @@ typedef struct BoardParameters
         // Draw line
         GridColorButton *topColorButton = [topConnections objectAtIndex:i];
         UIView *topConnection = topColorButton.button;
-        int topAdjustment = -13;   // Accounts for extra spacing in top button
+        int topAdjustment = -1 * (_boardParameters.emptyPaddingInGridButton);   // Accounts for extra spacing in top button
         int topY = topConnection.frame.origin.y + topConnection.frame.size.height + topAdjustment;
         int xAdjustment = -1; // Account for the fact that our width is 3 pixels
         int topX = topConnection.frame.origin.x + topConnection.frame.size.width / 2 + xAdjustment;
@@ -580,7 +638,7 @@ typedef struct BoardParameters
 
         int yAdjustment = -1; // Account for the fact that our width is 3 pixels
         int leftY = leftConnection.frame.origin.y + leftConnection.frame.size.height / 2 + yAdjustment;
-        int leftAdjustment = -13;   // Accounts for extra spacing in left button
+        int leftAdjustment = -1 * (_boardParameters.emptyPaddingInGridButton);   // Accounts for extra spacing in left button
         int leftX = leftConnection.frame.origin.x + leftConnection.frame.size.width + leftAdjustment;
         
         UIImageView *rightConnection = [rightConnections objectAtIndex:i];;

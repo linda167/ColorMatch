@@ -126,70 +126,8 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gfo-Oa-0De">
-                                <rect key="frame" x="10" y="278" width="300" height="277"/>
+                                <rect key="frame" x="10" y="281" width="300" height="277"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V6W-54-RQe">
-                                        <rect key="frame" x="93" y="0.0" width="50" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" image="EmptyCircle.png">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="GridButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="vm9-3B-2SH"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jci-Fd-iME">
-                                        <rect key="frame" x="157" y="0.0" width="50" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" image="EmptyCircle.png">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="GridButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="WmP-cg-RFz"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GXF-fY-Cxu">
-                                        <rect key="frame" x="221" y="0.0" width="50" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" image="EmptyCircle.png">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="GridButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="vB3-2u-4Jy"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GaD-oR-349">
-                                        <rect key="frame" x="29" y="63" width="50" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" image="EmptyCircle.png">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="GridButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="fyK-7U-pqs"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fhv-Y7-P7z">
-                                        <rect key="frame" x="29" y="123" width="50" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" image="EmptyCircle.png">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="GridButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="kLM-9W-EEF"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LIK-yj-Ir9">
-                                        <rect key="frame" x="29" y="184" width="50" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" image="EmptyCircle.png">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="GridButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="C01-IH-UPc"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2FV-Wg-Q4I">
@@ -204,6 +142,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <connections>
                         <outlet property="Goal00" destination="2Wc-ch-Lld" id="fIR-00-xVk"/>
                         <outlet property="Goal01" destination="zEM-Vo-dvv" id="3vX-pu-Mym"/>
@@ -215,14 +154,8 @@
                         <outlet property="Goal21" destination="Sk7-sE-Ujj" id="VdA-Pg-mrH"/>
                         <outlet property="Goal22" destination="eWx-WD-UgT" id="deG-u7-CY8"/>
                         <outlet property="GridContainerView" destination="Gfo-Oa-0De" id="s9g-ZU-59X"/>
-                        <outlet property="Left1Button" destination="GaD-oR-349" id="tOr-VD-o89"/>
-                        <outlet property="Left2Button" destination="Fhv-Y7-P7z" id="gcY-qp-eTl"/>
-                        <outlet property="Left3Button" destination="LIK-yj-Ir9" id="P5s-Qn-DYZ"/>
                         <outlet property="MovesLabel" destination="ZBE-xq-vrd" id="yms-0j-chq"/>
                         <outlet property="TimerLabel" destination="6M6-Da-3OJ" id="5ZA-81-evJ"/>
-                        <outlet property="Top1Button" destination="V6W-54-RQe" id="2TA-OF-IOQ"/>
-                        <outlet property="Top2Button" destination="Jci-Fd-iME" id="ikD-sZ-Hg5"/>
-                        <outlet property="Top3Button" destination="GXF-fY-Cxu" id="mqF-co-BR4"/>
                         <outlet property="blueButton" destination="4Uo-bZ-bKf" id="hIn-EU-oiA"/>
                         <outlet property="redButton" destination="9fi-Km-6sM" id="cpf-bq-uqW"/>
                         <outlet property="whiteButton" destination="zVl-s8-mXL" id="T5x-Xu-Chw"/>
@@ -238,7 +171,6 @@
         <image name="BlockWhite.png" width="34" height="34"/>
         <image name="Blue.png" width="60" height="60"/>
         <image name="ButtonBar.png" width="320" height="98"/>
-        <image name="EmptyCircle.png" width="50" height="50"/>
         <image name="Red.png" width="60" height="60"/>
         <image name="White.png" width="60" height="60"/>
         <image name="Yellow.png" width="60" height="60"/>

@@ -10,19 +10,12 @@
 
 @interface CMViewController : UIViewController <UIAlertViewDelegate>
 - (IBAction)ColorButtonPressed:(id)sender;
-- (IBAction)GridButtonPressed:(id)sender;
 
 @property (weak, nonatomic) IBOutlet UIView *GridContainerView;
 @property (weak, nonatomic) IBOutlet UIButton *blueButton;
 @property (weak, nonatomic) IBOutlet UIButton *yellowButton;
 @property (weak, nonatomic) IBOutlet UIButton *redButton;
 @property (weak, nonatomic) IBOutlet UIButton *whiteButton;
-@property (weak, nonatomic) IBOutlet UIButton *Top1Button;
-@property (weak, nonatomic) IBOutlet UIButton *Top2Button;
-@property (weak, nonatomic) IBOutlet UIButton *Top3Button;
-@property (weak, nonatomic) IBOutlet UIButton *Left1Button;
-@property (weak, nonatomic) IBOutlet UIButton *Left2Button;
-@property (weak, nonatomic) IBOutlet UIButton *Left3Button;
 @property (weak, nonatomic) IBOutlet UIImageView *Goal00;
 @property (weak, nonatomic) IBOutlet UIImageView *Goal01;
 @property (weak, nonatomic) IBOutlet UIImageView *Goal02;
