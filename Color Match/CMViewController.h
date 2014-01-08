@@ -10,6 +10,9 @@
 
 @interface CMViewController : UIViewController <UIAlertViewDelegate>
 - (IBAction)ColorButtonPressed:(id)sender;
+- (IBAction)ThreePressed:(id)sender;
+- (IBAction)FourPressed:(id)sender;
+- (IBAction)FivePressed:(id)sender;
 
 @property (weak, nonatomic) IBOutlet UIView *GridContainerView;
 @property (weak, nonatomic) IBOutlet UIButton *blueButton;
