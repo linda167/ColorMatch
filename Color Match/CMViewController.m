@@ -8,19 +8,7 @@
 
 #import "CMViewController.h"
 #import "GridColorButton.h"
-
-// Parameters used to create current board
-typedef struct BoardParameters
-{
-    int gridSize;
-    int colorCellSize;
-    int colorCellSpacing;
-    int yOffsetForFirstTopGridButton;
-    int xOffsetForFirstLeftGridButton;
-    int emptyPaddingInGridButton;
-    int goalColorCellSize;
-    int goalColorCellSpacing;
-} BoardParameters;
+#import "GoalBoard.h"
 
 @interface CMViewController ()
 
@@ -31,19 +19,18 @@ typedef struct BoardParameters
 @property NSMutableArray *colorCellSections;
 @property NSMutableArray *verticalLines;
 @property NSMutableArray *horizontalLines;
-@property NSMutableArray *goalCellSections;
-@property NSMutableArray *goalTopColorsState;
-@property NSMutableArray *goalLeftColorsState;
-@property (strong, nonatomic) NSTimer *stopWatchTimer;
-@property (strong, nonatomic) NSDate * startTime;
+@property NSTimer *stopWatchTimer;
+@property NSDate *startTime;
 @property NSInteger movesCount;
 @property BoardParameters boardParameters;
+@property GoalBoard *goalBoard;
 @end
 
 @implementation CMViewController
 
 - (NSUInteger)supportedInterfaceOrientations
 {
+    // Lock orientation to portrait
     return UIInterfaceOrientationPortrait + UIInterfaceOrientationPortraitUpsideDown;
 }
 
@@ -65,7 +52,7 @@ typedef struct BoardParameters
     [self renderNewBoard];
     
     // Generate new random goal state
-    [self generateNewGoalBoard];
+    [_goalBoard generateNewGoalBoardStates];
     
     // Start the timer
     [self startTimer];
@@ -78,7 +65,7 @@ typedef struct BoardParameters
 - (void)renderNewBoard
 {
     // Init goal color cells
-    [self initGoalColorCells];
+    _goalBoard = [[GoalBoard alloc] initWithParameters:(_boardParameters) goalContainerView:_GoalContainerView];
     
     // Init color bar buttons
     [self initGridColorButtons];
@@ -208,34 +195,6 @@ typedef struct BoardParameters
     }
 }
 
-- (void)initGoalColorCells
-{
-    int cellSizePlusSpace = _boardParameters.goalColorCellSize + _boardParameters.goalColorCellSpacing;
-    int xOffsetInitial = 0;
-    int xOffset = xOffsetInitial;
-    int yOffset = 0;
-    
-    self.goalCellSections = [[NSMutableArray alloc] init];
-    
-    for (int i=0; i<_boardParameters.gridSize; i++)
-    {
-        NSMutableArray *row = [[NSMutableArray alloc] init];
-        for (int j=0; j<_boardParameters.gridSize; j++)
-        {
-            UIImageView *cellBlock = [[UIImageView alloc] initWithFrame:CGRectMake(xOffset, yOffset, _boardParameters.goalColorCellSize, _boardParameters.goalColorCellSize)];
-            cellBlock.image=[UIImage imageNamed:@"BlockWhite.png"];
-            [_GoalContainerView addSubview:cellBlock];
-            
-            [row addObject:cellBlock];
-            xOffset += cellSizePlusSpace;
-        }
-        
-        [self.goalCellSections addObject:row];
-        yOffset += cellSizePlusSpace;
-        xOffset = xOffsetInitial;
-    }
-}
-
 - (void)initMovesCount
 {
     self.movesCount = 0;
@@ -284,29 +243,18 @@ typedef struct BoardParameters
     self.TimerLabel.text = timeString;
 }
 
-- (void)generateNewGoalBoard
-{
-    do
-    {
-        // Randomly generate goal color bar
-        [self RandomGenGoalStates];
-    }
-    while ([self CheckGoalSufficientDifficulty] == false);
-    
-    // Update goal cells
-    [self UpdateColorCells: self.goalCellSections :self.goalTopColorsState :self.goalLeftColorsState];
-}
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)ColorButtonPressed:(id)sender {
+- (IBAction)ColorButtonPressed:(id)sender
+{
     NSArray* buttons = [NSArray arrayWithObjects:_whiteButton,_blueButton,_redButton, _yellowButton, nil];
     
-    for (UIButton* button in buttons){
+    for (UIButton* button in buttons)
+    {
         if (button == sender){
             button.selected = YES;
             
@@ -340,9 +288,6 @@ typedef struct BoardParameters
             [self deselectColorButton:button];
         }
     }
-}
-
-- (IBAction)x3Pressed:(id)sender {
 }
 
 -(void)deselectColorButton:(UIButton *)button
@@ -477,161 +422,6 @@ typedef struct BoardParameters
     [self UpdateColorCells: self.colorCellSections :currentTopColorState :currentLeftColorState];
 }
 
--(void)RandomGenGoalStates
-{
-    self.goalTopColorsState = [[NSMutableArray alloc] init];
-    self.goalLeftColorsState = [[NSMutableArray alloc] init];
-    
-    for (int i=0; i<_boardParameters.gridSize; i++)
-    {
-        int random = arc4random()%4;
-        NSNumber* wrappedNumber = [NSNumber numberWithInt:random];
-        [self.goalTopColorsState addObject:wrappedNumber];
-    }
-    
-    for (int i=0; i<_boardParameters.gridSize; i++)
-    {
-        int random = arc4random()%4;
-        NSNumber* wrappedNumber = [NSNumber numberWithInt:random];
-        [self.goalLeftColorsState addObject:wrappedNumber];
-    }
-}
-
--(BOOL)CheckGoalSufficientDifficulty
-{
-    // Check that we have all non-white colors represented in the toggle states
-    bool has1 = false;
-    bool has2 = false;
-    bool has3 = false;
-    
-    // Keep track of white cells
-    bool hasWhiteOnTop = false;
-    bool hasWhiteOnLeft = false;
-    
-    for (NSNumber* number in self.goalTopColorsState){
-        int num = [number intValue];
-        if (num == 0)
-        {
-            hasWhiteOnTop = true;
-        }
-        else if (num == 1)
-        {
-            has1 = true;
-        }
-        else if (num == 2)
-        {
-            has2 = true;
-        }
-        else if (num == 3)
-        {
-            has3 = true;
-        }
-    }
-    
-    for (NSNumber* number in self.goalLeftColorsState){
-        int num = [number intValue];
-        if (num == 0)
-        {
-            hasWhiteOnLeft = true;
-        }
-        else if (num == 1)
-        {
-            has1 = true;
-        }
-        else if (num == 2)
-        {
-            has2 = true;
-        }
-        else if (num == 3)
-        {
-            has3 = true;
-        }
-    }
-    
-    bool hasAllColors = has1 && has2 && has3;
-    if (!hasAllColors)
-    {
-        return false;
-    }
-    
-    // Check that we don't have any whites in the result
-    if (hasWhiteOnTop && hasWhiteOnLeft)
-    {
-        return false;
-    }
-    
-    // Check all rows for N number of same colors in a row
-    int maxConsecutiveCountAllowed = 3;
-    for (NSNumber* leftNSNumber in self.goalLeftColorsState)
-    {
-        int leftColor = [leftNSNumber intValue];
-        int previousCombinedColor = -1;
-        int sameColorConsecutiveCount = 0;
-        for (NSNumber* topNSNumber in self.goalTopColorsState)
-        {
-            int topColor = [topNSNumber intValue];
-            int combinedColor = [self CombineColors:leftColor :topColor];
-
-            if (previousCombinedColor == -1)
-            {
-                previousCombinedColor = combinedColor;
-                sameColorConsecutiveCount = 1;
-            }
-            else if (combinedColor == previousCombinedColor)
-            {
-                sameColorConsecutiveCount++;
-                if (sameColorConsecutiveCount >= maxConsecutiveCountAllowed)
-                {
-                    // Too many same color found consecutively
-                    return false;
-                }
-            }
-            else
-            {
-                // Found a different color, reset consecutive count
-                previousCombinedColor = combinedColor;
-                sameColorConsecutiveCount = 1;
-            }
-        }
-    }
-    
-    // Check all columns for same colors in the column
-    for (NSNumber* topNSNumber in self.goalTopColorsState)
-    {
-        int topColor = [topNSNumber intValue];
-        int previousCombinedColor = -1;
-        int sameColorConsecutiveCount = 0;
-        for (NSNumber* leftNSNumber in self.goalLeftColorsState)
-        {
-            int leftColor = [leftNSNumber intValue];
-            int combinedColor = [self CombineColors:leftColor :topColor];
-
-            if (previousCombinedColor == -1)
-            {
-                previousCombinedColor = combinedColor;
-                sameColorConsecutiveCount = 1;
-            }
-            else if (combinedColor == previousCombinedColor)
-            {
-                sameColorConsecutiveCount++;
-                if (sameColorConsecutiveCount >= maxConsecutiveCountAllowed)
-                {
-                    // Too many same color found consecutively
-                    return false;
-                }
-            }
-            else
-            {
-                // Found a different color, reset consecutive count
-                previousCombinedColor = combinedColor;
-                sameColorConsecutiveCount = 1;
-            }
-        }
-    }
-    
-    return true;
-}
-
 -(void)DrawVerticalConnectingLines
 {
     // We want to connect lines from the top color buttons to the bottom row of color cells
@@ -724,59 +514,14 @@ typedef struct BoardParameters
             int topColor = [(NSNumber *)[topColorsState objectAtIndex:j] intValue];
             int leftColor = [(NSNumber *)[leftColorsState objectAtIndex:i] intValue];
             
-            int combinedColor = [self CombineColors:leftColor :topColor];
+            int combinedColor = [CommonUtils CombineColors:leftColor color2:topColor];
             
-            UIImage *image = [self GetCellImageForColor:combinedColor];
+            UIImage *image = [CommonUtils GetCellImageForColor:combinedColor];
             
             UIImageView *imageView = [row objectAtIndex:j];
             [imageView setImage:image];
         }
     }
-}
-
-/*------------------------------------------
- Return results:
- 0 - white
- 1 - blue
- 2 - Red
- 3 - Yellow
- 4 - Purple
- 5 - Green
- 6 - Orange
- ------------------------------------------*/
--(int)CombineColors:(int)color1 :(int)color2
-{
-    if (color1 == 0 && color2 == 0)
-    {
-        return 0;
-    }
-    else if ((color1 == 1 && color2 == 1) || (color1 == 1 && color2 == 0) || (color1 == 0 && color2 == 1))
-    {
-        return 1;
-    }
-    else if ((color1 == 2 && color2 == 2) || (color1 == 2 && color2 == 0) || (color1 == 0 && color2 == 2))
-    {
-        return 2;
-    }
-    else if ((color1 == 3 && color2 == 3) || (color1 == 3 && color2 == 0) || (color1 == 0 && color2 == 3))
-    {
-        return 3;
-    }
-    else if ((color1 == 1 && color2 == 2) || (color1 == 2 && color2 == 1))
-    {
-        return 4;
-    }
-    else if ((color1 == 1 && color2 == 3) || (color1 == 3 && color2 == 1))
-    {
-        return 5;
-    }
-    else if ((color1 == 2 && color2 == 3) || (color1 == 3 && color2 == 2))
-    {
-        return 6;
-    }
-    
-    // Should not be hit
-    return 0;
 }
 
 -(UIColor *) GetGrayColor
@@ -797,37 +542,6 @@ typedef struct BoardParameters
 -(UIColor *) GetRedColor
 {
     return [UIColor colorWithRed:(255/255.0) green:(0/255.0) blue:(0/255.0) alpha:1];
-}
-
--(UIImage *) GetCellImageForColor:(int)color
-{
-    switch (color)
-    {
-        case 0:
-            return [UIImage imageNamed:@"BlockWhite.png"];
-            break;
-        case 1:
-            return [UIImage imageNamed:@"BlockBlue.png"];
-            break;
-        case 2:
-            return [UIImage imageNamed:@"BlockRed.png"];
-            break;
-        case 3:
-            return [UIImage imageNamed:@"BlockYellow.png"];
-            break;
-        case 4:
-            return [UIImage imageNamed:@"BlockPurple.png"];
-            break;
-        case 5:
-            return [UIImage imageNamed:@"BlockGreen.png"];
-            break;
-        case 6:
-            return [UIImage imageNamed:@"BlockOrange.png"];
-            break;
-        default:
-            return [UIImage imageNamed:@"BlockWhite.png"];
-            break;
-    }
 }
 
 -(void)resetCells
@@ -862,19 +576,19 @@ typedef struct BoardParameters
 
 -(BOOL)CheckVictory
 {
-    for (int i=0; i < self.goalTopColorsState.count; i++)
+    for (int i=0; i < _goalBoard.topColorsState.count; i++)
     {
-        for (int j=0; j < self.goalLeftColorsState.count; j++)
+        for (int j=0; j < _goalBoard.leftColorsState.count; j++)
         {
-            int goalTopColor = [(NSNumber *)[self.goalTopColorsState objectAtIndex:i] intValue];
-            int goalLeftColor = [(NSNumber *)[self.goalLeftColorsState objectAtIndex:j] intValue];
-            int goalCombinedColor = [self CombineColors:goalTopColor :goalLeftColor];
+            int goalTopColor = [(NSNumber *)[_goalBoard.topColorsState objectAtIndex:i] intValue];
+            int goalLeftColor = [(NSNumber *)[_goalBoard.leftColorsState objectAtIndex:j] intValue];
+            int goalCombinedColor = [CommonUtils CombineColors:goalTopColor color2:goalLeftColor];
             
             GridColorButton *actualTopButton = [_topGridColorButtons objectAtIndex:i];
             int actualTopColor = [actualTopButton.color intValue];
             GridColorButton *actualLeftButton = [_leftGridColorButtons objectAtIndex:j];
             int actualLeftColor = [actualLeftButton.color intValue];
-            int actualCombinedColor = [self CombineColors:actualTopColor :actualLeftColor];
+            int actualCombinedColor = [CommonUtils CombineColors:actualTopColor color2:actualLeftColor];
             
             if (goalCombinedColor != actualCombinedColor)
             {
@@ -896,7 +610,7 @@ typedef struct BoardParameters
 
 - (void)NextLevel
 {
-    [self generateNewGoalBoard];
+    [_goalBoard generateNewGoalBoardStates];
     [self resetActionBar];
     [self resetCells];
     [self startTimer];
@@ -952,38 +666,13 @@ typedef struct BoardParameters
     [_horizontalLines removeAllObjects];
 }
 
-
-- (void)removeExistingGoalColorCells
-{
-    for (int i=0; i<_goalCellSections.count; i++)
-    {
-        NSMutableArray *row = [_goalCellSections objectAtIndex:i];
-
-        for (int j=0; j<row.count; j++)
-        {
-            UIImageView *cellBlock = [row objectAtIndex:j];
-            [cellBlock removeFromSuperview];
-        }
-        
-        [row removeAllObjects];
-    }
-    
-    [_goalCellSections removeAllObjects];
-}
-
-- (void)removeExistingGoalColorsState
-{
-    [_goalTopColorsState removeAllObjects];
-    [_goalLeftColorsState removeAllObjects];
-}
-
 - (void)removeExistingBoard
 {
     [self removeExistingGridColorButtons];
     [self removeExistingGridCells];
     [self removeExistingConnectingLines];
-    [self removeExistingGoalColorCells];
-    [self removeExistingGoalColorsState];
+    [_goalBoard removeExistingGoalColorCells];
+    [_goalBoard removeExistingGoalColorsState];
 }
 
 - (void)clearExistingGame

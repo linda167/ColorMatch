@@ -45,6 +45,9 @@
 		AFADA2311877D20D00FADA22 /* Yellow.png in Resources */ = {isa = PBXBuildFile; fileRef = AFADA21B1877D20D00FADA22 /* Yellow.png */; };
 		AFADA2321877D20D00FADA22 /* YellowSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = AFADA21C1877D20D00FADA22 /* YellowSelected.png */; };
 		AFADA23518791E4400FADA22 /* GridColorButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AFADA23418791E4400FADA22 /* GridColorButton.m */; };
+		AFB896811881C0C7003FAEF4 /* GoalBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB896801881C0C7003FAEF4 /* GoalBoard.m */; };
+		AFB896851881E011003FAEF4 /* ColorBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB896841881E011003FAEF4 /* ColorBoard.m */; };
+		AFB896881881E2E6003FAEF4 /* CommonUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB896871881E2E6003FAEF4 /* CommonUtils.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,6 +105,13 @@
 		AFADA21C1877D20D00FADA22 /* YellowSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = YellowSelected.png; sourceTree = "<group>"; };
 		AFADA23318791E4400FADA22 /* GridColorButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridColorButton.h; sourceTree = "<group>"; };
 		AFADA23418791E4400FADA22 /* GridColorButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridColorButton.m; sourceTree = "<group>"; };
+		AFB8967F1881C0C7003FAEF4 /* GoalBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoalBoard.h; sourceTree = "<group>"; };
+		AFB896801881C0C7003FAEF4 /* GoalBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoalBoard.m; sourceTree = "<group>"; };
+		AFB896821881C288003FAEF4 /* CommonTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonTypes.h; sourceTree = "<group>"; };
+		AFB896831881E011003FAEF4 /* ColorBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorBoard.h; sourceTree = "<group>"; };
+		AFB896841881E011003FAEF4 /* ColorBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorBoard.m; sourceTree = "<group>"; };
+		AFB896861881E2E6003FAEF4 /* CommonUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonUtils.h; sourceTree = "<group>"; };
+		AFB896871881E2E6003FAEF4 /* CommonUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonUtils.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,6 +182,13 @@
 				AF2C22291874B8B700082561 /* Supporting Files */,
 				AFADA23318791E4400FADA22 /* GridColorButton.h */,
 				AFADA23418791E4400FADA22 /* GridColorButton.m */,
+				AFB8967F1881C0C7003FAEF4 /* GoalBoard.h */,
+				AFB896801881C0C7003FAEF4 /* GoalBoard.m */,
+				AFB896821881C288003FAEF4 /* CommonTypes.h */,
+				AFB896831881E011003FAEF4 /* ColorBoard.h */,
+				AFB896841881E011003FAEF4 /* ColorBoard.m */,
+				AFB896861881E2E6003FAEF4 /* CommonUtils.h */,
+				AFB896871881E2E6003FAEF4 /* CommonUtils.m */,
 			);
 			path = "Color Match";
 			sourceTree = "<group>";
@@ -356,10 +373,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AFB896851881E011003FAEF4 /* ColorBoard.m in Sources */,
+				AFB896881881E2E6003FAEF4 /* CommonUtils.m in Sources */,
 				AF2C22331874B8B800082561 /* CMAppDelegate.m in Sources */,
 				AFADA23518791E4400FADA22 /* GridColorButton.m in Sources */,
 				AF2C222F1874B8B700082561 /* main.m in Sources */,
 				AF2C223C1874B8B800082561 /* CMViewController.m in Sources */,
+				AFB896811881C0C7003FAEF4 /* GoalBoard.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
