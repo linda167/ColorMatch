@@ -12,5 +12,9 @@
 
 +(int)CombineColors:(int)color1 color2:(int)color2;
 +(UIImage *) GetCellImageForColor:(int)color;
++(UIColor *) GetGrayColor;
++(UIColor *) GetBlueColor;
++(UIColor *) GetYellowColor;
++(UIColor *) GetRedColor;
 
 @end

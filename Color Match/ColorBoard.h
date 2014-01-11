@@ -13,6 +13,8 @@
 @property NSMutableArray *colorCellSections;
 @property NSMutableArray *topColorsState;
 @property NSMutableArray *leftColorsState;
+@property BoardParameters boardParameters;
+@property UIView *containerView;
 
 -(void)updateColorCells;
 

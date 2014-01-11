@@ -8,20 +8,15 @@
 
 #import "GoalBoard.h"
 
-@interface GoalBoard ()
-@property BoardParameters boardParameters;
-@property UIView *goalContainerView;
-@end
-
 @implementation GoalBoard
 
--(id)initWithParameters:(BoardParameters)boardParameters goalContainerView:(UIView*)goalContainerView
+-(id)initWithParameters:(BoardParameters)boardParameters containerView:(UIView*)containerView
 {
     self = [super init];
     if (self)
     {
-        _boardParameters = boardParameters;
-        _goalContainerView = goalContainerView;
+        self.boardParameters = boardParameters;
+        self.containerView = containerView;
         
         [self initGoalColorCells];
     }
@@ -31,21 +26,21 @@
 
 - (void)initGoalColorCells
 {
-    int cellSizePlusSpace = _boardParameters.goalColorCellSize + _boardParameters.goalColorCellSpacing;
+    int cellSizePlusSpace = self.boardParameters.goalColorCellSize + self.boardParameters.goalColorCellSpacing;
     int xOffsetInitial = 0;
     int xOffset = xOffsetInitial;
     int yOffset = 0;
     
     self.colorCellSections = [[NSMutableArray alloc] init];
     
-    for (int i=0; i<_boardParameters.gridSize; i++)
+    for (int i=0; i<self.boardParameters.gridSize; i++)
     {
         NSMutableArray *row = [[NSMutableArray alloc] init];
-        for (int j=0; j<_boardParameters.gridSize; j++)
+        for (int j=0; j<self.boardParameters.gridSize; j++)
         {
-            UIImageView *cellBlock = [[UIImageView alloc] initWithFrame:CGRectMake(xOffset, yOffset, _boardParameters.goalColorCellSize, _boardParameters.goalColorCellSize)];
+            UIImageView *cellBlock = [[UIImageView alloc] initWithFrame:CGRectMake(xOffset, yOffset, self.boardParameters.goalColorCellSize, self.boardParameters.goalColorCellSize)];
             cellBlock.image=[UIImage imageNamed:@"BlockWhite.png"];
-            [_goalContainerView addSubview:cellBlock];
+            [self.containerView addSubview:cellBlock];
             
             [row addObject:cellBlock];
             xOffset += cellSizePlusSpace;
@@ -80,14 +75,14 @@
     self.topColorsState = [[NSMutableArray alloc] init];
     self.leftColorsState = [[NSMutableArray alloc] init];
     
-    for (int i=0; i<_boardParameters.gridSize; i++)
+    for (int i=0; i<self.boardParameters.gridSize; i++)
     {
         int random = arc4random()%4;
         NSNumber* wrappedNumber = [NSNumber numberWithInt:random];
         [self.topColorsState addObject:wrappedNumber];
     }
     
-    for (int i=0; i<_boardParameters.gridSize; i++)
+    for (int i=0; i<self.boardParameters.gridSize; i++)
     {
         int random = arc4random()%4;
         NSNumber* wrappedNumber = [NSNumber numberWithInt:random];

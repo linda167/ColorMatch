@@ -86,4 +86,24 @@
     }
 }
 
++(UIColor *) GetGrayColor
+{
+    return [UIColor colorWithRed:(192/255.0) green:(192/255.0) blue:(192/255.0) alpha:1];
+}
+
++(UIColor *) GetBlueColor
+{
+    return [UIColor colorWithRed:(0/255.0) green:(38/255.0) blue:(255/255.0) alpha:1];
+}
+
++(UIColor *) GetYellowColor
+{
+    return [UIColor colorWithRed:(255/255.0) green:(216/255.0) blue:(0/255.0) alpha:1];
+}
+
++(UIColor *) GetRedColor
+{
+    return [UIColor colorWithRed:(255/255.0) green:(0/255.0) blue:(0/255.0) alpha:1];
+}
+
 @end

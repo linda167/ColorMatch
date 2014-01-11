@@ -48,6 +48,7 @@
 		AFB896811881C0C7003FAEF4 /* GoalBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB896801881C0C7003FAEF4 /* GoalBoard.m */; };
 		AFB896851881E011003FAEF4 /* ColorBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB896841881E011003FAEF4 /* ColorBoard.m */; };
 		AFB896881881E2E6003FAEF4 /* CommonUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB896871881E2E6003FAEF4 /* CommonUtils.m */; };
+		AFB8968B1881EDD0003FAEF4 /* UserColorBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB8968A1881EDD0003FAEF4 /* UserColorBoard.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -112,6 +113,8 @@
 		AFB896841881E011003FAEF4 /* ColorBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorBoard.m; sourceTree = "<group>"; };
 		AFB896861881E2E6003FAEF4 /* CommonUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonUtils.h; sourceTree = "<group>"; };
 		AFB896871881E2E6003FAEF4 /* CommonUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonUtils.m; sourceTree = "<group>"; };
+		AFB896891881EDD0003FAEF4 /* UserColorBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserColorBoard.h; sourceTree = "<group>"; };
+		AFB8968A1881EDD0003FAEF4 /* UserColorBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserColorBoard.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -189,6 +192,8 @@
 				AFB896841881E011003FAEF4 /* ColorBoard.m */,
 				AFB896861881E2E6003FAEF4 /* CommonUtils.h */,
 				AFB896871881E2E6003FAEF4 /* CommonUtils.m */,
+				AFB896891881EDD0003FAEF4 /* UserColorBoard.h */,
+				AFB8968A1881EDD0003FAEF4 /* UserColorBoard.m */,
 			);
 			path = "Color Match";
 			sourceTree = "<group>";
@@ -374,6 +379,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AFB896851881E011003FAEF4 /* ColorBoard.m in Sources */,
+				AFB8968B1881EDD0003FAEF4 /* UserColorBoard.m in Sources */,
 				AFB896881881E2E6003FAEF4 /* CommonUtils.m in Sources */,
 				AF2C22331874B8B800082561 /* CMAppDelegate.m in Sources */,
 				AFADA23518791E4400FADA22 /* GridColorButton.m in Sources */,
