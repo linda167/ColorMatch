@@ -560,32 +560,38 @@ typedef struct BoardParameters
         return false;
     }
     
-    // Check all rows for same colors in the row
+    // Check all rows for N number of same colors in a row
+    int maxConsecutiveCountAllowed = 3;
     for (NSNumber* leftNSNumber in self.goalLeftColorsState)
     {
         int leftColor = [leftNSNumber intValue];
         int previousCombinedColor = -1;
-        bool differentColorFound = false;
+        int sameColorConsecutiveCount = 0;
         for (NSNumber* topNSNumber in self.goalTopColorsState)
         {
             int topColor = [topNSNumber intValue];
             int combinedColor = [self CombineColors:leftColor :topColor];
+
             if (previousCombinedColor == -1)
             {
                 previousCombinedColor = combinedColor;
+                sameColorConsecutiveCount = 1;
             }
-            else if (combinedColor != previousCombinedColor)
+            else if (combinedColor == previousCombinedColor)
             {
-                // We found a different color in the row, we're good
-                differentColorFound = true;
-                break;
+                sameColorConsecutiveCount++;
+                if (sameColorConsecutiveCount >= maxConsecutiveCountAllowed)
+                {
+                    // Too many same color found consecutively
+                    return false;
+                }
             }
-        }
-        
-        if (!differentColorFound)
-        {
-            // We found all same colors in a row, no good
-            return false;
+            else
+            {
+                // Found a different color, reset consecutive count
+                previousCombinedColor = combinedColor;
+                sameColorConsecutiveCount = 1;
+            }
         }
     }
     
@@ -594,27 +600,32 @@ typedef struct BoardParameters
     {
         int topColor = [topNSNumber intValue];
         int previousCombinedColor = -1;
-        bool differentColorFound = false;
+        int sameColorConsecutiveCount = 0;
         for (NSNumber* leftNSNumber in self.goalLeftColorsState)
         {
             int leftColor = [leftNSNumber intValue];
             int combinedColor = [self CombineColors:leftColor :topColor];
+
             if (previousCombinedColor == -1)
             {
                 previousCombinedColor = combinedColor;
+                sameColorConsecutiveCount = 1;
             }
-            else if (combinedColor != previousCombinedColor)
+            else if (combinedColor == previousCombinedColor)
             {
-                // We found a different color in the row, we're good
-                differentColorFound = true;
-                break;
+                sameColorConsecutiveCount++;
+                if (sameColorConsecutiveCount >= maxConsecutiveCountAllowed)
+                {
+                    // Too many same color found consecutively
+                    return false;
+                }
             }
-        }
-        
-        if (!differentColorFound)
-        {
-            // We found all same colors in a column, no good
-            return false;
+            else
+            {
+                // Found a different color, reset consecutive count
+                previousCombinedColor = combinedColor;
+                sameColorConsecutiveCount = 1;
+            }
         }
     }
     
