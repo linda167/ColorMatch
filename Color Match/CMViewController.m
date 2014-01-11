@@ -9,6 +9,7 @@
 #import "CMViewController.h"
 #import "GridColorButton.h"
 
+// Parameters used to create current board
 typedef struct BoardParameters
 {
     int gridSize;
@@ -17,6 +18,8 @@ typedef struct BoardParameters
     int yOffsetForFirstTopGridButton;
     int xOffsetForFirstLeftGridButton;
     int emptyPaddingInGridButton;
+    int goalColorCellSize;
+    int goalColorCellSpacing;
 } BoardParameters;
 
 @interface CMViewController ()
@@ -52,22 +55,17 @@ typedef struct BoardParameters
     // Init board parameters
     self.boardParameters = [self getBoardParametersForSize:3];
     
-    // Init goal color cell sections
-    NSArray *goalRow1 = [NSArray arrayWithObjects:_Goal00,_Goal01, _Goal02, nil];
-    NSArray *goalRow2 = [NSArray arrayWithObjects:_Goal10,_Goal11, _Goal12, nil];
-    NSArray *goalRow3 = [NSArray arrayWithObjects:_Goal20,_Goal21, _Goal22, nil];
-    
-    self.goalCellSections = [NSMutableArray arrayWithObjects:goalRow1, goalRow2, goalRow3, nil];
-    
-    // Init goal color bar states
-    self.goalTopColorsState = [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:0], [NSNumber numberWithInt:0], [NSNumber numberWithInt:0], nil];
-    self.goalLeftColorsState = [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:0], [NSNumber numberWithInt:0], [NSNumber numberWithInt:0], nil];
-    
-    // Generate goal board
-    [self generateNewGoalBoard];
-    
+    // Start new game
+    [self startNewGame];
+}
+
+- (void)startNewGame
+{
     // Render new game board
     [self renderNewBoard];
+    
+    // Generate new random goal state
+    [self generateNewGoalBoard];
     
     // Start the timer
     [self startTimer];
@@ -79,6 +77,9 @@ typedef struct BoardParameters
 // Render new board to view given current parameters
 - (void)renderNewBoard
 {
+    // Init goal color cells
+    [self initGoalColorCells];
+    
     // Init color bar buttons
     [self initGridColorButtons];
     
@@ -103,6 +104,8 @@ typedef struct BoardParameters
             boardParameters.yOffsetForFirstTopGridButton= 0;
             boardParameters.xOffsetForFirstLeftGridButton = 29;
             boardParameters.emptyPaddingInGridButton = 13;
+            boardParameters.goalColorCellSize = 40;
+            boardParameters.goalColorCellSpacing = 8;
             break;
         case 4:
             boardParameters.colorCellSize = 40;
@@ -110,6 +113,8 @@ typedef struct BoardParameters
             boardParameters.yOffsetForFirstTopGridButton= 0;
             boardParameters.xOffsetForFirstLeftGridButton = 27;
             boardParameters.emptyPaddingInGridButton = 11;
+            boardParameters.goalColorCellSize = 32;
+            boardParameters.goalColorCellSpacing = 2;
             break;
         case 5:
             boardParameters.colorCellSize = 35;
@@ -117,6 +122,8 @@ typedef struct BoardParameters
             boardParameters.yOffsetForFirstTopGridButton= 0;
             boardParameters.xOffsetForFirstLeftGridButton = 20;
             boardParameters.emptyPaddingInGridButton = 9;
+            boardParameters.goalColorCellSize = 25;
+            boardParameters.goalColorCellSpacing = 2;
             break;
         default:
             [NSException raise:@"Invalid input" format:@"Invalid board size"];
@@ -130,8 +137,8 @@ typedef struct BoardParameters
 {
     // Color cell start 1 cell away from the left, so the xOffset is calculated by offset of the first column + 1 cellspacing
     int cellSizePlusSpace = _boardParameters.colorCellSize + _boardParameters.colorCellSpacing;
-    int xOffset_initial = _boardParameters.xOffsetForFirstLeftGridButton + cellSizePlusSpace;
-    int xOffset = xOffset_initial;
+    int xOffsetInitial = _boardParameters.xOffsetForFirstLeftGridButton + cellSizePlusSpace;
+    int xOffset = xOffsetInitial;
     
     // Color cells starts 1 cell away from the top due to grid buttons
     int yOffset = cellSizePlusSpace;
@@ -153,7 +160,7 @@ typedef struct BoardParameters
 
         [self.colorCellSections addObject:row];
         yOffset += cellSizePlusSpace;
-        xOffset = xOffset_initial;
+        xOffset = xOffsetInitial;
     }
 }
 
@@ -198,6 +205,34 @@ typedef struct BoardParameters
         [_allGridColorButtons addObject:gridColorButton];
         [_leftGridColorButtons addObject:gridColorButton];
         yOffset += cellSizePlusSpace;
+    }
+}
+
+- (void)initGoalColorCells
+{
+    int cellSizePlusSpace = _boardParameters.goalColorCellSize + _boardParameters.goalColorCellSpacing;
+    int xOffsetInitial = 0;
+    int xOffset = xOffsetInitial;
+    int yOffset = 0;
+    
+    self.goalCellSections = [[NSMutableArray alloc] init];
+    
+    for (int i=0; i<_boardParameters.gridSize; i++)
+    {
+        NSMutableArray *row = [[NSMutableArray alloc] init];
+        for (int j=0; j<_boardParameters.gridSize; j++)
+        {
+            UIImageView *cellBlock = [[UIImageView alloc] initWithFrame:CGRectMake(xOffset, yOffset, _boardParameters.goalColorCellSize, _boardParameters.goalColorCellSize)];
+            cellBlock.image=[UIImage imageNamed:@"BlockWhite.png"];
+            [_GoalContainerView addSubview:cellBlock];
+            
+            [row addObject:cellBlock];
+            xOffset += cellSizePlusSpace;
+        }
+        
+        [self.goalCellSections addObject:row];
+        yOffset += cellSizePlusSpace;
+        xOffset = xOffsetInitial;
     }
 }
 
@@ -444,20 +479,21 @@ typedef struct BoardParameters
 
 -(void)RandomGenGoalStates
 {
-    int topCount = (int)[self.goalTopColorsState count];
-    for (int i=0; i<topCount; i++)
+    self.goalTopColorsState = [[NSMutableArray alloc] init];
+    self.goalLeftColorsState = [[NSMutableArray alloc] init];
+    
+    for (int i=0; i<_boardParameters.gridSize; i++)
     {
         int random = arc4random()%4;
         NSNumber* wrappedNumber = [NSNumber numberWithInt:random];
-        [self.goalTopColorsState replaceObjectAtIndex:i withObject:wrappedNumber];
+        [self.goalTopColorsState addObject:wrappedNumber];
     }
     
-    int leftCount = (int)[self.goalLeftColorsState count];
-    for (int i=0; i<leftCount; i++)
+    for (int i=0; i<_boardParameters.gridSize; i++)
     {
         int random = arc4random()%4;
         NSNumber* wrappedNumber = [NSNumber numberWithInt:random];
-        [self.goalLeftColorsState replaceObjectAtIndex:i withObject:wrappedNumber];
+        [self.goalLeftColorsState addObject:wrappedNumber];
     }
 }
 
@@ -905,45 +941,81 @@ typedef struct BoardParameters
     [_horizontalLines removeAllObjects];
 }
 
+
+- (void)removeExistingGoalColorCells
+{
+    for (int i=0; i<_goalCellSections.count; i++)
+    {
+        NSMutableArray *row = [_goalCellSections objectAtIndex:i];
+
+        for (int j=0; j<row.count; j++)
+        {
+            UIImageView *cellBlock = [row objectAtIndex:j];
+            [cellBlock removeFromSuperview];
+        }
+        
+        [row removeAllObjects];
+    }
+    
+    [_goalCellSections removeAllObjects];
+}
+
+- (void)removeExistingGoalColorsState
+{
+    [_goalTopColorsState removeAllObjects];
+    [_goalLeftColorsState removeAllObjects];
+}
+
 - (void)removeExistingBoard
 {
     [self removeExistingGridColorButtons];
     [self removeExistingGridCells];
     [self removeExistingConnectingLines];
+    [self removeExistingGoalColorCells];
+    [self removeExistingGoalColorsState];
+}
+
+- (void)clearExistingGame
+{
+    // Stop the timer
+    [self.stopWatchTimer invalidate];
+    
+    // Remove game board state
+    [self removeExistingBoard];
 }
 
 - (IBAction)ThreePressed:(id)sender {
-    // Clean out existing view
-    [self removeExistingBoard];
+    // Clean out existing game
+    [self clearExistingGame];
     
     // Generate 3x3 parameters
     self.boardParameters = [self getBoardParametersForSize:3];
     
-    // Render new game board
-    [self renderNewBoard];
+    // Start new game
+    [self startNewGame];
 }
 
 - (IBAction)FourPressed:(id)sender
 {
-    // Clean out existing view
-    [self removeExistingBoard];
+    // Clean out existing game
+    [self clearExistingGame];
 
     // Generate 4x4 parameters
     self.boardParameters = [self getBoardParametersForSize:4];
     
-    // Render new game board
-    [self renderNewBoard];
+    // Start new game
+    [self startNewGame];
 }
 
 - (IBAction)FivePressed:(id)sender
 {
-    // Clean out existing view
-    [self removeExistingBoard];
+    // Clean out existing game
+    [self clearExistingGame];
     
     // Generate 5x5 parameters
     self.boardParameters = [self getBoardParametersForSize:5];
     
-    // Render new game board
-    [self renderNewBoard];
+    // Start new game
+    [self startNewGame];
 }
 @end
