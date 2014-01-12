@@ -15,7 +15,7 @@
 		AF2C22331874B8B800082561 /* CMAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2C22321874B8B800082561 /* CMAppDelegate.m */; };
 		AF2C22361874B8B800082561 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF2C22341874B8B800082561 /* Main_iPhone.storyboard */; };
 		AF2C22391874B8B800082561 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF2C22371874B8B800082561 /* Main_iPad.storyboard */; };
-		AF2C223C1874B8B800082561 /* CMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2C223B1874B8B800082561 /* CMViewController.m */; };
+		AF2C223C1874B8B800082561 /* MainGameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2C223B1874B8B800082561 /* MainGameViewController.m */; };
 		AF2C223E1874B8B800082561 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF2C223D1874B8B800082561 /* Images.xcassets */; };
 		AF2C22451874B8B800082561 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF2C22441874B8B800082561 /* XCTest.framework */; };
 		AF2C22461874B8B800082561 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF2C22221874B8B700082561 /* Foundation.framework */; };
@@ -49,6 +49,7 @@
 		AFB896851881E011003FAEF4 /* ColorBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB896841881E011003FAEF4 /* ColorBoard.m */; };
 		AFB896881881E2E6003FAEF4 /* CommonUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB896871881E2E6003FAEF4 /* CommonUtils.m */; };
 		AFB8968B1881EDD0003FAEF4 /* UserColorBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB8968A1881EDD0003FAEF4 /* UserColorBoard.m */; };
+		AFB8969118822186003FAEF4 /* ChooseGameSizeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB8969018822186003FAEF4 /* ChooseGameSizeViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,8 +75,8 @@
 		AF2C22321874B8B800082561 /* CMAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CMAppDelegate.m; sourceTree = "<group>"; };
 		AF2C22351874B8B800082561 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
 		AF2C22381874B8B800082561 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
-		AF2C223A1874B8B800082561 /* CMViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CMViewController.h; sourceTree = "<group>"; };
-		AF2C223B1874B8B800082561 /* CMViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CMViewController.m; sourceTree = "<group>"; };
+		AF2C223A1874B8B800082561 /* MainGameViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainGameViewController.h; sourceTree = "<group>"; };
+		AF2C223B1874B8B800082561 /* MainGameViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainGameViewController.m; sourceTree = "<group>"; };
 		AF2C223D1874B8B800082561 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		AF2C22431874B8B800082561 /* Color MatchTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Color MatchTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF2C22441874B8B800082561 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -115,6 +116,8 @@
 		AFB896871881E2E6003FAEF4 /* CommonUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonUtils.m; sourceTree = "<group>"; };
 		AFB896891881EDD0003FAEF4 /* UserColorBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserColorBoard.h; sourceTree = "<group>"; };
 		AFB8968A1881EDD0003FAEF4 /* UserColorBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserColorBoard.m; sourceTree = "<group>"; };
+		AFB8968F18822186003FAEF4 /* ChooseGameSizeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseGameSizeViewController.h; sourceTree = "<group>"; };
+		AFB8969018822186003FAEF4 /* ChooseGameSizeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseGameSizeViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,8 +182,8 @@
 				AF2C22321874B8B800082561 /* CMAppDelegate.m */,
 				AF2C22341874B8B800082561 /* Main_iPhone.storyboard */,
 				AF2C22371874B8B800082561 /* Main_iPad.storyboard */,
-				AF2C223A1874B8B800082561 /* CMViewController.h */,
-				AF2C223B1874B8B800082561 /* CMViewController.m */,
+				AF2C223A1874B8B800082561 /* MainGameViewController.h */,
+				AF2C223B1874B8B800082561 /* MainGameViewController.m */,
 				AF2C223D1874B8B800082561 /* Images.xcassets */,
 				AF2C22291874B8B700082561 /* Supporting Files */,
 				AFADA23318791E4400FADA22 /* GridColorButton.h */,
@@ -194,6 +197,8 @@
 				AFB896871881E2E6003FAEF4 /* CommonUtils.m */,
 				AFB896891881EDD0003FAEF4 /* UserColorBoard.h */,
 				AFB8968A1881EDD0003FAEF4 /* UserColorBoard.m */,
+				AFB8968F18822186003FAEF4 /* ChooseGameSizeViewController.h */,
+				AFB8969018822186003FAEF4 /* ChooseGameSizeViewController.m */,
 			);
 			path = "Color Match";
 			sourceTree = "<group>";
@@ -380,11 +385,12 @@
 			files = (
 				AFB896851881E011003FAEF4 /* ColorBoard.m in Sources */,
 				AFB8968B1881EDD0003FAEF4 /* UserColorBoard.m in Sources */,
+				AFB8969118822186003FAEF4 /* ChooseGameSizeViewController.m in Sources */,
 				AFB896881881E2E6003FAEF4 /* CommonUtils.m in Sources */,
 				AF2C22331874B8B800082561 /* CMAppDelegate.m in Sources */,
 				AFADA23518791E4400FADA22 /* GridColorButton.m in Sources */,
 				AF2C222F1874B8B700082561 /* main.m in Sources */,
-				AF2C223C1874B8B800082561 /* CMViewController.m in Sources */,
+				AF2C223C1874B8B800082561 /* MainGameViewController.m in Sources */,
 				AFB896811881C0C7003FAEF4 /* GoalBoard.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -8,14 +8,14 @@
 
 #import <Foundation/Foundation.h>
 #import "ColorBoard.h"
-#import "CMViewController.h"
+#import "MainGameViewController.h"
 
 @interface UserColorBoard : ColorBoard
 
 @property NSMutableArray *topGridColorButtons;
 @property NSMutableArray *leftGridColorButtons;
 
--(id)initWithParameters: (BoardParameters)boardParameters containerView:(UIView*)userBoardContainerView viewController:(CMViewController*)viewController;
+-(id)initWithParameters: (BoardParameters)boardParameters containerView:(UIView*)userBoardContainerView viewController:(MainGameViewController*)viewController;
 -(void)removeExistingBoard;
 -(void)resetCells;
 -(void)pressGridButtonWithColor:(UIButton *)button :(int)selectedColor;

@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CMViewController : UIViewController <UIAlertViewDelegate>
+@interface MainGameViewController : UIViewController <UIAlertViewDelegate>
 - (IBAction)ColorButtonPressed:(id)sender;
 - (IBAction)GridButtonPressed:(id)sender;
+- (void)SetGameSize:(int)size;
 
 @property (weak, nonatomic) IBOutlet UIView *GridContainerView;
 @property (weak, nonatomic) IBOutlet UIView *GoalContainerView;

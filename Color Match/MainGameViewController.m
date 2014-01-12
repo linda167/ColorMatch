@@ -6,12 +6,12 @@
 //  Copyright (c) 2014 SunSpark Entertainment. All rights reserved.
 //
 
-#import "CMViewController.h"
+#import "MainGameViewController.h"
 #import "GridColorButton.h"
 #import "GoalBoard.h"
 #import "UserColorBoard.h"
 
-@interface CMViewController ()
+@interface MainGameViewController ()
 
 @property NSInteger selectedColor;
 @property NSMutableArray *colorCellSections;
@@ -24,7 +24,7 @@
 @property bool isBoardParametersSet;
 @end
 
-@implementation CMViewController
+@implementation MainGameViewController
 
 - (NSUInteger)supportedInterfaceOrientations
 {
@@ -42,6 +42,12 @@
         // Start new game
         [self startNewGame];
     }
+}
+
+- (void)SetGameSize:(int)size
+{
+    _boardParameters = [self getBoardParametersForSize:size];
+    _isBoardParametersSet = true;
 }
 
 - (void)startNewGame
@@ -360,27 +366,4 @@
     [self removeExistingBoard];
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    CMViewController *destinationController = segue.destinationViewController;
-    
-    if ([[segue identifier] isEqualToString:@"SizeThreeSegue"])
-    {
-        // Generate 3x3 parameters
-        destinationController.boardParameters = [self getBoardParametersForSize:3];
-        destinationController.isBoardParametersSet = true;
-    }
-    else if ([[segue identifier] isEqualToString:@"SizeFourSegue"])
-    {
-        // Generate 4x4 parameters
-        destinationController.boardParameters = [self getBoardParametersForSize:4];
-        destinationController.isBoardParametersSet = true;
-    }
-    else if ([[segue identifier] isEqualToString:@"SizeFiveSegue"])
-    {
-        // Generate 5x5 parameters
-        destinationController.boardParameters = [self getBoardParametersForSize:5];
-        destinationController.isBoardParametersSet = true;
-    }
-}
 @end

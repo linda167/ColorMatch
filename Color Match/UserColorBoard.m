@@ -10,7 +10,7 @@
 #import "GridColorButton.h"
 
 @interface UserColorBoard ()
-@property CMViewController *viewController;
+@property MainGameViewController *viewController;
 @property NSMutableArray *allGridColorButtons;
 @property NSMutableArray *verticalLines;
 @property NSMutableArray *horizontalLines;
@@ -18,7 +18,7 @@
 
 @implementation UserColorBoard
 
--(id)initWithParameters:(BoardParameters)boardParameters containerView:(UIView*)containerView viewController:(CMViewController*)viewController
+-(id)initWithParameters:(BoardParameters)boardParameters containerView:(UIView*)containerView viewController:(MainGameViewController*)viewController
 {
     self = [super init];
     if (self)
