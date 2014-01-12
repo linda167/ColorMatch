@@ -21,6 +21,7 @@
 @property BoardParameters boardParameters;
 @property GoalBoard *goalBoard;
 @property UserColorBoard *userColorBoard;
+@property bool isBoardParametersSet;
 @end
 
 @implementation CMViewController
@@ -36,11 +37,11 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
-    // Init board parameters
-    self.boardParameters = [self getBoardParametersForSize:3];
-    
-    // Start new game
-    [self startNewGame];
+    if (self.isBoardParametersSet == true)
+    {
+        // Start new game
+        [self startNewGame];
+    }
 }
 
 - (void)startNewGame
@@ -359,38 +360,27 @@
     [self removeExistingBoard];
 }
 
-- (IBAction)ThreePressed:(id)sender {
-    // Clean out existing game
-    [self clearExistingGame];
-    
-    // Generate 3x3 parameters
-    self.boardParameters = [self getBoardParametersForSize:3];
-    
-    // Start new game
-    [self startNewGame];
-}
-
-- (IBAction)FourPressed:(id)sender
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    // Clean out existing game
-    [self clearExistingGame];
-
-    // Generate 4x4 parameters
-    self.boardParameters = [self getBoardParametersForSize:4];
+    CMViewController *destinationController = segue.destinationViewController;
     
-    // Start new game
-    [self startNewGame];
-}
-
-- (IBAction)FivePressed:(id)sender
-{
-    // Clean out existing game
-    [self clearExistingGame];
-    
-    // Generate 5x5 parameters
-    self.boardParameters = [self getBoardParametersForSize:5];
-    
-    // Start new game
-    [self startNewGame];
+    if ([[segue identifier] isEqualToString:@"SizeThreeSegue"])
+    {
+        // Generate 3x3 parameters
+        destinationController.boardParameters = [self getBoardParametersForSize:3];
+        destinationController.isBoardParametersSet = true;
+    }
+    else if ([[segue identifier] isEqualToString:@"SizeFourSegue"])
+    {
+        // Generate 4x4 parameters
+        destinationController.boardParameters = [self getBoardParametersForSize:4];
+        destinationController.isBoardParametersSet = true;
+    }
+    else if ([[segue identifier] isEqualToString:@"SizeFiveSegue"])
+    {
+        // Generate 5x5 parameters
+        destinationController.boardParameters = [self getBoardParametersForSize:5];
+        destinationController.isBoardParametersSet = true;
+    }
 }
 @end
