@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cTF-q9-ULn">
-                                <rect key="frame" x="28" y="299" width="88" height="39"/>
+                                <rect key="frame" x="28" y="363" width="88" height="39"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal">
                                     <attributedString key="attributedTitle">
@@ -33,7 +33,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fKw-lV-0C9">
-                                <rect key="frame" x="28" y="270" width="196" height="21"/>
+                                <rect key="frame" x="28" y="334" width="196" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <attributedString key="attributedText">
                                     <fragment content="Choose game board size:">
@@ -62,7 +62,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5bl-Ho-7Ul">
-                                <rect key="frame" x="28" y="329" width="88" height="33"/>
+                                <rect key="frame" x="28" y="394" width="88" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal">
                                     <attributedString key="attributedTitle">
@@ -78,7 +78,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CFE-R6-zlc">
-                                <rect key="frame" x="28" y="359" width="88" height="32"/>
+                                <rect key="frame" x="28" y="424" width="88" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal">
                                     <attributedString key="attributedTitle">
@@ -93,6 +93,10 @@
                                     <segue destination="vXZ-lx-hvc" kind="push" identifier="SizeFiveSegue" id="vdY-F1-BTr"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="GameLogo.png" translatesAutoresizingMaskIntoConstraints="NO" id="lfD-yR-aNm">
+                                <rect key="frame" x="86" y="167" width="149" height="155"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -237,10 +241,10 @@
             </objects>
             <point key="canvasLocation" x="644" y="-40"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--MainUI Navigation Controller-->
         <scene sceneID="STn-1C-bHk">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="6RX-lN-mdW" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="6RX-lN-mdW" customClass="MainUINavigationController" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="WxQ-HC-IYH">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -259,6 +263,7 @@
     <resources>
         <image name="Blue.png" width="60" height="60"/>
         <image name="ButtonBar2.png" width="319" height="68"/>
+        <image name="GameLogo.png" width="321" height="333"/>
         <image name="Red.png" width="60" height="60"/>
         <image name="White.png" width="60" height="60"/>
         <image name="Yellow.png" width="60" height="60"/>

@@ -25,12 +25,6 @@
 
 @implementation MainGameViewController
 
-- (NSUInteger)supportedInterfaceOrientations
-{
-    // Lock orientation to portrait
-    return UIInterfaceOrientationPortrait + UIInterfaceOrientationPortraitUpsideDown;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
