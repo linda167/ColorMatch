@@ -29,7 +29,7 @@
     int cellSizePlusSpace = self.boardParameters.goalColorCellSize + self.boardParameters.goalColorCellSpacing;
     int xOffsetInitial = 0;
     int xOffset = xOffsetInitial;
-    int yOffset = 0;
+    int yOffset = self.boardParameters.yOffsetForFirstTopGridButton;
     
     self.colorCellSections = [[NSMutableArray alloc] init];
     

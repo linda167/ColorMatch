@@ -21,7 +21,6 @@
 @property BoardParameters boardParameters;
 @property GoalBoard *goalBoard;
 @property UserColorBoard *userColorBoard;
-@property bool isBoardParametersSet;
 @end
 
 @implementation MainGameViewController
@@ -37,17 +36,13 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
-    if (self.isBoardParametersSet == true)
-    {
-        // Start new game
-        [self startNewGame];
-    }
+    // Start new game
+    [self startNewGame];
 }
 
 - (void)SetGameSize:(int)size
 {
     _boardParameters = [self getBoardParametersForSize:size];
-    _isBoardParametersSet = true;
 }
 
 - (void)startNewGame
@@ -85,7 +80,7 @@
         case 3:
             boardParameters.colorCellSize = 50;
             boardParameters.colorCellSpacing = 14;
-            boardParameters.yOffsetForFirstTopGridButton= 0;
+            boardParameters.yOffsetForFirstTopGridButton= 15;
             boardParameters.xOffsetForFirstLeftGridButton = 29;
             boardParameters.emptyPaddingInGridButton = 13;
             boardParameters.goalColorCellSize = 40;
@@ -94,11 +89,11 @@
         case 4:
             boardParameters.colorCellSize = 40;
             boardParameters.colorCellSpacing = 10;
-            boardParameters.yOffsetForFirstTopGridButton= 0;
+            boardParameters.yOffsetForFirstTopGridButton= 6;
             boardParameters.xOffsetForFirstLeftGridButton = 27;
             boardParameters.emptyPaddingInGridButton = 11;
             boardParameters.goalColorCellSize = 32;
-            boardParameters.goalColorCellSpacing = 2;
+            boardParameters.goalColorCellSpacing = 6;
             break;
         case 5:
             boardParameters.colorCellSize = 35;
@@ -106,8 +101,8 @@
             boardParameters.yOffsetForFirstTopGridButton= 0;
             boardParameters.xOffsetForFirstLeftGridButton = 20;
             boardParameters.emptyPaddingInGridButton = 9;
-            boardParameters.goalColorCellSize = 25;
-            boardParameters.goalColorCellSpacing = 2;
+            boardParameters.goalColorCellSize = 27;
+            boardParameters.goalColorCellSpacing = 4;
             break;
         default:
             [NSException raise:@"Invalid input" format:@"Invalid board size"];

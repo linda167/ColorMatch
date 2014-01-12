@@ -50,6 +50,7 @@
 		AFB896881881E2E6003FAEF4 /* CommonUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB896871881E2E6003FAEF4 /* CommonUtils.m */; };
 		AFB8968B1881EDD0003FAEF4 /* UserColorBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB8968A1881EDD0003FAEF4 /* UserColorBoard.m */; };
 		AFB8969118822186003FAEF4 /* ChooseGameSizeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB8969018822186003FAEF4 /* ChooseGameSizeViewController.m */; };
+		AFB8969318822F2F003FAEF4 /* ButtonBar2.png in Resources */ = {isa = PBXBuildFile; fileRef = AFB8969218822F2F003FAEF4 /* ButtonBar2.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -118,6 +119,7 @@
 		AFB8968A1881EDD0003FAEF4 /* UserColorBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserColorBoard.m; sourceTree = "<group>"; };
 		AFB8968F18822186003FAEF4 /* ChooseGameSizeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseGameSizeViewController.h; sourceTree = "<group>"; };
 		AFB8969018822186003FAEF4 /* ChooseGameSizeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseGameSizeViewController.m; sourceTree = "<group>"; };
+		AFB8969218822F2F003FAEF4 /* ButtonBar2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ButtonBar2.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -235,6 +237,7 @@
 		AF2C225A1874B95000082561 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				AFB8969218822F2F003FAEF4 /* ButtonBar2.png */,
 				AFADA2071877D20D00FADA22 /* BlockBlue.png */,
 				AFADA2081877D20D00FADA22 /* BlockGreen.png */,
 				AFADA2091877D20D00FADA22 /* BlockOrange.png */,
@@ -362,6 +365,7 @@
 				AFADA2211877D20D00FADA22 /* BlockRed.png in Resources */,
 				AF2C222D1874B8B700082561 /* InfoPlist.strings in Resources */,
 				AFADA2201877D20D00FADA22 /* BlockPurple.png in Resources */,
+				AFB8969318822F2F003FAEF4 /* ButtonBar2.png in Resources */,
 				AFADA2221877D20D00FADA22 /* BlockWhite.png in Resources */,
 				AFADA21D1877D20D00FADA22 /* BlockBlue.png in Resources */,
 				AFADA21E1877D20D00FADA22 /* BlockGreen.png in Resources */,
