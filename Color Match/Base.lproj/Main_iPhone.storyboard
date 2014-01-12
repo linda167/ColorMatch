@@ -9,15 +9,15 @@
             <objects>
                 <viewController id="93e-Hz-0Io" customClass="ChooseGameSizeViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="yaa-vi-j5A"/>
-                        <viewControllerLayoutGuide type="bottom" id="fv3-2W-dgw"/>
+                        <viewControllerLayoutGuide type="top" id="zpS-Ej-kg1"/>
+                        <viewControllerLayoutGuide type="bottom" id="kgy-E0-GZl"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Puj-PF-3Ld">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cTF-q9-ULn">
-                                <rect key="frame" x="28" y="363" width="88" height="39"/>
+                                <rect key="frame" x="30" y="333" width="88" height="39"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal">
                                     <attributedString key="attributedTitle">
@@ -33,7 +33,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fKw-lV-0C9">
-                                <rect key="frame" x="28" y="334" width="196" height="21"/>
+                                <rect key="frame" x="30" y="304" width="196" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <attributedString key="attributedText">
                                     <fragment content="Choose game board size:">
@@ -47,10 +47,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9P5-uK-2HB">
-                                <rect key="frame" x="28" y="119" width="264" height="40"/>
+                                <rect key="frame" x="81" y="135" width="264" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <attributedString key="attributedText">
-                                    <fragment content="Welcome to Color Match!">
+                                    <fragment content="Freeplay Mode">
                                         <attributes>
                                             <color key="NSColor" red="0.18136463994565222" green="0.18136463994565222" blue="0.18136463994565222" alpha="1" colorSpace="calibratedRGB"/>
                                             <font key="NSFont" size="22" name="Futura-Medium"/>
@@ -62,7 +62,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5bl-Ho-7Ul">
-                                <rect key="frame" x="28" y="394" width="88" height="33"/>
+                                <rect key="frame" x="30" y="364" width="88" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal">
                                     <attributedString key="attributedTitle">
@@ -78,7 +78,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CFE-R6-zlc">
-                                <rect key="frame" x="28" y="424" width="88" height="32"/>
+                                <rect key="frame" x="30" y="394" width="88" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal">
                                     <attributedString key="attributedTitle">
@@ -93,10 +93,6 @@
                                     <segue destination="vXZ-lx-hvc" kind="push" identifier="SizeFiveSegue" id="vdY-F1-BTr"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="GameLogo.png" translatesAutoresizingMaskIntoConstraints="NO" id="lfD-yR-aNm">
-                                <rect key="frame" x="86" y="167" width="149" height="155"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -111,8 +107,8 @@
             <objects>
                 <viewController id="vXZ-lx-hvc" customClass="MainGameViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="O00-AK-Xnx"/>
-                        <viewControllerLayoutGuide type="bottom" id="fGL-qX-6W0"/>
+                        <viewControllerLayoutGuide type="top" id="dOR-8N-ZwZ"/>
+                        <viewControllerLayoutGuide type="bottom" id="HKj-Fl-UmZ"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -252,12 +248,68 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="93e-Hz-0Io" kind="relationship" relationship="rootViewController" id="aaS-ca-6wJ"/>
+                        <segue destination="Ype-Mf-Odz" kind="relationship" relationship="rootViewController" id="WLd-u1-1FA"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l2E-c2-6at" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-589" y="-28"/>
+            <point key="canvasLocation" x="-665" y="-34"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="a0G-LU-lPF">
+            <objects>
+                <viewController id="Ype-Mf-Odz" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Uf8-Zz-OZI"/>
+                        <viewControllerLayoutGuide type="bottom" id="9UM-Bs-TSY"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="0hK-Sj-KcJ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8vT-LV-lsK">
+                                <rect key="frame" x="28" y="155" width="264" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="Welcome to Color Match!">
+                                        <attributes>
+                                            <color key="NSColor" red="0.18136463994565222" green="0.18136463994565222" blue="0.18136463994565222" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="22" name="Futura-Medium"/>
+                                            <font key="NSOriginalFont" size="20" name="Futura-Medium"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="GameLogo.png" translatesAutoresizingMaskIntoConstraints="NO" id="h6F-yk-ziO">
+                                <rect key="frame" x="86" y="220" width="149" height="155"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="drx-Vc-dci">
+                                <rect key="frame" x="78" y="411" width="165" height="39"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="Freeplay Mode">
+                                            <attributes>
+                                                <font key="NSFont" size="18" name="Futura-Medium"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </state>
+                                <connections>
+                                    <segue destination="93e-Hz-0Io" kind="push" id="X24-cy-YwP"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="CEC-Zd-8xO"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uKi-xh-kd9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-264" y="-34"/>
         </scene>
     </scenes>
     <resources>
