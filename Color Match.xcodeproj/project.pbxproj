@@ -46,6 +46,7 @@
 		AFADA2321877D20D00FADA22 /* YellowSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = AFADA21C1877D20D00FADA22 /* YellowSelected.png */; };
 		AFADA23518791E4400FADA22 /* GridColorButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AFADA23418791E4400FADA22 /* GridColorButton.m */; };
 		AFB75A9B188339C900CAB736 /* GameLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = AFB75A9A188339C900CAB736 /* GameLogo.png */; };
+		AFB75A9F18834ECD00CAB736 /* AppIcon120.png in Resources */ = {isa = PBXBuildFile; fileRef = AFB75A9D18834ECD00CAB736 /* AppIcon120.png */; };
 		AFB896811881C0C7003FAEF4 /* GoalBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB896801881C0C7003FAEF4 /* GoalBoard.m */; };
 		AFB896851881E011003FAEF4 /* ColorBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB896841881E011003FAEF4 /* ColorBoard.m */; };
 		AFB896881881E2E6003FAEF4 /* CommonUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB896871881E2E6003FAEF4 /* CommonUtils.m */; };
@@ -111,6 +112,7 @@
 		AFADA23318791E4400FADA22 /* GridColorButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridColorButton.h; sourceTree = "<group>"; };
 		AFADA23418791E4400FADA22 /* GridColorButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridColorButton.m; sourceTree = "<group>"; };
 		AFB75A9A188339C900CAB736 /* GameLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GameLogo.png; sourceTree = "<group>"; };
+		AFB75A9D18834ECD00CAB736 /* AppIcon120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIcon120.png; sourceTree = "<group>"; };
 		AFB8967F1881C0C7003FAEF4 /* GoalBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoalBoard.h; sourceTree = "<group>"; };
 		AFB896801881C0C7003FAEF4 /* GoalBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoalBoard.m; sourceTree = "<group>"; };
 		AFB896821881C288003FAEF4 /* CommonTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonTypes.h; sourceTree = "<group>"; };
@@ -244,6 +246,7 @@
 		AF2C225A1874B95000082561 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				AFB75A9D18834ECD00CAB736 /* AppIcon120.png */,
 				AFB75A9A188339C900CAB736 /* GameLogo.png */,
 				AFB8969218822F2F003FAEF4 /* ButtonBar2.png */,
 				AFADA2071877D20D00FADA22 /* BlockBlue.png */,
@@ -255,12 +258,12 @@
 				AFADA20D1877D20D00FADA22 /* BlockYellow.png */,
 				AFADA20E1877D20D00FADA22 /* Blue.png */,
 				AFADA20F1877D20D00FADA22 /* BlueSelected.png */,
-				AFADA2101877D20D00FADA22 /* ButtonBar.png */,
 				AFADA2111877D20D00FADA22 /* EmptyCircle.png */,
 				AFADA2121877D20D00FADA22 /* FilledCircleBlue.png */,
 				AFADA2131877D20D00FADA22 /* FilledCircleGreen.png */,
 				AFADA2141877D20D00FADA22 /* FilledCircleRed.png */,
 				AFADA2151877D20D00FADA22 /* FilledCircleYellow.png */,
+				AFADA2101877D20D00FADA22 /* ButtonBar.png */,
 				AFADA2161877D20D00FADA22 /* Green.png */,
 				AFADA2171877D20D00FADA22 /* Red.png */,
 				AFADA2181877D20D00FADA22 /* RedSelected.png */,
@@ -371,6 +374,7 @@
 				AFADA2271877D20D00FADA22 /* EmptyCircle.png in Resources */,
 				AFADA2291877D20D00FADA22 /* FilledCircleGreen.png in Resources */,
 				AFADA2211877D20D00FADA22 /* BlockRed.png in Resources */,
+				AFB75A9F18834ECD00CAB736 /* AppIcon120.png in Resources */,
 				AF2C222D1874B8B700082561 /* InfoPlist.strings in Resources */,
 				AFB75A9B188339C900CAB736 /* GameLogo.png in Resources */,
 				AFADA2201877D20D00FADA22 /* BlockPurple.png in Resources */,
