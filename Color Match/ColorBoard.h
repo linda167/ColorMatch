@@ -16,6 +16,10 @@
 @property BoardParameters boardParameters;
 @property UIView *containerView;
 
--(void)updateColorCells;
+-(void)updateAllColorCells;
+-(void)removeColorForRow:(int)color rowIndex:(int)rowIndex;
+-(void)removeColorForColumn:(int)color colIndex:(int)colIndex;
+-(void)addColorForRow:(int)color rowIndex:(int)rowIndex;
+-(void)addColorForColumn:(int)color colIndex:(int)colIndex;
 
 @end

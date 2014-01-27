@@ -54,6 +54,7 @@
 		AFB8969118822186003FAEF4 /* ChooseGameSizeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB8969018822186003FAEF4 /* ChooseGameSizeViewController.m */; };
 		AFB8969318822F2F003FAEF4 /* ButtonBar2.png in Resources */ = {isa = PBXBuildFile; fileRef = AFB8969218822F2F003FAEF4 /* ButtonBar2.png */; };
 		AFB8969618823E6E003FAEF4 /* MainUINavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB8969518823E6E003FAEF4 /* MainUINavigationController.m */; };
+		BF6304391895F231002F3C9E /* ColorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BF6304381895F231002F3C9E /* ColorCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -127,6 +128,8 @@
 		AFB8969218822F2F003FAEF4 /* ButtonBar2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ButtonBar2.png; sourceTree = "<group>"; };
 		AFB8969418823E6E003FAEF4 /* MainUINavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainUINavigationController.h; sourceTree = "<group>"; };
 		AFB8969518823E6E003FAEF4 /* MainUINavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainUINavigationController.m; sourceTree = "<group>"; };
+		BF6304371895F231002F3C9E /* ColorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorCell.h; sourceTree = "<group>"; };
+		BF6304381895F231002F3C9E /* ColorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -210,6 +213,8 @@
 				AFB8969018822186003FAEF4 /* ChooseGameSizeViewController.m */,
 				AFB8969418823E6E003FAEF4 /* MainUINavigationController.h */,
 				AFB8969518823E6E003FAEF4 /* MainUINavigationController.m */,
+				BF6304371895F231002F3C9E /* ColorCell.h */,
+				BF6304381895F231002F3C9E /* ColorCell.m */,
 			);
 			path = "Color Match";
 			sourceTree = "<group>";
@@ -406,6 +411,7 @@
 				AFB896881881E2E6003FAEF4 /* CommonUtils.m in Sources */,
 				AFB8969618823E6E003FAEF4 /* MainUINavigationController.m in Sources */,
 				AF2C22331874B8B800082561 /* CMAppDelegate.m in Sources */,
+				BF6304391895F231002F3C9E /* ColorCell.m in Sources */,
 				AFADA23518791E4400FADA22 /* GridColorButton.m in Sources */,
 				AF2C222F1874B8B700082561 /* main.m in Sources */,
 				AF2C223C1874B8B800082561 /* MainGameViewController.m in Sources */,

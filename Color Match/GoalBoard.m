@@ -7,6 +7,7 @@
 //
 
 #import "GoalBoard.h"
+#import "ColorCell.h"
 
 @implementation GoalBoard
 
@@ -40,9 +41,13 @@
         {
             UIImageView *cellBlock = [[UIImageView alloc] initWithFrame:CGRectMake(xOffset, yOffset, self.boardParameters.goalColorCellSize, self.boardParameters.goalColorCellSize)];
             cellBlock.image=[UIImage imageNamed:@"BlockWhite.png"];
+            
+            // Add cell image to view
             [self.containerView addSubview:cellBlock];
             
-            [row addObject:cellBlock];
+            // Create ColorCell object and add it to our color cell matrix
+            ColorCell *colorCell = [[ColorCell alloc] initWithImage:cellBlock];
+            [row addObject:colorCell];
             xOffset += cellSizePlusSpace;
         }
         
@@ -60,7 +65,8 @@
         
         for (int j=0; j<row.count; j++)
         {
-            UIImageView *cellBlock = [row objectAtIndex:j];
+            ColorCell *colorCell = [row objectAtIndex:i];
+            UIImageView *cellBlock = [colorCell image];
             [cellBlock removeFromSuperview];
         }
         
@@ -163,7 +169,7 @@
         for (NSNumber* topNSNumber in self.topColorsState)
         {
             int topColor = [topNSNumber intValue];
-            int combinedColor = [CommonUtils CombineColors:leftColor color2:topColor];
+            int combinedColor = [CommonUtils CombineTwoColors:leftColor color2:topColor];
             
             if (previousCombinedColor == -1)
             {
@@ -197,7 +203,7 @@
         for (NSNumber* leftNSNumber in self.leftColorsState)
         {
             int leftColor = [leftNSNumber intValue];
-            int combinedColor = [CommonUtils CombineColors:leftColor color2:topColor];
+            int combinedColor = [CommonUtils CombineTwoColors:leftColor color2:topColor];
             
             if (previousCombinedColor == -1)
             {
@@ -234,14 +240,31 @@
     }
     while ([self checkGoalSufficientDifficulty] == false);
     
+    // Remove existing input colors from cells
+    [self removeAllInputColorsFromCells];
+    
     // Update goal cells
-    [self updateColorCells];
+    [self updateAllColorCells];
 }
 
 - (void)removeExistingGoalColorsState
 {
     [self.topColorsState removeAllObjects];
     [self.leftColorsState removeAllObjects];
+}
+
+- (void)removeAllInputColorsFromCells
+{
+    for (int i=0; i<self.colorCellSections.count; i++)
+    {
+        NSMutableArray *row = [self.colorCellSections objectAtIndex:i];
+        
+        for (int j=0; j<row.count; j++)
+        {
+            ColorCell *colorCell = [row objectAtIndex:j];
+            [colorCell removeAllInputColors];
+        }
+    }
 }
 
 @end

@@ -8,6 +8,7 @@
 
 #import "UserColorBoard.h"
 #import "GridColorButton.h"
+#import "ColorCell.h"
 
 @interface UserColorBoard ()
 @property MainGameViewController *viewController;
@@ -57,9 +58,14 @@
         {
             UIImageView *cellBlock = [[UIImageView alloc] initWithFrame:CGRectMake(xOffset, yOffset, self.boardParameters.colorCellSize, self.boardParameters.colorCellSize)];
             cellBlock.image=[UIImage imageNamed:@"BlockWhite.png"];
+            
+            // Add cell image to view
             [self.containerView addSubview:cellBlock];
             
-            [row addObject:cellBlock];
+            // Create ColorCell object and add it to our color cell matrix
+            ColorCell *colorCell = [[ColorCell alloc] initWithImage:cellBlock];
+            [row addObject:colorCell];
+            
             xOffset += cellSizePlusSpace;
         }
         
@@ -76,7 +82,12 @@
     int rowCount = (int)[self.colorCellSections count];
     NSArray *bottomConnections = [self.colorCellSections objectAtIndex:rowCount - 1];
     
-    // We should assert that top connections and bottom connections have equal number of items
+    // Assert that top connections and bottom connections have equal number of items
+    if (topConnections.count != bottomConnections.count)
+    {
+        [NSException raise:@"Invalid state" format:@"Top connections must equal bottom connections when drawing vertical lines"];
+    }
+    
     int itemCount = (int)[topConnections count];
     NSMutableArray *verticalLines = [NSMutableArray array];
     for (int i=0; i<itemCount; i++)
@@ -89,7 +100,8 @@
         int xAdjustment = -1; // Account for the fact that our width is 3 pixels
         int topX = topConnection.frame.origin.x + topConnection.frame.size.width / 2 + xAdjustment;
         
-        UIImageView *bottomConnection = [bottomConnections objectAtIndex:i];
+        ColorCell *colorCell = [bottomConnections objectAtIndex:i];
+        UIImageView *bottomConnection = [colorCell image];
         int bottomAdjustment = 3;   // Accounts for extra spacing in bottom button
         int bottomY = bottomConnection.frame.origin.y + bottomAdjustment;
         
@@ -120,7 +132,12 @@
         [rightConnections addObject:rightConnection];
     }
     
-    // We should assert that left connections and right connections have equal number of items
+    // Assert that left connections and right connections have equal number of items
+    if (leftConnections.count != rightConnections.count)
+    {
+        [NSException raise:@"Invalid state" format:@"Left connections must equal right connections when drawing vertical lines"];
+    }
+    
     int itemCount = (int)[leftConnections count];
     NSMutableArray *horizontalLines = [NSMutableArray array];
     for (int i=0; i<itemCount; i++)
@@ -134,7 +151,8 @@
         int leftAdjustment = -1 * (self.boardParameters.emptyPaddingInGridButton);   // Accounts for extra spacing in left button
         int leftX = leftConnection.frame.origin.x + leftConnection.frame.size.width + leftAdjustment;
         
-        UIImageView *rightConnection = [rightConnections objectAtIndex:i];;
+        ColorCell *colorCell = [rightConnections objectAtIndex:i];
+        UIImageView *rightConnection = [colorCell image];
         int rightAdjustment = 3;   // Accounts for extra spacing in right button
         int rightX = rightConnection.frame.origin.x + rightAdjustment;
         
@@ -151,22 +169,42 @@
 
 -(void)pressGridButtonWithColor:(UIButton *)button :(int)selectedColor
 {
-    // Update color state on top and left bar
     NSNumber* wrappedSelectedColor = [NSNumber numberWithInt:selectedColor];
     
     // Update grid color button state
+    // Find the grid button that was clicked
     GridColorButton* gridColorButtonClicked;
     for (GridColorButton* gridColorButton in _allGridColorButtons)
     {
         if (gridColorButton.button == button)
         {
-            [gridColorButton setColor:wrappedSelectedColor];
             gridColorButtonClicked = gridColorButton;
             break;
         }
     }
     
+    // Get the index of the grid button clicked
     NSInteger topIndex = [self.topGridColorButtons indexOfObject:gridColorButtonClicked];
+    NSInteger leftIndex = [self.leftGridColorButtons indexOfObject:gridColorButtonClicked];
+    
+    // Remove color of the previous state of the grid button
+    if (gridColorButtonClicked.hasInputColorFromUser)
+    {
+        int previousColor = gridColorButtonClicked.color.intValue;
+        if (topIndex != NSNotFound)
+        {
+            [self removeColorForColumn:previousColor colIndex:topIndex];
+        }
+        else
+        {
+            [self removeColorForRow:previousColor rowIndex:leftIndex];
+        }
+    }
+    
+    // Set grid button to new color
+    [gridColorButtonClicked setColor:wrappedSelectedColor isUserInput:true];
+    
+    // Update vertical or horizontal line
     UIView *lineToUpdate;
     if (topIndex != NSNotFound)
     {
@@ -174,7 +212,6 @@
     }
     else
     {
-        NSInteger leftIndex = [self.leftGridColorButtons indexOfObject:gridColorButtonClicked];
         lineToUpdate = [self.horizontalLines objectAtIndex:leftIndex];
     }
     
@@ -196,7 +233,7 @@
         lineToUpdate.backgroundColor = [CommonUtils GetYellowColor];
     }
     
-    // Get current color states
+    // Update current color states
     NSMutableArray *currentTopColorState = [[NSMutableArray alloc] init];
     for (GridColorButton* gridColorButton in _topGridColorButtons)
     {
@@ -211,8 +248,14 @@
     }
     self.leftColorsState = currentLeftColorState;
     
-    // Trigger update of color cells
-    [self updateColorCells];
+    if (topIndex != NSNotFound)
+    {
+        [self addColorForColumn:selectedColor colIndex:topIndex];
+    }
+    else
+    {
+        [self addColorForRow:selectedColor rowIndex:leftIndex];
+    }
 }
 
 - (void)initGridColorButtons
@@ -299,7 +342,8 @@
         NSMutableArray *row = [self.colorCellSections objectAtIndex:i];
         for (int j=0; j<row.count; j++)
         {
-            UIImageView *cellBlock = [row objectAtIndex:j];
+            ColorCell *colorCell = [row objectAtIndex:i];
+            UIImageView *cellBlock = [colorCell image];
             [cellBlock removeFromSuperview];
         }
         

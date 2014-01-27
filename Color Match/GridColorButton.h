@@ -12,7 +12,8 @@
 
 @property (nonatomic, strong) UIButton *button;
 @property (nonatomic, strong) NSNumber *color;
+@property bool hasInputColorFromUser;
 
 -(id)initWithButton: (UIButton*)button;
--(void)setColor: (NSNumber *)color;
+-(void)setColor: (NSNumber *)color isUserInput:(bool)isUserInput;
 @end

@@ -16,15 +16,16 @@
     if (self)
     {
         _button = button;
-        [self setColor:[NSNumber numberWithInt:0]];
+        [self setColor:[NSNumber numberWithInt:0] isUserInput:false];
     }
     
     return self;
 }
 
--(void)setColor: (NSNumber *)color
+-(void)setColor:(NSNumber *)color isUserInput:(bool)isUserInput
 {
     _color = color;
+    _hasInputColorFromUser = isUserInput;
 
     int intColor = [color intValue];
     if (intColor == 0)

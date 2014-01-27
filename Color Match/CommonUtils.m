@@ -19,8 +19,59 @@
  4 - Purple
  5 - Green
  6 - Orange
+ 7 - Brown
  ------------------------------------------*/
-+(int)CombineColors:(int)color1 color2:(int)color2
+
++(int)CombineColorsList:(NSMutableArray*)colorList
+{
+    NSMutableArray* dedupedColorList = [self RemoveDuplicatesAndWhite:colorList];
+    
+    if (dedupedColorList.count == 3)
+    {
+        return 7;
+    }
+    else if (dedupedColorList.count == 2)
+    {
+        int color1 = [(NSNumber*)[dedupedColorList objectAtIndex:0] intValue];
+        int color2 = [(NSNumber*)[dedupedColorList objectAtIndex:1] intValue];
+        return [self CombineTwoColors:color1 color2:color2];
+    }
+    else if (dedupedColorList.count == 1)
+    {
+        return [(NSNumber*)[dedupedColorList objectAtIndex:0] intValue];
+    }
+    else
+    {
+        return 0;
+    }
+}
+
++(NSMutableArray*)RemoveDuplicatesAndWhite:(NSMutableArray*)colorList
+{
+    NSMutableArray *colorListCopy = [NSMutableArray arrayWithArray:colorList];
+    NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] init];
+    for (NSNumber* color in colorListCopy)
+    {
+        if ([dictionary objectForKey:(color)] == nil)
+        {
+            // We haven't encountered this color yet, add it to dictionary and continue
+            [dictionary setObject:[NSNumber numberWithInt:1] forKey:color];
+        }
+    }
+    
+    NSMutableArray* colorListWithoutDuplicates = [[NSMutableArray alloc] init];
+    for (NSNumber* color in dictionary)
+    {
+        if (color.intValue != 0)
+        {
+            [colorListWithoutDuplicates addObject:color];
+        }
+    }
+    
+    return colorListWithoutDuplicates;
+}
+
++(int)CombineTwoColors:(int)color1 color2:(int)color2
 {
     if (color1 == 0 && color2 == 0)
     {

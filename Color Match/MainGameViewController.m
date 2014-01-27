@@ -14,7 +14,6 @@
 @interface MainGameViewController ()
 
 @property NSInteger selectedColor;
-@property NSMutableArray *colorCellSections;
 @property NSTimer *stopWatchTimer;
 @property NSDate *startTime;
 @property NSInteger movesCount;
@@ -242,28 +241,6 @@
     [alert show];
 }
 
--(void)UpdateColorCells:(NSMutableArray *)colorCellSections :(NSMutableArray*)topColorsState :(NSMutableArray*) leftColorsState
-{
-    int sectionsCount = (int)[colorCellSections count];
-    for (int i=0; i<sectionsCount; i++)
-    {
-        NSArray *row = [colorCellSections objectAtIndex:i];
-        int rowLength = (int)[row count];
-        for (int j=0; j<rowLength; j++)
-        {
-            int topColor = [(NSNumber *)[topColorsState objectAtIndex:j] intValue];
-            int leftColor = [(NSNumber *)[leftColorsState objectAtIndex:i] intValue];
-            
-            int combinedColor = [CommonUtils CombineColors:leftColor color2:topColor];
-            
-            UIImage *image = [CommonUtils GetCellImageForColor:combinedColor];
-            
-            UIImageView *imageView = [row objectAtIndex:j];
-            [imageView setImage:image];
-        }
-    }
-}
-
 - (IBAction)GridButtonPressed:(id)sender
 {
     // Update moves count
@@ -304,13 +281,13 @@
         {
             int goalTopColor = [(NSNumber *)[_goalBoard.topColorsState objectAtIndex:i] intValue];
             int goalLeftColor = [(NSNumber *)[_goalBoard.leftColorsState objectAtIndex:j] intValue];
-            int goalCombinedColor = [CommonUtils CombineColors:goalTopColor color2:goalLeftColor];
+            int goalCombinedColor = [CommonUtils CombineTwoColors:goalTopColor color2:goalLeftColor];
             
             GridColorButton *actualTopButton = [_userColorBoard.topGridColorButtons objectAtIndex:i];
             int actualTopColor = [actualTopButton.color intValue];
             GridColorButton *actualLeftButton = [_userColorBoard.leftGridColorButtons objectAtIndex:j];
             int actualLeftColor = [actualLeftButton.color intValue];
-            int actualCombinedColor = [CommonUtils CombineColors:actualTopColor color2:actualLeftColor];
+            int actualCombinedColor = [CommonUtils CombineTwoColors:actualTopColor color2:actualLeftColor];
             
             if (goalCombinedColor != actualCombinedColor)
             {

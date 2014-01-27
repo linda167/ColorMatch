@@ -10,7 +10,8 @@
 
 @interface CommonUtils : NSObject
 
-+(int)CombineColors:(int)color1 color2:(int)color2;
++(int)CombineColorsList:(NSMutableArray*)colorList;
++(int)CombineTwoColors:(int)color1 color2:(int)color2;
 +(UIImage *) GetCellImageForColor:(int)color;
 +(UIColor *) GetGrayColor;
 +(UIColor *) GetBlueColor;
