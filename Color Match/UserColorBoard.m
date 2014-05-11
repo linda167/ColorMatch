@@ -57,7 +57,15 @@
         for (int j=0; j<self.boardParameters.gridSize; j++)
         {
             UIImageView *cellBlock = [[UIImageView alloc] initWithFrame:CGRectMake(xOffset, yOffset, self.boardParameters.colorCellSize, self.boardParameters.colorCellSize)];
-            cellBlock.image=[UIImage imageNamed:@"BlockWhite.png"];
+            cellBlock.image = [UIImage imageNamed:@"BlockWhite.png"];
+            
+            // TODO: lindach: We'll need to change this for mechanic blocks
+            /*
+            if (i == 1 && j == 1)
+            {
+                cellBlock.image = [UIImage imageNamed:@"mechanicReflector@2x.png"];
+            }
+             */
             
             // Add cell image to view
             [self.containerView addSubview:cellBlock];

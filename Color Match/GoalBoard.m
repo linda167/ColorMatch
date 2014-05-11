@@ -39,6 +39,7 @@
         NSMutableArray *row = [[NSMutableArray alloc] init];
         for (int j=0; j<self.boardParameters.gridSize; j++)
         {
+            // TODO: lindach: We'll need to change this for mechanic blocks
             UIImageView *cellBlock = [[UIImageView alloc] initWithFrame:CGRectMake(xOffset, yOffset, self.boardParameters.goalColorCellSize, self.boardParameters.goalColorCellSize)];
             cellBlock.image=[UIImage imageNamed:@"BlockWhite.png"];
             

@@ -13,6 +13,7 @@
 
 -(void)updateAllColorCells
 {
+    // TODO: lindach: Need to change this to support mechanic cells
     // Apply colors from top buttons
     int rowCount = (int)_colorCellSections.count;
     for (int i=0; i<_topColorsState.count; i++)

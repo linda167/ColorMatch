@@ -130,9 +130,18 @@
 
 - (void)updateTimer
 {
+    int MAXTIME = 59*60 + 59;
+    
     // Create elapsed time
     NSDate *currentTime = [NSDate date];
     NSTimeInterval timeInterval = [currentTime timeIntervalSinceDate:self.startTime];
+    
+    // Check for max time
+    if (timeInterval > MAXTIME)
+    {
+        timeInterval = MAXTIME;
+    }
+    
     NSDate *timerDate = [NSDate dateWithTimeIntervalSince1970:timeInterval];
     
     // Create date formatter
@@ -249,8 +258,12 @@
     if ([currentColorForButton intValue] != self.selectedColor)
     {
         // Update moves count only if color changed
-        self.movesCount++;
-        [self updateMovesCountLabel];
+        // Cap moves count at 99
+        if (self.movesCount < 99)
+        {
+            self.movesCount++;
+            [self updateMovesCountLabel];
+        }
     }
     
     // Handle selecting color
