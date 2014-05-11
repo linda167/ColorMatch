@@ -22,4 +22,12 @@ typedef struct BoardParameters
     int goalColorCellSpacing;
 } BoardParameters;
 
+// Cell type
+typedef NS_ENUM(NSUInteger, CellType)
+{
+    NormalCell,
+    ReflectorLeftToDown,
+    ReflectorTopToRight
+};
+
 #endif

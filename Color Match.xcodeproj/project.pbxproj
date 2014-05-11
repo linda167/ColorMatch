@@ -54,6 +54,7 @@
 		AFB8969118822186003FAEF4 /* ChooseGameSizeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB8969018822186003FAEF4 /* ChooseGameSizeViewController.m */; };
 		AFB8969318822F2F003FAEF4 /* ButtonBar2.png in Resources */ = {isa = PBXBuildFile; fileRef = AFB8969218822F2F003FAEF4 /* ButtonBar2.png */; };
 		AFB8969618823E6E003FAEF4 /* MainUINavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB8969518823E6E003FAEF4 /* MainUINavigationController.m */; };
+		BF0D4BC5192010BB00AACB5A /* BoardCells.m in Sources */ = {isa = PBXBuildFile; fileRef = BF0D4BC4192010BB00AACB5A /* BoardCells.m */; };
 		BF6304391895F231002F3C9E /* ColorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BF6304381895F231002F3C9E /* ColorCell.m */; };
 		BF63043F18963BC4002F3C9E /* mechanicReflector@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF63043E18963BC4002F3C9E /* mechanicReflector@2x.png */; };
 /* End PBXBuildFile section */
@@ -129,6 +130,8 @@
 		AFB8969218822F2F003FAEF4 /* ButtonBar2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ButtonBar2.png; sourceTree = "<group>"; };
 		AFB8969418823E6E003FAEF4 /* MainUINavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainUINavigationController.h; sourceTree = "<group>"; };
 		AFB8969518823E6E003FAEF4 /* MainUINavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainUINavigationController.m; sourceTree = "<group>"; };
+		BF0D4BC3192010BB00AACB5A /* BoardCells.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoardCells.h; sourceTree = "<group>"; };
+		BF0D4BC4192010BB00AACB5A /* BoardCells.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoardCells.m; sourceTree = "<group>"; };
 		BF6304371895F231002F3C9E /* ColorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorCell.h; sourceTree = "<group>"; };
 		BF6304381895F231002F3C9E /* ColorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorCell.m; sourceTree = "<group>"; };
 		BF63043E18963BC4002F3C9E /* mechanicReflector@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mechanicReflector@2x.png"; sourceTree = "<group>"; };
@@ -217,6 +220,8 @@
 				AFB8969518823E6E003FAEF4 /* MainUINavigationController.m */,
 				BF6304371895F231002F3C9E /* ColorCell.h */,
 				BF6304381895F231002F3C9E /* ColorCell.m */,
+				BF0D4BC3192010BB00AACB5A /* BoardCells.h */,
+				BF0D4BC4192010BB00AACB5A /* BoardCells.m */,
 			);
 			path = "Color Match";
 			sourceTree = "<group>";
@@ -419,6 +424,7 @@
 				AFADA23518791E4400FADA22 /* GridColorButton.m in Sources */,
 				AF2C222F1874B8B700082561 /* main.m in Sources */,
 				AF2C223C1874B8B800082561 /* MainGameViewController.m in Sources */,
+				BF0D4BC5192010BB00AACB5A /* BoardCells.m in Sources */,
 				AFB896811881C0C7003FAEF4 /* GoalBoard.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -556,7 +562,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = FakeCodeSign;
+				CODE_SIGN_IDENTITY = FakeCodeSign2;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Color Match/Color Match-Prefix.pch";
 				INFOPLIST_FILE = "Color Match/Color Match-Info.plist";
@@ -570,7 +576,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = FakeCodeSign;
+				CODE_SIGN_IDENTITY = FakeCodeSign2;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Color Match/Color Match-Prefix.pch";
 				INFOPLIST_FILE = "Color Match/Color Match-Info.plist";

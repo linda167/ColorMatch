@@ -10,6 +10,7 @@
 #import "GridColorButton.h"
 #import "GoalBoard.h"
 #import "UserColorBoard.h"
+#import "BoardCells.h"
 
 @interface MainGameViewController ()
 
@@ -18,6 +19,7 @@
 @property NSDate *startTime;
 @property NSInteger movesCount;
 @property BoardParameters boardParameters;
+@property BoardCells *boardCells;
 @property GoalBoard *goalBoard;
 @property UserColorBoard *userColorBoard;
 @end
@@ -56,6 +58,9 @@
 // Render new board to view given current parameters
 - (void)renderNewBoard
 {
+    // Init board cell types
+    _boardCells = [[BoardCells alloc] initWithParameters:(_boardParameters)];
+    
     // Init goal color cells
     _goalBoard = [[GoalBoard alloc] initWithParameters:(_boardParameters) containerView:_GoalContainerView];
 
@@ -130,6 +135,7 @@
 
 - (void)updateTimer
 {
+    // Max time capped at 59:59
     int MAXTIME = 59*60 + 59;
     
     // Create elapsed time

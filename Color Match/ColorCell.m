@@ -2,6 +2,8 @@
 //  ColorCell.m
 //  Color Match
 //
+//  Description: Object representing a single color cell
+//
 //  Created by Linda Chen on 1/26/14.
 //  Copyright (c) 2014 SunSpark Entertainment. All rights reserved.
 //
@@ -30,7 +32,7 @@
 
 -(void)removeInputColor: (NSNumber *)color;
 {
-    int existingColorIndex = [_colorInputs indexOfObject:color];
+    NSInteger existingColorIndex = [_colorInputs indexOfObject:color];
     if (existingColorIndex == NSNotFound)
     {
         [NSException raise:@"Invalid input" format:@"Color to remove not found in current input list"];
