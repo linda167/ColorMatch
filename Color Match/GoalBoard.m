@@ -8,16 +8,22 @@
 
 #import "GoalBoard.h"
 #import "ColorCell.h"
+#import "BoardCells.h"
+
+@interface GoalBoard ()
+@property BoardCells *boardCells;
+@end
 
 @implementation GoalBoard
 
--(id)initWithParameters:(BoardParameters)boardParameters containerView:(UIView*)containerView
+-(id)initWithParameters:(BoardParameters)boardParameters containerView:(UIView*)containerView boardCells:(BoardCells*) boardCells
 {
     self = [super init];
     if (self)
     {
         self.boardParameters = boardParameters;
         self.containerView = containerView;
+        self.boardCells = boardCells;
         
         [self initGoalColorCells];
     }
@@ -37,17 +43,13 @@
     for (int i=0; i<self.boardParameters.gridSize; i++)
     {
         NSMutableArray *row = [[NSMutableArray alloc] init];
+        NSMutableArray *boardCellTypeRow = [self.boardCells.colorCellSections objectAtIndex:i];
+        
         for (int j=0; j<self.boardParameters.gridSize; j++)
         {
-            // TODO: lindach: We'll need to change this for mechanic blocks
-            UIImageView *cellBlock = [[UIImageView alloc] initWithFrame:CGRectMake(xOffset, yOffset, self.boardParameters.goalColorCellSize, self.boardParameters.goalColorCellSize)];
-            cellBlock.image=[UIImage imageNamed:@"BlockWhite.png"];
+            NSNumber *cellType = [boardCellTypeRow objectAtIndex:j];
+            ColorCell *colorCell = [self getColorCellForType:cellType.intValue xOffset:xOffset yOffset:yOffset size:self.boardParameters.goalColorCellSize];
             
-            // Add cell image to view
-            [self.containerView addSubview:cellBlock];
-            
-            // Create ColorCell object and add it to our color cell matrix
-            ColorCell *colorCell = [[ColorCell alloc] initWithImage:cellBlock];
             [row addObject:colorCell];
             xOffset += cellSizePlusSpace;
         }

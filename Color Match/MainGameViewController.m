@@ -62,10 +62,10 @@
     _boardCells = [[BoardCells alloc] initWithParameters:(_boardParameters)];
     
     // Init goal color cells
-    _goalBoard = [[GoalBoard alloc] initWithParameters:(_boardParameters) containerView:_GoalContainerView];
+    _goalBoard = [[GoalBoard alloc] initWithParameters:(_boardParameters) containerView:_GoalContainerView boardCells:_boardCells];
 
     // Init color cell sections
-    _userColorBoard = [[UserColorBoard alloc] initWithParameters:(_boardParameters) containerView:_GridContainerView viewController:self];
+    _userColorBoard = [[UserColorBoard alloc] initWithParameters:(_boardParameters) containerView:_GridContainerView viewController:self boardCells:_boardCells];
 }
 
 -(BoardParameters)getBoardParametersForSize:(int)size

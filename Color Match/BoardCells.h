@@ -10,6 +10,8 @@
 
 @interface BoardCells : NSObject
 
+@property NSMutableArray *colorCellSections;
+
 -(id)initWithParameters: (BoardParameters)boardParameters;
 
 @end

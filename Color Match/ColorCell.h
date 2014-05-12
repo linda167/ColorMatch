@@ -12,8 +12,9 @@
 
 @property (nonatomic, strong) UIImageView *image;
 @property NSMutableArray *colorInputs;
+@property int cellType;
 
--(id)initWithImage: (UIImageView*)image;
+-(id)initWithImage: (UIImageView*)image cellType:(int)cellType;
 -(void)addInputColor: (NSNumber *)color;
 -(void)removeInputColor: (NSNumber *)color;
 -(void)removeAllInputColors;

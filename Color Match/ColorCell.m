@@ -12,12 +12,13 @@
 
 @implementation ColorCell
 
--(id)initWithImage: (UIImageView*)image
+-(id)initWithImage: (UIImageView*)image cellType:(int)cellType
 {
     self = [super init];
     if (self)
     {
         _image = image;
+        _cellType = cellType;
         _colorInputs = [[NSMutableArray alloc] init];
     }
     

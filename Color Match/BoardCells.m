@@ -12,7 +12,6 @@
 #import "BoardCells.h"
 
 @interface BoardCells ()
-@property NSMutableArray *colorCellSections;
 @property BoardParameters boardParameters;
 @end
 

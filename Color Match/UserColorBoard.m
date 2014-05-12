@@ -9,6 +9,7 @@
 #import "UserColorBoard.h"
 #import "GridColorButton.h"
 #import "ColorCell.h"
+#import "BoardCells.h"
 
 @interface UserColorBoard ()
 @property MainGameViewController *viewController;
@@ -19,13 +20,18 @@
 
 @implementation UserColorBoard
 
--(id)initWithParameters:(BoardParameters)boardParameters containerView:(UIView*)containerView viewController:(MainGameViewController*)viewController
+-(id)initWithParameters:
+    (BoardParameters)boardParameters
+    containerView:(UIView*)containerView
+    viewController:(MainGameViewController*)viewController
+    boardCells:(BoardCells*) boardCells
 {
     self = [super init];
     if (self)
     {
         self.boardParameters = boardParameters;
         self.containerView = containerView;
+        self.boardCells = boardCells;
         _viewController = viewController;
         
         [self initGridColorButtons];
@@ -54,24 +60,12 @@
     for (int i=0; i<self.boardParameters.gridSize; i++)
     {
         NSMutableArray *row = [[NSMutableArray alloc] init];
+        NSMutableArray *boardCellTypeRow = [self.boardCells.colorCellSections objectAtIndex:i];
+        
         for (int j=0; j<self.boardParameters.gridSize; j++)
         {
-            UIImageView *cellBlock = [[UIImageView alloc] initWithFrame:CGRectMake(xOffset, yOffset, self.boardParameters.colorCellSize, self.boardParameters.colorCellSize)];
-            cellBlock.image = [UIImage imageNamed:@"BlockWhite.png"];
-            
-            // TODO: lindach: We'll need to change this for mechanic blocks
-            /*
-            if (i == 1 && j == 1)
-            {
-                cellBlock.image = [UIImage imageNamed:@"mechanicReflector@2x.png"];
-            }
-             */
-            
-            // Add cell image to view
-            [self.containerView addSubview:cellBlock];
-            
-            // Create ColorCell object and add it to our color cell matrix
-            ColorCell *colorCell = [[ColorCell alloc] initWithImage:cellBlock];
+            NSNumber *cellType = [boardCellTypeRow objectAtIndex:j];
+            ColorCell *colorCell = [self getColorCellForType:cellType.intValue xOffset:xOffset yOffset:yOffset size:self.boardParameters.colorCellSize];
             [row addObject:colorCell];
             
             xOffset += cellSizePlusSpace;

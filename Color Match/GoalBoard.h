@@ -8,10 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import "ColorBoard.h"
+#import "BoardCells.h"
 
 @interface GoalBoard : ColorBoard
 
--(id)initWithParameters: (BoardParameters)boardParameters containerView:(UIView*)containerView;
+-(id)initWithParameters: (BoardParameters)boardParameters containerView:(UIView*)containerView boardCells:(BoardCells*) boardCells;
 -(void)removeExistingGoalColorCells;
 -(void)generateNewGoalBoardStates;
 -(void)removeExistingGoalColorsState;

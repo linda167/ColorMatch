@@ -23,7 +23,12 @@
         {
             NSArray *row = [self.colorCellSections objectAtIndex:j];
             ColorCell *colorCell = [row objectAtIndex:i];
-            [colorCell addInputColor:color];
+            
+            // Applying colors only valid for normal cells
+            if (colorCell.cellType == NormalCell)
+            {
+                [colorCell addInputColor:color];
+            }
         }
     }
     
@@ -35,7 +40,12 @@
         for (int j=0; j<row.count; j++)
         {
             ColorCell *colorCell = [row objectAtIndex:j];
-            [colorCell addInputColor:color];
+            
+            // Applying colors only valid for normal cells
+            if (colorCell.cellType == NormalCell)
+            {
+                [colorCell addInputColor:color];
+            }
         }
     }
 }
@@ -46,7 +56,12 @@
     for (int j=0; j<row.count; j++)
     {
         ColorCell *colorCell = [row objectAtIndex:j];
-        [colorCell removeInputColor:[NSNumber numberWithInt:color]];
+        
+        // Applying colors only valid for normal cells
+        if (colorCell.cellType == NormalCell)
+        {
+            [colorCell removeInputColor:[NSNumber numberWithInt:color]];
+        }
     }
 }
 
@@ -57,7 +72,12 @@
     {
         NSArray *row = [self.colorCellSections objectAtIndex:j];
         ColorCell *colorCell = [row objectAtIndex:colIndex];
-        [colorCell removeInputColor:[NSNumber numberWithInt:color]];
+        
+        // Applying colors only valid for normal cells
+        if (colorCell.cellType == NormalCell)
+        {
+            [colorCell removeInputColor:[NSNumber numberWithInt:color]];
+        }
     }
 }
 
@@ -67,7 +87,12 @@
     for (int j=0; j<row.count; j++)
     {
         ColorCell *colorCell = [row objectAtIndex:j];
-        [colorCell addInputColor:[NSNumber numberWithInt:color]];
+        
+        // Applying colors only valid for normal cells
+        if (colorCell.cellType == NormalCell)
+        {
+            [colorCell addInputColor:[NSNumber numberWithInt:color]];
+        }
     }
 }
 
@@ -78,8 +103,39 @@
     {
         NSArray *row = [self.colorCellSections objectAtIndex:j];
         ColorCell *colorCell = [row objectAtIndex:colIndex];
-        [colorCell addInputColor:[NSNumber numberWithInt:color]];
+        
+        // Applying colors only valid for normal cells
+        if (colorCell.cellType == NormalCell)
+        {
+            [colorCell addInputColor:[NSNumber numberWithInt:color]];
+        }
     }
+}
+
+- (ColorCell*) getColorCellForType:(int)cellType xOffset:(int)xOffset yOffset:(int)yOffset size:(int)size
+{
+    UIImageView *cellBlock = [[UIImageView alloc] initWithFrame:CGRectMake(xOffset, yOffset, size, size)];
+    
+    switch (cellType)
+    {
+        case NormalCell:
+            cellBlock.image=[UIImage imageNamed:@"BlockWhite.png"];
+            break;
+        case ReflectorLeftToDown:
+            cellBlock.image=[UIImage imageNamed:@"mechanicReflectorLeftBottom@2x.png"];
+            break;
+        case ReflectorTopToRight:
+            cellBlock.image=[UIImage imageNamed:@"mechanicReflectorTopRight@2x.png"];
+            break;
+    }
+    
+    // Add cell image to view
+    [self.containerView addSubview:cellBlock];
+    
+    // Create ColorCell object and add it to our color cell matrix
+    ColorCell *colorCell = [[ColorCell alloc] initWithImage:cellBlock cellType:cellType];
+    
+    return colorCell;
 }
 
 @end
