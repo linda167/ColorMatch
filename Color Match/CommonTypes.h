@@ -30,4 +30,13 @@ typedef NS_ENUM(NSUInteger, CellType)
     ReflectorTopToRight
 };
 
+// Struct defining a line to draw
+typedef struct LineInfo
+{
+    int startX;
+    int startY;
+    int endX;
+    int endY;
+} LineInfo;
+
 #endif

@@ -10,12 +10,14 @@
 #import "GridColorButton.h"
 #import "ColorCell.h"
 #import "BoardCells.h"
+#import "ConnectorLines.h"
 
 @interface UserColorBoard ()
 @property MainGameViewController *viewController;
 @property NSMutableArray *allGridColorButtons;
 @property NSMutableArray *verticalLines;
 @property NSMutableArray *horizontalLines;
+@property ConnectorLines *connectorLines;
 @end
 
 @implementation UserColorBoard
@@ -38,6 +40,7 @@
         [self initColorCells];
 
         // Draw connecting lines
+        [self CreateConnectorLinesFrame];
         [self DrawVerticalConnectingLines];
         [self DrawHorizontalConnectingLines];
     }
@@ -77,6 +80,15 @@
     }
 }
 
+-(void)CreateConnectorLinesFrame
+{
+    // CGRect for dimensions of container frame
+    CGRect containerFrame = CGRectMake(0,0,self.containerView.frame.size.height,self.containerView.frame.size.height);
+    self.connectorLines = [[ConnectorLines alloc] initWithFrame:containerFrame];
+    [self.containerView addSubview:self.connectorLines];
+    [self.containerView sendSubviewToBack:self.connectorLines];
+}
+
 -(void)DrawVerticalConnectingLines
 {
     // We want to connect lines from the top color buttons to the bottom row of color cells
@@ -107,12 +119,23 @@
         int bottomAdjustment = 3;   // Accounts for extra spacing in bottom button
         int bottomY = bottomConnection.frame.origin.y + bottomAdjustment;
         
+        /* TODO: lindach: Testing
         UIView *line = [[UIView alloc] initWithFrame:CGRectMake(topX, topY, 3, bottomY - topY)];
         line.backgroundColor = [CommonUtils GetGrayColor];
         [self.containerView addSubview:line];
         [self.containerView sendSubviewToBack:line];
         
         [verticalLines addObject:line];
+         */
+        
+        struct LineInfo newLine;
+        newLine.startX = topX;
+        newLine.startY = topY;
+        newLine.endX = topX;
+        newLine.endY = bottomY;
+        
+        [self.connectorLines addLine:newLine];
+        [self.connectorLines setNeedsDisplay];
     }
     
     self.verticalLines = verticalLines;
@@ -158,12 +181,24 @@
         int rightAdjustment = 3;   // Accounts for extra spacing in right button
         int rightX = rightConnection.frame.origin.x + rightAdjustment;
         
+        /*
+        // TODO: lindach: Switch to using custom UIView to draw
         UIView *line = [[UIView alloc] initWithFrame:CGRectMake(leftX, leftY, rightX - leftX, 3)];
         line.backgroundColor = [CommonUtils GetGrayColor];
         [self.containerView addSubview:line];
         [self.containerView sendSubviewToBack:line];
         
         [horizontalLines addObject:line];
+         */
+        
+        struct LineInfo newLine;
+        newLine.startX = leftX;
+        newLine.startY = leftY;
+        newLine.endX = rightX;
+        newLine.endY = leftY;
+        
+        [self.connectorLines addLine:newLine];
+        [self.connectorLines setNeedsDisplay];
     }
     
     self.horizontalLines = horizontalLines;
