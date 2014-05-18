@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LineInfo.h"
 
 @interface ConnectorLines : UIView
 
-- (void)addLine:(LineInfo)lineInfo;
+- (void)addLine:(LineInfo*)lineInfo isHorizontal:(BOOL)isHorizontal;
+- (void)updateLine:(int)lineIndex isHorizontal:(BOOL)isHorizontal color:(UIColor*)color;
 
 @end

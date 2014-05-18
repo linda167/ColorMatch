@@ -58,6 +58,7 @@
 		BF0D4BC819208B7300AACB5A /* mechanicReflectorLeftBottom@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF0D4BC619208B7300AACB5A /* mechanicReflectorLeftBottom@2x.png */; };
 		BF0D4BC919208B7300AACB5A /* mechanicReflectorTopRight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF0D4BC719208B7300AACB5A /* mechanicReflectorTopRight@2x.png */; };
 		BF0D4BCC1921DEE700AACB5A /* ConnectorLines.m in Sources */ = {isa = PBXBuildFile; fileRef = BF0D4BCB1921DEE700AACB5A /* ConnectorLines.m */; };
+		BF0D4BCF1929379100AACB5A /* LineInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = BF0D4BCE1929379100AACB5A /* LineInfo.m */; };
 		BF6304391895F231002F3C9E /* ColorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BF6304381895F231002F3C9E /* ColorCell.m */; };
 /* End PBXBuildFile section */
 
@@ -138,6 +139,8 @@
 		BF0D4BC719208B7300AACB5A /* mechanicReflectorTopRight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mechanicReflectorTopRight@2x.png"; sourceTree = "<group>"; };
 		BF0D4BCA1921DEE700AACB5A /* ConnectorLines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectorLines.h; sourceTree = "<group>"; };
 		BF0D4BCB1921DEE700AACB5A /* ConnectorLines.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectorLines.m; sourceTree = "<group>"; };
+		BF0D4BCD1929379100AACB5A /* LineInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineInfo.h; sourceTree = "<group>"; };
+		BF0D4BCE1929379100AACB5A /* LineInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineInfo.m; sourceTree = "<group>"; };
 		BF6304371895F231002F3C9E /* ColorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorCell.h; sourceTree = "<group>"; };
 		BF6304381895F231002F3C9E /* ColorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -229,6 +232,8 @@
 				BF0D4BC4192010BB00AACB5A /* BoardCells.m */,
 				BF0D4BCA1921DEE700AACB5A /* ConnectorLines.h */,
 				BF0D4BCB1921DEE700AACB5A /* ConnectorLines.m */,
+				BF0D4BCD1929379100AACB5A /* LineInfo.h */,
+				BF0D4BCE1929379100AACB5A /* LineInfo.m */,
 			);
 			path = "Color Match";
 			sourceTree = "<group>";
@@ -428,6 +433,7 @@
 				AFB8969118822186003FAEF4 /* ChooseGameSizeViewController.m in Sources */,
 				AFB896881881E2E6003FAEF4 /* CommonUtils.m in Sources */,
 				AFB8969618823E6E003FAEF4 /* MainUINavigationController.m in Sources */,
+				BF0D4BCF1929379100AACB5A /* LineInfo.m in Sources */,
 				AF2C22331874B8B800082561 /* CMAppDelegate.m in Sources */,
 				BF0D4BCC1921DEE700AACB5A /* ConnectorLines.m in Sources */,
 				BF6304391895F231002F3C9E /* ColorCell.m in Sources */,

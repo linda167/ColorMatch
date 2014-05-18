@@ -103,42 +103,31 @@
     }
     
     int itemCount = (int)[topConnections count];
-    NSMutableArray *verticalLines = [NSMutableArray array];
     for (int i=0; i<itemCount; i++)
     {
-        // Draw line
+        // Figure out connection points
         GridColorButton *topColorButton = [topConnections objectAtIndex:i];
         UIView *topConnection = topColorButton.button;
         int topAdjustment = -1 * (self.boardParameters.emptyPaddingInGridButton);   // Accounts for extra spacing in top button
         int topY = topConnection.frame.origin.y + topConnection.frame.size.height + topAdjustment;
-        int xAdjustment = -1; // Account for the fact that our width is 3 pixels
-        int topX = topConnection.frame.origin.x + topConnection.frame.size.width / 2 + xAdjustment;
+        int topX = topConnection.frame.origin.x + topConnection.frame.size.width / 2;
         
+        // Create the line
         ColorCell *colorCell = [bottomConnections objectAtIndex:i];
         UIImageView *bottomConnection = [colorCell image];
         int bottomAdjustment = 3;   // Accounts for extra spacing in bottom button
         int bottomY = bottomConnection.frame.origin.y + bottomAdjustment;
         
-        /* TODO: lindach: Testing
-        UIView *line = [[UIView alloc] initWithFrame:CGRectMake(topX, topY, 3, bottomY - topY)];
-        line.backgroundColor = [CommonUtils GetGrayColor];
-        [self.containerView addSubview:line];
-        [self.containerView sendSubviewToBack:line];
-        
-        [verticalLines addObject:line];
-         */
-        
-        struct LineInfo newLine;
+        LineInfo *newLine = [[LineInfo alloc] init];
         newLine.startX = topX;
         newLine.startY = topY;
         newLine.endX = topX;
         newLine.endY = bottomY;
+        newLine.color = [CommonUtils GetGrayColor];
         
-        [self.connectorLines addLine:newLine];
-        [self.connectorLines setNeedsDisplay];
+        // Draw the line
+        [self.connectorLines addLine:newLine isHorizontal:false];
     }
-    
-    self.verticalLines = verticalLines;
 }
 
 -(void)DrawHorizontalConnectingLines
@@ -164,44 +153,32 @@
     }
     
     int itemCount = (int)[leftConnections count];
-    NSMutableArray *horizontalLines = [NSMutableArray array];
     for (int i=0; i<itemCount; i++)
     {
-        // Draw line
+        // Figue out connection points
         GridColorButton *leftColorButton = [leftConnections objectAtIndex:i];
         UIView *leftConnection = leftColorButton.button;
         
-        int yAdjustment = -1; // Account for the fact that our width is 3 pixels
-        int leftY = leftConnection.frame.origin.y + leftConnection.frame.size.height / 2 + yAdjustment;
+        int leftY = leftConnection.frame.origin.y + leftConnection.frame.size.height / 2;
         int leftAdjustment = -1 * (self.boardParameters.emptyPaddingInGridButton);   // Accounts for extra spacing in left button
         int leftX = leftConnection.frame.origin.x + leftConnection.frame.size.width + leftAdjustment;
         
+        // Create the line
         ColorCell *colorCell = [rightConnections objectAtIndex:i];
         UIImageView *rightConnection = [colorCell image];
         int rightAdjustment = 3;   // Accounts for extra spacing in right button
         int rightX = rightConnection.frame.origin.x + rightAdjustment;
         
-        /*
-        // TODO: lindach: Switch to using custom UIView to draw
-        UIView *line = [[UIView alloc] initWithFrame:CGRectMake(leftX, leftY, rightX - leftX, 3)];
-        line.backgroundColor = [CommonUtils GetGrayColor];
-        [self.containerView addSubview:line];
-        [self.containerView sendSubviewToBack:line];
-        
-        [horizontalLines addObject:line];
-         */
-        
-        struct LineInfo newLine;
+        LineInfo *newLine = [[LineInfo alloc] init];
         newLine.startX = leftX;
         newLine.startY = leftY;
         newLine.endX = rightX;
         newLine.endY = leftY;
+        newLine.color = [CommonUtils GetGrayColor];
         
-        [self.connectorLines addLine:newLine];
-        [self.connectorLines setNeedsDisplay];
+        // Draw the line
+        [self.connectorLines addLine:newLine isHorizontal:true];
     }
-    
-    self.horizontalLines = horizontalLines;
 }
 
 -(void)pressGridButtonWithColor:(UIButton *)button :(int)selectedColor
@@ -241,33 +218,33 @@
     // Set grid button to new color
     [gridColorButtonClicked setColor:wrappedSelectedColor isUserInput:true];
     
-    // Update vertical or horizontal line
-    UIView *lineToUpdate;
-    if (topIndex != NSNotFound)
-    {
-        lineToUpdate = [self.verticalLines objectAtIndex:topIndex];
-    }
-    else
-    {
-        lineToUpdate = [self.horizontalLines objectAtIndex:leftIndex];
-    }
-    
-    // Update filled color on the button being clicked, and the color of the connecting line
+    // Get new color of connecting line
+    UIColor *color;
     if (selectedColor == 0)
     {
-        lineToUpdate.backgroundColor = [CommonUtils GetGrayColor];
+        color = [CommonUtils GetGrayColor];
     }
     else if (selectedColor == 1)
     {
-        lineToUpdate.backgroundColor = [CommonUtils GetBlueColor];
+        color = [CommonUtils GetBlueColor];
     }
     else if (selectedColor == 2)
     {
-        lineToUpdate.backgroundColor = [CommonUtils GetRedColor];
+        color = [CommonUtils GetRedColor];
     }
     else if (selectedColor == 3)
     {
-        lineToUpdate.backgroundColor = [CommonUtils GetYellowColor];
+        color = [CommonUtils GetYellowColor];
+    }
+    
+    // Update vertical or horizontal line
+    if (topIndex != NSNotFound)
+    {
+        [self.connectorLines updateLine:topIndex isHorizontal:false color:color];
+    }
+    else
+    {
+        [self.connectorLines updateLine:leftIndex isHorizontal:true color:color];
     }
     
     // Update current color states

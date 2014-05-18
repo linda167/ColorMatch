@@ -7,9 +7,11 @@
 //
 
 #import "ConnectorLines.h"
+#import "LineInfo.h"
 
 @interface ConnectorLines ()
-@property NSMutableArray *lines;
+@property NSMutableArray *verticalLines;
+@property NSMutableArray *horizontalLines;
 @end
 
 @implementation ConnectorLines
@@ -18,7 +20,8 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.lines = [[NSMutableArray alloc] init];
+        self.verticalLines = [[NSMutableArray alloc] init];
+        self.horizontalLines = [[NSMutableArray alloc] init];
         [self setBackgroundColor:[UIColor whiteColor]];
     }
     return self;
@@ -28,28 +31,66 @@
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect
 {
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSetLineWidth(context, 3.0);
-    CGContextSetStrokeColorWithColor(context, [CommonUtils GetGrayColor].CGColor);
-    CGContextBeginPath(context);
-    
-    for (int i = 0; i < self.lines.count; i++)
+    for (int i = 0; i < self.horizontalLines.count; i++)
     {
-        
-        NSValue *boxedLineInfo = [self.lines objectAtIndex:i];
-        struct LineInfo lineInfo;
-        [boxedLineInfo getValue:&lineInfo];
-        CGContextMoveToPoint(context, lineInfo.startX, lineInfo.startY);
-        CGContextAddLineToPoint(context, lineInfo.endX, lineInfo.endY);
+        LineInfo *lineInfo = [self.horizontalLines objectAtIndex:i];
+        [self drawLine:lineInfo];
     }
     
+    for (int i = 0; i < self.verticalLines.count; i++)
+    {
+        LineInfo *lineInfo = [self.verticalLines objectAtIndex:i];
+        [self drawLine:lineInfo];
+    }
+}
+
+- (void)drawLine:(LineInfo*)line
+{
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetLineWidth(context, 3.0);
+    
+    // Begin path
+    CGContextSetStrokeColorWithColor(context, line.color.CGColor);
+    CGContextBeginPath(context);
+    
+    // Add lines
+    CGContextMoveToPoint(context, line.startX, line.startY);
+    CGContextAddLineToPoint(context, line.endX, line.endY);
+    
+    // Stroke path
     CGContextStrokePath(context);
 }
 
-- (void)addLine:(LineInfo)lineInfo
+- (void)addLine:(LineInfo*)lineInfo isHorizontal:(BOOL)isHorizontal
 {
-    NSValue *boxedLineInfo = [NSValue valueWithBytes:&lineInfo objCType:@encode(struct LineInfo)];
-    [self.lines addObject:boxedLineInfo];
+    if (isHorizontal)
+    {
+        [self.horizontalLines addObject:lineInfo];
+    }
+    else
+    {
+        [self.verticalLines addObject:lineInfo];
+    }
+    
+    [self setNeedsDisplay];
+}
+
+- (void)updateLine:(int)lineIndex isHorizontal:(BOOL)isHorizontal color:(UIColor*)color
+{
+    LineInfo *lineInfo;
+    
+    if (!isHorizontal)
+    {
+        lineInfo = [self.verticalLines objectAtIndex:lineIndex];
+    }
+    else
+    {
+        lineInfo = [self.horizontalLines objectAtIndex:lineIndex];
+    }
+    
+    lineInfo.color = color;
+    
+    [self setNeedsDisplay];
 }
 
 @end
