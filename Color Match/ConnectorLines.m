@@ -62,9 +62,15 @@
     
     // Add lines
     CGContextMoveToPoint(context, line.startX, line.startY);
-    CGContextAddLineToPoint(context, line.endX, line.endY);
+    
+    for (int i = 0; i < line.linePieces.count; i++)
+    {
+        LinePiece *linePiece = [line.linePieces objectAtIndex:i];
+        CGContextAddLineToPoint(context, linePiece.endX, linePiece.endY);
+    }
     
     // Stroke path
+    CGContextSetLineJoin(context, kCGLineJoinRound);
     CGContextStrokePath(context);
 }
 

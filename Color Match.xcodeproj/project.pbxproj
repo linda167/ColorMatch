@@ -55,10 +55,10 @@
 		AFB8969318822F2F003FAEF4 /* ButtonBar2.png in Resources */ = {isa = PBXBuildFile; fileRef = AFB8969218822F2F003FAEF4 /* ButtonBar2.png */; };
 		AFB8969618823E6E003FAEF4 /* MainUINavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB8969518823E6E003FAEF4 /* MainUINavigationController.m */; };
 		BF0D4BC5192010BB00AACB5A /* BoardCells.m in Sources */ = {isa = PBXBuildFile; fileRef = BF0D4BC4192010BB00AACB5A /* BoardCells.m */; };
-		BF0D4BC819208B7300AACB5A /* mechanicReflectorLeftBottom@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF0D4BC619208B7300AACB5A /* mechanicReflectorLeftBottom@2x.png */; };
-		BF0D4BC919208B7300AACB5A /* mechanicReflectorTopRight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF0D4BC719208B7300AACB5A /* mechanicReflectorTopRight@2x.png */; };
 		BF0D4BCC1921DEE700AACB5A /* ConnectorLines.m in Sources */ = {isa = PBXBuildFile; fileRef = BF0D4BCB1921DEE700AACB5A /* ConnectorLines.m */; };
 		BF0D4BCF1929379100AACB5A /* LineInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = BF0D4BCE1929379100AACB5A /* LineInfo.m */; };
+		BF0D4BD119293E5500AACB5A /* BlockClear.png in Resources */ = {isa = PBXBuildFile; fileRef = BF0D4BD019293E5500AACB5A /* BlockClear.png */; };
+		BF0D4BD41929429E00AACB5A /* LinePiece.m in Sources */ = {isa = PBXBuildFile; fileRef = BF0D4BD31929429E00AACB5A /* LinePiece.m */; };
 		BF6304391895F231002F3C9E /* ColorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BF6304381895F231002F3C9E /* ColorCell.m */; };
 /* End PBXBuildFile section */
 
@@ -135,12 +135,13 @@
 		AFB8969518823E6E003FAEF4 /* MainUINavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainUINavigationController.m; sourceTree = "<group>"; };
 		BF0D4BC3192010BB00AACB5A /* BoardCells.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoardCells.h; sourceTree = "<group>"; };
 		BF0D4BC4192010BB00AACB5A /* BoardCells.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoardCells.m; sourceTree = "<group>"; };
-		BF0D4BC619208B7300AACB5A /* mechanicReflectorLeftBottom@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mechanicReflectorLeftBottom@2x.png"; sourceTree = "<group>"; };
-		BF0D4BC719208B7300AACB5A /* mechanicReflectorTopRight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mechanicReflectorTopRight@2x.png"; sourceTree = "<group>"; };
 		BF0D4BCA1921DEE700AACB5A /* ConnectorLines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectorLines.h; sourceTree = "<group>"; };
 		BF0D4BCB1921DEE700AACB5A /* ConnectorLines.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectorLines.m; sourceTree = "<group>"; };
 		BF0D4BCD1929379100AACB5A /* LineInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineInfo.h; sourceTree = "<group>"; };
 		BF0D4BCE1929379100AACB5A /* LineInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineInfo.m; sourceTree = "<group>"; };
+		BF0D4BD019293E5500AACB5A /* BlockClear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlockClear.png; sourceTree = "<group>"; };
+		BF0D4BD21929429E00AACB5A /* LinePiece.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LinePiece.h; sourceTree = "<group>"; };
+		BF0D4BD31929429E00AACB5A /* LinePiece.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LinePiece.m; sourceTree = "<group>"; };
 		BF6304371895F231002F3C9E /* ColorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorCell.h; sourceTree = "<group>"; };
 		BF6304381895F231002F3C9E /* ColorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -234,6 +235,8 @@
 				BF0D4BCB1921DEE700AACB5A /* ConnectorLines.m */,
 				BF0D4BCD1929379100AACB5A /* LineInfo.h */,
 				BF0D4BCE1929379100AACB5A /* LineInfo.m */,
+				BF0D4BD21929429E00AACB5A /* LinePiece.h */,
+				BF0D4BD31929429E00AACB5A /* LinePiece.m */,
 			);
 			path = "Color Match";
 			sourceTree = "<group>";
@@ -270,8 +273,7 @@
 		AF2C225A1874B95000082561 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				BF0D4BC619208B7300AACB5A /* mechanicReflectorLeftBottom@2x.png */,
-				BF0D4BC719208B7300AACB5A /* mechanicReflectorTopRight@2x.png */,
+				BF0D4BD019293E5500AACB5A /* BlockClear.png */,
 				AFB75A9D18834ECD00CAB736 /* AppIcon120.png */,
 				AFB75A9A188339C900CAB736 /* GameLogo.png */,
 				AFB8969218822F2F003FAEF4 /* ButtonBar2.png */,
@@ -380,7 +382,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AFADA21F1877D20D00FADA22 /* BlockOrange.png in Resources */,
-				BF0D4BC819208B7300AACB5A /* mechanicReflectorLeftBottom@2x.png in Resources */,
 				AFADA2281877D20D00FADA22 /* FilledCircleBlue.png in Resources */,
 				AFADA2321877D20D00FADA22 /* YellowSelected.png in Resources */,
 				AF2C22391874B8B800082561 /* Main_iPad.storyboard in Resources */,
@@ -395,9 +396,9 @@
 				AFADA22B1877D20D00FADA22 /* FilledCircleYellow.png in Resources */,
 				AF2C22361874B8B800082561 /* Main_iPhone.storyboard in Resources */,
 				AFADA2251877D20D00FADA22 /* BlueSelected.png in Resources */,
+				BF0D4BD119293E5500AACB5A /* BlockClear.png in Resources */,
 				AFADA22C1877D20D00FADA22 /* Green.png in Resources */,
 				AFADA2231877D20D00FADA22 /* BlockYellow.png in Resources */,
-				BF0D4BC919208B7300AACB5A /* mechanicReflectorTopRight@2x.png in Resources */,
 				AFADA22A1877D20D00FADA22 /* FilledCircleRed.png in Resources */,
 				AFADA2271877D20D00FADA22 /* EmptyCircle.png in Resources */,
 				AFADA2291877D20D00FADA22 /* FilledCircleGreen.png in Resources */,
@@ -431,6 +432,7 @@
 				AFB896851881E011003FAEF4 /* ColorBoard.m in Sources */,
 				AFB8968B1881EDD0003FAEF4 /* UserColorBoard.m in Sources */,
 				AFB8969118822186003FAEF4 /* ChooseGameSizeViewController.m in Sources */,
+				BF0D4BD41929429E00AACB5A /* LinePiece.m in Sources */,
 				AFB896881881E2E6003FAEF4 /* CommonUtils.m in Sources */,
 				AFB8969618823E6E003FAEF4 /* MainUINavigationController.m in Sources */,
 				BF0D4BCF1929379100AACB5A /* LineInfo.m in Sources */,

@@ -7,7 +7,24 @@
 //
 
 #import "LineInfo.h"
+#import "LinePiece.h"
 
 @implementation LineInfo
+
+- (id)init
+{
+    self = [super init];
+    if (self)
+    {
+        self.linePieces = [[NSMutableArray alloc] init];
+    }
+    
+    return self;
+}
+
+- (void)addLinePiece:(LinePiece*) linePiece
+{
+    [self.linePieces addObject:linePiece];
+}
 
 @end

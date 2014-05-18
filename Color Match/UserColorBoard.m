@@ -89,16 +89,8 @@
 
 -(void)DrawVerticalConnectingLines
 {
-    // We want to connect lines from the top color buttons to the bottom row of color cells
+    // We want to connect lines from the top color buttons to the bottom row of color cells, unless there are reflector cells
     NSArray *topConnections = self.topGridColorButtons;
-    int rowCount = (int)[self.colorCellSections count];
-    NSArray *bottomConnections = [self.colorCellSections objectAtIndex:rowCount - 1];
-    
-    // Assert that top connections and bottom connections have equal number of items
-    if (topConnections.count != bottomConnections.count)
-    {
-        [NSException raise:@"Invalid state" format:@"Top connections must equal bottom connections when drawing vertical lines"];
-    }
     
     int itemCount = (int)[topConnections count];
     for (int i=0; i<itemCount; i++)
@@ -106,25 +98,19 @@
         // Figure out connection points
         GridColorButton *topColorButton = [topConnections objectAtIndex:i];
         UIView *topConnection = topColorButton.button;
-        int topAdjustment = -1 * (self.boardParameters.emptyPaddingInGridButton);   // Accounts for extra spacing in top button
+        
+        // Accounts for extra spacing in top button
+        int topAdjustment = -1 * (self.boardParameters.emptyPaddingInGridButton);
         int topY = topConnection.frame.origin.y + topConnection.frame.size.height + topAdjustment;
         int topX = topConnection.frame.origin.x + topConnection.frame.size.width / 2;
         
-        // Create the line
-        ColorCell *colorCell = [bottomConnections objectAtIndex:i];
-        UIImageView *bottomConnection = [colorCell image];
-        int bottomAdjustment = 3;   // Accounts for extra spacing in bottom button
-        int bottomY = bottomConnection.frame.origin.y + bottomAdjustment;
-        
-        LineInfo *newLine = [[LineInfo alloc] init];
-        newLine.startX = topX;
-        newLine.startY = topY;
-        newLine.endX = topX;
-        newLine.endY = bottomY;
-        newLine.color = [CommonUtils GetGrayColor];
-        
         // Draw the line
-        [self.connectorLines addLine:newLine isHorizontal:false];
+        LineInfo *lineInfo = [[LineInfo alloc] init];
+        lineInfo.startX = topX;
+        lineInfo.startY = topY;
+        lineInfo.color = [CommonUtils GetGrayColor];
+        [self DrawLineToNextConnectionPoint:-1 currentCol:i currentX:topX currentY:topY isHorizontal:false lineInfo:lineInfo];
+        [self.connectorLines addLine:lineInfo isHorizontal:false];
     }
 }
 
@@ -132,23 +118,6 @@
 {
     // We want to connect lines from the left color buttons to the rightmost column of color cells
     NSArray *leftConnections = self.leftGridColorButtons;
-    int rowCount = (int)[self.colorCellSections count];
-    
-    // Add rightmost cell of each row to rightConnections
-    NSMutableArray *rightConnections = [NSMutableArray array];
-    for (int i=0; i<rowCount; i++)
-    {
-        NSArray *row = [self.colorCellSections objectAtIndex:i];
-        int colCount = (int)[row count];
-        UIView *rightConnection = [row objectAtIndex:colCount - 1];
-        [rightConnections addObject:rightConnection];
-    }
-    
-    // Assert that left connections and right connections have equal number of items
-    if (leftConnections.count != rightConnections.count)
-    {
-        [NSException raise:@"Invalid state" format:@"Left connections must equal right connections when drawing vertical lines"];
-    }
     
     int itemCount = (int)[leftConnections count];
     for (int i=0; i<itemCount; i++)
@@ -161,22 +130,136 @@
         int leftAdjustment = -1 * (self.boardParameters.emptyPaddingInGridButton);   // Accounts for extra spacing in left button
         int leftX = leftConnection.frame.origin.x + leftConnection.frame.size.width + leftAdjustment;
         
-        // Create the line
-        ColorCell *colorCell = [rightConnections objectAtIndex:i];
-        UIImageView *rightConnection = [colorCell image];
-        int rightAdjustment = 3;   // Accounts for extra spacing in right button
-        int rightX = rightConnection.frame.origin.x + rightAdjustment;
-        
-        LineInfo *newLine = [[LineInfo alloc] init];
-        newLine.startX = leftX;
-        newLine.startY = leftY;
-        newLine.endX = rightX;
-        newLine.endY = leftY;
-        newLine.color = [CommonUtils GetGrayColor];
-        
         // Draw the line
-        [self.connectorLines addLine:newLine isHorizontal:true];
+        LineInfo *lineInfo = [[LineInfo alloc] init];
+        lineInfo.startX = leftX;
+        lineInfo.startY = leftY;
+        lineInfo.color = [CommonUtils GetGrayColor];
+        [self DrawLineToNextConnectionPoint:i currentCol:-1 currentX:leftX currentY:leftY isHorizontal:true lineInfo:lineInfo];
+        [self.connectorLines addLine:lineInfo isHorizontal:true];
     }
+}
+
+-(void)DrawLineToNextConnectionPoint:(int)currentRow currentCol:(int)currentCol currentX:(int)currentX currentY:(int)currentY isHorizontal:(BOOL)isHorizontal lineInfo:(LineInfo*)lineInfo
+{
+    if (isHorizontal)
+    {
+        NSArray *row = [self.colorCellSections objectAtIndex:currentRow];
+        
+        bool connectionFound = false;
+        for (int i = currentCol+1; i < row.count; i++)
+        {
+            ColorCell *colorCell = [row objectAtIndex:i];
+            if (colorCell.cellType == ReflectorLeftToDown)
+            {
+                // Draw line to reflector
+                int rightX = [self DrawHorizontalLineToConnection:colorCell lineInfo:lineInfo currentY:currentY drawToCenter:true];
+                
+                // Trigger drawing to next connection vertically
+                [self DrawLineToNextConnectionPoint:currentRow currentCol:i currentX:rightX currentY:currentY isHorizontal:false lineInfo:lineInfo];
+                connectionFound = true;
+                break;
+            }
+            else if (colorCell.cellType == ReflectorTopToRight)
+            {
+                if (i > currentCol + 1)
+                {
+                    // Draw line to cell before the reflector
+                    ColorCell *colorCell = [row objectAtIndex:i-1];
+                    [self DrawHorizontalLineToConnection:colorCell lineInfo:lineInfo currentY:currentY drawToCenter:true];
+                }
+                
+                connectionFound = true;
+                break;
+            }
+        }
+        
+        if (!connectionFound)
+        {
+            // If no special connection found, then the connection is to the right most cell
+            ColorCell *colorCell = [row objectAtIndex:row.count - 1];
+            [self DrawHorizontalLineToConnection:colorCell lineInfo:lineInfo currentY:currentY drawToCenter:false];
+        }
+    }
+    else    // if vertical
+    {
+        bool connectionFound = false;
+        for (int i=currentRow+1; i<self.colorCellSections.count; i++)
+        {
+            NSArray *row = [self.colorCellSections objectAtIndex:i];
+            ColorCell *colorCell = [row objectAtIndex:currentCol];
+            
+            if (colorCell.cellType == ReflectorLeftToDown)
+            {
+                if (i > currentRow + 1)
+                {
+                    // Draw line to cell before the reflector
+                    NSArray *row = [self.colorCellSections objectAtIndex:i-1];
+                    ColorCell *colorCell = [row objectAtIndex:currentCol];
+                    [self DrawVerticalLineToConnection:colorCell lineInfo:lineInfo currentX:currentX drawToCenter:true];
+                }
+                 
+                connectionFound = true;
+                break;
+            }
+            else if (colorCell.cellType == ReflectorTopToRight)
+            {
+                // Draw line to reflector
+                int bottomY = [self DrawVerticalLineToConnection:colorCell lineInfo:lineInfo currentX:currentX drawToCenter:true];
+                
+                // Trigger drawing to next connection horizontally
+                [self DrawLineToNextConnectionPoint:i currentCol:currentCol currentX:currentX currentY:bottomY isHorizontal:true lineInfo:lineInfo];
+                connectionFound = true;
+                break;
+            }
+        }
+        
+        if (!connectionFound)
+        {
+            // If no special connection found, then the connection is to the bottom most cell
+            NSArray *row = [self.colorCellSections objectAtIndex:self.colorCellSections.count - 1];
+            ColorCell *colorCell = [row objectAtIndex:currentCol];
+            [self DrawVerticalLineToConnection:colorCell lineInfo:lineInfo currentX:currentX drawToCenter:false];
+        }
+    }
+}
+
+-(int)DrawHorizontalLineToConnection:(ColorCell*)connection lineInfo:(LineInfo*)lineInfo currentY:(int)currentY drawToCenter:(BOOL)drawToCenter
+{
+    UIImageView *rightConnection = [connection image];
+    int rightAdjustment = 3;   // Accounts for extra spacing in right button
+    int rightX = rightConnection.frame.origin.x + rightAdjustment;
+    
+    if (drawToCenter)
+    {
+        rightX = rightX + rightConnection.frame.size.width / 2;
+    }
+    
+    LinePiece *linePiece = [[LinePiece alloc] init];
+    linePiece.endX = rightX;
+    linePiece.endY = currentY;
+    [lineInfo addLinePiece:linePiece];
+    
+    return rightX;
+}
+
+-(int)DrawVerticalLineToConnection:(ColorCell*)connection lineInfo:(LineInfo*)lineInfo currentX:(int)currentX drawToCenter:(BOOL)drawToCenter
+{
+    UIImageView *bottomConnection = [connection image];
+    int bottomAdjustment = 3;   // Accounts for extra spacing in bottom button
+    int bottomY = bottomConnection.frame.origin.y + bottomAdjustment;
+    
+    if (drawToCenter)
+    {
+        bottomY = bottomY + bottomConnection.frame.size.height / 2;
+    }
+    
+    LinePiece *linePiece = [[LinePiece alloc] init];
+    linePiece.endX = currentX;
+    linePiece.endY = bottomY;
+    [lineInfo addLinePiece:linePiece];
+    
+    return bottomY;
 }
 
 -(void)pressGridButtonWithColor:(UIButton *)button :(int)selectedColor

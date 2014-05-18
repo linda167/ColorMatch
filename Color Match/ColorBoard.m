@@ -122,10 +122,8 @@
             cellBlock.image=[UIImage imageNamed:@"BlockWhite.png"];
             break;
         case ReflectorLeftToDown:
-            cellBlock.image=[UIImage imageNamed:@"mechanicReflectorLeftBottom@2x.png"];
-            break;
         case ReflectorTopToRight:
-            cellBlock.image=[UIImage imageNamed:@"mechanicReflectorTopRight@2x.png"];
+            cellBlock.image=[UIImage imageNamed:@"BlockClear.png"];
             break;
     }
     

@@ -7,13 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "LinePiece.h"
 
 @interface LineInfo : NSObject
 
+@property UIColor* color;
 @property int startX;
 @property int startY;
-@property int endX;
-@property int endY;
-@property UIColor* color;
+@property NSMutableArray *linePieces;
+- (void)addLinePiece:(LinePiece*) linePiece;
 
 @end
