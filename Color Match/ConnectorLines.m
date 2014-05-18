@@ -12,6 +12,7 @@
 @interface ConnectorLines ()
 @property NSMutableArray *verticalLines;
 @property NSMutableArray *horizontalLines;
+@property BOOL needToClear;
 @end
 
 @implementation ConnectorLines
@@ -31,6 +32,12 @@
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect
 {
+    if (self.needToClear)
+    {
+        self.needToClear = false;
+        return;
+    }
+    
     for (int i = 0; i < self.horizontalLines.count; i++)
     {
         LineInfo *lineInfo = [self.horizontalLines objectAtIndex:i];
@@ -90,6 +97,12 @@
     
     lineInfo.color = color;
     
+    [self setNeedsDisplay];
+}
+
+- (void)clear
+{
+    self.needToClear = true;
     [self setNeedsDisplay];
 }
 

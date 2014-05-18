@@ -15,8 +15,6 @@
 @interface UserColorBoard ()
 @property MainGameViewController *viewController;
 @property NSMutableArray *allGridColorButtons;
-@property NSMutableArray *verticalLines;
-@property NSMutableArray *horizontalLines;
 @property ConnectorLines *connectorLines;
 @end
 
@@ -369,21 +367,7 @@
 
 - (void)removeExistingConnectingLines
 {
-    for (int i=0; i<_verticalLines.count; i++)
-    {
-        UIView *line = [_verticalLines objectAtIndex:i];
-        [line removeFromSuperview];
-    }
-    
-    [_verticalLines removeAllObjects];
-    
-    for (int i=0; i<_horizontalLines.count; i++)
-    {
-        UIView *line = [_horizontalLines objectAtIndex:i];
-        [line removeFromSuperview];
-    }
-    
-    [_horizontalLines removeAllObjects];
+    [self.connectorLines clear];
 }
 
 - (void)removeExistingBoard

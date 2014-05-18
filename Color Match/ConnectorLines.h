@@ -13,5 +13,6 @@
 
 - (void)addLine:(LineInfo*)lineInfo isHorizontal:(BOOL)isHorizontal;
 - (void)updateLine:(int)lineIndex isHorizontal:(BOOL)isHorizontal color:(UIColor*)color;
+- (void)clear;
 
 @end
