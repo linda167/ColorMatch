@@ -152,29 +152,11 @@
             ColorCell *colorCell = [row objectAtIndex:i];
             if (colorCell.cellType == ReflectorLeftToDown)
             {
-                // Left to down doesn't make sense to draw for bottom row
-                BOOL isBottomRow = currentCol == row.count - 1;
+                // Draw line to reflector
+                int rightX = [self DrawHorizontalLineToConnection:colorCell lineInfo:lineInfo currentY:currentY drawToCenter:true];
                 
-                // Check next cell to see if it's LeftToDown
-                BOOL nextCellIsLeftToDown = false;
-                if (currentCol < row.count - 1)
-                {
-                    NSArray *nextRow = [self.colorCellSections objectAtIndex:currentRow+1];
-                    ColorCell *nextColorCell = [nextRow objectAtIndex:i];
-                    if (nextColorCell.cellType == ReflectorLeftToDown)
-                    {
-                        nextCellIsLeftToDown = true;
-                    }
-                }
-                
-                if (!isBottomRow && !nextCellIsLeftToDown)
-                {
-                    // Draw line to reflector
-                    int rightX = [self DrawHorizontalLineToConnection:colorCell lineInfo:lineInfo currentY:currentY drawToCenter:true];
-                
-                    // Trigger drawing to next connection vertically
-                    [self DrawLineToNextConnectionPoint:currentRow currentCol:i currentX:rightX currentY:currentY isHorizontal:false lineInfo:lineInfo];
-                }
+                // Trigger drawing to next connection vertically
+                [self DrawLineToNextConnectionPoint:currentRow currentCol:i currentX:rightX currentY:currentY isHorizontal:false lineInfo:lineInfo];
                 
                 connectionFound = true;
                 break;
@@ -223,28 +205,11 @@
             }
             else if (colorCell.cellType == ReflectorTopToRight)
             {
-                // Top to right doesn't make sense to draw if it's the last column
-                BOOL isLastColumn = currentCol == row.count - 1;
+                // Draw line to reflector
+                int bottomY = [self DrawVerticalLineToConnection:colorCell lineInfo:lineInfo currentX:currentX drawToCenter:true];
                 
-                // Check next cell to see if it's TopToRight
-                BOOL nextCellIsTopToRight = false;
-                if (currentCol < row.count - 1)
-                {
-                    ColorCell *nextColorCell = [row objectAtIndex:currentCol + 1];
-                    if (nextColorCell.cellType == ReflectorTopToRight)
-                    {
-                        nextCellIsTopToRight = true;
-                    }
-                }
-                
-                if (!isLastColumn && !nextCellIsTopToRight)
-                {
-                    // Draw line to reflector
-                    int bottomY = [self DrawVerticalLineToConnection:colorCell lineInfo:lineInfo currentX:currentX drawToCenter:true];
-                
-                    // Trigger drawing to next connection horizontally
-                    [self DrawLineToNextConnectionPoint:i currentCol:currentCol currentX:   currentX currentY:bottomY isHorizontal:true lineInfo:lineInfo];
-                }
+                // Trigger drawing to next connection horizontally
+                [self DrawLineToNextConnectionPoint:i currentCol:currentCol currentX:   currentX currentY:bottomY isHorizontal:true lineInfo:lineInfo];
                 
                 connectionFound = true;
                 break;
@@ -270,6 +235,9 @@
     if (drawToCenter)
     {
         rightX = rightX + rightConnection.frame.size.width / 2;
+        
+        // adjustment for line width
+        rightX = rightX - 3;
     }
     
     LinePiece *linePiece = [[LinePiece alloc] init];
@@ -289,6 +257,9 @@
     if (drawToCenter)
     {
         bottomY = bottomY + bottomConnection.frame.size.height / 2;
+        
+        // adjustment for line width
+        bottomY = bottomY - 3;
     }
     
     LinePiece *linePiece = [[LinePiece alloc] init];

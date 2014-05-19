@@ -294,21 +294,17 @@
 
 -(BOOL)CheckVictory
 {
-    for (int i=0; i < _goalBoard.topColorsState.count; i++)
+    for (int i=0; i < _goalBoard.colorCellSections.count; i++)
     {
-        for (int j=0; j < _goalBoard.leftColorsState.count; j++)
+        NSMutableArray *goalRow = [_goalBoard.colorCellSections objectAtIndex:i];
+        NSMutableArray *userBoardRow = [_userColorBoard.colorCellSections objectAtIndex:i];
+        
+        for (int j=0; j < goalRow.count; j++)
         {
-            int goalTopColor = [(NSNumber *)[_goalBoard.topColorsState objectAtIndex:i] intValue];
-            int goalLeftColor = [(NSNumber *)[_goalBoard.leftColorsState objectAtIndex:j] intValue];
-            int goalCombinedColor = [CommonUtils CombineTwoColors:goalTopColor color2:goalLeftColor];
+            ColorCell *goalColorCell = [goalRow objectAtIndex:j];
+            ColorCell *userColorCell = [userBoardRow objectAtIndex:j];
             
-            GridColorButton *actualTopButton = [_userColorBoard.topGridColorButtons objectAtIndex:i];
-            int actualTopColor = [actualTopButton.color intValue];
-            GridColorButton *actualLeftButton = [_userColorBoard.leftGridColorButtons objectAtIndex:j];
-            int actualLeftColor = [actualLeftButton.color intValue];
-            int actualCombinedColor = [CommonUtils CombineTwoColors:actualTopColor color2:actualLeftColor];
-            
-            if (goalCombinedColor != actualCombinedColor)
+            if (goalColorCell.currentColor != userColorCell.currentColor)
             {
                 return false;
             }

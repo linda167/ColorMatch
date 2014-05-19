@@ -13,6 +13,7 @@
 @property (nonatomic, strong) UIImageView *image;
 @property NSMutableArray *colorInputs;
 @property int cellType;
+@property int currentColor;
 
 -(id)initWithImage: (UIImageView*)image cellType:(int)cellType;
 -(void)addInputColor: (NSNumber *)color;

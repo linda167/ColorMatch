@@ -92,14 +92,90 @@
         NSNumber *cellType = [row objectAtIndex:randomCol];
         
         // Only replace normal cells, not cells that already have mechanics
-        if (cellType.intValue == NormalCell)
+        if (cellType.intValue != NormalCell)
         {
-            int reflectorDirection = arc4random()%2;
-            CellType reflectorType = reflectorDirection == 1 ?
-                ReflectorLeftToDown : ReflectorTopToRight;
-            [row replaceObjectAtIndex:randomCol withObject:[NSNumber numberWithInt:reflectorType]];
-            i++;
+            continue;
         }
+        
+        int reflectorDirection = arc4random()%2;
+        CellType reflectorType = reflectorDirection == 1 ?
+            ReflectorLeftToDown : ReflectorTopToRight;
+        
+        // Do not allow LeftToDown mechanic on bottom row
+        if (reflectorType == ReflectorLeftToDown && randomRow == self.boardParameters.gridSize - 1)
+        {
+            continue;
+        }
+        
+        // Do not allow TopToRight mechanic on right column
+        if (reflectorType == ReflectorTopToRight && randomCol == self.boardParameters.gridSize - 1)
+        {
+            continue;
+        }
+        
+        if (reflectorType == ReflectorTopToRight)
+        {
+            // Check both sides for TopToRight cell
+            if (randomCol > 0)
+            {
+                NSNumber *leftCellType = [row objectAtIndex:randomCol - 1];
+                if (leftCellType.intValue == ReflectorTopToRight)
+                {
+                    // Don't want 2 TopToRight cells next to each other
+                    continue;
+                }
+            }
+            
+            if (randomCol < self.boardParameters.gridSize - 1)
+            {
+                NSNumber *rightCellType = [row objectAtIndex:randomCol + 1];
+                if (rightCellType.intValue == ReflectorTopToRight)
+                {
+                    // Don't want 2 TopToRight cells next to each other
+                    continue;
+                }
+            }
+        }
+        
+        if (reflectorType == ReflectorLeftToDown)
+        {
+            // Check both sides for LeftToDown cell
+            if (randomRow > 0)
+            {
+                NSMutableArray *topRow = [self.colorCellSections objectAtIndex:randomRow - 1];
+                NSNumber *topCellType = [topRow objectAtIndex:randomCol];
+                if (topCellType.intValue == ReflectorLeftToDown)
+                {
+                    // Don't want 2 LeftToDown cells next to each other
+                    continue;
+                }
+            }
+            
+            if (randomRow < self.boardParameters.gridSize - 1)
+            {
+                NSMutableArray *bottomRow = [self.colorCellSections objectAtIndex:randomRow + 1];
+                NSNumber *bottomCellType = [bottomRow objectAtIndex:randomCol];
+                if (bottomCellType.intValue == ReflectorLeftToDown)
+                {
+                    // Don't want 2 LeftToDown cells next to each other
+                    continue;
+                }
+            }
+        }
+        
+        // Replace iwth special cell
+        [row replaceObjectAtIndex:randomCol withObject:[NSNumber numberWithInt:reflectorType]];
+        i++;
+            
+        // Logging
+        NSString *reflector = reflectorDirection == 1 ?
+                @"ReflectorLeftToDown" : @"ReflectorTopToRight";
+        NSMutableString *string = [[NSMutableString alloc] init];
+        [string appendString:@"Added reflector cell of type "];
+        [string appendString:reflector];
+        [string appendString:[NSString stringWithFormat: @" to cell %d,%d", randomRow, randomCol]];
+        NSLog(@"%@", string);
+        
     }
 }
 

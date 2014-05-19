@@ -48,6 +48,7 @@
     int combinedColor = [CommonUtils CombineColorsList:_colorInputs];
     UIImage *image = [CommonUtils GetCellImageForColor:combinedColor];
     [_image setImage:image];
+    self.currentColor = combinedColor;
 }
 
 -(void)removeAllInputColors
