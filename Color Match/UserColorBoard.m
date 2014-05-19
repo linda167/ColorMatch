@@ -152,11 +152,30 @@
             ColorCell *colorCell = [row objectAtIndex:i];
             if (colorCell.cellType == ReflectorLeftToDown)
             {
-                // Draw line to reflector
-                int rightX = [self DrawHorizontalLineToConnection:colorCell lineInfo:lineInfo currentY:currentY drawToCenter:true];
+                // Left to down doesn't make sense to draw for bottom row
+                BOOL isBottomRow = currentCol == row.count - 1;
                 
-                // Trigger drawing to next connection vertically
-                [self DrawLineToNextConnectionPoint:currentRow currentCol:i currentX:rightX currentY:currentY isHorizontal:false lineInfo:lineInfo];
+                // Check next cell to see if it's LeftToDown
+                BOOL nextCellIsLeftToDown = false;
+                if (currentCol < row.count - 1)
+                {
+                    NSArray *nextRow = [self.colorCellSections objectAtIndex:currentRow+1];
+                    ColorCell *nextColorCell = [nextRow objectAtIndex:i];
+                    if (nextColorCell.cellType == ReflectorLeftToDown)
+                    {
+                        nextCellIsLeftToDown = true;
+                    }
+                }
+                
+                if (!isBottomRow && !nextCellIsLeftToDown)
+                {
+                    // Draw line to reflector
+                    int rightX = [self DrawHorizontalLineToConnection:colorCell lineInfo:lineInfo currentY:currentY drawToCenter:true];
+                
+                    // Trigger drawing to next connection vertically
+                    [self DrawLineToNextConnectionPoint:currentRow currentCol:i currentX:rightX currentY:currentY isHorizontal:false lineInfo:lineInfo];
+                }
+                
                 connectionFound = true;
                 break;
             }
@@ -168,7 +187,7 @@
                     ColorCell *colorCell = [row objectAtIndex:i-1];
                     [self DrawHorizontalLineToConnection:colorCell lineInfo:lineInfo currentY:currentY drawToCenter:true];
                 }
-                
+        
                 connectionFound = true;
                 break;
             }
@@ -204,11 +223,29 @@
             }
             else if (colorCell.cellType == ReflectorTopToRight)
             {
-                // Draw line to reflector
-                int bottomY = [self DrawVerticalLineToConnection:colorCell lineInfo:lineInfo currentX:currentX drawToCenter:true];
+                // Top to right doesn't make sense to draw if it's the last column
+                BOOL isLastColumn = currentCol == row.count - 1;
                 
-                // Trigger drawing to next connection horizontally
-                [self DrawLineToNextConnectionPoint:i currentCol:currentCol currentX:currentX currentY:bottomY isHorizontal:true lineInfo:lineInfo];
+                // Check next cell to see if it's TopToRight
+                BOOL nextCellIsTopToRight = false;
+                if (currentCol < row.count - 1)
+                {
+                    ColorCell *nextColorCell = [row objectAtIndex:currentCol + 1];
+                    if (nextColorCell.cellType == ReflectorTopToRight)
+                    {
+                        nextCellIsTopToRight = true;
+                    }
+                }
+                
+                if (!isLastColumn && !nextCellIsTopToRight)
+                {
+                    // Draw line to reflector
+                    int bottomY = [self DrawVerticalLineToConnection:colorCell lineInfo:lineInfo currentX:currentX drawToCenter:true];
+                
+                    // Trigger drawing to next connection horizontally
+                    [self DrawLineToNextConnectionPoint:i currentCol:currentCol currentX:   currentX currentY:bottomY isHorizontal:true lineInfo:lineInfo];
+                }
+                
                 connectionFound = true;
                 break;
             }

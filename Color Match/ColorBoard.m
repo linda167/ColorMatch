@@ -13,101 +13,103 @@
 
 -(void)updateAllColorCells
 {
-    // TODO: lindach: Need to change this to support mechanic cells
     // Apply colors from top buttons
-    int rowCount = (int)_colorCellSections.count;
     for (int i=0; i<_topColorsState.count; i++)
     {
         NSNumber* color = (NSNumber *)[_topColorsState objectAtIndex:i];
-        for (int j=0; j<rowCount; j++)
-        {
-            NSArray *row = [self.colorCellSections objectAtIndex:j];
-            ColorCell *colorCell = [row objectAtIndex:i];
-            
-            // Applying colors only valid for normal cells
-            if (colorCell.cellType == NormalCell)
-            {
-                [colorCell addInputColor:color];
-            }
-        }
+        [self addColorForColumn:color.intValue colIndex:i];
     }
     
     // Apply colors from left buttons
     for (int i=0; i<_leftColorsState.count; i++)
     {
         NSNumber* color = (NSNumber *)[_leftColorsState objectAtIndex:i];
-        NSArray *row = [self.colorCellSections objectAtIndex:i];
-        for (int j=0; j<row.count; j++)
-        {
-            ColorCell *colorCell = [row objectAtIndex:j];
-            
-            // Applying colors only valid for normal cells
-            if (colorCell.cellType == NormalCell)
-            {
-                [colorCell addInputColor:color];
-            }
-        }
+        [self addColorForRow:color.intValue rowIndex:i];
     }
 }
 
 -(void)removeColorForRow:(int)color rowIndex:(int)rowIndex
 {
-    NSArray *row = [self.colorCellSections objectAtIndex:rowIndex];
-    for (int j=0; j<row.count; j++)
-    {
-        ColorCell *colorCell = [row objectAtIndex:j];
-        
-        // Applying colors only valid for normal cells
-        if (colorCell.cellType == NormalCell)
-        {
-            [colorCell removeInputColor:[NSNumber numberWithInt:color]];
-        }
-    }
+    [self applyColor:rowIndex currentCol:-1 isHorizontal:true color:color isAdd:false];
 }
 
 -(void)removeColorForColumn:(int)color colIndex:(int)colIndex
 {
-    int rowCount = (int)_colorCellSections.count;
-    for (int j=0; j<rowCount; j++)
-    {
-        NSArray *row = [self.colorCellSections objectAtIndex:j];
-        ColorCell *colorCell = [row objectAtIndex:colIndex];
-        
-        // Applying colors only valid for normal cells
-        if (colorCell.cellType == NormalCell)
-        {
-            [colorCell removeInputColor:[NSNumber numberWithInt:color]];
-        }
-    }
+    [self applyColor:-1 currentCol:colIndex isHorizontal:false color:color isAdd:false];
 }
 
 -(void)addColorForRow:(int)color rowIndex:(int)rowIndex
 {
-    NSArray *row = [self.colorCellSections objectAtIndex:rowIndex];
-    for (int j=0; j<row.count; j++)
-    {
-        ColorCell *colorCell = [row objectAtIndex:j];
-        
-        // Applying colors only valid for normal cells
-        if (colorCell.cellType == NormalCell)
-        {
-            [colorCell addInputColor:[NSNumber numberWithInt:color]];
-        }
-    }
+    [self applyColor:rowIndex currentCol:-1 isHorizontal:true color:color isAdd:true];
 }
 
 -(void)addColorForColumn:(int)color colIndex:(int)colIndex
 {
-    int rowCount = (int)_colorCellSections.count;
-    for (int j=0; j<rowCount; j++)
+    [self applyColor:-1 currentCol:colIndex isHorizontal:false color:color isAdd:true];
+}
+
+-(void)applyColor:(int)currentRow currentCol:(int)currentCol isHorizontal:(BOOL)isHorizontal color:(int)color isAdd:(BOOL)isAdd
+{
+    if (isHorizontal)
     {
-        NSArray *row = [self.colorCellSections objectAtIndex:j];
-        ColorCell *colorCell = [row objectAtIndex:colIndex];
+        NSArray *row = [self.colorCellSections objectAtIndex:currentRow];
         
-        // Applying colors only valid for normal cells
-        if (colorCell.cellType == NormalCell)
+        for (int i = currentCol+1; i < row.count; i++)
         {
-            [colorCell addInputColor:[NSNumber numberWithInt:color]];
+            ColorCell *colorCell = [row objectAtIndex:i];
+            if (colorCell.cellType == NormalCell)
+            {
+                if (isAdd)
+                {
+                    [colorCell addInputColor:[NSNumber numberWithInt:color]];
+                }
+                else
+                {
+                    [colorCell removeInputColor:[NSNumber numberWithInt:color]];
+                }
+            }
+            else if (colorCell.cellType == ReflectorLeftToDown)
+            {
+                // Trigger apply color vertically down
+                [self applyColor:currentRow currentCol:i isHorizontal:false color:color isAdd:isAdd];
+                break;
+            }
+            else if (colorCell.cellType == ReflectorTopToRight)
+            {
+                // NOOP since we're coming from the left
+                break;
+            }
+        }
+    }
+    else    // if vertical
+    {
+        for (int i=currentRow+1; i<self.colorCellSections.count; i++)
+        {
+            NSArray *row = [self.colorCellSections objectAtIndex:i];
+            ColorCell *colorCell = [row objectAtIndex:currentCol];
+            
+            if (colorCell.cellType == NormalCell)
+            {
+                if (isAdd)
+                {
+                    [colorCell addInputColor:[NSNumber numberWithInt:color]];
+                }
+                else
+                {
+                    [colorCell removeInputColor:[NSNumber numberWithInt:color]];
+                }
+            }
+            else if (colorCell.cellType == ReflectorLeftToDown)
+            {
+                // NOOP since we're coming from top
+                break;
+            }
+            else if (colorCell.cellType == ReflectorTopToRight)
+            {
+                // Trigger apply color horizontal to the right
+                [self applyColor:i currentCol:currentCol isHorizontal:true color:color isAdd:isAdd];
+                break;
+            }
         }
     }
 }
