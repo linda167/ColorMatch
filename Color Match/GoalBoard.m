@@ -68,7 +68,7 @@
         
         for (int j=0; j<row.count; j++)
         {
-            ColorCell *colorCell = [row objectAtIndex:i];
+            ColorCell *colorCell = [row objectAtIndex:j];
             UIImageView *cellBlock = [colorCell image];
             [cellBlock removeFromSuperview];
         }

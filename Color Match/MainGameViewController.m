@@ -324,11 +324,9 @@
 
 - (void)NextLevel
 {
-    [_goalBoard generateNewGoalBoardStates];
+    [self removeExistingBoard];
     [self resetActionBar];
-    [_userColorBoard resetCells];
-    [self startTimer];
-    [self initMovesCount];
+    [self startNewGame];
 }
 
 - (void)removeExistingBoard

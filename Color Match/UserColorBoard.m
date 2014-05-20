@@ -34,16 +34,21 @@
         self.boardCells = boardCells;
         _viewController = viewController;
         
-        [self initGridColorButtons];
-        [self initColorCells];
-
-        // Draw connecting lines
-        [self CreateConnectorLinesFrame];
-        [self DrawVerticalConnectingLines];
-        [self DrawHorizontalConnectingLines];
+        [self createNewBoard];
     }
     
     return self;
+}
+
+- (void)createNewBoard
+{
+    [self initGridColorButtons];
+    [self initColorCells];
+    
+    // Draw connecting lines
+    [self CreateConnectorLinesFrame];
+    [self DrawVerticalConnectingLines];
+    [self DrawHorizontalConnectingLines];
 }
 
 - (void)initColorCells
@@ -424,7 +429,6 @@
     }
 }
 
-
 - (void)removeExistingGridColorButtons
 {
     for (int i=0; i<_allGridColorButtons.count; i++)
@@ -445,7 +449,7 @@
         NSMutableArray *row = [self.colorCellSections objectAtIndex:i];
         for (int j=0; j<row.count; j++)
         {
-            ColorCell *colorCell = [row objectAtIndex:i];
+            ColorCell *colorCell = [row objectAtIndex:j];
             UIImageView *cellBlock = [colorCell image];
             [cellBlock removeFromSuperview];
         }
@@ -459,6 +463,7 @@
 - (void)removeExistingConnectingLines
 {
     [self.connectorLines clear];
+    [self.connectorLines removeFromSuperview];
 }
 
 - (void)removeExistingBoard
