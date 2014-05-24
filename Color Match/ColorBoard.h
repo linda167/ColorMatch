@@ -23,5 +23,6 @@
 -(void)addColorForRow:(int)color rowIndex:(int)rowIndex;
 -(void)addColorForColumn:(int)color colIndex:(int)colIndex;
 -(ColorCell*) getColorCellForType:(int)cellType xOffset:(int)xOffset yOffset:(int)yOffset size:(int)size;
+-(UIImage*)GetImageForCellType:(int)cellType;
 
 @end

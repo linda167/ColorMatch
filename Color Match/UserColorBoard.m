@@ -71,6 +71,7 @@
         for (int j=0; j<self.boardParameters.gridSize; j++)
         {
             NSNumber *cellType = [boardCellTypeRow objectAtIndex:j];
+            
             ColorCell *colorCell = [self getColorCellForType:cellType.intValue xOffset:xOffset yOffset:yOffset size:self.boardParameters.colorCellSize];
             [row addObject:colorCell];
             
@@ -356,6 +357,7 @@
     }
     self.leftColorsState = currentLeftColorState;
     
+    // Add new color
     if (topIndex != NSNotFound)
     {
         [self addColorForColumn:selectedColor colIndex:topIndex];
@@ -452,6 +454,12 @@
             ColorCell *colorCell = [row objectAtIndex:j];
             UIImageView *cellBlock = [colorCell image];
             [cellBlock removeFromSuperview];
+            
+            if (colorCell.specialImage != NULL)
+            {
+                UIImageView *specialImageCell = colorCell.specialImage;
+                [specialImageCell removeFromSuperview];
+            }
         }
         
         [row removeAllObjects];
@@ -485,6 +493,117 @@
     
     // Should not be hit
     return NULL;
+}
+
+// override base class
+-(UIImage*)GetImageForCellType:(int)cellType
+{
+    switch (cellType)
+    {
+        case ReflectorLeftToDown:
+            return [UIImage imageNamed:@"BlockClear.png"];
+        case ReflectorTopToRight:
+            return [UIImage imageNamed:@"BlockClear.png"];
+    }
+    
+    return [super GetImageForCellType:cellType];
+}
+
+-(void)GetSpecialImageForCellIfNeeded:(ColorCell*)colorCell
+{
+    UIImage *specialImage = NULL;
+    
+    switch (colorCell.cellType)
+    {
+        case ReflectorLeftToDown:
+            specialImage = [UIImage imageNamed:@"ReflectorArrowLtD@2x.png"];
+            break;
+        case ReflectorTopToRight:
+            specialImage = [UIImage imageNamed:@"ReflectorArrowTtR@2x.png"];
+            break;
+    }
+    
+    if (specialImage != NULL)
+    {
+        // Fix width for now for all layouts so arrows look consistent
+        int size = 35;
+        int adjustmentX = [self getXAdjustmentForSpecialCell:colorCell.cellType];
+        int adjustmentY = [self getYAdjustmentForSpecialCell:colorCell.cellType];
+        
+        int x = colorCell.image.frame.origin.x + adjustmentX;
+        int y = colorCell.image.frame.origin.y + adjustmentY;
+        
+        UIImageView *specialImageView = [[UIImageView alloc] initWithFrame:CGRectMake(x, y, size, size)];
+        
+        specialImageView.image = specialImage;
+        colorCell.specialImage = specialImageView;
+        [self.containerView addSubview:specialImageView];
+    }
+}
+
+-(int)getXAdjustmentForSpecialCell:(int)cellType
+{
+    switch (cellType)
+    {
+        case ReflectorLeftToDown:
+            if (self.boardParameters.gridSize == 4)
+            {
+                return 3;
+            }
+            else if (self.boardParameters.gridSize == 3)
+            {
+                return 8;
+            }
+            break;
+        case ReflectorTopToRight:
+            if (self.boardParameters.gridSize == 5)
+            {
+                return 2;
+            }
+            else if (self.boardParameters.gridSize == 4)
+            {
+                return 4;
+            }
+            else if (self.boardParameters.gridSize == 3)
+            {
+                return 12;
+            }
+            break;
+    }
+    
+    return 0;
+}
+
+-(int)getYAdjustmentForSpecialCell:(int)cellType
+{
+    switch (cellType)
+    {
+        case ReflectorLeftToDown:
+            if (self.boardParameters.gridSize == 5)
+            {
+                return 2;
+            }
+            else if (self.boardParameters.gridSize == 4)
+            {
+                return 4;
+            }
+            else if (self.boardParameters.gridSize == 3)
+            {
+                return 12;
+            }
+        case ReflectorTopToRight:
+            if (self.boardParameters.gridSize == 4)
+            {
+                return 3;
+            }
+            else if (self.boardParameters.gridSize == 3)
+            {
+                return 8;
+            }
+            break;
+    }
+    
+    return 0;
 }
 
 @end

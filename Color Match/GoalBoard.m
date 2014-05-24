@@ -270,4 +270,18 @@
     }
 }
 
+// override base class
+-(UIImage*)GetImageForCellType:(int)cellType
+{
+    switch (cellType)
+    {
+        case ReflectorLeftToDown:
+            return [UIImage imageNamed:@"ReflectorLtDGoal@2x.png"];
+        case ReflectorTopToRight:
+            return [UIImage imageNamed:@"ReflectorTtRGoal@2x.png"];
+    }
+    
+    return [super GetImageForCellType:cellType];
+}
+
 @end

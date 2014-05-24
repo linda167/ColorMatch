@@ -48,6 +48,7 @@
     [self applyColor:-1 currentCol:colIndex isHorizontal:false color:color isAdd:true];
 }
 
+// Apply color from (but not including) currentRow and currentCol
 -(void)applyColor:(int)currentRow currentCol:(int)currentCol isHorizontal:(BOOL)isHorizontal color:(int)color isAdd:(BOOL)isAdd
 {
     if (isHorizontal)
@@ -72,6 +73,29 @@
             {
                 // Trigger apply color vertically down
                 [self applyColor:currentRow currentCol:i isHorizontal:false color:color isAdd:isAdd];
+                
+                // Change special image
+                UIImage *specialImage;
+                switch (color)
+                {
+                    case 0:
+                        specialImage = [UIImage imageNamed:@"ReflectorArrowLtD@2x.png"];
+                        break;
+                    case 1:
+                        specialImage = [UIImage imageNamed:@"ReflectorArrowLtDBlue@2x.png"];
+                        break;
+                    case 2:
+                        specialImage = [UIImage imageNamed:@"ReflectorArrowLtDRed@2x.png"];
+                        break;
+                    case 3:
+                        specialImage = [UIImage imageNamed:@"ReflectorArrowLtDYellow@2x.png"];
+                        break;
+                    default:
+                        [NSException raise:@"Invalid input" format:@"Invalid input color"];
+                        break;
+                }
+                
+                [colorCell.specialImage setImage:specialImage];
                 break;
             }
             else if (colorCell.cellType == ReflectorTopToRight)
@@ -108,6 +132,29 @@
             {
                 // Trigger apply color horizontal to the right
                 [self applyColor:i currentCol:currentCol isHorizontal:true color:color isAdd:isAdd];
+                
+                // Change special image
+                UIImage *specialImage;
+                switch (color)
+                {
+                    case 0:
+                        specialImage = [UIImage imageNamed:@"ReflectorArrowTtR@2x.png"];
+                        break;
+                    case 1:
+                        specialImage = [UIImage imageNamed:@"ReflectorArrowTtRBlue@2x.png"];
+                        break;
+                    case 2:
+                        specialImage = [UIImage imageNamed:@"ReflectorArrowTtRRed@2x.png"];
+                        break;
+                    case 3:
+                        specialImage = [UIImage imageNamed:@"ReflectorArrowTtRYellow@2x.png"];
+                        break;
+                    default:
+                        [NSException raise:@"Invalid input" format:@"Invalid input color"];
+                        break;
+                }
+                
+                [colorCell.specialImage setImage:specialImage];
                 break;
             }
         }
@@ -118,16 +165,7 @@
 {
     UIImageView *cellBlock = [[UIImageView alloc] initWithFrame:CGRectMake(xOffset, yOffset, size, size)];
     
-    switch (cellType)
-    {
-        case NormalCell:
-            cellBlock.image=[UIImage imageNamed:@"BlockWhite.png"];
-            break;
-        case ReflectorLeftToDown:
-        case ReflectorTopToRight:
-            cellBlock.image=[UIImage imageNamed:@"BlockClear.png"];
-            break;
-    }
+    cellBlock.image = [self GetImageForCellType:cellType];
     
     // Add cell image to view
     [self.containerView addSubview:cellBlock];
@@ -135,7 +173,20 @@
     // Create ColorCell object and add it to our color cell matrix
     ColorCell *colorCell = [[ColorCell alloc] initWithImage:cellBlock cellType:cellType];
     
+    [self GetSpecialImageForCellIfNeeded:colorCell];
+    
     return colorCell;
+}
+
+-(UIImage*)GetImageForCellType:(int)cellType
+{
+    // Default image
+    return [UIImage imageNamed:@"BlockWhite.png"];
+}
+
+-(void)GetSpecialImageForCellIfNeeded:(ColorCell*)colorCell
+{
+    // NOOP in base class
 }
 
 @end

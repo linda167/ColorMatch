@@ -70,12 +70,12 @@
         case 4:
             upperBound = 2;
             lowerBound = 1;
-            specialCellsCount = arc4random()%(upperBound - lowerBound + 1) + 1;
+            specialCellsCount = arc4random()%(upperBound - lowerBound + 1) + lowerBound;
             break;
         case 5:
             upperBound = 4;
             lowerBound = 2;
-            specialCellsCount = arc4random()%(upperBound - lowerBound + 1) + 1;
+            specialCellsCount = arc4random()%(upperBound - lowerBound + 1) + lowerBound;
             break;
         default:
             [NSException raise:@"Invalid input" format:@"Invalid board size"];

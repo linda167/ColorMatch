@@ -60,6 +60,16 @@
 		BF0D4BD119293E5500AACB5A /* BlockClear.png in Resources */ = {isa = PBXBuildFile; fileRef = BF0D4BD019293E5500AACB5A /* BlockClear.png */; };
 		BF0D4BD41929429E00AACB5A /* LinePiece.m in Sources */ = {isa = PBXBuildFile; fileRef = BF0D4BD31929429E00AACB5A /* LinePiece.m */; };
 		BF6304391895F231002F3C9E /* ColorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BF6304381895F231002F3C9E /* ColorCell.m */; };
+		BF874D11192B28C1001701A2 /* ReflectorLtDGoal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF874D0D192B28C1001701A2 /* ReflectorLtDGoal@2x.png */; };
+		BF874D15192B2CBB001701A2 /* ReflectorTtRGoal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF874D14192B2CBB001701A2 /* ReflectorTtRGoal@2x.png */; };
+		BFA3A2B4192D899D00C1BB7D /* ReflectorArrowLtD@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFA3A2B2192D899D00C1BB7D /* ReflectorArrowLtD@2x.png */; };
+		BFA3A2B5192D899D00C1BB7D /* ReflectorArrowTtR@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFA3A2B3192D899D00C1BB7D /* ReflectorArrowTtR@2x.png */; };
+		BFA3A2BC1931401700C1BB7D /* ReflectorArrowLtDBlue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFA3A2B61931401700C1BB7D /* ReflectorArrowLtDBlue@2x.png */; };
+		BFA3A2BD1931401700C1BB7D /* ReflectorArrowLtDRed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFA3A2B71931401700C1BB7D /* ReflectorArrowLtDRed@2x.png */; };
+		BFA3A2BE1931401700C1BB7D /* ReflectorArrowLtDYellow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFA3A2B81931401700C1BB7D /* ReflectorArrowLtDYellow@2x.png */; };
+		BFA3A2BF1931401700C1BB7D /* ReflectorArrowTtRBlue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFA3A2B91931401700C1BB7D /* ReflectorArrowTtRBlue@2x.png */; };
+		BFA3A2C01931401700C1BB7D /* ReflectorArrowTtRRed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFA3A2BA1931401700C1BB7D /* ReflectorArrowTtRRed@2x.png */; };
+		BFA3A2C11931401700C1BB7D /* ReflectorArrowTtRYellow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFA3A2BB1931401700C1BB7D /* ReflectorArrowTtRYellow@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -144,6 +154,16 @@
 		BF0D4BD31929429E00AACB5A /* LinePiece.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LinePiece.m; sourceTree = "<group>"; };
 		BF6304371895F231002F3C9E /* ColorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorCell.h; sourceTree = "<group>"; };
 		BF6304381895F231002F3C9E /* ColorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorCell.m; sourceTree = "<group>"; };
+		BF874D0D192B28C1001701A2 /* ReflectorLtDGoal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReflectorLtDGoal@2x.png"; sourceTree = "<group>"; };
+		BF874D14192B2CBB001701A2 /* ReflectorTtRGoal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReflectorTtRGoal@2x.png"; sourceTree = "<group>"; };
+		BFA3A2B2192D899D00C1BB7D /* ReflectorArrowLtD@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReflectorArrowLtD@2x.png"; sourceTree = "<group>"; };
+		BFA3A2B3192D899D00C1BB7D /* ReflectorArrowTtR@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReflectorArrowTtR@2x.png"; sourceTree = "<group>"; };
+		BFA3A2B61931401700C1BB7D /* ReflectorArrowLtDBlue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReflectorArrowLtDBlue@2x.png"; sourceTree = "<group>"; };
+		BFA3A2B71931401700C1BB7D /* ReflectorArrowLtDRed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReflectorArrowLtDRed@2x.png"; sourceTree = "<group>"; };
+		BFA3A2B81931401700C1BB7D /* ReflectorArrowLtDYellow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReflectorArrowLtDYellow@2x.png"; sourceTree = "<group>"; };
+		BFA3A2B91931401700C1BB7D /* ReflectorArrowTtRBlue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReflectorArrowTtRBlue@2x.png"; sourceTree = "<group>"; };
+		BFA3A2BA1931401700C1BB7D /* ReflectorArrowTtRRed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReflectorArrowTtRRed@2x.png"; sourceTree = "<group>"; };
+		BFA3A2BB1931401700C1BB7D /* ReflectorArrowTtRYellow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReflectorArrowTtRYellow@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -273,6 +293,16 @@
 		AF2C225A1874B95000082561 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				BFA3A2B61931401700C1BB7D /* ReflectorArrowLtDBlue@2x.png */,
+				BFA3A2B71931401700C1BB7D /* ReflectorArrowLtDRed@2x.png */,
+				BFA3A2B81931401700C1BB7D /* ReflectorArrowLtDYellow@2x.png */,
+				BFA3A2B91931401700C1BB7D /* ReflectorArrowTtRBlue@2x.png */,
+				BFA3A2BA1931401700C1BB7D /* ReflectorArrowTtRRed@2x.png */,
+				BFA3A2BB1931401700C1BB7D /* ReflectorArrowTtRYellow@2x.png */,
+				BFA3A2B2192D899D00C1BB7D /* ReflectorArrowLtD@2x.png */,
+				BFA3A2B3192D899D00C1BB7D /* ReflectorArrowTtR@2x.png */,
+				BF874D14192B2CBB001701A2 /* ReflectorTtRGoal@2x.png */,
+				BF874D0D192B28C1001701A2 /* ReflectorLtDGoal@2x.png */,
 				BF0D4BD019293E5500AACB5A /* BlockClear.png */,
 				AFB75A9D18834ECD00CAB736 /* AppIcon120.png */,
 				AFB75A9A188339C900CAB736 /* GameLogo.png */,
@@ -382,6 +412,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				AFADA21F1877D20D00FADA22 /* BlockOrange.png in Resources */,
+				BF874D11192B28C1001701A2 /* ReflectorLtDGoal@2x.png in Resources */,
+				BFA3A2BF1931401700C1BB7D /* ReflectorArrowTtRBlue@2x.png in Resources */,
 				AFADA2281877D20D00FADA22 /* FilledCircleBlue.png in Resources */,
 				AFADA2321877D20D00FADA22 /* YellowSelected.png in Resources */,
 				AF2C22391874B8B800082561 /* Main_iPad.storyboard in Resources */,
@@ -392,22 +424,30 @@
 				AFADA2301877D20D00FADA22 /* WhiteSelected.png in Resources */,
 				AFADA2261877D20D00FADA22 /* ButtonBar.png in Resources */,
 				AFADA2241877D20D00FADA22 /* Blue.png in Resources */,
+				BFA3A2B5192D899D00C1BB7D /* ReflectorArrowTtR@2x.png in Resources */,
 				AFADA22D1877D20D00FADA22 /* Red.png in Resources */,
 				AFADA22B1877D20D00FADA22 /* FilledCircleYellow.png in Resources */,
 				AF2C22361874B8B800082561 /* Main_iPhone.storyboard in Resources */,
 				AFADA2251877D20D00FADA22 /* BlueSelected.png in Resources */,
 				BF0D4BD119293E5500AACB5A /* BlockClear.png in Resources */,
 				AFADA22C1877D20D00FADA22 /* Green.png in Resources */,
+				BFA3A2BC1931401700C1BB7D /* ReflectorArrowLtDBlue@2x.png in Resources */,
 				AFADA2231877D20D00FADA22 /* BlockYellow.png in Resources */,
+				BFA3A2BE1931401700C1BB7D /* ReflectorArrowLtDYellow@2x.png in Resources */,
 				AFADA22A1877D20D00FADA22 /* FilledCircleRed.png in Resources */,
 				AFADA2271877D20D00FADA22 /* EmptyCircle.png in Resources */,
 				AFADA2291877D20D00FADA22 /* FilledCircleGreen.png in Resources */,
 				AFADA2211877D20D00FADA22 /* BlockRed.png in Resources */,
 				AFB75A9F18834ECD00CAB736 /* AppIcon120.png in Resources */,
 				AF2C222D1874B8B700082561 /* InfoPlist.strings in Resources */,
+				BF874D15192B2CBB001701A2 /* ReflectorTtRGoal@2x.png in Resources */,
+				BFA3A2BD1931401700C1BB7D /* ReflectorArrowLtDRed@2x.png in Resources */,
 				AFB75A9B188339C900CAB736 /* GameLogo.png in Resources */,
+				BFA3A2B4192D899D00C1BB7D /* ReflectorArrowLtD@2x.png in Resources */,
 				AFADA2201877D20D00FADA22 /* BlockPurple.png in Resources */,
+				BFA3A2C11931401700C1BB7D /* ReflectorArrowTtRYellow@2x.png in Resources */,
 				AFB8969318822F2F003FAEF4 /* ButtonBar2.png in Resources */,
+				BFA3A2C01931401700C1BB7D /* ReflectorArrowTtRRed@2x.png in Resources */,
 				AFADA2221877D20D00FADA22 /* BlockWhite.png in Resources */,
 				AFADA21D1877D20D00FADA22 /* BlockBlue.png in Resources */,
 				AFADA21E1877D20D00FADA22 /* BlockGreen.png in Resources */,

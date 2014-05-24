@@ -11,6 +11,7 @@
 @interface ColorCell : NSObject
 
 @property (nonatomic, strong) UIImageView *image;
+@property (nonatomic, strong) UIImageView *specialImage;
 @property NSMutableArray *colorInputs;
 @property int cellType;
 @property int currentColor;

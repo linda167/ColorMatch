@@ -18,6 +18,7 @@
     if (self)
     {
         _image = image;
+        _specialImage = NULL;
         _cellType = cellType;
         _colorInputs = [[NSMutableArray alloc] init];
     }
