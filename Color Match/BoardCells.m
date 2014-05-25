@@ -115,55 +115,49 @@
         
         if (reflectorType == ReflectorTopToRight)
         {
-            // Check both sides for TopToRight cell
-            if (randomCol > 0)
+            // Make sure there is a connection from the top
+            if (![self hasConnectionFromTop:randomRow col:randomCol])
             {
-                NSNumber *leftCellType = [row objectAtIndex:randomCol - 1];
-                if (leftCellType.intValue == ReflectorTopToRight)
-                {
-                    // Don't want 2 TopToRight cells next to each other
-                    continue;
-                }
+                continue;
             }
             
-            if (randomCol < self.boardParameters.gridSize - 1)
+            // Make sure we don't need a connection on the bottom
+            if ([self needConnectionOnBottom:randomRow col:randomCol])
             {
-                NSNumber *rightCellType = [row objectAtIndex:randomCol + 1];
-                if (rightCellType.intValue == ReflectorTopToRight)
-                {
-                    // Don't want 2 TopToRight cells next to each other
-                    continue;
-                }
+                // We need the connection to the bottom, so can't add this reflector here
+                continue;
+            }
+            
+            // Make sure we don't have 2 TopToRight next to each other
+            if ([self hasAdjacentTopToRightCell:randomRow col:randomCol])
+            {
+                continue;
             }
         }
         
         if (reflectorType == ReflectorLeftToDown)
         {
-            // Check both sides for LeftToDown cell
-            if (randomRow > 0)
+            // Make sure there is a connection from the left
+            if (![self hasConnectionFromLeft:randomRow col:randomCol])
             {
-                NSMutableArray *topRow = [self.colorCellSections objectAtIndex:randomRow - 1];
-                NSNumber *topCellType = [topRow objectAtIndex:randomCol];
-                if (topCellType.intValue == ReflectorLeftToDown)
-                {
-                    // Don't want 2 LeftToDown cells next to each other
-                    continue;
-                }
+                continue;
             }
             
-            if (randomRow < self.boardParameters.gridSize - 1)
+            // Make sure we don't need a connection on the right
+            if ([self needConnectionOnRight:randomRow col:randomCol])
             {
-                NSMutableArray *bottomRow = [self.colorCellSections objectAtIndex:randomRow + 1];
-                NSNumber *bottomCellType = [bottomRow objectAtIndex:randomCol];
-                if (bottomCellType.intValue == ReflectorLeftToDown)
-                {
-                    // Don't want 2 LeftToDown cells next to each other
-                    continue;
-                }
+                // We need the connection to the right, so can't add this reflector here
+                continue;
+            }
+            
+            // Make sure we don't have 2 LeftToDown on top of each other
+            if ([self hasAdjacentLeftToDownCell:randomRow col:randomCol])
+            {
+                continue;
             }
         }
         
-        // Replace iwth special cell
+        // Replace with special cell
         [row replaceObjectAtIndex:randomCol withObject:[NSNumber numberWithInt:reflectorType]];
         i++;
             
@@ -175,8 +169,146 @@
         [string appendString:reflector];
         [string appendString:[NSString stringWithFormat: @" to cell %d,%d", randomRow, randomCol]];
         NSLog(@"%@", string);
-        
     }
+}
+
+// Returns true if at given row, col, there is a connection from up top
+- (bool)hasConnectionFromTop:(int)row col:(int)col
+{
+    for (int j = row-1; j >=0; j--)
+    {
+        NSMutableArray *tempRow = [self.colorCellSections objectAtIndex:j];
+        NSNumber *tempCellType = [tempRow objectAtIndex:col];
+        
+        if (tempCellType.intValue == ReflectorTopToRight)
+        {
+            return false;
+        }
+        else if (tempCellType.intValue == ReflectorLeftToDown)
+        {
+            return true;
+        }
+    }
+    
+    return true;
+}
+
+// Returns true if at given row, col, we require a connection to the bottom
+- (bool)needConnectionOnBottom:(int)row col:(int)col
+{
+    for (int j=row+1; j<self.boardParameters.gridSize; j++)
+    {
+        NSMutableArray *tempRow = [self.colorCellSections objectAtIndex:j];
+        NSNumber *tempCellType = [tempRow objectAtIndex:col];
+        
+        if (tempCellType.intValue == ReflectorTopToRight)
+        {
+            return true;
+        }
+        else if (tempCellType.intValue == ReflectorLeftToDown)
+        {
+            return false;
+        }
+    }
+    
+    return false;
+}
+
+// Returns true if at given row, col, there is a connection from the left
+- (bool)hasConnectionFromLeft:(int)row col:(int)col
+{
+    NSMutableArray *currentRow = [self.colorCellSections objectAtIndex:row];
+    for (int j = col-1; j >=0; j--)
+    {
+        NSNumber *tempCellType = [currentRow objectAtIndex:j];
+        
+        if (tempCellType.intValue == ReflectorLeftToDown)
+        {
+            return false;
+        }
+        else if (tempCellType.intValue == ReflectorTopToRight)
+        {
+            return true;
+        }
+    }
+    
+    return true;
+}
+
+// Returns true if at given row, col, we require a connection on the right
+- (bool)needConnectionOnRight:(int)row col:(int)col
+{
+    NSMutableArray *currentRow = [self.colorCellSections objectAtIndex:row];
+    for (int j=col+1; j<self.boardParameters.gridSize; j++)
+    {
+        NSNumber *tempCellType = [currentRow objectAtIndex:j];
+        
+        if (tempCellType.intValue == ReflectorLeftToDown)
+        {
+            return true;
+        }
+        else if (tempCellType.intValue == ReflectorTopToRight)
+        {
+            return false;
+        }
+    }
+    
+    return false;
+}
+
+- (bool)hasAdjacentTopToRightCell:(int)row col:(int)col
+{
+    // Check both sides for TopToRight cell
+    NSMutableArray *currentRow = [self.colorCellSections objectAtIndex:row];
+    if (col > 0)
+    {
+        NSNumber *leftCellType = [currentRow objectAtIndex:col - 1];
+        if (leftCellType.intValue == ReflectorTopToRight)
+        {
+            // 2 TopToRight cells next to each other
+            return true;
+        }
+    }
+    
+    if (col < self.boardParameters.gridSize - 1)
+    {
+        NSNumber *rightCellType = [currentRow objectAtIndex:col + 1];
+        if (rightCellType.intValue == ReflectorTopToRight)
+        {
+            // 2 TopToRight cells next to each other
+            return true;
+        }
+    }
+    
+    return false;
+}
+
+- (bool)hasAdjacentLeftToDownCell:(int)row col:(int)col
+{
+    // Check both sides for LeftToDown cell
+    if (row > 0)
+    {
+        NSMutableArray *topRow = [self.colorCellSections objectAtIndex:row - 1];
+        NSNumber *topCellType = [topRow objectAtIndex:col];
+        if (topCellType.intValue == ReflectorLeftToDown)
+        {
+            // 2 LeftToDown cells on top of each other
+            return true;
+        }
+    }
+    
+    if (row < self.boardParameters.gridSize - 1)
+    {
+        NSMutableArray *bottomRow = [self.colorCellSections objectAtIndex:row + 1];
+        NSNumber *bottomCellType = [bottomRow objectAtIndex:col];
+        if (bottomCellType.intValue == ReflectorLeftToDown)
+        {
+            // 2 LeftToDown cells on top of each other
+            return true;
+        }
+    }
+    
+    return false;
 }
 
 @end
