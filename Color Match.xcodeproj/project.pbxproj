@@ -70,6 +70,7 @@
 		BFA3A2BF1931401700C1BB7D /* ReflectorArrowTtRBlue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFA3A2B91931401700C1BB7D /* ReflectorArrowTtRBlue@2x.png */; };
 		BFA3A2C01931401700C1BB7D /* ReflectorArrowTtRRed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFA3A2BA1931401700C1BB7D /* ReflectorArrowTtRRed@2x.png */; };
 		BFA3A2C11931401700C1BB7D /* ReflectorArrowTtRYellow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFA3A2BB1931401700C1BB7D /* ReflectorArrowTtRYellow@2x.png */; };
+		BFA3A2C5193A566F00C1BB7D /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFA3A2C4193A566F00C1BB7D /* logo@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -164,6 +165,7 @@
 		BFA3A2B91931401700C1BB7D /* ReflectorArrowTtRBlue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReflectorArrowTtRBlue@2x.png"; sourceTree = "<group>"; };
 		BFA3A2BA1931401700C1BB7D /* ReflectorArrowTtRRed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReflectorArrowTtRRed@2x.png"; sourceTree = "<group>"; };
 		BFA3A2BB1931401700C1BB7D /* ReflectorArrowTtRYellow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReflectorArrowTtRYellow@2x.png"; sourceTree = "<group>"; };
+		BFA3A2C4193A566F00C1BB7D /* logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -293,6 +295,7 @@
 		AF2C225A1874B95000082561 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				BFA3A2C4193A566F00C1BB7D /* logo@2x.png */,
 				BFA3A2B61931401700C1BB7D /* ReflectorArrowLtDBlue@2x.png */,
 				BFA3A2B71931401700C1BB7D /* ReflectorArrowLtDRed@2x.png */,
 				BFA3A2B81931401700C1BB7D /* ReflectorArrowLtDYellow@2x.png */,
@@ -427,6 +430,7 @@
 				BFA3A2B5192D899D00C1BB7D /* ReflectorArrowTtR@2x.png in Resources */,
 				AFADA22D1877D20D00FADA22 /* Red.png in Resources */,
 				AFADA22B1877D20D00FADA22 /* FilledCircleYellow.png in Resources */,
+				BFA3A2C5193A566F00C1BB7D /* logo@2x.png in Resources */,
 				AF2C22361874B8B800082561 /* Main_iPhone.storyboard in Resources */,
 				AFADA2251877D20D00FADA22 /* BlueSelected.png in Resources */,
 				BF0D4BD119293E5500AACB5A /* BlockClear.png in Resources */,
