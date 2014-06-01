@@ -12,7 +12,9 @@
 
 @interface GoalBoard : ColorBoard
 
--(id)initWithParameters: (BoardParameters)boardParameters containerView:(UIView*)containerView boardCells:(BoardCells*) boardCells;
+@property BoardCells *boardCells;
+
+-(id)initWithParameters: (BoardParameters)boardParameters containerView:(UIView*)containerView;
 -(void)removeExistingGoalColorCells;
 -(void)generateNewGoalBoardStates;
 -(void)removeExistingGoalColorsState;

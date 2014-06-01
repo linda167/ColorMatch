@@ -58,11 +58,11 @@
 // Render new board to view given current parameters
 - (void)renderNewBoard
 {
-    // Init board cell types
-    _boardCells = [[BoardCells alloc] initWithParameters:(_boardParameters)];
-    
     // Init goal color cells
-    _goalBoard = [[GoalBoard alloc] initWithParameters:(_boardParameters) containerView:_GoalContainerView boardCells:_boardCells];
+    _goalBoard = [[GoalBoard alloc] initWithParameters:(_boardParameters) containerView:_GoalContainerView];
+    
+    // Init board cell types
+    _boardCells = _goalBoard.boardCells;
 
     // Init color cell sections
     _userColorBoard = [[UserColorBoard alloc] initWithParameters:(_boardParameters) containerView:_GridContainerView viewController:self boardCells:_boardCells];
