@@ -107,6 +107,7 @@
     bool has3 = false;
     bool hasAllColors = false;
     bool hasWhiteInResult = false;
+    bool hasSpecialCells = false;
     
     for (int i=0; i<self.colorCellSections.count; i++)
     {
@@ -139,6 +140,10 @@
                     hasWhiteInResult = true;
                 }
             }
+            else
+            {
+                hasSpecialCells = true;
+            }
         }
     }
     
@@ -149,7 +154,8 @@
     }
     
     // Check that we don't have any whites in the result
-    if (hasWhiteInResult)
+    if (!hasSpecialCells &&
+        hasWhiteInResult)
     {
         return false;
     }
@@ -175,7 +181,7 @@
                 else if (currentColor == previousColor)
                 {
                     sameColorConsecutiveCount++;
-                    if (sameColorConsecutiveCount >= maxConsecutiveCountAllowed)
+                    if (sameColorConsecutiveCount > maxConsecutiveCountAllowed)
                     {
                         // Too many same color found consecutively
                         return false;
@@ -209,7 +215,7 @@
                 else if (currentColor == previousColor)
                 {
                     sameColorConsecutiveCount++;
-                    if (sameColorConsecutiveCount >= maxConsecutiveCountAllowed)
+                    if (sameColorConsecutiveCount > maxConsecutiveCountAllowed)
                     {
                         // Too many same color found consecutively
                         return false;
