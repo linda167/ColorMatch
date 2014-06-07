@@ -15,16 +15,15 @@
 
 @implementation GoalBoard
 
--(id)initWithParameters:(BoardParameters)boardParameters containerView:(UIView*)containerView
+-(id)initWithParameters:(BoardParameters)boardParameters containerView:(UIView*)containerView boardCells:(BoardCells*)boardCells
 {
     self = [super init];
     if (self)
     {
         self.boardParameters = boardParameters;
         self.containerView = containerView;
-     
-        // Init board cell types
-        _boardCells = [[BoardCells alloc] initWithParameters:(boardParameters)];
+        self.boardCells = boardCells;
+        
         [self initGoalColorCells];
     }
     
@@ -97,6 +96,29 @@
         NSNumber* wrappedNumber = [NSNumber numberWithInt:random];
         [self.leftColorsState addObject:wrappedNumber];
     }
+    
+    [self logGoalStates];
+}
+
+-(void)logGoalStates
+{
+    NSMutableString *string = [[NSMutableString alloc] init];
+
+    [string appendString:@"Left goal states: "];
+    for (NSNumber* leftNSNumber in self.leftColorsState)
+    {
+        [string appendString:[NSString stringWithFormat: @"%d", leftNSNumber.intValue]];
+    }
+    [string appendString:@"\n "];
+    
+    [string appendString:@"Top goal states: "];
+    for (NSNumber* topNSNumber in self.topColorsState)
+    {
+        [string appendString:[NSString stringWithFormat: @"%d", topNSNumber.intValue]];
+    }
+    [string appendString:@"\n "];
+    
+    [CommonUtils Log:string];
 }
 
 -(BOOL)checkGoalSufficientDifficulty
@@ -153,79 +175,111 @@
         return false;
     }
     
-    // Check that we don't have any whites in the result
+    // Check that we don't have any whites in the result if there are no special cells
     if (!hasSpecialCells &&
         hasWhiteInResult)
     {
         return false;
     }
     
-    // Check horizontally for max consecutive allowed
-    int maxConsecutiveCountAllowed = 3;
-    for (int i=0; i<self.colorCellSections.count; i++)
+    if (!hasSpecialCells)
     {
-        int sameColorConsecutiveCount = 0;
-        int previousColor = -1;
-        NSMutableArray *row = [self.colorCellSections objectAtIndex:i];
-        for (int j=0; j<row.count; j++)
+        // Check horizontally for max consecutive allowed
+        int maxConsecutiveCountAllowed = 2;
+        for (int i=0; i<self.colorCellSections.count; i++)
         {
-            ColorCell *colorCell = [row objectAtIndex:j];
-            if (colorCell.cellType == NormalCell)
+            int sameColorConsecutiveCount = 0;
+            int previousColor = -1;
+            NSMutableArray *row = [self.colorCellSections objectAtIndex:i];
+            for (int j=0; j<row.count; j++)
             {
-                int currentColor = colorCell.currentColor;
-                if (previousColor == -1 || currentColor != previousColor)
+                ColorCell *colorCell = [row objectAtIndex:j];
+                if (colorCell.cellType == NormalCell)
                 {
-                    previousColor = currentColor;
-                    sameColorConsecutiveCount = 1;
-                }
-                else if (currentColor == previousColor)
-                {
-                    sameColorConsecutiveCount++;
-                    if (sameColorConsecutiveCount > maxConsecutiveCountAllowed)
+                    int currentColor = colorCell.currentColor;
+                    if (previousColor == -1 || currentColor != previousColor)
                     {
-                        // Too many same color found consecutively
-                        return false;
+                        previousColor = currentColor;
+                        sameColorConsecutiveCount = 1;
+                    }
+                    else if (currentColor == previousColor)
+                    {
+                        sameColorConsecutiveCount++;
+                        if (sameColorConsecutiveCount > maxConsecutiveCountAllowed)
+                        {
+                            // Too many same color found consecutively
+                            return false;
+                        }
                     }
                 }
+                else
+                {
+                    sameColorConsecutiveCount = 0;
+                }
             }
-            else
+        }
+        
+        // Check vertically for max consecutive allowed
+        for (int i=0; i<self.colorCellSections.count; i++)
+        {
+            int sameColorConsecutiveCount = 0;
+            int previousColor = -1;
+            for (int j=0; j<self.colorCellSections.count; j++)
             {
-                sameColorConsecutiveCount = 0;
+                NSMutableArray *row = [self.colorCellSections objectAtIndex:j];
+                ColorCell *colorCell = [row objectAtIndex:i];
+                if (colorCell.cellType == NormalCell)
+                {
+                    int currentColor = colorCell.currentColor;
+                    if (previousColor == -1 || currentColor != previousColor)
+                    {
+                        previousColor = currentColor;
+                        sameColorConsecutiveCount = 1;
+                    }
+                    else if (currentColor == previousColor)
+                    {
+                        sameColorConsecutiveCount++;
+                        if (sameColorConsecutiveCount > maxConsecutiveCountAllowed)
+                        {
+                            // Too many same color found consecutively
+                            return false;
+                        }
+                    }
+                }
+                else
+                {
+                    sameColorConsecutiveCount = 0;
+                }
             }
         }
     }
     
-    // Check vertically for max consecutive allowed
-    for (int i=0; i<self.colorCellSections.count; i++)
+    if (hasSpecialCells)
     {
-        int sameColorConsecutiveCount = 0;
-        int previousColor = -1;
-        for (int j=0; j<self.colorCellSections.count; j++)
+        // Only allow max of 1 white input if we have special cells
+        int whiteColorInputCount = 0;
+        for (NSNumber* leftNSNumber in self.leftColorsState)
         {
-            NSMutableArray *row = [self.colorCellSections objectAtIndex:j];
-            ColorCell *colorCell = [row objectAtIndex:i];
-            if (colorCell.cellType == NormalCell)
+            int leftColor = [leftNSNumber intValue];
+            if (leftColor == 0)
             {
-                int currentColor = colorCell.currentColor;
-                if (previousColor == -1 || currentColor != previousColor)
-                {
-                    previousColor = currentColor;
-                    sameColorConsecutiveCount = 1;
-                }
-                else if (currentColor == previousColor)
-                {
-                    sameColorConsecutiveCount++;
-                    if (sameColorConsecutiveCount > maxConsecutiveCountAllowed)
-                    {
-                        // Too many same color found consecutively
-                        return false;
-                    }
-                }
+                whiteColorInputCount++;
             }
-            else
+        }
+        
+        for (NSNumber* topNSNumber in self.topColorsState)
+        {
+            int topColor = [topNSNumber intValue];
+            if (topColor == 0)
             {
-                sameColorConsecutiveCount = 0;
+                whiteColorInputCount++;
             }
+        }
+        
+        if (whiteColorInputCount > 1)
+        {
+            [CommonUtils Log:[NSMutableString stringWithFormat: @"Too many white inputs. HasSpecialCells, white color inputs: %d", whiteColorInputCount]];
+            return false;
         }
     }
     
@@ -236,9 +290,6 @@
 {
     do
     {
-        // Re-generate board cells
-        self.boardCells = [[BoardCells alloc] initWithParameters:(self.boardParameters)];
-        
         // Randomly generate goal color bar
         [self randomGenGoalStates];
         

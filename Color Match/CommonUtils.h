@@ -17,5 +17,6 @@
 +(UIColor *) GetBlueColor;
 +(UIColor *) GetYellowColor;
 +(UIColor *) GetRedColor;
++(void) Log:(NSMutableString*)string;
 
 @end

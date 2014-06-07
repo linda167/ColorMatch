@@ -157,4 +157,9 @@
     return [UIColor colorWithRed:(255/255.0) green:(0/255.0) blue:(0/255.0) alpha:1];
 }
 
++(void) Log:(NSMutableString*)string
+{
+    NSLog(@"%@", string);
+}
+
 @end

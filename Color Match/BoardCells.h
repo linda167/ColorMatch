@@ -13,5 +13,6 @@
 @property NSMutableArray *colorCellSections;
 
 -(id)initWithParameters: (BoardParameters)boardParameters;
+-(void)logBoardCellState;
 
 @end

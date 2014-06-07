@@ -71,6 +71,9 @@
 		BFA3A2C01931401700C1BB7D /* ReflectorArrowTtRRed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFA3A2BA1931401700C1BB7D /* ReflectorArrowTtRRed@2x.png */; };
 		BFA3A2C11931401700C1BB7D /* ReflectorArrowTtRYellow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFA3A2BB1931401700C1BB7D /* ReflectorArrowTtRYellow@2x.png */; };
 		BFA3A2C5193A566F00C1BB7D /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFA3A2C4193A566F00C1BB7D /* logo@2x.png */; };
+		BFA3A2C8193AE81100C1BB7D /* WorldViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFA3A2C7193AE81100C1BB7D /* WorldViewController.m */; };
+		BFA3A2CB193AF4D900C1BB7D /* completeLevel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFA3A2C9193AF4D900C1BB7D /* completeLevel@2x.png */; };
+		BFA3A2CC193AF4D900C1BB7D /* incompleteLevel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFA3A2CA193AF4D900C1BB7D /* incompleteLevel@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -166,6 +169,10 @@
 		BFA3A2BA1931401700C1BB7D /* ReflectorArrowTtRRed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReflectorArrowTtRRed@2x.png"; sourceTree = "<group>"; };
 		BFA3A2BB1931401700C1BB7D /* ReflectorArrowTtRYellow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReflectorArrowTtRYellow@2x.png"; sourceTree = "<group>"; };
 		BFA3A2C4193A566F00C1BB7D /* logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@2x.png"; sourceTree = "<group>"; };
+		BFA3A2C6193AE81100C1BB7D /* WorldViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorldViewController.h; sourceTree = "<group>"; };
+		BFA3A2C7193AE81100C1BB7D /* WorldViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorldViewController.m; sourceTree = "<group>"; };
+		BFA3A2C9193AF4D900C1BB7D /* completeLevel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "completeLevel@2x.png"; sourceTree = "<group>"; };
+		BFA3A2CA193AF4D900C1BB7D /* incompleteLevel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "incompleteLevel@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -259,6 +266,8 @@
 				BF0D4BCE1929379100AACB5A /* LineInfo.m */,
 				BF0D4BD21929429E00AACB5A /* LinePiece.h */,
 				BF0D4BD31929429E00AACB5A /* LinePiece.m */,
+				BFA3A2C6193AE81100C1BB7D /* WorldViewController.h */,
+				BFA3A2C7193AE81100C1BB7D /* WorldViewController.m */,
 			);
 			path = "Color Match";
 			sourceTree = "<group>";
@@ -295,6 +304,8 @@
 		AF2C225A1874B95000082561 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				BFA3A2C9193AF4D900C1BB7D /* completeLevel@2x.png */,
+				BFA3A2CA193AF4D900C1BB7D /* incompleteLevel@2x.png */,
 				BFA3A2C4193A566F00C1BB7D /* logo@2x.png */,
 				BFA3A2B61931401700C1BB7D /* ReflectorArrowLtDBlue@2x.png */,
 				BFA3A2B71931401700C1BB7D /* ReflectorArrowLtDRed@2x.png */,
@@ -426,8 +437,10 @@
 				AFADA2311877D20D00FADA22 /* Yellow.png in Resources */,
 				AFADA2301877D20D00FADA22 /* WhiteSelected.png in Resources */,
 				AFADA2261877D20D00FADA22 /* ButtonBar.png in Resources */,
+				BFA3A2CC193AF4D900C1BB7D /* incompleteLevel@2x.png in Resources */,
 				AFADA2241877D20D00FADA22 /* Blue.png in Resources */,
 				BFA3A2B5192D899D00C1BB7D /* ReflectorArrowTtR@2x.png in Resources */,
+				BFA3A2CB193AF4D900C1BB7D /* completeLevel@2x.png in Resources */,
 				AFADA22D1877D20D00FADA22 /* Red.png in Resources */,
 				AFADA22B1877D20D00FADA22 /* FilledCircleYellow.png in Resources */,
 				BFA3A2C5193A566F00C1BB7D /* logo@2x.png in Resources */,
@@ -480,6 +493,7 @@
 				AFB896881881E2E6003FAEF4 /* CommonUtils.m in Sources */,
 				AFB8969618823E6E003FAEF4 /* MainUINavigationController.m in Sources */,
 				BF0D4BCF1929379100AACB5A /* LineInfo.m in Sources */,
+				BFA3A2C8193AE81100C1BB7D /* WorldViewController.m in Sources */,
 				AF2C22331874B8B800082561 /* CMAppDelegate.m in Sources */,
 				BF0D4BCC1921DEE700AACB5A /* ConnectorLines.m in Sources */,
 				BF6304391895F231002F3C9E /* ColorCell.m in Sources */,

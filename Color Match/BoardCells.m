@@ -55,6 +55,8 @@
     {
         [self addReflectorMechanic];
     }
+    
+    [self logBoardCellState];
 }
 
 - (void)addReflectorMechanic
@@ -160,16 +162,26 @@
         // Replace with special cell
         [row replaceObjectAtIndex:randomCol withObject:[NSNumber numberWithInt:reflectorType]];
         i++;
-            
-        // Logging
-        NSString *reflector = reflectorDirection == 1 ?
-                @"ReflectorLeftToDown" : @"ReflectorTopToRight";
-        NSMutableString *string = [[NSMutableString alloc] init];
-        [string appendString:@"Added reflector cell of type "];
-        [string appendString:reflector];
-        [string appendString:[NSString stringWithFormat: @" to cell %d,%d", randomRow, randomCol]];
-        NSLog(@"%@", string);
     }
+}
+
+- (void)logBoardCellState
+{
+    NSMutableString *string = [[NSMutableString alloc] init];
+    [string appendString:@"Board cells state:\n "];
+    for (int i=0; i<self.colorCellSections.count; i++)
+    {
+        NSMutableArray *row = [self.colorCellSections objectAtIndex:i];
+        for (int j=0; j<self.colorCellSections.count; j++)
+        {
+            NSNumber *cellType = [row objectAtIndex:j];
+            [string appendString:[NSString stringWithFormat: @"%d", cellType.intValue]];
+        }
+        
+        [string appendString:@"\n "];
+    }
+    
+    [CommonUtils Log:string];
 }
 
 // Returns true if at given row, col, there is a connection from up top
