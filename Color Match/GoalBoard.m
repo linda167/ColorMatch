@@ -172,6 +172,7 @@
     // Make sure all colors are represented on the board
     if (!hasAllColors)
     {
+        [CommonUtils Log:[NSMutableString stringWithString:@"Not all colors are represented on the board."]];
         return false;
     }
     
@@ -179,6 +180,7 @@
     if (!hasSpecialCells &&
         hasWhiteInResult)
     {
+        [CommonUtils Log:[NSMutableString stringWithString:@"Difficulty check failed, white found in result with no special cells."]];
         return false;
     }
     
@@ -208,6 +210,7 @@
                         if (sameColorConsecutiveCount > maxConsecutiveCountAllowed)
                         {
                             // Too many same color found consecutively
+                            [CommonUtils Log:[NSMutableString stringWithString:@"Difficulty check failed, too many same color found consecutively horizontally."]];
                             return false;
                         }
                     }
@@ -242,6 +245,7 @@
                         if (sameColorConsecutiveCount > maxConsecutiveCountAllowed)
                         {
                             // Too many same color found consecutively
+                            [CommonUtils Log:[NSMutableString stringWithString:@"Difficulty check failed, too many same color found consecutively vertically."]];
                             return false;
                         }
                     }
