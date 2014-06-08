@@ -34,17 +34,17 @@
     if ([[segue identifier] isEqualToString:@"SizeThreeSegue"])
     {
         // Same game size to 3x3
-        [destinationController SetGameSize:3];
+        [destinationController SetParametersForNewGame:3 worldId:0 levelId:0];
     }
     else if ([[segue identifier] isEqualToString:@"SizeFourSegue"])
     {
         // Same game size to 4x4
-        [destinationController SetGameSize:4];
+        [destinationController SetParametersForNewGame:4 worldId:0 levelId:0];
     }
     else if ([[segue identifier] isEqualToString:@"SizeFiveSegue"])
     {
         // Same game size to 5x5
-        [destinationController SetGameSize:5];
+        [destinationController SetParametersForNewGame:5 worldId:0 levelId:0];
     }
 }
 

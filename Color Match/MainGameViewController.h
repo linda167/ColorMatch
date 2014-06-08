@@ -11,7 +11,7 @@
 @interface MainGameViewController : UIViewController <UIAlertViewDelegate>
 - (IBAction)ColorButtonPressed:(id)sender;
 - (IBAction)GridButtonPressed:(id)sender;
-- (void)SetGameSize:(int)size;
+- (void)SetParametersForNewGame:(int)size worldId:(int)worldId levelId:(int)levelId;
 
 @property (weak, nonatomic) IBOutlet UIView *GridContainerView;
 @property (weak, nonatomic) IBOutlet UIView *GoalContainerView;
@@ -21,5 +21,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *whiteButton;
 @property (weak, nonatomic) IBOutlet UILabel *TimerLabel;
 @property (weak, nonatomic) IBOutlet UILabel *MovesLabel;
+@property (weak, nonatomic) IBOutlet UILabel *LevelNumberLabel;
+@property (weak, nonatomic) IBOutlet UILabel *LevelLabel;
 
 @end

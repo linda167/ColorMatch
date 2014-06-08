@@ -290,7 +290,23 @@
     return true;
 }
 
-- (void)generateNewGoalBoardStates
+- (void)generateNewGoalBoardStates:(int)worldId levelId:(int)levelId
+{
+    if (worldId == 0 && levelId == 0)
+    {
+        // World 0-0 means random board
+        [self generateRandomGoalBoardStates];
+    }
+    else
+    {
+        [self getBoardStatesForLevel:worldId levelId:levelId];
+        
+        // Update goal cell
+        [self updateAllColorCells];
+    }
+}
+
+- (void)generateRandomGoalBoardStates
 {
     do
     {
@@ -304,6 +320,110 @@
         [self updateAllColorCells];
     }
     while ([self checkGoalSufficientDifficulty] == false);
+}
+
+- (void)getBoardStatesForLevel:(int)worldId levelId:(int)levelId
+{
+    if (worldId == 1 && levelId == 1)
+    {
+        self.topColorsState = [NSMutableArray arrayWithObjects:@"2", @"3", @"1", nil];
+        self.leftColorsState = [NSMutableArray arrayWithObjects:@"3", @"1", @"2", nil];
+    }
+    else if (worldId == 1 && levelId == 2)
+    {
+        self.topColorsState = [NSMutableArray arrayWithObjects:@"1", @"0", @"3", nil];
+        self.leftColorsState = [NSMutableArray arrayWithObjects:@"1", @"2", @"3", nil];
+    }
+    else if (worldId == 1 && levelId == 3)
+    {
+        self.topColorsState = [NSMutableArray arrayWithObjects:@"2", @"1", @"3", nil];
+        self.leftColorsState = [NSMutableArray arrayWithObjects:@"2", @"3", @"1", nil];
+    }
+    else if (worldId == 1 && levelId == 4)
+    {
+        self.topColorsState = [NSMutableArray arrayWithObjects:@"3", @"1", @"2", nil];
+        self.leftColorsState = [NSMutableArray arrayWithObjects:@"0", @"3", @"2", nil];
+    }
+    else if (worldId == 1 && levelId == 5)
+    {
+        self.topColorsState = [NSMutableArray arrayWithObjects:@"3", @"2", @"0", nil];
+        self.leftColorsState = [NSMutableArray arrayWithObjects:@"2", @"1", @"3", nil];
+    }
+    else if (worldId == 1 && levelId == 6)
+    {
+        self.topColorsState = [NSMutableArray arrayWithObjects:@"3", @"1", @"1", @"2", nil];
+        self.leftColorsState = [NSMutableArray arrayWithObjects:@"2", @"3", @"1", @"3", nil];
+    }
+    else if (worldId == 1 && levelId == 7)
+    {
+        self.topColorsState = [NSMutableArray arrayWithObjects:@"1", @"2", @"3", @"2", nil];
+        self.leftColorsState = [NSMutableArray arrayWithObjects:@"3", @"1", @"0", @"2", nil];
+    }
+    else if (worldId == 1 && levelId == 8)
+    {
+        self.topColorsState = [NSMutableArray arrayWithObjects:@"1", @"2", @"3", @"0", nil];
+        self.leftColorsState = [NSMutableArray arrayWithObjects:@"1", @"2", @"3", @"2", nil];
+    }
+    else if (worldId == 1 && levelId == 9)
+    {
+        self.topColorsState = [NSMutableArray arrayWithObjects:@"2", @"3", @"2", @"1", nil];
+        self.leftColorsState = [NSMutableArray arrayWithObjects:@"1", @"3", @"2", @"1", nil];
+    }
+    else if (worldId == 1 && levelId == 10)
+    {
+        self.topColorsState = [NSMutableArray arrayWithObjects:@"3", @"0", @"2", @"1", nil];
+        self.leftColorsState = [NSMutableArray arrayWithObjects:@"2", @"1", @"3", @"1", nil];
+    }
+    else if (worldId == 1 && levelId == 11)
+    {
+        self.topColorsState = [NSMutableArray arrayWithObjects:@"3", @"1", @"1", @"2", @"3", nil];
+        self.leftColorsState = [NSMutableArray arrayWithObjects:@"2", @"1", @"3", @"2", @"3", nil];
+    }
+    else if (worldId == 1 && levelId == 12)
+    {
+        self.topColorsState = [NSMutableArray arrayWithObjects:@"1", @"2", @"3", @"3", @"2", nil];
+        self.leftColorsState = [NSMutableArray arrayWithObjects:@"1", @"2", @"3", @"2", @"1", nil];
+    }
+    else if (worldId == 1 && levelId == 13)
+    {
+        self.topColorsState = [NSMutableArray arrayWithObjects:@"2", @"3", @"2", @"1", @"3", nil];
+        self.leftColorsState = [NSMutableArray arrayWithObjects:@"3", @"1", @"2", @"0", @"1", nil];
+    }
+    else if (worldId == 1 && levelId == 14)
+    {
+        self.topColorsState = [NSMutableArray arrayWithObjects:@"2", @"3", @"1", @"2", @"0", nil];
+        self.leftColorsState = [NSMutableArray arrayWithObjects:@"2", @"1", @"3", @"2", @"3", nil];
+    }
+    else if (worldId == 1 && levelId == 15)
+    {
+        self.topColorsState = [NSMutableArray arrayWithObjects:@"3", @"1", @"2", @"0", @"1", nil];
+        self.leftColorsState = [NSMutableArray arrayWithObjects:@"1", @"3", @"2", @"1", @"3", nil];
+    }
+    else if (worldId == 1 && levelId == 16)
+    {
+        self.topColorsState = [NSMutableArray arrayWithObjects:@"1", @"2", @"1", @"2", @"3", nil];
+        self.leftColorsState = [NSMutableArray arrayWithObjects:@"0", @"3", @"1", @"2", @"3", nil];
+    }
+    else if (worldId == 1 && levelId == 17)
+    {
+        self.topColorsState = [NSMutableArray arrayWithObjects:@"3", @"0", @"3", @"1", @"2", nil];
+        self.leftColorsState = [NSMutableArray arrayWithObjects:@"3", @"2", @"1", @"2", @"2", nil];
+    }
+    else if (worldId == 1 && levelId == 18)
+    {
+        self.topColorsState = [NSMutableArray arrayWithObjects:@"1", @"2", @"3", @"1", @"3", nil];
+        self.leftColorsState = [NSMutableArray arrayWithObjects:@"1", @"3", @"2", @"1", @"2", nil];
+    }
+    else if (worldId == 1 && levelId == 19)
+    {
+        self.topColorsState = [NSMutableArray arrayWithObjects:@"3", @"2", @"0", @"1", @"2", nil];
+        self.leftColorsState = [NSMutableArray arrayWithObjects:@"2", @"1", @"3", @"2", @"3", nil];
+    }
+    else if (worldId == 1 && levelId == 20)
+    {
+        self.topColorsState = [NSMutableArray arrayWithObjects:@"2", @"3", @"1", @"2", @"3", nil];
+        self.leftColorsState = [NSMutableArray arrayWithObjects:@"1", @"3", @"1", @"2", @"1", nil];
+    }
 }
 
 - (void)removeExistingGoalColorsState

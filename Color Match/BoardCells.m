@@ -46,7 +46,10 @@
         
         [self.colorCellSections addObject:row];
     }
-    
+}
+
+- (void)generateRandomCellTypes
+{
     // TODO: Need to modify this to add additional mechanics
     int random = arc4random()%2;
     bool hasReflectorMechanic = random == 1;

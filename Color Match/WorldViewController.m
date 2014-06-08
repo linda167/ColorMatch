@@ -8,9 +8,13 @@
 
 #import "WorldViewController.h"
 #import "MainGameViewController.h"
+#import "LevelSelectButton.h"
+#import "UserData.h"
 
 @interface WorldViewController ()
-
+@property bool isFirstTimeViewCreation;
+@property NSMutableArray *levelButtons;
+@property int worldId;
 @end
 
 @implementation WorldViewController
@@ -28,8 +32,24 @@
 {
     [super viewDidLoad];
     
+    self.levelButtons = [[NSMutableArray alloc] init];
+    self.isFirstTimeViewCreation = true;
+    
     // Do any additional setup after loading the view.
-    [self renderLevelsDisplay:1];
+    self.worldId = 1;
+    [self renderLevelsDisplay];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    if (!self.isFirstTimeViewCreation)
+    {
+        [self updateProgression];
+    }
+    
+    self.isFirstTimeViewCreation = false;
 }
 
 - (void)didReceiveMemoryWarning
@@ -38,7 +58,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)renderLevelsDisplay:(int)worldId
+- (void)renderLevelsDisplay
 {
     int rowsToRender = 5;
     int colsToRender = 4;
@@ -53,24 +73,31 @@
     int widthBetweenCols = 60;
     for (int i=0; i<totalLevelsToRender; i++)
     {
-        // Add level image
-        UIButton *levelButton = [[UIButton alloc] initWithFrame:CGRectMake(xOffset, yOffset, size, size)];
-        [levelButton setImage:[UIImage imageNamed:@"incompleteLevel@2x.png"] forState:UIControlStateNormal];
+        // Figure out if level is complete
+        int levelId = i+1;
+        bool isLevelComplete = [[UserData sharedUserData] getLevelCompleteState:self.worldId levelId:levelId];
+        UIImage *buttonImage = [self getImageForLevel:isLevelComplete];
+        
+        // Add level button
+        LevelSelectButton *levelButton = [[LevelSelectButton alloc] initWithFrame:CGRectMake(xOffset, yOffset, size, size)];
+        [levelButton setImage:buttonImage forState:UIControlStateNormal];
         [levelButton addTarget:self action:@selector(levelButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        levelButton.worldId = self.worldId;
+        levelButton.levelId = levelId;
+        levelButton.isComplete = isLevelComplete;
+        [self.levelButtons addObject:levelButton];
         [self.containerView addSubview:levelButton];
         
         // Add level text
         UILabel *levelName = [[UILabel alloc] initWithFrame:CGRectMake(xOffset+20, yOffset+52, size, 25)];
         levelName.font = [UIFont fontWithName:@"Futura-Medium" size:12.0];
-        NSMutableString *levelString = [[NSMutableString alloc] init];
-        [levelString appendString:[NSString stringWithFormat: @"%d-", worldId]];
-        [levelString appendString:[NSString stringWithFormat: @"%d", i+1]];
+        NSMutableString *levelString = [UserData getLevelString:self.worldId levelId:levelId];
         levelName.text = levelString;
         [self.containerView addSubview:levelName];
         
         if ((i+1)%rowsToRender == 0)
         {
-            // Time to render new line
+            // Time to render new line of buttons
             xOffset = xOffsetInitial;
             yOffset += heightBetweenRows;
         }
@@ -80,22 +107,59 @@
         }
     }
 }
-         
-- (IBAction)levelButtonPressed:(id)sender
+
+- (UIImage*)getImageForLevel:(bool)isComplete
+{
+    return isComplete ?
+        [UIImage imageNamed:@"completeLevel@2x.png"] :
+        [UIImage imageNamed:@"incompleteLevel@2x.png"];
+}
+
+- (void)updateProgression
 {
     // TODO: lindach
-    [self performSegueWithIdentifier:@"LoadLevel" sender:self];
+    for (int i = 0; i < self.levelButtons.count; i++)
+    {
+        LevelSelectButton *levelButton = [self.levelButtons objectAtIndex:i];
+        int levelId = i+1;
+        
+        bool isLevelComplete = [[UserData sharedUserData] getLevelCompleteState:self.worldId levelId:levelId];
+        if (isLevelComplete != levelButton.isComplete)
+        {
+            UIImage *buttonImage = [self getImageForLevel:isLevelComplete];
+            levelButton.imageView.image = buttonImage;
+            levelButton.isComplete = isLevelComplete;
+        }
+    }
+}
+
+- (IBAction)levelButtonPressed:(id)sender
+{
+    [self performSegueWithIdentifier:@"LoadLevel" sender:sender];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     MainGameViewController *destinationController = segue.destinationViewController;
+    LevelSelectButton *levelSelectButton = (LevelSelectButton*)sender;
     
     if ([[segue identifier] isEqualToString:@"LoadLevel"])
     {
-        // TODO: lindach
-        [destinationController SetGameSize:5];
+        int worldId = levelSelectButton.worldId;
+        int levelId = levelSelectButton.levelId;
+        int gameSize = [self getGameSizeForWorld:worldId levelId:levelId];
+        [destinationController SetParametersForNewGame:gameSize worldId:levelSelectButton.worldId levelId:levelSelectButton.levelId];
     }
+}
+
+- (int)getGameSizeForWorld:(int)worldId levelId:(int)levelId
+{
+    if (levelId <= 5)
+        return 3;
+    else if (levelId <= 10)
+        return 4;
+    else
+        return 5;
 }
 
 /*

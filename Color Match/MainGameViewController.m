@@ -11,6 +11,7 @@
 #import "GoalBoard.h"
 #import "UserColorBoard.h"
 #import "BoardCells.h"
+#import "UserData.h"
 
 @interface MainGameViewController ()
 
@@ -22,6 +23,8 @@
 @property BoardCells *boardCells;
 @property GoalBoard *goalBoard;
 @property UserColorBoard *userColorBoard;
+@property int worldId;
+@property int levelId;
 @end
 
 @implementation MainGameViewController
@@ -35,9 +38,11 @@
     [self startNewGame];
 }
 
-- (void)SetGameSize:(int)size
+- (void)SetParametersForNewGame:(int)size worldId:(int)worldId levelId:(int)levelId
 {
     _boardParameters = [self getBoardParametersForSize:size];
+    _worldId = worldId;
+    _levelId = levelId;
 }
 
 - (void)startNewGame
@@ -46,7 +51,7 @@
     [self renderNewBoard];
     
     // Generate new random goal state
-    [_goalBoard generateNewGoalBoardStates];
+    [_goalBoard generateNewGoalBoardStates:self.worldId levelId:self.levelId];
     
     // Start the timer
     [self startTimer];
@@ -59,13 +64,40 @@
 - (void)renderNewBoard
 {
     // Init board cell types
-    _boardCells = [[BoardCells alloc] initWithParameters:(_boardParameters)];
+    [self loadBoardCellTypes];
     
     // Init goal color cells
     _goalBoard = [[GoalBoard alloc] initWithParameters:(_boardParameters) containerView:_GoalContainerView boardCells:_boardCells];
 
     // Init color cell sections
     _userColorBoard = [[UserColorBoard alloc] initWithParameters:(_boardParameters) containerView:_GridContainerView viewController:self boardCells:_boardCells];
+    
+    // Set the level name
+    if (self.worldId == 0 && self.levelId == 0)
+    {
+        [self.LevelNumberLabel removeFromSuperview];
+        [self.LevelLabel removeFromSuperview];
+    }
+    else
+    {
+        NSMutableString *levelString = [UserData getLevelString:self.worldId levelId:self.levelId];
+        self.LevelNumberLabel.text = levelString;
+    }
+}
+
+-(void)loadBoardCellTypes
+{
+    _boardCells = [[BoardCells alloc] initWithParameters:(_boardParameters)];
+    
+    if (self.worldId == 0 && self.levelId == 0)
+    {
+        // World 0-0 means random board
+        [_boardCells generateRandomCellTypes];
+    }
+    else
+    {
+        // TODO: Need to load board cell types for world 2+
+    }
 }
 
 -(BoardParameters)getBoardParametersForSize:(int)size
@@ -246,6 +278,9 @@
     // Stop the timer
     [self.stopWatchTimer invalidate];
     
+    // Store level complete progress
+    [self storeLevelCompleteProgress];
+    
     // Show victory message
     NSString *victoryMessage = [[[@"Nicely done! \n\nMoves: " stringByAppendingString:self.MovesLabel.text] stringByAppendingString:@"\nTime taken: "]
         stringByAppendingString:self.TimerLabel.text];
@@ -254,6 +289,11 @@
         otherButtonTitles:nil];
     [alert addButtonWithTitle:@"Next Level"];
     [alert show];
+}
+
+-(void)storeLevelCompleteProgress
+{
+    [[UserData sharedUserData] storeLevelComplete:self.worldId levelId:self.levelId];
 }
 
 - (IBAction)GridButtonPressed:(id)sender
@@ -328,9 +368,29 @@
     [self resetActionBar];
 
     // Re-generate board cells
-    self.boardCells = [[BoardCells alloc] initWithParameters:(self.boardParameters)];
+    [self loadBoardCellTypes];
+    
+    [self getNextLevelId];
     
     [self startNewGame];
+}
+
+- (void)getNextLevelId
+{
+    if (self.worldId == 0 && self.levelId == 0)
+    {
+        // This is a randomly generated board, no need to change levelId
+        return;
+    }
+    
+    if (self.levelId < 20)
+    {
+        self.levelId++;
+    }
+    else
+    {
+        // TODO: transition to next world
+    }
 }
 
 - (void)removeExistingBoard

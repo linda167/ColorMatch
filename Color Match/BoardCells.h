@@ -14,5 +14,6 @@
 
 -(id)initWithParameters: (BoardParameters)boardParameters;
 -(void)logBoardCellState;
+-(void)generateRandomCellTypes;
 
 @end

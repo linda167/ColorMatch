@@ -16,7 +16,7 @@
 
 -(id)initWithParameters:(BoardParameters)boardParameters containerView:(UIView*)containerView boardCells:(BoardCells*)boardCells;
 -(void)removeExistingGoalColorCells;
--(void)generateNewGoalBoardStates;
+-(void)generateNewGoalBoardStates:(int)worldId levelId:(int)levelId;
 -(void)removeExistingGoalColorsState;
 
 @end
