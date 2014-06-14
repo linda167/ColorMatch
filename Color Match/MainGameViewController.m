@@ -272,12 +272,22 @@
     // Store level complete progress
     [self storeLevelCompleteProgress];
     
-    // TODO: lindach: Add level number
+    // Create the title string
+    NSString *levelString = [[NSString alloc] init];
+    if (![LevelsManager IsRandomLevel:self.worldId levelId:self.levelId])
+    {
+        levelString = [[UserData getLevelString:self.worldId levelId:self.levelId] stringByAppendingString:@" "];
+    }
+    NSString *titleMessage = [[@"Level "
+        stringByAppendingString:levelString]
+        stringByAppendingString:@"Complete: "];
     
     // Show victory message
     NSString *victoryMessage = [[[@"Nicely done! \n\nMoves: " stringByAppendingString:self.MovesLabel.text] stringByAppendingString:@"\nTime taken: "]
         stringByAppendingString:self.TimerLabel.text];
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Level Complete"                                                        message:victoryMessage
+    UIAlertView *alert = [[UIAlertView alloc]
+        initWithTitle:titleMessage
+        message:victoryMessage
         delegate: self cancelButtonTitle:@"Cancel"
         otherButtonTitles:nil];
     [alert addButtonWithTitle:@"Next Level"];
