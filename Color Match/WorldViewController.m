@@ -10,6 +10,7 @@
 #import "MainGameViewController.h"
 #import "LevelSelectButton.h"
 #import "UserData.h"
+#import "LevelsManager.h"
 
 @interface WorldViewController ()
 @property bool isFirstTimeViewCreation;
@@ -60,8 +61,18 @@
 
 - (void)renderLevelsDisplay
 {
-    int rowsToRender = 5;
-    int colsToRender = 4;
+    int rowsToRender = 0;
+    int colsToRender = 0;
+
+    if (self.worldId == 1)
+    {
+        rowsToRender = 5;
+        colsToRender = 2;
+    }
+    else
+    {
+        // TODO: add for additional worlds
+    }
     
     int totalLevelsToRender = rowsToRender * colsToRender;
     int xOffsetInitial = 0;
@@ -117,7 +128,6 @@
 
 - (void)updateProgression
 {
-    // TODO: lindach
     for (int i = 0; i < self.levelButtons.count; i++)
     {
         LevelSelectButton *levelButton = [self.levelButtons objectAtIndex:i];
@@ -147,19 +157,9 @@
     {
         int worldId = levelSelectButton.worldId;
         int levelId = levelSelectButton.levelId;
-        int gameSize = [self getGameSizeForWorld:worldId levelId:levelId];
+        int gameSize = [LevelsManager GetGameSizeForWorld:worldId levelId:levelId];
         [destinationController SetParametersForNewGame:gameSize worldId:levelSelectButton.worldId levelId:levelSelectButton.levelId];
     }
-}
-
-- (int)getGameSizeForWorld:(int)worldId levelId:(int)levelId
-{
-    if (levelId <= 5)
-        return 3;
-    else if (levelId <= 10)
-        return 4;
-    else
-        return 5;
 }
 
 /*

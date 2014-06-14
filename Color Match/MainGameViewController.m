@@ -12,6 +12,7 @@
 #import "UserColorBoard.h"
 #import "BoardCells.h"
 #import "UserData.h"
+#import "LevelsManager.h"
 
 @interface MainGameViewController ()
 
@@ -370,12 +371,12 @@
     // Re-generate board cells
     [self loadBoardCellTypes];
     
-    [self getNextLevelId];
+    [self getNextLevelParameters];
     
     [self startNewGame];
 }
 
-- (void)getNextLevelId
+- (void)getNextLevelParameters
 {
     if (self.worldId == 0 && self.levelId == 0)
     {
@@ -383,7 +384,7 @@
         return;
     }
     
-    if (self.levelId < 20)
+    if (self.levelId < 10)
     {
         self.levelId++;
     }
@@ -391,6 +392,9 @@
     {
         // TODO: transition to next world
     }
+    
+    int gameSize = [LevelsManager GetGameSizeForWorld:self.worldId levelId:self.levelId];
+    _boardParameters = [self getBoardParametersForSize:gameSize];
 }
 
 - (void)removeExistingBoard
