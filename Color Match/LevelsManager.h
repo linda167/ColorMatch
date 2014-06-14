@@ -11,5 +11,9 @@
 @interface LevelsManager : NSObject
 
 +(int) GetGameSizeForWorld:(int)worldId levelId:(int)levelId;
++(int) GetLevelCountForWorld:(int)worldId;
++(int) IsRandomLevel:(int)worldId levelId:(int)levelId;
++(void)GetBoardStatesForLevel:(int)worldId levelId:(int)levelId topColorsState:(NSMutableArray*)topColorsState leftColorsState:(NSMutableArray*)leftColorsState;
++(BoardCells*)LoadBoardCellTypes:(int)worldId levelId:(int)levelId boardParameters:(BoardParameters)boardParameters;
 
 @end

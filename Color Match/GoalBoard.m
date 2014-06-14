@@ -9,6 +9,7 @@
 #import "GoalBoard.h"
 #import "ColorCell.h"
 #import "BoardCells.h"
+#import "LevelsManager.h"
 
 @interface GoalBoard ()
 @end
@@ -23,6 +24,8 @@
         self.boardParameters = boardParameters;
         self.containerView = containerView;
         self.boardCells = boardCells;
+        self.topColorsState = [[NSMutableArray alloc] init];
+        self.leftColorsState = [[NSMutableArray alloc] init];
         
         [self initGoalColorCells];
     }
@@ -80,9 +83,6 @@
 
 -(void)randomGenGoalStates
 {
-    self.topColorsState = [[NSMutableArray alloc] init];
-    self.leftColorsState = [[NSMutableArray alloc] init];
-    
     for (int i=0; i<self.boardParameters.gridSize; i++)
     {
         int random = arc4random()%4;
@@ -292,14 +292,14 @@
 
 - (void)generateNewGoalBoardStates:(int)worldId levelId:(int)levelId
 {
-    if (worldId == 0 && levelId == 0)
+    if ([LevelsManager IsRandomLevel:worldId levelId:levelId])
     {
-        // World 0-0 means random board
+        // Random board
         [self generateRandomGoalBoardStates];
     }
     else
     {
-        [self getBoardStatesForLevel:worldId levelId:levelId];
+        [LevelsManager GetBoardStatesForLevel:worldId levelId:levelId topColorsState:self.topColorsState leftColorsState:self.leftColorsState];
         
         // Update goal cell
         [self updateAllColorCells];
@@ -320,60 +320,6 @@
         [self updateAllColorCells];
     }
     while ([self checkGoalSufficientDifficulty] == false);
-}
-
-- (void)getBoardStatesForLevel:(int)worldId levelId:(int)levelId
-{
-    if (worldId == 1 && levelId == 1)
-    {
-        self.topColorsState = [NSMutableArray arrayWithObjects:@"2", @"3", @"1", nil];
-        self.leftColorsState = [NSMutableArray arrayWithObjects:@"3", @"1", @"2", nil];
-    }
-    else if (worldId == 1 && levelId == 2)
-    {
-        self.topColorsState = [NSMutableArray arrayWithObjects:@"1", @"0", @"3", nil];
-        self.leftColorsState = [NSMutableArray arrayWithObjects:@"1", @"2", @"3", nil];
-    }
-    else if (worldId == 1 && levelId == 3)
-    {
-        self.topColorsState = [NSMutableArray arrayWithObjects:@"3", @"1", @"1", @"2", nil];
-        self.leftColorsState = [NSMutableArray arrayWithObjects:@"2", @"3", @"1", @"3", nil];
-    }
-    else if (worldId == 1 && levelId == 4)
-    {
-        self.topColorsState = [NSMutableArray arrayWithObjects:@"1", @"2", @"3", @"2", nil];
-        self.leftColorsState = [NSMutableArray arrayWithObjects:@"3", @"1", @"0", @"2", nil];
-    }
-    else if (worldId == 1 && levelId == 5)
-    {
-        self.topColorsState = [NSMutableArray arrayWithObjects:@"1", @"2", @"3", @"0", nil];
-        self.leftColorsState = [NSMutableArray arrayWithObjects:@"1", @"2", @"3", @"2", nil];
-    }
-    else if (worldId == 1 && levelId == 6)
-    {
-        self.topColorsState = [NSMutableArray arrayWithObjects:@"3", @"1", @"1", @"2", @"3", nil];
-        self.leftColorsState = [NSMutableArray arrayWithObjects:@"2", @"1", @"3", @"2", @"3", nil];
-    }
-    else if (worldId == 1 && levelId == 7)
-    {
-        self.topColorsState = [NSMutableArray arrayWithObjects:@"1", @"2", @"3", @"3", @"2", nil];
-        self.leftColorsState = [NSMutableArray arrayWithObjects:@"1", @"2", @"3", @"2", @"1", nil];
-    }
-    else if (worldId == 1 && levelId == 8)
-    {
-        self.topColorsState = [NSMutableArray arrayWithObjects:@"2", @"3", @"2", @"1", @"3", nil];
-        self.leftColorsState = [NSMutableArray arrayWithObjects:@"3", @"1", @"2", @"0", @"1", nil];
-    }
-    else if (worldId == 1 && levelId == 9)
-    {
-        self.topColorsState = [NSMutableArray arrayWithObjects:@"2", @"3", @"1", @"2", @"0", nil];
-        self.leftColorsState = [NSMutableArray arrayWithObjects:@"2", @"1", @"3", @"2", @"3", nil];
-    }
-    else if (worldId == 1 && levelId == 10)
-    {
-        self.topColorsState = [NSMutableArray arrayWithObjects:@"3", @"1", @"2", @"0", @"1", nil];
-        self.leftColorsState = [NSMutableArray arrayWithObjects:@"1", @"3", @"2", @"1", @"3", nil];
-    }
 }
 
 - (void)removeExistingGoalColorsState

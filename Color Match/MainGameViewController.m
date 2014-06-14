@@ -74,7 +74,7 @@
     _userColorBoard = [[UserColorBoard alloc] initWithParameters:(_boardParameters) containerView:_GridContainerView viewController:self boardCells:_boardCells];
     
     // Set the level name
-    if (self.worldId == 0 && self.levelId == 0)
+    if ([LevelsManager IsRandomLevel:self.worldId levelId:self.levelId])
     {
         [self.LevelNumberLabel removeFromSuperview];
         [self.LevelLabel removeFromSuperview];
@@ -88,17 +88,7 @@
 
 -(void)loadBoardCellTypes
 {
-    _boardCells = [[BoardCells alloc] initWithParameters:(_boardParameters)];
-    
-    if (self.worldId == 0 && self.levelId == 0)
-    {
-        // World 0-0 means random board
-        [_boardCells generateRandomCellTypes];
-    }
-    else
-    {
-        // TODO: Need to load board cell types for world 2+
-    }
+    _boardCells = [LevelsManager LoadBoardCellTypes:self.worldId levelId:self.levelId boardParameters:_boardParameters];
 }
 
 -(BoardParameters)getBoardParametersForSize:(int)size
@@ -384,7 +374,7 @@
         return;
     }
     
-    if (self.levelId < 10)
+    if (self.levelId < [LevelsManager GetLevelCountForWorld:self.worldId])
     {
         self.levelId++;
     }
