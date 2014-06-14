@@ -272,6 +272,8 @@
     // Store level complete progress
     [self storeLevelCompleteProgress];
     
+    // TODO: lindach: Add level number
+    
     // Show victory message
     NSString *victoryMessage = [[[@"Nicely done! \n\nMoves: " stringByAppendingString:self.MovesLabel.text] stringByAppendingString:@"\nTime taken: "]
         stringByAppendingString:self.TimerLabel.text];

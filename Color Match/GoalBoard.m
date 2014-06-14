@@ -83,6 +83,9 @@
 
 -(void)randomGenGoalStates
 {
+    [self.topColorsState removeAllObjects];
+    [self.leftColorsState removeAllObjects];
+    
     for (int i=0; i<self.boardParameters.gridSize; i++)
     {
         int random = arc4random()%4;
