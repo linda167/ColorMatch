@@ -64,6 +64,58 @@
     return boardCells;
 }
 
++(int)CalculateStarsEarned:(int)boardSize time:(int)time
+{
+    if (boardSize == 3)
+    {
+        if (time <= 20)
+        {
+            return 3;
+        }
+        else if (time <= 40)
+        {
+            return 2;
+        }
+        else
+        {
+            return 1;
+        }
+    }
+    else if (boardSize == 4)
+    {
+        if (time <= 30)
+        {
+            return 3;
+        }
+        else if (time <= 50)
+        {
+            return 2;
+        }
+        else
+        {
+            return 1;
+        }
+    }
+    else if (boardSize == 5)
+    {
+        if (time <= 40)
+        {
+            return 3;
+        }
+        else if (time <= 60)
+        {
+            return 2;
+        }
+        else
+        {
+            return 1;
+        }
+    }
+    
+    [NSException raise:@"Invalid board size" format:@"Invalid board size"];
+    return 1;
+}
+
 +(void)GetBoardStatesForLevel:(int)worldId levelId:(int)levelId topColorsState:(NSMutableArray*)topColorsState leftColorsState:(NSMutableArray*)leftColorsState
 {
     [topColorsState removeAllObjects];

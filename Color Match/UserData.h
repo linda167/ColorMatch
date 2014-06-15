@@ -14,7 +14,8 @@
 
 +(id)sharedUserData;
 +(NSMutableString*)getLevelString:(int)worldId levelId:(int)levelId;
--(void)storeLevelComplete:(int)worldId levelId:(int)levelId;
+-(void)storeLevelComplete:(int)worldId levelId:(int)levelId stars:(int)stars;
 -(bool)getLevelCompleteState:(int)worldId levelId:(int)levelId;
+-(void)wipeData;
 
 @end

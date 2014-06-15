@@ -63,6 +63,7 @@
 		BF874D11192B28C1001701A2 /* ReflectorLtDGoal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF874D0D192B28C1001701A2 /* ReflectorLtDGoal@2x.png */; };
 		BF874D15192B2CBB001701A2 /* ReflectorTtRGoal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF874D14192B2CBB001701A2 /* ReflectorTtRGoal@2x.png */; };
 		BF90795C194CE618000E6E58 /* LevelsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BF90795B194CE618000E6E58 /* LevelsManager.m */; };
+		BF90795F194D22B0000E6E58 /* DebugModeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF90795E194D22B0000E6E58 /* DebugModeViewController.m */; };
 		BFA3A2B4192D899D00C1BB7D /* ReflectorArrowLtD@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFA3A2B2192D899D00C1BB7D /* ReflectorArrowLtD@2x.png */; };
 		BFA3A2B5192D899D00C1BB7D /* ReflectorArrowTtR@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFA3A2B3192D899D00C1BB7D /* ReflectorArrowTtR@2x.png */; };
 		BFA3A2BC1931401700C1BB7D /* ReflectorArrowLtDBlue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFA3A2B61931401700C1BB7D /* ReflectorArrowLtDBlue@2x.png */; };
@@ -165,6 +166,8 @@
 		BF874D14192B2CBB001701A2 /* ReflectorTtRGoal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReflectorTtRGoal@2x.png"; sourceTree = "<group>"; };
 		BF90795A194CE618000E6E58 /* LevelsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelsManager.h; sourceTree = "<group>"; };
 		BF90795B194CE618000E6E58 /* LevelsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LevelsManager.m; sourceTree = "<group>"; };
+		BF90795D194D22B0000E6E58 /* DebugModeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DebugModeViewController.h; sourceTree = "<group>"; };
+		BF90795E194D22B0000E6E58 /* DebugModeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DebugModeViewController.m; sourceTree = "<group>"; };
 		BFA3A2B2192D899D00C1BB7D /* ReflectorArrowLtD@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReflectorArrowLtD@2x.png"; sourceTree = "<group>"; };
 		BFA3A2B3192D899D00C1BB7D /* ReflectorArrowTtR@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReflectorArrowTtR@2x.png"; sourceTree = "<group>"; };
 		BFA3A2B61931401700C1BB7D /* ReflectorArrowLtDBlue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReflectorArrowLtDBlue@2x.png"; sourceTree = "<group>"; };
@@ -283,6 +286,8 @@
 				BFA3A2D11944B6B900C1BB7D /* UserData.m */,
 				BF90795A194CE618000E6E58 /* LevelsManager.h */,
 				BF90795B194CE618000E6E58 /* LevelsManager.m */,
+				BF90795D194D22B0000E6E58 /* DebugModeViewController.h */,
+				BF90795E194D22B0000E6E58 /* DebugModeViewController.m */,
 			);
 			path = "Color Match";
 			sourceTree = "<group>";
@@ -519,6 +524,7 @@
 				BFA3A2CF1944386400C1BB7D /* LevelSelectButton.m in Sources */,
 				BF6304391895F231002F3C9E /* ColorCell.m in Sources */,
 				AFADA23518791E4400FADA22 /* GridColorButton.m in Sources */,
+				BF90795F194D22B0000E6E58 /* DebugModeViewController.m in Sources */,
 				AF2C222F1874B8B700082561 /* main.m in Sources */,
 				AF2C223C1874B8B800082561 /* MainGameViewController.m in Sources */,
 				BF0D4BC5192010BB00AACB5A /* BoardCells.m in Sources */,

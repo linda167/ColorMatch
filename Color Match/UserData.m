@@ -31,11 +31,19 @@
     return sharedUserData;
 }
 
--(void)storeLevelComplete:(int)worldId levelId:(int)levelId
++(NSMutableString*)getLevelString:(int)worldId levelId:(int)levelId
+{
+    NSMutableString *levelString = [[NSMutableString alloc] init];
+    [levelString appendString:[NSString stringWithFormat: @"%d-", worldId]];
+    [levelString appendString:[NSString stringWithFormat: @"%d", levelId]];
+    return  levelString;
+}
+
+-(void)storeLevelComplete:(int)worldId levelId:(int)levelId stars:(int)stars
 {
     NSMutableString *levelString = [UserData getLevelString:worldId levelId:levelId];
     
-    [self.userData setInteger:1 forKey:levelString];
+    [self.userData setInteger:stars forKey:levelString];
     [self.userData synchronize];
 }
 
@@ -43,15 +51,19 @@
 {
     NSMutableString *levelString = [UserData getLevelString:worldId levelId:levelId];
     NSInteger isComplete = [self.userData integerForKey:levelString];
-    return (int)isComplete == 1;
+    return (int)isComplete >= 1;
 }
 
-+(NSMutableString*)getLevelString:(int)worldId levelId:(int)levelId
+-(void)wipeData
 {
-    NSMutableString *levelString = [[NSMutableString alloc] init];
-    [levelString appendString:[NSString stringWithFormat: @"%d-", worldId]];
-    [levelString appendString:[NSString stringWithFormat: @"%d", levelId]];
-    return  levelString;
+    NSDictionary *dictionary = [self.userData dictionaryRepresentation];
+    
+    for (id key in dictionary)
+    {
+        [self.userData removeObjectForKey:key];
+    }
+    
+    [self.userData synchronize];
 }
 
 @end

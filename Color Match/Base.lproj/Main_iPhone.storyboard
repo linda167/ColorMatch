@@ -98,6 +98,42 @@
             </objects>
             <point key="canvasLocation" x="124" y="-40"/>
         </scene>
+        <!--Debug Mode View Controller-->
+        <scene sceneID="mOG-Zg-icq">
+            <objects>
+                <viewController id="qE1-aF-Kwa" customClass="DebugModeViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="jXv-eS-ykO">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" id="gct-yr-qAj">
+                                <rect key="frame" x="0.0" y="92" width="165" height="39"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="Reset Progress">
+                                            <attributes>
+                                                <font key="NSFont" size="18" name="Futura-Medium"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </state>
+                                <connections>
+                                    <action selector="ResetProgress:" destination="qE1-aF-Kwa" eventType="touchUpInside" id="rd5-9J-6TC"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="FkL-F7-qsW"/>
+                    <connections>
+                        <outlet property="resetProgressButton" destination="gct-yr-qAj" id="rn0-Ji-88k"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1Wd-z4-swd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-700" y="641"/>
+        </scene>
         <!--World View Controller-->
         <scene sceneID="Rkm-CB-rML">
             <objects>
@@ -315,7 +351,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l2E-c2-6at" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-665" y="-34"/>
+            <point key="canvasLocation" x="-785" y="-34"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="a0G-LU-lPF">
@@ -345,7 +381,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" id="drx-Vc-dci">
-                                <rect key="frame" x="78" y="430" width="165" height="39"/>
+                                <rect key="frame" x="78" y="434" width="165" height="39"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal">
                                     <attributedString key="attributedTitle">
@@ -376,6 +412,22 @@
                                     <segue destination="MmH-K3-vAA" kind="push" id="x2f-0g-08e"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" id="HKW-c3-399">
+                                <rect key="frame" x="266" y="533" width="54" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="Debug">
+                                            <attributes>
+                                                <font key="NSFont" size="12" name="Futura-Medium"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </state>
+                                <connections>
+                                    <segue destination="qE1-aF-Kwa" kind="push" id="m3I-mW-O8D"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -383,7 +435,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uKi-xh-kd9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-264" y="-34"/>
+            <point key="canvasLocation" x="-350" y="-34"/>
         </scene>
     </scenes>
     <resources>
@@ -400,6 +452,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="eYq-DS-mDC"/>
+        <segue reference="vdY-F1-BTr"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -26,6 +26,7 @@
 @property UserColorBoard *userColorBoard;
 @property int worldId;
 @property int levelId;
+@property NSTimeInterval timeInterval;
 @end
 
 @implementation MainGameViewController
@@ -163,15 +164,15 @@
     
     // Create elapsed time
     NSDate *currentTime = [NSDate date];
-    NSTimeInterval timeInterval = [currentTime timeIntervalSinceDate:self.startTime];
+    self.timeInterval = [currentTime timeIntervalSinceDate:self.startTime];
     
     // Check for max time
-    if (timeInterval > MAXTIME)
+    if (self.timeInterval > MAXTIME)
     {
-        timeInterval = MAXTIME;
+        self.timeInterval = MAXTIME;
     }
     
-    NSDate *timerDate = [NSDate dateWithTimeIntervalSince1970:timeInterval];
+    NSDate *timerDate = [NSDate dateWithTimeIntervalSince1970:self.timeInterval];
     
     // Create date formatter
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc ] init];
@@ -296,7 +297,9 @@
 
 -(void)storeLevelCompleteProgress
 {
-    [[UserData sharedUserData] storeLevelComplete:self.worldId levelId:self.levelId];
+    int stars = [LevelsManager CalculateStarsEarned:_boardParameters.gridSize time:self.timeInterval];
+    
+    [[UserData sharedUserData] storeLevelComplete:self.worldId levelId:self.levelId stars:stars];
 }
 
 - (IBAction)GridButtonPressed:(id)sender
