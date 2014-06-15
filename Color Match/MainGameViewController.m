@@ -284,15 +284,10 @@
         stringByAppendingString:@"Complete: "];
     
     // Show victory message
-    NSString *rainbowString = stars > 3 ? @" rainbow" : @"";
-    if (stars > 3)
-        stars = 3;
-    
-    NSString *victoryMessage = [[[[[[@"Nicely done! \n\nMoves: " stringByAppendingString:self.MovesLabel.text] stringByAppendingString:@"\nTime taken: "]
+    NSString *starsEarnedMessage = [self getStarsEarnedMessage:stars];
+    NSString *victoryMessage = [[[[@"Nicely done! \n\nMoves: " stringByAppendingString:self.MovesLabel.text] stringByAppendingString:@"\nTime taken: "]
         stringByAppendingString:self.TimerLabel.text]
-        stringByAppendingString:[NSString stringWithFormat:@"\n\nYou have earned %d", stars]]
-        stringByAppendingString:rainbowString]
-        stringByAppendingString:@" stars!"];
+        stringByAppendingString:starsEarnedMessage];
     UIAlertView *alert = [[UIAlertView alloc]
         initWithTitle:titleMessage
         message:victoryMessage
@@ -300,6 +295,28 @@
         otherButtonTitles:nil];
     [alert addButtonWithTitle:@"Next Level"];
     [alert show];
+}
+
+-(NSString*)getStarsEarnedMessage:(int)stars
+{
+    
+    NSString *starsMessage;
+    if (![LevelsManager IsRandomLevel:self.worldId levelId:self.levelId])
+    {
+        NSString *rainbowString = stars > 3 ? @" rainbow" : @"";
+        if (stars > 3)
+            stars = 3;
+        
+        starsMessage = [[[NSString stringWithFormat:@"\n\nYou have earned %d", stars]
+            stringByAppendingString:rainbowString ]
+            stringByAppendingString:@" stars!"];
+    }
+    else
+    {
+        starsMessage = @"";
+    }
+    
+    return starsMessage;
 }
 
 -(int)storeLevelCompleteProgress
