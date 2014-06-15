@@ -271,7 +271,7 @@
     [self.stopWatchTimer invalidate];
     
     // Store level complete progress
-    [self storeLevelCompleteProgress];
+    int stars = [self storeLevelCompleteProgress];
     
     // Create the title string
     NSString *levelString = [[NSString alloc] init];
@@ -284,8 +284,15 @@
         stringByAppendingString:@"Complete: "];
     
     // Show victory message
-    NSString *victoryMessage = [[[@"Nicely done! \n\nMoves: " stringByAppendingString:self.MovesLabel.text] stringByAppendingString:@"\nTime taken: "]
-        stringByAppendingString:self.TimerLabel.text];
+    NSString *rainbowString = stars > 3 ? @" rainbow" : @"";
+    if (stars > 3)
+        stars = 3;
+    
+    NSString *victoryMessage = [[[[[[@"Nicely done! \n\nMoves: " stringByAppendingString:self.MovesLabel.text] stringByAppendingString:@"\nTime taken: "]
+        stringByAppendingString:self.TimerLabel.text]
+        stringByAppendingString:[NSString stringWithFormat:@"\n\nYou have earned %d", stars]]
+        stringByAppendingString:rainbowString]
+        stringByAppendingString:@" stars!"];
     UIAlertView *alert = [[UIAlertView alloc]
         initWithTitle:titleMessage
         message:victoryMessage
@@ -295,11 +302,13 @@
     [alert show];
 }
 
--(void)storeLevelCompleteProgress
+-(int)storeLevelCompleteProgress
 {
     int stars = [LevelsManager CalculateStarsEarned:_boardParameters.gridSize time:self.timeInterval];
     
     [[UserData sharedUserData] storeLevelComplete:self.worldId levelId:self.levelId stars:stars];
+    
+    return stars;
 }
 
 - (IBAction)GridButtonPressed:(id)sender

@@ -12,4 +12,6 @@
 @property (nonatomic, assign) int worldId;
 @property (nonatomic, assign) int levelId;
 @property (nonatomic, assign) bool isComplete;
+@property UIImageView *starsImage;
+@property int starCount;
 @end

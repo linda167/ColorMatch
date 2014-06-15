@@ -68,7 +68,11 @@
 {
     if (boardSize == 3)
     {
-        if (time <= 20)
+        if (time <= 10)
+        {
+            return 4;
+        }
+        else if (time <= 20)
         {
             return 3;
         }
@@ -83,7 +87,11 @@
     }
     else if (boardSize == 4)
     {
-        if (time <= 30)
+        if (time <= 20)
+        {
+            return 4;
+        }
+        else if (time <= 30)
         {
             return 3;
         }
@@ -98,7 +106,11 @@
     }
     else if (boardSize == 5)
     {
-        if (time <= 40)
+        if (time <= 30)
+        {
+            return 4;
+        }
+        else if (time <= 40)
         {
             return 3;
         }

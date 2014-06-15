@@ -64,6 +64,11 @@
 		BF874D15192B2CBB001701A2 /* ReflectorTtRGoal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF874D14192B2CBB001701A2 /* ReflectorTtRGoal@2x.png */; };
 		BF90795C194CE618000E6E58 /* LevelsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BF90795B194CE618000E6E58 /* LevelsManager.m */; };
 		BF90795F194D22B0000E6E58 /* DebugModeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF90795E194D22B0000E6E58 /* DebugModeViewController.m */; };
+		BF907965194D6284000E6E58 /* rainbow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF907964194D6284000E6E58 /* rainbow@2x.png */; };
+		BF90796A194D6E42000E6E58 /* 0stars@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF907966194D6E42000E6E58 /* 0stars@2x.png */; };
+		BF90796B194D6E42000E6E58 /* 1stars@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF907967194D6E42000E6E58 /* 1stars@2x.png */; };
+		BF90796C194D6E42000E6E58 /* 2stars@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF907968194D6E42000E6E58 /* 2stars@2x.png */; };
+		BF90796D194D6E42000E6E58 /* 3stars@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF907969194D6E42000E6E58 /* 3stars@2x.png */; };
 		BFA3A2B4192D899D00C1BB7D /* ReflectorArrowLtD@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFA3A2B2192D899D00C1BB7D /* ReflectorArrowLtD@2x.png */; };
 		BFA3A2B5192D899D00C1BB7D /* ReflectorArrowTtR@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFA3A2B3192D899D00C1BB7D /* ReflectorArrowTtR@2x.png */; };
 		BFA3A2BC1931401700C1BB7D /* ReflectorArrowLtDBlue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFA3A2B61931401700C1BB7D /* ReflectorArrowLtDBlue@2x.png */; };
@@ -168,6 +173,11 @@
 		BF90795B194CE618000E6E58 /* LevelsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LevelsManager.m; sourceTree = "<group>"; };
 		BF90795D194D22B0000E6E58 /* DebugModeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DebugModeViewController.h; sourceTree = "<group>"; };
 		BF90795E194D22B0000E6E58 /* DebugModeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DebugModeViewController.m; sourceTree = "<group>"; };
+		BF907964194D6284000E6E58 /* rainbow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rainbow@2x.png"; sourceTree = "<group>"; };
+		BF907966194D6E42000E6E58 /* 0stars@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "0stars@2x.png"; sourceTree = "<group>"; };
+		BF907967194D6E42000E6E58 /* 1stars@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1stars@2x.png"; sourceTree = "<group>"; };
+		BF907968194D6E42000E6E58 /* 2stars@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "2stars@2x.png"; sourceTree = "<group>"; };
+		BF907969194D6E42000E6E58 /* 3stars@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "3stars@2x.png"; sourceTree = "<group>"; };
 		BFA3A2B2192D899D00C1BB7D /* ReflectorArrowLtD@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReflectorArrowLtD@2x.png"; sourceTree = "<group>"; };
 		BFA3A2B3192D899D00C1BB7D /* ReflectorArrowTtR@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReflectorArrowTtR@2x.png"; sourceTree = "<group>"; };
 		BFA3A2B61931401700C1BB7D /* ReflectorArrowLtDBlue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReflectorArrowLtDBlue@2x.png"; sourceTree = "<group>"; };
@@ -324,6 +334,11 @@
 		AF2C225A1874B95000082561 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				BF907966194D6E42000E6E58 /* 0stars@2x.png */,
+				BF907967194D6E42000E6E58 /* 1stars@2x.png */,
+				BF907968194D6E42000E6E58 /* 2stars@2x.png */,
+				BF907969194D6E42000E6E58 /* 3stars@2x.png */,
+				BF907964194D6284000E6E58 /* rainbow@2x.png */,
 				BFA3A2C9193AF4D900C1BB7D /* completeLevel@2x.png */,
 				BFA3A2CA193AF4D900C1BB7D /* incompleteLevel@2x.png */,
 				BFA3A2C4193A566F00C1BB7D /* logo@2x.png */,
@@ -474,15 +489,20 @@
 				BFA3A2BC1931401700C1BB7D /* ReflectorArrowLtDBlue@2x.png in Resources */,
 				AFADA2231877D20D00FADA22 /* BlockYellow.png in Resources */,
 				BFA3A2BE1931401700C1BB7D /* ReflectorArrowLtDYellow@2x.png in Resources */,
+				BF90796D194D6E42000E6E58 /* 3stars@2x.png in Resources */,
 				AFADA22A1877D20D00FADA22 /* FilledCircleRed.png in Resources */,
 				AFADA2271877D20D00FADA22 /* EmptyCircle.png in Resources */,
 				AFADA2291877D20D00FADA22 /* FilledCircleGreen.png in Resources */,
 				AFADA2211877D20D00FADA22 /* BlockRed.png in Resources */,
+				BF90796B194D6E42000E6E58 /* 1stars@2x.png in Resources */,
 				AFB75A9F18834ECD00CAB736 /* AppIcon120.png in Resources */,
 				AF2C222D1874B8B700082561 /* InfoPlist.strings in Resources */,
 				BF874D15192B2CBB001701A2 /* ReflectorTtRGoal@2x.png in Resources */,
+				BF907965194D6284000E6E58 /* rainbow@2x.png in Resources */,
 				BFA3A2BD1931401700C1BB7D /* ReflectorArrowLtDRed@2x.png in Resources */,
 				AFB75A9B188339C900CAB736 /* GameLogo.png in Resources */,
+				BF90796C194D6E42000E6E58 /* 2stars@2x.png in Resources */,
+				BF90796A194D6E42000E6E58 /* 0stars@2x.png in Resources */,
 				BFA3A2B4192D899D00C1BB7D /* ReflectorArrowLtD@2x.png in Resources */,
 				AFADA2201877D20D00FADA22 /* BlockPurple.png in Resources */,
 				BFA3A2C11931401700C1BB7D /* ReflectorArrowTtRYellow@2x.png in Resources */,

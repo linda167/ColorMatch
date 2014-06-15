@@ -41,10 +41,16 @@
 
 -(void)storeLevelComplete:(int)worldId levelId:(int)levelId stars:(int)stars
 {
-    NSMutableString *levelString = [UserData getLevelString:worldId levelId:levelId];
+    int currentStarCount = [self getStarCount:worldId levelId:levelId];
     
-    [self.userData setInteger:stars forKey:levelString];
-    [self.userData synchronize];
+    // Don't overwrite higher star count
+    if (stars > currentStarCount)
+    {
+        NSMutableString *levelString = [UserData getLevelString:worldId levelId:levelId];
+        
+        [self.userData setInteger:stars forKey:levelString];
+        [self.userData synchronize];
+    }
 }
 
 -(bool)getLevelCompleteState:(int)worldId levelId:(int)levelId
@@ -52,6 +58,13 @@
     NSMutableString *levelString = [UserData getLevelString:worldId levelId:levelId];
     NSInteger isComplete = [self.userData integerForKey:levelString];
     return (int)isComplete >= 1;
+}
+
+-(int)getStarCount:(int)worldId levelId:(int)levelId
+{
+    NSMutableString *levelString = [UserData getLevelString:worldId levelId:levelId];
+    NSInteger starCount = [self.userData integerForKey:levelString];
+    return (int)starCount;
 }
 
 -(void)wipeData

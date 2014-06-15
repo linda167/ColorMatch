@@ -66,22 +66,26 @@
 
     if (self.worldId == 1)
     {
-        rowsToRender = 5;
-        colsToRender = 2;
+        rowsToRender = 3;
+        colsToRender = 4;
     }
     else
     {
         // TODO: add for additional worlds
     }
     
-    int totalLevelsToRender = rowsToRender * colsToRender;
-    int xOffsetInitial = 0;
+    int totalLevelsToRender = [LevelsManager GetLevelCountForWorld:self.worldId];
+    int xOffsetInitial = 8;
     int yOffsetInitial = 0;
     int xOffset = xOffsetInitial;
     int yOffset = yOffsetInitial;
     int size = 60;
-    int heightBetweenRows = 80;
-    int widthBetweenCols = 60;
+    int heightBetweenRows = 98;
+    int widthBetweenCols = 75;
+    int starYOffset = 57;
+    int starXOffset = 8;
+    int starWidth=44;
+    int starHeight=16;
     for (int i=0; i<totalLevelsToRender; i++)
     {
         // Figure out if level is complete
@@ -99,14 +103,23 @@
         [self.levelButtons addObject:levelButton];
         [self.containerView addSubview:levelButton];
         
+        // Add stars
+        int starCount = [[UserData sharedUserData] getStarCount:self.worldId levelId:levelId];
+        int starYPosition = yOffset+starYOffset;
+        UIImageView *starsImage = [[UIImageView alloc] initWithFrame:CGRectMake(xOffset+starXOffset, starYPosition, starWidth, starHeight)];
+        starsImage.image = [self getImageForStars:starCount];
+        levelButton.starsImage = starsImage;
+        levelButton.starCount = starCount;
+        [self.containerView addSubview:starsImage];
+        
         // Add level text
-        UILabel *levelName = [[UILabel alloc] initWithFrame:CGRectMake(xOffset+20, yOffset+52, size, 25)];
+        UILabel *levelName = [[UILabel alloc] initWithFrame:CGRectMake(xOffset+20, starYPosition+15, size, 25)];
         levelName.font = [UIFont fontWithName:@"Futura-Medium" size:12.0];
         NSMutableString *levelString = [UserData getLevelString:self.worldId levelId:levelId];
         levelName.text = levelString;
         [self.containerView addSubview:levelName];
         
-        if ((i+1)%rowsToRender == 0)
+        if ((i+1)%colsToRender == 0)
         {
             // Time to render new line of buttons
             xOffset = xOffsetInitial;
@@ -126,6 +139,21 @@
         [UIImage imageNamed:@"incompleteLevel@2x.png"];
 }
 
+- (UIImage*)getImageForStars:(int)starCount
+{
+    if (starCount == 1)
+        return [UIImage imageNamed:@"1stars@2x.png"];
+    else if (starCount == 2)
+        return [UIImage imageNamed:@"2stars@2x.png"];
+    else if (starCount == 3)
+        return [UIImage imageNamed:@"3stars@2x.png"];
+    else if (starCount == 4)
+        return [UIImage imageNamed:@"rainbow@2x.png"];
+    else
+        return [UIImage imageNamed:@"0stars@2x.png"];
+
+}
+
 - (void)updateProgression
 {
     for (int i = 0; i < self.levelButtons.count; i++)
@@ -133,12 +161,21 @@
         LevelSelectButton *levelButton = [self.levelButtons objectAtIndex:i];
         int levelId = i+1;
         
+        // Update checkmark
         bool isLevelComplete = [[UserData sharedUserData] getLevelCompleteState:self.worldId levelId:levelId];
         if (isLevelComplete != levelButton.isComplete)
         {
             UIImage *buttonImage = [self getImageForLevel:isLevelComplete];
             levelButton.imageView.image = buttonImage;
             levelButton.isComplete = isLevelComplete;
+        }
+        
+        // Update stars
+        int starCount = [[UserData sharedUserData] getStarCount:self.worldId levelId:levelId];
+        if (starCount != levelButton.starCount)
+        {
+            levelButton.starCount = starCount;
+            levelButton.starsImage.image = [self getImageForStars:starCount];
         }
     }
 }
