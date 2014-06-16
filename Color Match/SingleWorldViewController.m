@@ -60,10 +60,8 @@
     }
 }
 
-- (void)viewWillAppear:(BOOL)animated
+- (void)viewWillAppear
 {
-    [super viewWillAppear:animated];
-    
     if (!self.isFirstTimeViewCreation)
     {
         [self updateProgression];
@@ -104,7 +102,7 @@
     }
     
     int totalLevelsToRender = [LevelsManager GetLevelCountForWorld:self.worldId];
-    int xOffsetInitial = 10;
+    int xOffsetInitial = 15;
     int yOffsetInitial = 50;
     int xOffset = xOffsetInitial;
     int yOffset = yOffsetInitial;

@@ -25,9 +25,9 @@ typedef struct BoardParameters
 // Cell type
 typedef NS_ENUM(NSUInteger, CellType)
 {
-    NormalCell,
-    ReflectorLeftToDown,
-    ReflectorTopToRight
+    NormalCell = 0,
+    ReflectorLeftToDown = 1,
+    ReflectorTopToRight = 2
 };
 
 

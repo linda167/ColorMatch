@@ -55,6 +55,17 @@
     [self loadScrollViewWithPage:1];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [[self getCurrentPageViewController] viewWillAppear];
+}
+
+- (SingleWorldViewController*)getCurrentPageViewController
+{
+    return [self.viewControllers objectAtIndex:self.pageControl.currentPage];
+}
+
 - (void)loadScrollViewWithPage:(int)page
 {
     if (page < 0) return;

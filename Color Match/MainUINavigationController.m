@@ -33,6 +33,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    if ([self respondsToSelector:@selector(interactivePopGestureRecognizer)])
+    {
+        self.interactivePopGestureRecognizer.enabled = NO;
+    }
 	
     // Do any additional setup after loading the view.
     [self showLogo];

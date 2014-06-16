@@ -11,4 +11,5 @@
 
 @interface SingleWorldViewController : UIViewController
 - (id)initWithWorldId:(int)worldId parentWorldController:(WorldViewController*)parentWorldController;
+- (void)viewWillAppear;
 @end

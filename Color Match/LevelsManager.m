@@ -64,6 +64,14 @@
     else
     {
         // TODO: Need to load board cell types for world 2+
+        if (worldId == 2 && levelId == 1)
+        {
+            boardCells.colorCellSections = [NSMutableArray arrayWithObjects:
+                [NSArray arrayWithObjects:@"0", @"0", @"0", nil],
+                [NSArray arrayWithObjects:@"0", @"0", @"0", nil],
+                [NSArray arrayWithObjects:@"0", @"0", @"0", nil],
+                nil];
+        }
     }
     
     return boardCells;
