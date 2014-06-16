@@ -7,15 +7,14 @@
 //
 
 #import "WorldViewController.h"
+#import "LevelsManager.h"
+#import "SingleWorldViewController.h"
 #import "MainGameViewController.h"
 #import "LevelSelectButton.h"
-#import "UserData.h"
-#import "LevelsManager.h"
 
 @interface WorldViewController ()
-@property bool isFirstTimeViewCreation;
-@property NSMutableArray *levelButtons;
-@property int worldId;
+@property int pageCount;
+@property BOOL pageControlUsed;
 @end
 
 @implementation WorldViewController
@@ -33,24 +32,82 @@
 {
     [super viewDidLoad];
     
-    self.levelButtons = [[NSMutableArray alloc] init];
-    self.isFirstTimeViewCreation = true;
-    
-    // Do any additional setup after loading the view.
-    self.worldId = 1;
-    [self renderLevelsDisplay];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    if (!self.isFirstTimeViewCreation)
+    self.viewControllers = [[NSMutableArray alloc] init];
+    self.pageCount = [LevelsManager GetTotalWorldCount];
+    for (int i = 0; i < self.pageCount; i++)
     {
-        [self updateProgression];
+        [self.viewControllers addObject:[NSNull null]];
     }
     
-    self.isFirstTimeViewCreation = false;
+    self.scrollView.pagingEnabled = YES;
+    self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width * self.pageCount, self.scrollView.frame.size.height);
+    self.scrollView.showsHorizontalScrollIndicator = NO;
+    self.scrollView.showsVerticalScrollIndicator = NO;
+    self.scrollView.scrollsToTop = NO;
+    self.scrollView.delegate = self;
+    
+    self.pageControl.userInteractionEnabled = YES;
+    self.pageControl.numberOfPages = self.pageCount;
+    self.pageControl.currentPage = 0;
+    self.pageControl.enabled = TRUE;
+    
+    [self loadScrollViewWithPage:0];
+    [self loadScrollViewWithPage:1];
+}
+
+- (void)loadScrollViewWithPage:(int)page
+{
+    if (page < 0) return;
+    if (page >= self.pageCount) return;
+    
+    SingleWorldViewController *controller = [self.viewControllers objectAtIndex:page];
+    
+    if ((NSNull *) controller == [NSNull null])
+    {
+        controller = [[SingleWorldViewController alloc] initWithWorldId:page+1 parentWorldController:self];
+        [self.viewControllers replaceObjectAtIndex:page withObject:controller];
+    }
+    
+    if (nil == controller.view.superview)
+    {
+        CGRect frame = self.scrollView.frame;
+        frame.origin.x = frame.size.width * page;
+        frame.origin.y = 0;
+        controller.view.frame = frame;
+        [self.scrollView addSubview:controller.view];
+    }
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)sender
+{
+    if (self.pageControlUsed)
+        return;
+    
+    CGFloat pageWidth = self.scrollView.frame.size.width;
+    int page = floor((self.scrollView.contentOffset.x - pageWidth / 3) / pageWidth) + 1;
+    
+    self.pageControl.currentPage = page;
+    
+    [self loadScrollViewWithPage:page - 1];
+    [self loadScrollViewWithPage:page];
+    [self loadScrollViewWithPage:page + 1];
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *) scrollView
+{
+    self.pageControlUsed = NO;
+}
+- (IBAction)changePage:(id)sender
+{
+    int page = self.pageControl.currentPage;
+    [self loadScrollViewWithPage:page - 1];
+    [self loadScrollViewWithPage:page];
+    [self loadScrollViewWithPage:page + 1];
+    CGRect frame = self.scrollView.frame;
+    frame.origin.x = frame.size.width * page;
+    frame.origin.y = 0;
+    [self.scrollView scrollRectToVisible:frame animated:YES];
+    self.pageControlUsed = YES;
 }
 
 - (void)didReceiveMemoryWarning
@@ -59,131 +116,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)renderLevelsDisplay
-{
-    int rowsToRender = 0;
-    int colsToRender = 0;
-
-    if (self.worldId == 1)
-    {
-        rowsToRender = 3;
-        colsToRender = 4;
-    }
-    else
-    {
-        // TODO: add for additional worlds
-    }
-    
-    int totalLevelsToRender = [LevelsManager GetLevelCountForWorld:self.worldId];
-    int xOffsetInitial = 8;
-    int yOffsetInitial = 0;
-    int xOffset = xOffsetInitial;
-    int yOffset = yOffsetInitial;
-    int size = 60;
-    int heightBetweenRows = 98;
-    int widthBetweenCols = 75;
-    int starYOffset = 57;
-    int starXOffset = 8;
-    int starWidth=44;
-    int starHeight=16;
-    for (int i=0; i<totalLevelsToRender; i++)
-    {
-        // Figure out if level is complete
-        int levelId = i+1;
-        bool isLevelComplete = [[UserData sharedUserData] getLevelCompleteState:self.worldId levelId:levelId];
-        UIImage *buttonImage = [self getImageForLevel:isLevelComplete];
-        
-        // Add level button
-        LevelSelectButton *levelButton = [[LevelSelectButton alloc] initWithFrame:CGRectMake(xOffset, yOffset, size, size)];
-        [levelButton setImage:buttonImage forState:UIControlStateNormal];
-        [levelButton addTarget:self action:@selector(levelButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-        levelButton.worldId = self.worldId;
-        levelButton.levelId = levelId;
-        levelButton.isComplete = isLevelComplete;
-        [self.levelButtons addObject:levelButton];
-        [self.containerView addSubview:levelButton];
-        
-        // Add stars
-        int starCount = [[UserData sharedUserData] getStarCount:self.worldId levelId:levelId];
-        int starYPosition = yOffset+starYOffset;
-        UIImageView *starsImage = [[UIImageView alloc] initWithFrame:CGRectMake(xOffset+starXOffset, starYPosition, starWidth, starHeight)];
-        starsImage.image = [self getImageForStars:starCount];
-        levelButton.starsImage = starsImage;
-        levelButton.starCount = starCount;
-        [self.containerView addSubview:starsImage];
-        
-        // Add level text
-        UILabel *levelName = [[UILabel alloc] initWithFrame:CGRectMake(xOffset+20, starYPosition+15, size, 25)];
-        levelName.font = [UIFont fontWithName:@"Futura-Medium" size:12.0];
-        NSMutableString *levelString = [UserData getLevelString:self.worldId levelId:levelId];
-        levelName.text = levelString;
-        [self.containerView addSubview:levelName];
-        
-        if ((i+1)%colsToRender == 0)
-        {
-            // Time to render new line of buttons
-            xOffset = xOffsetInitial;
-            yOffset += heightBetweenRows;
-        }
-        else
-        {
-            xOffset += widthBetweenCols;
-        }
-    }
-}
-
-- (UIImage*)getImageForLevel:(bool)isComplete
-{
-    return isComplete ?
-        [UIImage imageNamed:@"completeLevel@2x.png"] :
-        [UIImage imageNamed:@"incompleteLevel@2x.png"];
-}
-
-- (UIImage*)getImageForStars:(int)starCount
-{
-    if (starCount == 1)
-        return [UIImage imageNamed:@"1stars@2x.png"];
-    else if (starCount == 2)
-        return [UIImage imageNamed:@"2stars@2x.png"];
-    else if (starCount == 3)
-        return [UIImage imageNamed:@"3stars@2x.png"];
-    else if (starCount == 4)
-        return [UIImage imageNamed:@"rainbow@2x.png"];
-    else
-        return [UIImage imageNamed:@"0stars@2x.png"];
-
-}
-
-- (void)updateProgression
-{
-    for (int i = 0; i < self.levelButtons.count; i++)
-    {
-        LevelSelectButton *levelButton = [self.levelButtons objectAtIndex:i];
-        int levelId = i+1;
-        
-        // Update checkmark
-        bool isLevelComplete = [[UserData sharedUserData] getLevelCompleteState:self.worldId levelId:levelId];
-        if (isLevelComplete != levelButton.isComplete)
-        {
-            UIImage *buttonImage = [self getImageForLevel:isLevelComplete];
-            levelButton.imageView.image = buttonImage;
-            levelButton.isComplete = isLevelComplete;
-        }
-        
-        // Update stars
-        int starCount = [[UserData sharedUserData] getStarCount:self.worldId levelId:levelId];
-        if (starCount != levelButton.starCount)
-        {
-            levelButton.starCount = starCount;
-            levelButton.starsImage.image = [self getImageForStars:starCount];
-        }
-    }
-}
-
-- (IBAction)levelButtonPressed:(id)sender
-{
-    [self performSegueWithIdentifier:@"LoadLevel" sender:sender];
-}
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -198,6 +130,7 @@
         [destinationController SetParametersForNewGame:gameSize worldId:levelSelectButton.worldId levelId:levelSelectButton.levelId];
     }
 }
+
 
 /*
 #pragma mark - Navigation

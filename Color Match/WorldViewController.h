@@ -8,7 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface WorldViewController : UIViewController
+@interface WorldViewController : UIViewController <UIScrollViewDelegate>
 @property (weak, nonatomic) IBOutlet UIView *containerView;
-
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
+@property (nonatomic, retain) NSMutableArray *viewControllers;
+- (IBAction)changePage:(id)sender;
 @end

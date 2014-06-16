@@ -42,6 +42,11 @@
     }
 }
 
++(int)GetTotalWorldCount
+{
+    return 10;
+}
+
 +(int)IsRandomLevel:(int)worldId levelId:(int)levelId
 {
     return worldId == 0 && levelId == 0;
