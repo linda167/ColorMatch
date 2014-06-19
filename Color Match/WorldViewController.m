@@ -58,7 +58,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [[self getCurrentPageViewController] viewWillAppear];
+    [[self getCurrentPageViewController] onViewShown];
 }
 
 - (SingleWorldViewController*)getCurrentPageViewController
@@ -97,11 +97,17 @@
     CGFloat pageWidth = self.scrollView.frame.size.width;
     int page = floor((self.scrollView.contentOffset.x - pageWidth / 3) / pageWidth) + 1;
     
-    self.pageControl.currentPage = page;
-    
-    [self loadScrollViewWithPage:page - 1];
-    [self loadScrollViewWithPage:page];
-    [self loadScrollViewWithPage:page + 1];
+    if (self.pageControl.currentPage != page)
+    {
+        self.pageControl.currentPage = page;
+        
+        [self loadScrollViewWithPage:page - 1];
+        [self loadScrollViewWithPage:page];
+        [self loadScrollViewWithPage:page + 1];
+        
+        // Let single world page controller know it's about to be shown
+        [[self getCurrentPageViewController] onViewShown];
+    }
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *) scrollView
@@ -119,6 +125,9 @@
     frame.origin.y = 0;
     [self.scrollView scrollRectToVisible:frame animated:YES];
     self.pageControlUsed = YES;
+    
+    // Let single world page controller know it's about to be shown
+    [[self getCurrentPageViewController] onViewShown];
 }
 
 - (void)didReceiveMemoryWarning

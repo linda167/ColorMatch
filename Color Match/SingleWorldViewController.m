@@ -53,14 +53,14 @@
     
     // Do any additional setup after loading the view.
     [self renderWorldTitleDisplay];
-    if (self.worldId == 1)
+    if (self.worldId < 3)
     {
         // TODO: add support for other worlds
         [self renderLevelsDisplay];
     }
 }
 
-- (void)viewWillAppear
+-(void)onViewShown
 {
     if (!self.isFirstTimeViewCreation)
     {
@@ -82,7 +82,7 @@
     worldTitle.font = [UIFont fontWithName:@"Futura-Medium" size:16.0];
     worldTitle.text = [NSString stringWithFormat: @"World %d", self.worldId];
     [worldTitle sizeToFit];
-    [worldTitle setCenter:CGPointMake(self.view.frame.size.width / 2, 15)];
+    [worldTitle setCenter:CGPointMake(self.view.frame.size.width / 2, 23)];
     [self.view addSubview:worldTitle];
 }
 
@@ -91,10 +91,11 @@
     int rowsToRender = 0;
     int colsToRender = 0;
     
-    if (self.worldId == 1)
+    if (self.worldId < 3)
     {
-        rowsToRender = 3;
+        int levelCount = [LevelsManager GetLevelCountForWorld:self.worldId];
         colsToRender = 4;
+        rowsToRender = levelCount % colsToRender;
     }
     else
     {
@@ -103,11 +104,11 @@
     
     int totalLevelsToRender = [LevelsManager GetLevelCountForWorld:self.worldId];
     int xOffsetInitial = 15;
-    int yOffsetInitial = 50;
+    int yOffsetInitial = 48;
     int xOffset = xOffsetInitial;
     int yOffset = yOffsetInitial;
     int size = 60;
-    int heightBetweenRows = 98;
+    int heightBetweenRows = 95;
     int widthBetweenCols = 75;
     int starYOffset = 57;
     int starXOffset = 8;
