@@ -321,7 +321,7 @@
 
 -(int)storeLevelCompleteProgress
 {
-    int stars = [LevelsManager CalculateStarsEarned:_boardParameters.gridSize time:self.timeInterval];
+    int stars = [LevelsManager CalculateStarsEarned:_boardParameters.gridSize time:self.timeInterval worldId:self.worldId];
     
     [[UserData sharedUserData] storeLevelComplete:self.worldId levelId:self.levelId stars:stars];
     

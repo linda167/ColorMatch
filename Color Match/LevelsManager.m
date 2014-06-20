@@ -230,63 +230,54 @@
     return boardCells;
 }
 
-+(int)CalculateStarsEarned:(int)boardSize time:(int)time
++(int)CalculateStarsEarned:(int)boardSize time:(int)time worldId:(int)worldId
 {
-    if (boardSize == 3)
+    if (worldId == 1)
     {
-        if (time <= 10)
+        if (boardSize == 3)
         {
-            return 4;
+            if (time <= 10) return 4;
+            else if (time <= 20) return 3;
+            else if (time <= 40) return 2;
+            else return 1;
         }
-        else if (time <= 20)
+        else if (boardSize == 4)
         {
-            return 3;
+            if (time <= 15) return 4;
+            else if (time <= 25) return 3;
+            else if (time <= 45) return 2;
+            else return 1;
         }
-        else if (time <= 40)
+        else if (boardSize == 5)
         {
-            return 2;
-        }
-        else
-        {
-            return 1;
+            if (time <= 20) return 4;
+            else if (time <= 30) return 3;
+            else if (time <= 50) return 2;
+            else return 1;
         }
     }
-    else if (boardSize == 4)
+    else if (worldId == 2)
     {
-        if (time <= 15)
+        if (boardSize == 3)
         {
-            return 4;
+            if (time <= 10) return 4;
+            else if (time <= 20) return 3;
+            else if (time <= 40) return 2;
+            else return 1;
         }
-        else if (time <= 25)
+        else if (boardSize == 4)
         {
-            return 3;
+            if (time <= 20) return 4;
+            else if (time <= 30) return 3;
+            else if (time <= 50) return 2;
+            else return 1;
         }
-        else if (time <= 45)
+        else if (boardSize == 5)
         {
-            return 2;
-        }
-        else
-        {
-            return 1;
-        }
-    }
-    else if (boardSize == 5)
-    {
-        if (time <= 20)
-        {
-            return 4;
-        }
-        else if (time <= 30)
-        {
-            return 3;
-        }
-        else if (time <= 50)
-        {
-            return 2;
-        }
-        else
-        {
-            return 1;
+            if (time <= 25) return 4;
+            else if (time <= 35) return 3;
+            else if (time <= 55) return 2;
+            else return 1;
         }
     }
     
