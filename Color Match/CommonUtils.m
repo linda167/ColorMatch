@@ -131,6 +131,9 @@
         case 6:
             return [UIImage imageNamed:@"BlockOrange.png"];
             break;
+        case 7:
+            return [UIImage imageNamed:@"BlockBrown.png"];
+            break;
         default:
             return [UIImage imageNamed:@"BlockWhite.png"];
             break;
@@ -160,6 +163,62 @@
 +(void) Log:(NSMutableString*)string
 {
     NSLog(@"%@", string);
+}
+
++(UIImage *) GetConnectorInnerImageForColor:(int)color
+{
+    switch (color)
+    {
+        case 0:
+            return [UIImage imageNamed:@"connectorInnerWhite@2x.png"];
+            break;
+        case 1:
+            return [UIImage imageNamed:@"connectorInnerBlue@2x.png"];
+            break;
+        case 2:
+            return [UIImage imageNamed:@"connectorInnerRed@2x.png"];
+            break;
+        case 3:
+            return [UIImage imageNamed:@"connectorInnerYellow@2x.png"];
+            break;
+        case 4:
+            return [UIImage imageNamed:@"connectorInnerPurple@2x.png"];
+            break;
+        case 5:
+            return [UIImage imageNamed:@"connectorInnerGreen@2x.png"];
+            break;
+        case 6:
+            return [UIImage imageNamed:@"connectorInnerOrange@2x.png"];
+            break;
+        case 7:
+            return [UIImage imageNamed:@"connectorInnerBrown@2x.png"];
+            break;
+        default:
+            return [UIImage imageNamed:@"BlockWhite.png"];
+            break;
+    }
+}
+
++(UIImage *) GetConnectorOuterImageForColor:(int)color
+{
+    switch (color)
+    {
+        case 0:
+            return [UIImage imageNamed:@"connectorOuterWhite@2x.png"];
+            break;
+        case 1:
+            return [UIImage imageNamed:@"connectorOuterBlue@2x.png"];
+            break;
+        case 2:
+            return [UIImage imageNamed:@"connectorOuterRed@2x.png"];
+            break;
+        case 3:
+            return [UIImage imageNamed:@"connectorOuterYellow@2x.png"];
+            break;
+        default:
+            return [UIImage imageNamed:@"BlockWhite.png"];
+            break;
+    }
 }
 
 @end

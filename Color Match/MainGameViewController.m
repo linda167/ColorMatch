@@ -16,7 +16,6 @@
 
 @interface MainGameViewController ()
 
-@property NSInteger selectedColor;
 @property NSTimer *stopWatchTimer;
 @property NSDate *startTime;
 @property NSInteger movesCount;
@@ -270,8 +269,12 @@
     // Stop the timer
     [self.stopWatchTimer invalidate];
     
-    // Store level complete progress
-    int stars = [self storeLevelCompleteProgress];
+    int stars = 0;
+    if (![LevelsManager IsRandomLevel:self.worldId levelId:self.levelId])
+    {
+        // Store level complete progress
+        stars = [self storeLevelCompleteProgress];
+    }
     
     // Create the title string
     NSString *levelString = [[NSString alloc] init];
@@ -348,10 +351,7 @@
     int selectedColor = (int)self.selectedColor;
     [_userColorBoard pressGridButtonWithColor:sender :selectedColor];
     
-    if ([self CheckVictory] == true)
-    {
-        [self DoVictory];
-    }
+    [self checkAndDoVictory];
 }
 
 -(void)resetActionBar
@@ -361,6 +361,14 @@
     for (UIButton* button in buttons)
     {
         [self deselectColorButton:button];
+    }
+}
+
+-(void)checkAndDoVictory
+{
+    if ([self CheckVictory] == true)
+    {
+        [self DoVictory];
     }
 }
 

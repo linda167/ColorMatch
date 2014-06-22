@@ -53,7 +53,7 @@
     
     // Do any additional setup after loading the view.
     [self renderWorldTitleDisplay];
-    if (self.worldId < 3)
+    if (self.worldId < 4)
     {
         // TODO: add support for other worlds
         [self renderLevelsDisplay];
@@ -90,17 +90,10 @@
 {
     int rowsToRender = 0;
     int colsToRender = 0;
-    
-    if (self.worldId < 3)
-    {
-        int levelCount = [LevelsManager GetLevelCountForWorld:self.worldId];
-        colsToRender = 4;
-        rowsToRender = levelCount % colsToRender;
-    }
-    else
-    {
-        // TODO: add for additional worlds
-    }
+        
+    int levelCount = [LevelsManager GetLevelCountForWorld:self.worldId];
+    colsToRender = 4;
+    rowsToRender = levelCount % colsToRender;
     
     int totalLevelsToRender = [LevelsManager GetLevelCountForWorld:self.worldId];
     int xOffsetInitial = 15;

@@ -11,9 +11,12 @@
 @interface BoardCells : NSObject
 
 @property NSMutableArray *colorCellSections;
+@property int connectorCellInput;
 
 -(id)initWithParameters: (BoardParameters)boardParameters;
 -(void)logBoardCellState;
 -(void)generateRandomCellTypes;
+-(void)addZonerValueAt:(int)row col:(int)col value:(int)value;
+-(int)getZonerValueAt:(int)row col:(int)col;
 
 @end

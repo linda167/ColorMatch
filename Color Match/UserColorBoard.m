@@ -11,11 +11,16 @@
 #import "ColorCell.h"
 #import "BoardCells.h"
 #import "ConnectorLines.h"
+#import "ZonerCell.h"
+#import "ZonerCellButton.h"
+#import "ConnectorCell.h"
 
 @interface UserColorBoard ()
 @property MainGameViewController *viewController;
 @property NSMutableArray *allGridColorButtons;
 @property ConnectorLines *connectorLines;
+@property NSMutableArray *allConnectorCells;
+@property int connectorColorInput;
 @end
 
 @implementation UserColorBoard
@@ -33,6 +38,8 @@
         self.containerView = containerView;
         self.boardCells = boardCells;
         _viewController = viewController;
+        self.allConnectorCells = [[NSMutableArray alloc] init];
+        self.connectorColorInput = 0;
         
         [self createNewBoard];
     }
@@ -72,7 +79,7 @@
         {
             NSNumber *cellType = [boardCellTypeRow objectAtIndex:j];
             
-            ColorCell *colorCell = [self getColorCellForType:cellType.intValue xOffset:xOffset yOffset:yOffset size:self.boardParameters.colorCellSize];
+            ColorCell *colorCell = [self getColorCellForType:cellType.intValue xOffset:xOffset yOffset:yOffset size:self.boardParameters.colorCellSize row:i col:j boardCells:self.boardCells];
             [row addObject:colorCell];
             
             xOffset += cellSizePlusSpace;
@@ -234,7 +241,7 @@
 
 -(int)DrawHorizontalLineToConnection:(ColorCell*)connection lineInfo:(LineInfo*)lineInfo currentY:(int)currentY drawToCenter:(BOOL)drawToCenter
 {
-    UIImageView *rightConnection = [connection image];
+    UIView *rightConnection = [connection image];
     int rightAdjustment = 3;   // Accounts for extra spacing in right button
     int rightX = rightConnection.frame.origin.x + rightAdjustment;
     
@@ -256,7 +263,7 @@
 
 -(int)DrawVerticalLineToConnection:(ColorCell*)connection lineInfo:(LineInfo*)lineInfo currentX:(int)currentX drawToCenter:(BOOL)drawToCenter
 {
-    UIImageView *bottomConnection = [connection image];
+    UIView *bottomConnection = [connection image];
     int bottomAdjustment = 3;   // Accounts for extra spacing in bottom button
     int bottomY = bottomConnection.frame.origin.y + bottomAdjustment;
     
@@ -452,7 +459,7 @@
         for (int j=0; j<row.count; j++)
         {
             ColorCell *colorCell = [row objectAtIndex:j];
-            UIImageView *cellBlock = [colorCell image];
+            UIView *cellBlock = [colorCell image];
             [cellBlock removeFromSuperview];
             
             if (colorCell.specialImage != NULL)
@@ -504,12 +511,16 @@
             return [UIImage imageNamed:@"BlockClear.png"];
         case ReflectorTopToRight:
             return [UIImage imageNamed:@"BlockClear.png"];
+        case Zoner:
+            return [UIImage imageNamed:@"zonerWhite@2x.png"];
+        case Connector:
+            return [UIImage imageNamed:@"connectorOuterWhite@2x.png"];
     }
     
     return [super GetImageForCellType:cellType];
 }
 
--(void)GetSpecialImageForCellIfNeeded:(ColorCell*)colorCell
+-(void)GetSpecialImageForCellIfNeeded:(ColorCell*)colorCell boardCells:(BoardCells*)boardCells
 {
     UIImage *specialImage = NULL;
     
@@ -521,17 +532,32 @@
         case ReflectorTopToRight:
             specialImage = [UIImage imageNamed:@"ReflectorArrowTtR@2x.png"];
             break;
+        case Connector:
+            // Initialize to white cell
+            specialImage = [CommonUtils GetConnectorInnerImageForColor:0];
+            break;
     }
     
     if (specialImage != NULL)
     {
-        // Fix width for now for all layouts so arrows look consistent
-        int size = 35;
-        int adjustmentX = [self getXAdjustmentForSpecialCell:colorCell.cellType];
-        int adjustmentY = [self getYAdjustmentForSpecialCell:colorCell.cellType];
+        int x, y, size;
         
-        int x = colorCell.image.frame.origin.x + adjustmentX;
-        int y = colorCell.image.frame.origin.y + adjustmentY;
+        if (colorCell.cellType == ReflectorLeftToDown || colorCell.cellType == ReflectorTopToRight)
+        {
+            // Fix width for now for all layouts so arrows look consistent
+            size = 35;
+            int adjustmentX = [self getXAdjustmentForSpecialCell:colorCell.cellType];
+            int adjustmentY = [self getYAdjustmentForSpecialCell:colorCell.cellType];
+            
+            x = colorCell.image.frame.origin.x + adjustmentX;
+            y = colorCell.image.frame.origin.y + adjustmentY;
+        }
+        else
+        {
+            size = colorCell.image.frame.size.width;
+            x = colorCell.image.frame.origin.x;
+            y = colorCell.image.frame.origin.y;
+        }
         
         UIImageView *specialImageView = [[UIImageView alloc] initWithFrame:CGRectMake(x, y, size, size)];
         
@@ -604,6 +630,96 @@
     }
     
     return 0;
+}
+
+-(UIView*)getUIViewForCell:(int)cellType xOffset:(int)xOffset yOffset:(int)yOffset size:(int)size colorCell:(ColorCell*)colorCell
+{
+    if (cellType == Zoner)
+    {
+        ZonerCellButton* cellBlock = [[ZonerCellButton alloc] initWithFrame:CGRectMake(xOffset, yOffset, size, size)];
+        cellBlock.colorCell = colorCell;
+        [cellBlock setImage:[self GetImageForCellType:cellType] forState:UIControlStateNormal];
+        
+        [cellBlock addTarget:self action:@selector(zonerCellPressed:) forControlEvents:UIControlEventTouchUpInside];
+        
+        return cellBlock;
+    }
+    else if (cellType == Connector)
+    {
+        UIButton* connectorButton = [[UIButton alloc] initWithFrame:CGRectMake(xOffset, yOffset, size, size)];
+        [connectorButton setImage:[self GetImageForCellType:cellType] forState:UIControlStateNormal];
+        
+        [connectorButton addTarget:self action:@selector(connectorCellPressed:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [self.allConnectorCells addObject:colorCell];
+        
+        return connectorButton;
+    }
+    else
+    {
+        return [super getUIViewForCell:cellType xOffset:xOffset yOffset:yOffset size:size colorCell:colorCell];
+    }
+}
+
+- (IBAction)zonerCellPressed:(id)sender
+{
+    int currentSelectedColor = (int)self.viewController.selectedColor;
+    ZonerCellButton* zonerCellButton = (ZonerCellButton*)sender;
+    
+    UIImage* newZonerImage;
+    switch (currentSelectedColor)
+    {
+        case 0:
+            newZonerImage = [UIImage imageNamed:@"zonerWhite@2x.png"];
+            break;
+        case 1:
+            newZonerImage = [UIImage imageNamed:@"zonerBlue@2x.png"];
+            break;
+        case 2:
+            newZonerImage = [UIImage imageNamed:@"zonerRed@2x.png"];
+            break;
+        case 3:
+            newZonerImage = [UIImage imageNamed:@"zonerYellow@2x.png"];
+            break;
+    }
+    
+    [zonerCellButton setImage:newZonerImage forState:UIControlStateNormal];
+    
+    int existingInputColor = ((ZonerCell*)zonerCellButton.colorCell).inputColor;
+    if (existingInputColor != 0)
+    {
+        [self applySpecialCell:zonerCellButton.colorCell isAdd:false];
+    }
+    
+    ((ZonerCell*)zonerCellButton.colorCell).inputColor = currentSelectedColor;
+    [self applySpecialCell:zonerCellButton.colorCell isAdd:true];
+    
+    // User action was taken so we need to check for victory
+    [self.viewController checkAndDoVictory];
+}
+
+- (IBAction)connectorCellPressed:(id)sender
+{
+    int currentSelectedColor = (int)self.viewController.selectedColor;
+    
+    for (ConnectorCell* colorCell in self.allConnectorCells)
+    {
+        // Remove existing connector input
+        [self applySpecialCell:colorCell isAdd:false];
+        
+        // Add new connector input
+        self.connectorColorInput = currentSelectedColor;
+        colorCell.inputColor = currentSelectedColor;
+        [self applySpecialCell:colorCell isAdd:true];
+        
+        // TODO: lindach
+        // Update the outer color
+        UIImage* newConnectorImage = [CommonUtils GetConnectorOuterImageForColor:currentSelectedColor];
+        [colorCell setImage:(UIView*)newConnectorImage];
+    }
+    
+    // User action was taken so we need to check for victory
+    [self.viewController checkAndDoVictory];
 }
 
 @end

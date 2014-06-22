@@ -12,12 +12,11 @@
 
 @implementation ColorCell
 
--(id)initWithImage: (UIImageView*)image cellType:(int)cellType
+-(id)init:(int)cellType
 {
     self = [super init];
     if (self)
     {
-        _image = image;
         _specialImage = NULL;
         _cellType = cellType;
         _colorInputs = [[NSMutableArray alloc] init];
@@ -26,14 +25,38 @@
     return self;
 }
 
++(bool)doesCellSupportCombineColor:(CellType)cellType
+{
+    return cellType == NormalCell || cellType == Connector;
+}
+
+-(void)recalculateSpecialCellImage
+{
+    if (self.cellType == Connector)
+    {
+        [self.specialImage setImage:[CommonUtils GetConnectorInnerImageForColor:self.currentColor]];
+    }
+}
+
 -(void)addInputColor: (NSNumber *)color
 {
+    if (![ColorCell doesCellSupportCombineColor:self.cellType])
+    {
+        return;
+    }
+    
     [_colorInputs addObject:color];
     [self recalculateOutputColor];
+    [self recalculateSpecialCellImage];
 }
 
 -(void)removeInputColor: (NSNumber *)color;
 {
+    if (![ColorCell doesCellSupportCombineColor:self.cellType])
+    {
+        return;
+    }
+    
     NSInteger existingColorIndex = [_colorInputs indexOfObject:color];
     if (existingColorIndex == NSNotFound)
     {
@@ -47,8 +70,13 @@
 -(void)recalculateOutputColor
 {
     int combinedColor = [CommonUtils CombineColorsList:_colorInputs];
-    UIImage *image = [CommonUtils GetCellImageForColor:combinedColor];
-    [_image setImage:image];
+    
+    if (self.cellType == NormalCell)
+    {
+        UIImage *image = [CommonUtils GetCellImageForColor:combinedColor];
+        [((UIImageView*)_image) setImage:image];
+    }
+    
     self.currentColor = combinedColor;
 }
 

@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "ColorCell.h"
+#import "BoardCells.h"
 
 @interface ColorBoard : NSObject
 
@@ -22,7 +23,9 @@
 -(void)removeColorForColumn:(int)color colIndex:(int)colIndex;
 -(void)addColorForRow:(int)color rowIndex:(int)rowIndex;
 -(void)addColorForColumn:(int)color colIndex:(int)colIndex;
--(ColorCell*) getColorCellForType:(int)cellType xOffset:(int)xOffset yOffset:(int)yOffset size:(int)size;
+-(ColorCell*) getColorCellForType:(int)cellType xOffset:(int)xOffset yOffset:(int)yOffset size:(int)size row:(int)row col:(int)col boardCells:(BoardCells*)boardCells;
 -(UIImage*)GetImageForCellType:(int)cellType;
+-(void)applySpecialCell:(ColorCell*)colorCell isAdd:(bool)isAdd;
+-(UIView*)getUIViewForCell:(int)cellType xOffset:(int)xOffset yOffset:(int)yOffset size:(int)size colorCell:(ColorCell*)colorCell;
 
 @end

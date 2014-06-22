@@ -10,15 +10,17 @@
 
 @interface ColorCell : NSObject
 
-@property (nonatomic, strong) UIImageView *image;
+@property (nonatomic, strong) UIView *image;
 @property (nonatomic, strong) UIImageView *specialImage;
 @property NSMutableArray *colorInputs;
 @property int cellType;
 @property int currentColor;
 
--(id)initWithImage: (UIImageView*)image cellType:(int)cellType;
++(bool)doesCellSupportCombineColor:(CellType)cellType;
+-(id)init:(int)cellType;
 -(void)addInputColor: (NSNumber *)color;
 -(void)removeInputColor: (NSNumber *)color;
 -(void)removeAllInputColors;
+-(void)recalculateSpecialCellImage;
 
 @end

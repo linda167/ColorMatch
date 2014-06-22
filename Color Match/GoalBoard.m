@@ -10,6 +10,8 @@
 #import "ColorCell.h"
 #import "BoardCells.h"
 #import "LevelsManager.h"
+#import "ZonerCell.h"
+#import "ConnectorCell.h"
 
 @interface GoalBoard ()
 @end
@@ -50,7 +52,14 @@
         for (int j=0; j<self.boardParameters.gridSize; j++)
         {
             NSNumber *cellType = [boardCellTypeRow objectAtIndex:j];
-            ColorCell *colorCell = [self getColorCellForType:cellType.intValue xOffset:xOffset yOffset:yOffset size:self.boardParameters.goalColorCellSize];
+            ColorCell *colorCell = [self getColorCellForType:cellType.intValue xOffset:xOffset yOffset:yOffset size:self.boardParameters.goalColorCellSize row:i col:j boardCells:self.boardCells];
+            
+            if (cellType.intValue == Zoner)
+            {
+                ((ZonerCell*)colorCell).inputColor = [self.boardCells getZonerValueAt:i col:j];
+                ((ZonerCell*)colorCell).row = i;
+                ((ZonerCell*)colorCell).col = j;
+            }
             
             [row addObject:colorCell];
             xOffset += cellSizePlusSpace;
@@ -71,7 +80,7 @@
         for (int j=0; j<row.count; j++)
         {
             ColorCell *colorCell = [row objectAtIndex:j];
-            UIImageView *cellBlock = [colorCell image];
+            UIView *cellBlock = [colorCell image];
             [cellBlock removeFromSuperview];
         }
         
@@ -88,19 +97,45 @@
     
     for (int i=0; i<self.boardParameters.gridSize; i++)
     {
-        int random = arc4random()%4;
-        NSNumber* wrappedNumber = [NSNumber numberWithInt:random];
-        [self.topColorsState addObject:wrappedNumber];
+        [self.topColorsState addObject:[self getRandomColor]];
     }
     
     for (int i=0; i<self.boardParameters.gridSize; i++)
     {
-        int random = arc4random()%4;
-        NSNumber* wrappedNumber = [NSNumber numberWithInt:random];
-        [self.leftColorsState addObject:wrappedNumber];
+        [self.leftColorsState addObject:[self getRandomColor]];
     }
     
     [self logGoalStates];
+}
+
+- (NSNumber*)getRandomColor
+{
+    int random = arc4random()%4;
+    return [NSNumber numberWithInt:random];
+}
+
+
+- (void)randomGenAndApplySpecialCellStates
+{
+    for (int i=0; i<self.colorCellSections.count; i++)
+    {
+        NSMutableArray *row = [self.colorCellSections objectAtIndex:i];
+        for (int j=0; j<row.count; j++)
+        {
+            ColorCell *colorCell = [row objectAtIndex:j];
+            
+            if (colorCell.cellType == Zoner)
+            {
+                ((ZonerCell*)colorCell).inputColor = [self getRandomColor].intValue;
+                [self applySpecialCell:colorCell isAdd:true];
+            }
+            else if (colorCell.cellType == Connector)
+            {
+                ((ConnectorCell*)colorCell).inputColor = self.boardCells.connectorCellInput;
+                [self applySpecialCell:colorCell isAdd:true];
+            }
+        }
+    }
 }
 
 -(void)logGoalStates
@@ -141,7 +176,7 @@
         for (int j=0; j<row.count; j++)
         {
             ColorCell *colorCell = [row objectAtIndex:j];
-            if (colorCell.cellType == NormalCell)
+            if ([ColorCell doesCellSupportCombineColor:colorCell.cellType])
             {
                 if ([colorCell.colorInputs containsObject:[NSNumber numberWithInt:1]])
                 {
@@ -199,7 +234,7 @@
             for (int j=0; j<row.count; j++)
             {
                 ColorCell *colorCell = [row objectAtIndex:j];
-                if (colorCell.cellType == NormalCell)
+                if ([ColorCell doesCellSupportCombineColor:colorCell.cellType])
                 {
                     int currentColor = colorCell.currentColor;
                     if (previousColor == -1 || currentColor != previousColor)
@@ -234,7 +269,7 @@
             {
                 NSMutableArray *row = [self.colorCellSections objectAtIndex:j];
                 ColorCell *colorCell = [row objectAtIndex:i];
-                if (colorCell.cellType == NormalCell)
+                if ([ColorCell doesCellSupportCombineColor:colorCell.cellType])
                 {
                     int currentColor = colorCell.currentColor;
                     if (previousColor == -1 || currentColor != previousColor)
@@ -306,11 +341,32 @@
         
         // Update goal cell
         [self updateAllColorCells];
+        
+        // Apply special cells
+        [self applySpecialCells];
+    }
+}
+
+- (void)applySpecialCells
+{
+    for (int i=0; i<self.colorCellSections.count; i++)
+    {
+        NSMutableArray *row = [self.colorCellSections objectAtIndex:i];
+        
+        for (int j=0; j<row.count; j++)
+        {
+            ColorCell *colorCell = [row objectAtIndex:j];
+            if (colorCell.cellType == Zoner)
+            {
+                [self applySpecialCell:colorCell isAdd:true];
+            }
+        }
     }
 }
 
 - (void)generateRandomGoalBoardStates
 {
+    int tryCount = 0;
     do
     {
         // Randomly generate goal color bar
@@ -321,8 +377,12 @@
         
         // Update goal cells
         [self updateAllColorCells];
+        
+        // Randomly generate and apply special cell states
+        [self randomGenAndApplySpecialCellStates];
+        tryCount++;
     }
-    while ([self checkGoalSufficientDifficulty] == false);
+    while ([self checkGoalSufficientDifficulty] == false && tryCount < 10);
 }
 
 - (void)removeExistingGoalColorsState
@@ -354,9 +414,41 @@
             return [UIImage imageNamed:@"ReflectorLtDGoal@2x.png"];
         case ReflectorTopToRight:
             return [UIImage imageNamed:@"ReflectorTtRGoal@2x.png"];
+        case Zoner:
+            return [UIImage imageNamed:@"zonerGoal@2x.png"];
+        case Connector:
+            return [UIImage imageNamed:@"connectorOuterWhite@2x.png"];
     }
     
     return [super GetImageForCellType:cellType];
+}
+
+-(void)GetSpecialImageForCellIfNeeded:(ColorCell*)colorCell boardCells:(BoardCells*)boardCells
+{
+    UIImage *specialImage = NULL;
+    
+    switch (colorCell.cellType)
+    {
+        case Connector:
+        {
+            // Initialize to white cell
+            specialImage = [CommonUtils GetConnectorInnerImageForColor:0];
+            break;
+        }
+    }
+    
+    if (specialImage != NULL)
+    {
+        int size = colorCell.image.frame.size.width;
+        int x = colorCell.image.frame.origin.x;
+        int y = colorCell.image.frame.origin.y;
+        
+        UIImageView *specialImageView = [[UIImageView alloc] initWithFrame:CGRectMake(x, y, size, size)];
+        
+        specialImageView.image = specialImage;
+        colorCell.specialImage = specialImageView;
+        [self.containerView addSubview:specialImageView];
+    }
 }
 
 @end

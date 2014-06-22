@@ -18,5 +18,7 @@
 +(UIColor *) GetYellowColor;
 +(UIColor *) GetRedColor;
 +(void) Log:(NSMutableString*)string;
++(UIImage *) GetConnectorInnerImageForColor:(int)color;
++(UIImage *) GetConnectorOuterImageForColor:(int)color;
 
 @end

@@ -27,7 +27,9 @@ typedef NS_ENUM(NSUInteger, CellType)
 {
     NormalCell = 0,
     ReflectorLeftToDown = 1,
-    ReflectorTopToRight = 2
+    ReflectorTopToRight = 2,
+    Zoner = 3,
+    Connector = 4
 };
 
 

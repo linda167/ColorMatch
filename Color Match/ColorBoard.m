@@ -8,6 +8,9 @@
 
 #import "ColorBoard.h"
 #import "ColorCell.h"
+#import "ZonerCell.h"
+#import "BoardCells.h"
+#import "ConnectorCell.h"
 
 @implementation ColorBoard
 
@@ -58,7 +61,7 @@
         for (int i = currentCol+1; i < row.count; i++)
         {
             ColorCell *colorCell = [row objectAtIndex:i];
-            if (colorCell.cellType == NormalCell)
+            if ([ColorCell doesCellSupportCombineColor:colorCell.cellType])
             {
                 if (isAdd)
                 {
@@ -112,7 +115,7 @@
             NSArray *row = [self.colorCellSections objectAtIndex:i];
             ColorCell *colorCell = [row objectAtIndex:currentCol];
             
-            if (colorCell.cellType == NormalCell)
+            if ([ColorCell doesCellSupportCombineColor:colorCell.cellType])
             {
                 if (isAdd)
                 {
@@ -161,19 +164,51 @@
     }
 }
 
-- (ColorCell*) getColorCellForType:(int)cellType xOffset:(int)xOffset yOffset:(int)yOffset size:(int)size
+-(void)addColorToSingleCell:(int)rowValue col:(int)colValue color:(int)color
 {
-    UIImageView *cellBlock = [[UIImageView alloc] initWithFrame:CGRectMake(xOffset, yOffset, size, size)];
-    
+    NSArray *row = [self.colorCellSections objectAtIndex:rowValue];
+    ColorCell *colorCell = [row objectAtIndex:colValue];
+    [colorCell addInputColor:[NSNumber numberWithInt:color]];
+}
+
+-(void)removeColorFromSingleCell:(int)rowValue col:(int)colValue color:(int)color
+{
+    NSArray *row = [self.colorCellSections objectAtIndex:rowValue];
+    ColorCell *colorCell = [row objectAtIndex:colValue];
+    [colorCell removeInputColor:[NSNumber numberWithInt:color]];
+}
+
+-(UIView*)getUIViewForCell:(int)cellType xOffset:(int)xOffset yOffset:(int)yOffset size:(int)size colorCell:(ColorCell*)colorCell
+{
+    UIImageView* cellBlock = [[UIImageView alloc] initWithFrame:CGRectMake(xOffset, yOffset, size, size)];
     cellBlock.image = [self GetImageForCellType:cellType];
+    
+    return cellBlock;
+}
+
+-(ColorCell*)getColorCellForType:(int)cellType xOffset:(int)xOffset yOffset:(int)yOffset size:(int)size row:(int)row col:(int)col boardCells:(BoardCells*)boardCells
+{
+    // Create ColorCell object and add it to our color cell matrix
+    ColorCell *colorCell;
+    
+    switch (cellType)
+    {
+        case Zoner:
+            colorCell = [[ZonerCell alloc] init:cellType];
+            break;
+        case Connector:
+            colorCell = [[ConnectorCell alloc] init:cellType];
+            break;
+        default:
+            colorCell = [[ColorCell alloc] init:cellType];
+    }
+    
+    UIView* cellBlock = [self getUIViewForCell:cellType xOffset:xOffset yOffset:yOffset size:size colorCell:colorCell];
+    colorCell.image = cellBlock;
     
     // Add cell image to view
     [self.containerView addSubview:cellBlock];
-    
-    // Create ColorCell object and add it to our color cell matrix
-    ColorCell *colorCell = [[ColorCell alloc] initWithImage:cellBlock cellType:cellType];
-    
-    [self GetSpecialImageForCellIfNeeded:colorCell];
+    [self GetSpecialImageForCellIfNeeded:colorCell boardCells:boardCells];
     
     return colorCell;
 }
@@ -184,9 +219,150 @@
     return [UIImage imageNamed:@"BlockWhite.png"];
 }
 
--(void)GetSpecialImageForCellIfNeeded:(ColorCell*)colorCell
+-(void)GetSpecialImageForCellIfNeeded:(ColorCell*)colorCell boardCells:(BoardCells*)boardCells
 {
     // NOOP in base class
+}
+
+-(void)applySpecialCell:(ColorCell*)colorCell isAdd:(bool)isAdd
+{
+    if (colorCell.cellType == Zoner)
+    {
+        [self applySpecialCellZoner:colorCell isAdd:isAdd];
+    }
+    else if (colorCell.cellType == Connector)
+    {
+        [self applySpecialCellConnector:colorCell isAdd:isAdd];
+    }
+}
+
+-(void)applySpecialCellConnector:(ColorCell*)colorCell isAdd:(bool)isAdd
+{
+    ConnectorCell *connectorCell = (ConnectorCell*)colorCell;
+    if (isAdd)
+    {
+        [connectorCell addInputColor:[NSNumber numberWithInt:connectorCell.inputColor]];
+    }
+    else
+    {
+        if (connectorCell.inputColor != 0)
+        {
+            [connectorCell removeInputColor:[NSNumber numberWithInt:connectorCell.inputColor]];
+        }
+    }
+}
+
+-(void)applySpecialCellZoner:(ColorCell*)colorCell isAdd:(bool)isAdd
+{
+    ZonerCell *zonerCell = (ZonerCell*)colorCell;
+    int row = zonerCell.row;
+    int col = zonerCell.col;
+    
+    // Apply to top
+    if (row > 0)
+    {
+        // Apply to top left
+        if (col > 0)
+        {
+            if (isAdd)
+            {
+                [self addColorToSingleCell:row-1 col:col-1 color:zonerCell.inputColor];
+            }
+            else
+            {
+                [self removeColorFromSingleCell:row-1 col:col-1 color:zonerCell.inputColor];
+            }
+        }
+        
+        // Apply to top
+        if (isAdd)
+        {
+            [self addColorToSingleCell:row-1 col:col color:zonerCell.inputColor];
+        }
+        else
+        {
+            [self removeColorFromSingleCell:row-1 col:col color:zonerCell.inputColor];
+        }
+        
+        // Apply to top right
+        if (col < self.boardParameters.gridSize - 1)
+        {
+            if (isAdd)
+            {
+                [self addColorToSingleCell:row-1 col:col+1 color:zonerCell.inputColor];
+            }
+            else
+            {
+                [self removeColorFromSingleCell:row-1 col:col+1 color:zonerCell.inputColor];
+            }
+        }
+    }
+    
+    // Apply to left
+    if (col > 0)
+    {
+        if (isAdd)
+        {
+            [self addColorToSingleCell:row col:col-1 color:zonerCell.inputColor];
+        }
+        else
+        {
+            [self removeColorFromSingleCell:row col:col-1 color:zonerCell.inputColor];
+        }
+    }
+    
+    // Apply to right
+    if (col < self.boardParameters.gridSize - 1)
+    {
+        if (isAdd)
+        {
+            [self addColorToSingleCell:row col:col+1 color:zonerCell.inputColor];
+        }
+        else
+        {
+            [self removeColorFromSingleCell:row col:col+1 color:zonerCell.inputColor];
+        }
+    }
+    
+    // Apply to bottom
+    if (row < self.boardParameters.gridSize - 1)
+    {
+        // Apply to bottom left
+        if (col > 0)
+        {
+            if (isAdd)
+            {
+                [self addColorToSingleCell:row+1 col:col-1 color:zonerCell.inputColor];
+            }
+            else
+            {
+                [self removeColorFromSingleCell:row+1 col:col-1 color:zonerCell.inputColor];
+            }
+        }
+        
+        // Apply to bottom
+        if (isAdd)
+        {
+            [self addColorToSingleCell:row+1 col:col color:zonerCell.inputColor];
+        }
+        else
+        {
+            [self removeColorFromSingleCell:row+1 col:col color:zonerCell.inputColor];
+        }
+        
+        // Apply to bottom right
+        if (col < self.boardParameters.gridSize - 1)
+        {
+            if (isAdd)
+            {
+                [self addColorToSingleCell:row+1 col:col+1 color:zonerCell.inputColor];
+            }
+            else
+            {
+                [self removeColorFromSingleCell:row+1 col:col+1 color:zonerCell.inputColor];
+            }
+        }
+    }
 }
 
 @end

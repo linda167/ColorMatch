@@ -12,6 +12,7 @@
 - (IBAction)ColorButtonPressed:(id)sender;
 - (IBAction)GridButtonPressed:(id)sender;
 - (void)SetParametersForNewGame:(int)size worldId:(int)worldId levelId:(int)levelId;
+-(void)checkAndDoVictory;
 
 @property (weak, nonatomic) IBOutlet UIView *GridContainerView;
 @property (weak, nonatomic) IBOutlet UIView *GoalContainerView;
@@ -23,5 +24,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *MovesLabel;
 @property (weak, nonatomic) IBOutlet UILabel *LevelNumberLabel;
 @property (weak, nonatomic) IBOutlet UILabel *LevelLabel;
+@property NSInteger selectedColor;
 
 @end
