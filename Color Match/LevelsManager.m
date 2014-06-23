@@ -508,32 +508,32 @@
     
     if (worldId == 1 && levelId == 1)
     {
-        [topColorsState addObjectsFromArray:[NSArray arrayWithObjects:@"2", @"3", @"1", nil]];
-        [leftColorsState addObjectsFromArray:[NSArray arrayWithObjects:@"3", @"1", @"2", nil]];
+        [topColorsState addObjectsFromArray:[NSArray arrayWithObjects:@"1", @"2", @"3", nil]];
+        [leftColorsState addObjectsFromArray:[NSArray arrayWithObjects:@"0", @"0", @"0", nil]];
     }
     else if (worldId == 1 && levelId == 2)
     {
         [topColorsState addObjectsFromArray:[NSArray arrayWithObjects:@"1", @"0", @"3", nil]];
-        [leftColorsState addObjectsFromArray:[NSArray arrayWithObjects:@"1", @"2", @"3", nil]];
+        [leftColorsState addObjectsFromArray:[NSArray arrayWithObjects:@"1", @"0", @"3", nil]];
     }
     else if (worldId == 1 && levelId == 3)
     {
-        [topColorsState addObjectsFromArray:[NSArray arrayWithObjects:@"2", @"1", @"3", nil]];
-        [leftColorsState addObjectsFromArray:[NSArray arrayWithObjects:@"2", @"3", @"1", nil]];
+        [topColorsState addObjectsFromArray:[NSArray arrayWithObjects:@"3", @"0", @"3", nil]];
+        [leftColorsState addObjectsFromArray:[NSArray arrayWithObjects:@"2", @"2", @"2", nil]];
     }
     else if (worldId == 1 && levelId == 4)
     {
-        [topColorsState addObjectsFromArray:[NSArray arrayWithObjects:@"3", @"1", @"2", nil]];
-        [leftColorsState addObjectsFromArray:[NSArray arrayWithObjects:@"0", @"3", @"2", nil]];
+        [topColorsState addObjectsFromArray:[NSArray arrayWithObjects:@"0", @"1", @"2", nil]];
+        [leftColorsState addObjectsFromArray:[NSArray arrayWithObjects:@"1", @"2", @"0", nil]];
     }
     else if (worldId == 1 && levelId == 5)
     {
         [topColorsState addObjectsFromArray:[NSArray arrayWithObjects:@"3", @"1", @"1", @"2", nil]];
-        [leftColorsState addObjectsFromArray:[NSArray arrayWithObjects:@"2", @"3", @"1", @"3", nil]];
+        [leftColorsState addObjectsFromArray:[NSArray arrayWithObjects:@"2", @"3", @"0", @"0", nil]];
     }
     else if (worldId == 1 && levelId == 6)
     {
-        [topColorsState addObjectsFromArray:[NSArray arrayWithObjects:@"1", @"2", @"3", @"2", nil]];
+        [topColorsState addObjectsFromArray:[NSArray arrayWithObjects:@"1", @"0", @"3", @"2", nil]];
         [leftColorsState addObjectsFromArray:[NSArray arrayWithObjects:@"3", @"1", @"0", @"2", nil]];
     }
     else if (worldId == 1 && levelId == 7)
@@ -568,23 +568,23 @@
     }
     else if (worldId == 2 && levelId == 1)
     {
-        [topColorsState addObjectsFromArray:[NSArray arrayWithObjects:@"1", @"0", @"3", nil]];
-        [leftColorsState addObjectsFromArray:[NSArray arrayWithObjects:@"3", @"2", @"1", nil]];
+        [topColorsState addObjectsFromArray:[NSArray arrayWithObjects:@"0", @"0", @"0", nil]];
+        [leftColorsState addObjectsFromArray:[NSArray arrayWithObjects:@"3", @"0", @"2", nil]];
     }
     else if (worldId == 2 && levelId == 2)
     {
-        [topColorsState addObjectsFromArray:[NSArray arrayWithObjects:@"2", @"3", @"1", nil]];
-        [leftColorsState addObjectsFromArray:[NSArray arrayWithObjects:@"2", @"1", @"3", nil]];
+        [topColorsState addObjectsFromArray:[NSArray arrayWithObjects:@"0", @"3", @"1", nil]];
+        [leftColorsState addObjectsFromArray:[NSArray arrayWithObjects:@"2", @"0", @"0", nil]];
     }
     else if (worldId == 2 && levelId == 3)
     {
-        [topColorsState addObjectsFromArray:[NSArray arrayWithObjects:@"3", @"2", @"1", nil]];
+        [topColorsState addObjectsFromArray:[NSArray arrayWithObjects:@"3", @"2", @"0", nil]];
         [leftColorsState addObjectsFromArray:[NSArray arrayWithObjects:@"1", @"3", @"2", nil]];
     }
     else if (worldId == 2 && levelId == 4)
     {
-        [topColorsState addObjectsFromArray:[NSArray arrayWithObjects:@"0", @"1", @"3", nil]];
-        [leftColorsState addObjectsFromArray:[NSArray arrayWithObjects:@"2", @"0", @"3", nil]];
+        [topColorsState addObjectsFromArray:[NSArray arrayWithObjects:@"3", @"1", @"1", nil]];
+        [leftColorsState addObjectsFromArray:[NSArray arrayWithObjects:@"2", @"2", @"3", nil]];
     }
     else if (worldId == 2 && levelId == 5)
     {

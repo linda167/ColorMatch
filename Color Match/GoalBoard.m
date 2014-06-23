@@ -57,8 +57,6 @@
             if (cellType.intValue == Zoner)
             {
                 ((ZonerCell*)colorCell).inputColor = [self.boardCells getZonerValueAt:i col:j];
-                ((ZonerCell*)colorCell).row = i;
-                ((ZonerCell*)colorCell).col = j;
             }
             
             [row addObject:colorCell];

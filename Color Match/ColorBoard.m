@@ -195,6 +195,8 @@
     {
         case Zoner:
             colorCell = [[ZonerCell alloc] init:cellType];
+            ((ZonerCell*)colorCell).row = row;
+            ((ZonerCell*)colorCell).col = col;
             break;
         case Connector:
             colorCell = [[ConnectorCell alloc] init:cellType];

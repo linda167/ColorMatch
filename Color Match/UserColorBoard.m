@@ -486,6 +486,13 @@
     [self removeExistingGridColorButtons];
     [self removeExistingGridCells];
     [self removeExistingConnectingLines];
+    [self resetBoardState];
+}
+
+- (void)resetBoardState
+{
+    [self.allConnectorCells removeAllObjects];
+    self.connectorColorInput = 0;
 }
 
 -(NSNumber*)getCurrentColorForButton:(UIButton *)button;
@@ -712,10 +719,10 @@
         colorCell.inputColor = currentSelectedColor;
         [self applySpecialCell:colorCell isAdd:true];
         
-        // TODO: lindach
         // Update the outer color
         UIImage* newConnectorImage = [CommonUtils GetConnectorOuterImageForColor:currentSelectedColor];
-        [colorCell setImage:(UIView*)newConnectorImage];
+        UIButton* connectorButton = (UIButton*)colorCell.image;
+        [connectorButton setImage:newConnectorImage forState:UIControlStateNormal];
     }
     
     // User action was taken so we need to check for victory
