@@ -18,5 +18,6 @@
 -(bool)getLevelCompleteState:(int)worldId levelId:(int)levelId;
 -(int)getStarCount:(int)worldId levelId:(int)levelId;
 -(void)wipeData;
+-(int)getLastLevelCompletedInWorld;
 
 @end

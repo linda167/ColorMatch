@@ -187,7 +187,7 @@
         if (isLevelComplete != levelButton.isComplete)
         {
             UIImage *buttonImage = [self getImageForLevel:isLevelComplete];
-            levelButton.imageView.image = buttonImage;
+            [levelButton setImage:buttonImage forState:UIControlStateNormal];
             levelButton.isComplete = isLevelComplete;
         }
         

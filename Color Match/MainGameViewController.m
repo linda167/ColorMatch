@@ -312,7 +312,7 @@
         
         starsMessage = [[[NSString stringWithFormat:@"\n\nYou have earned %d", stars]
             stringByAppendingString:rainbowString ]
-            stringByAppendingString:@" stars!"];
+            stringByAppendingString: stars > 1 ? @" stars!" : @" star!"];
     }
     else
     {
@@ -429,7 +429,9 @@
     }
     else
     {
-        // TODO: transition to next world
+        // Transition to next world
+        self.worldId++;
+        self.levelId=1;
     }
     
     int gameSize = [LevelsManager GetGameSizeForWorld:self.worldId levelId:self.levelId];

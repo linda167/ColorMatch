@@ -8,6 +8,8 @@
 
 #import "UserData.h"
 
+static NSString *const LastLevelCompletedInWorldKey = @"LastLevelCompletedInWorld";
+
 @implementation UserData
 
 - (id)init
@@ -42,15 +44,22 @@
 -(void)storeLevelComplete:(int)worldId levelId:(int)levelId stars:(int)stars
 {
     int currentStarCount = [self getStarCount:worldId levelId:levelId];
+    NSMutableString *levelString = [UserData getLevelString:worldId levelId:levelId];
     
     // Don't overwrite higher star count
     if (stars > currentStarCount)
     {
-        NSMutableString *levelString = [UserData getLevelString:worldId levelId:levelId];
-        
         [self.userData setInteger:stars forKey:levelString];
-        [self.userData synchronize];
     }
+    
+    // Store last level complete
+    [self.userData setInteger:worldId forKey:LastLevelCompletedInWorldKey];
+    [self.userData synchronize];
+}
+
+-(int)getLastLevelCompletedInWorld
+{
+    return [self.userData integerForKey:LastLevelCompletedInWorldKey];
 }
 
 -(bool)getLevelCompleteState:(int)worldId levelId:(int)levelId

@@ -11,6 +11,7 @@
 #import "SingleWorldViewController.h"
 #import "MainGameViewController.h"
 #import "LevelSelectButton.h"
+#import "UserData.h"
 
 @interface WorldViewController ()
 @property int pageCount;
@@ -51,8 +52,21 @@
     self.pageControl.currentPage = 0;
     self.pageControl.enabled = TRUE;
     
-    [self loadScrollViewWithPage:0];
-    [self loadScrollViewWithPage:1];
+    // Get last world that we completed a level
+    int lastLevelCompletedInWorld = [[UserData sharedUserData] getLastLevelCompletedInWorld];
+    if (lastLevelCompletedInWorld > 1)
+    {
+        self.pageControl.currentPage = lastLevelCompletedInWorld-1;
+    }
+    
+    // Load views around current page
+    [self loadScrollViewAroundPage:self.pageControl.currentPage];
+    
+    // Scroll to world to show
+    if (lastLevelCompletedInWorld > 1)
+    {
+        [self scrollToCurrentPage:false /* animated */ ];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -100,10 +114,7 @@
     if (self.pageControl.currentPage != page)
     {
         self.pageControl.currentPage = page;
-        
-        [self loadScrollViewWithPage:page - 1];
-        [self loadScrollViewWithPage:page];
-        [self loadScrollViewWithPage:page + 1];
+        [self loadScrollViewAroundPage:page];
         
         // Let single world page controller know it's about to be shown
         [[self getCurrentPageViewController] onViewShown];
@@ -114,20 +125,30 @@
 {
     self.pageControlUsed = NO;
 }
+
 - (IBAction)changePage:(id)sender
 {
     int page = self.pageControl.currentPage;
-    [self loadScrollViewWithPage:page - 1];
-    [self loadScrollViewWithPage:page];
-    [self loadScrollViewWithPage:page + 1];
-    CGRect frame = self.scrollView.frame;
-    frame.origin.x = frame.size.width * page;
-    frame.origin.y = 0;
-    [self.scrollView scrollRectToVisible:frame animated:YES];
-    self.pageControlUsed = YES;
+    [self loadScrollViewAroundPage:page];
+    [self scrollToCurrentPage:true /* animated */ ];
     
     // Let single world page controller know it's about to be shown
     [[self getCurrentPageViewController] onViewShown];
+}
+
+- (void)loadScrollViewAroundPage:(int)page
+{
+    [self loadScrollViewWithPage:page - 1];
+    [self loadScrollViewWithPage:page];
+    [self loadScrollViewWithPage:page + 1];
+}
+
+- (void)scrollToCurrentPage:(bool)animated
+{
+    CGRect frame = self.scrollView.frame;
+    frame.origin.x = frame.size.width * self.pageControl.currentPage;
+    frame.origin.y = 0;
+    [self.scrollView scrollRectToVisible:frame animated:animated];
 }
 
 - (void)didReceiveMemoryWarning
@@ -150,7 +171,6 @@
         [destinationController SetParametersForNewGame:gameSize worldId:levelSelectButton.worldId levelId:levelSelectButton.levelId];
     }
 }
-
 
 /*
 #pragma mark - Navigation
