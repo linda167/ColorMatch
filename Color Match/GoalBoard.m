@@ -69,6 +69,7 @@
     }
 }
 
+// TODO: lindach: Remove
 - (void)removeExistingGoalColorCells
 {
     for (int i=0; i<self.colorCellSections.count; i++)
@@ -356,6 +357,11 @@
             ColorCell *colorCell = [row objectAtIndex:j];
             if (colorCell.cellType == Zoner)
             {
+                [self applySpecialCell:colorCell isAdd:true];
+            }
+            else if (colorCell.cellType == Connector)
+            {
+                ((ConnectorCell*)colorCell).inputColor = self.boardCells.connectorCellInput;
                 [self applySpecialCell:colorCell isAdd:true];
             }
         }

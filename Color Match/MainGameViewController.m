@@ -439,7 +439,7 @@
 - (void)removeExistingBoard
 {
     [_userColorBoard removeExistingBoard];
-    [_goalBoard removeExistingGoalColorCells];
+    [_goalBoard removeExistingGridCells];
     [_goalBoard removeExistingGoalColorsState];
 }
 

@@ -367,4 +367,28 @@
     }
 }
 
+- (void)removeExistingGridCells
+{
+    for (int i=0; i<self.colorCellSections.count; i++)
+    {
+        NSMutableArray *row = [self.colorCellSections objectAtIndex:i];
+        for (int j=0; j<row.count; j++)
+        {
+            ColorCell *colorCell = [row objectAtIndex:j];
+            UIView *cellBlock = [colorCell image];
+            [cellBlock removeFromSuperview];
+            
+            if (colorCell.specialImage != NULL)
+            {
+                UIImageView *specialImageCell = colorCell.specialImage;
+                [specialImageCell removeFromSuperview];
+            }
+        }
+        
+        [row removeAllObjects];
+    }
+    
+    [self.colorCellSections removeAllObjects];
+}
+
 @end

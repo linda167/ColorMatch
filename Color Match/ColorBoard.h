@@ -27,5 +27,6 @@
 -(UIImage*)GetImageForCellType:(int)cellType;
 -(void)applySpecialCell:(ColorCell*)colorCell isAdd:(bool)isAdd;
 -(UIView*)getUIViewForCell:(int)cellType xOffset:(int)xOffset yOffset:(int)yOffset size:(int)size colorCell:(ColorCell*)colorCell;
+- (void)removeExistingGridCells;
 
 @end
