@@ -91,6 +91,26 @@
 		BF90799C19560FE3000E6E58 /* connectorOuterWhite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF90799019560FE3000E6E58 /* connectorOuterWhite@2x.png */; };
 		BF90799D19560FE3000E6E58 /* connectorOuterYellow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF90799119560FE3000E6E58 /* connectorOuterYellow@2x.png */; };
 		BF9079A019564F29000E6E58 /* ConnectorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BF90799F19564F29000E6E58 /* ConnectorCell.m */; };
+		BF9079AC195E073E000E6E58 /* BlockBlue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF9079A4195E073E000E6E58 /* BlockBlue@2x.png */; };
+		BF9079AD195E073E000E6E58 /* BlockBrown@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF9079A5195E073E000E6E58 /* BlockBrown@2x.png */; };
+		BF9079AE195E073E000E6E58 /* BlockGreen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF9079A6195E073E000E6E58 /* BlockGreen@2x.png */; };
+		BF9079AF195E073E000E6E58 /* BlockOrange@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF9079A7195E073E000E6E58 /* BlockOrange@2x.png */; };
+		BF9079B0195E073E000E6E58 /* BlockPurple@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF9079A8195E073E000E6E58 /* BlockPurple@2x.png */; };
+		BF9079B1195E073E000E6E58 /* BlockRed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF9079A9195E073E000E6E58 /* BlockRed@2x.png */; };
+		BF9079B2195E073E000E6E58 /* BlockWhite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF9079AA195E073E000E6E58 /* BlockWhite@2x.png */; };
+		BF9079B3195E073E000E6E58 /* BlockYellow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF9079AB195E073E000E6E58 /* BlockYellow@2x.png */; };
+		BF9079B8195E1040000E6E58 /* EmptyCircle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF9079B4195E1040000E6E58 /* EmptyCircle@2x.png */; };
+		BF9079B9195E1040000E6E58 /* FilledCircleBlue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF9079B5195E1040000E6E58 /* FilledCircleBlue@2x.png */; };
+		BF9079BA195E1040000E6E58 /* FilledCircleRed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF9079B6195E1040000E6E58 /* FilledCircleRed@2x.png */; };
+		BF9079BB195E1040000E6E58 /* FilledCircleYellow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF9079B7195E1040000E6E58 /* FilledCircleYellow@2x.png */; };
+		BF9079C4195E1819000E6E58 /* Blue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF9079BC195E1819000E6E58 /* Blue@2x.png */; };
+		BF9079C5195E1819000E6E58 /* BlueSelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF9079BD195E1819000E6E58 /* BlueSelected@2x.png */; };
+		BF9079C6195E1819000E6E58 /* Red@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF9079BE195E1819000E6E58 /* Red@2x.png */; };
+		BF9079C7195E1819000E6E58 /* RedSelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF9079BF195E1819000E6E58 /* RedSelected@2x.png */; };
+		BF9079C8195E1819000E6E58 /* White@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF9079C0195E1819000E6E58 /* White@2x.png */; };
+		BF9079C9195E1819000E6E58 /* WhiteSelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF9079C1195E1819000E6E58 /* WhiteSelected@2x.png */; };
+		BF9079CA195E1819000E6E58 /* Yellow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF9079C2195E1819000E6E58 /* Yellow@2x.png */; };
+		BF9079CB195E1819000E6E58 /* YellowSelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF9079C3195E1819000E6E58 /* YellowSelected@2x.png */; };
 		BFA3A2B4192D899D00C1BB7D /* ReflectorArrowLtD@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFA3A2B2192D899D00C1BB7D /* ReflectorArrowLtD@2x.png */; };
 		BFA3A2B5192D899D00C1BB7D /* ReflectorArrowTtR@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFA3A2B3192D899D00C1BB7D /* ReflectorArrowTtR@2x.png */; };
 		BFA3A2BC1931401700C1BB7D /* ReflectorArrowLtDBlue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFA3A2B61931401700C1BB7D /* ReflectorArrowLtDBlue@2x.png */; };
@@ -226,6 +246,26 @@
 		BF90799119560FE3000E6E58 /* connectorOuterYellow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "connectorOuterYellow@2x.png"; sourceTree = "<group>"; };
 		BF90799E19564F29000E6E58 /* ConnectorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectorCell.h; sourceTree = "<group>"; };
 		BF90799F19564F29000E6E58 /* ConnectorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectorCell.m; sourceTree = "<group>"; };
+		BF9079A4195E073E000E6E58 /* BlockBlue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BlockBlue@2x.png"; sourceTree = "<group>"; };
+		BF9079A5195E073E000E6E58 /* BlockBrown@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BlockBrown@2x.png"; sourceTree = "<group>"; };
+		BF9079A6195E073E000E6E58 /* BlockGreen@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BlockGreen@2x.png"; sourceTree = "<group>"; };
+		BF9079A7195E073E000E6E58 /* BlockOrange@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BlockOrange@2x.png"; sourceTree = "<group>"; };
+		BF9079A8195E073E000E6E58 /* BlockPurple@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BlockPurple@2x.png"; sourceTree = "<group>"; };
+		BF9079A9195E073E000E6E58 /* BlockRed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BlockRed@2x.png"; sourceTree = "<group>"; };
+		BF9079AA195E073E000E6E58 /* BlockWhite@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BlockWhite@2x.png"; sourceTree = "<group>"; };
+		BF9079AB195E073E000E6E58 /* BlockYellow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BlockYellow@2x.png"; sourceTree = "<group>"; };
+		BF9079B4195E1040000E6E58 /* EmptyCircle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "EmptyCircle@2x.png"; sourceTree = "<group>"; };
+		BF9079B5195E1040000E6E58 /* FilledCircleBlue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "FilledCircleBlue@2x.png"; sourceTree = "<group>"; };
+		BF9079B6195E1040000E6E58 /* FilledCircleRed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "FilledCircleRed@2x.png"; sourceTree = "<group>"; };
+		BF9079B7195E1040000E6E58 /* FilledCircleYellow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "FilledCircleYellow@2x.png"; sourceTree = "<group>"; };
+		BF9079BC195E1819000E6E58 /* Blue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Blue@2x.png"; sourceTree = "<group>"; };
+		BF9079BD195E1819000E6E58 /* BlueSelected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BlueSelected@2x.png"; sourceTree = "<group>"; };
+		BF9079BE195E1819000E6E58 /* Red@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Red@2x.png"; sourceTree = "<group>"; };
+		BF9079BF195E1819000E6E58 /* RedSelected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RedSelected@2x.png"; sourceTree = "<group>"; };
+		BF9079C0195E1819000E6E58 /* White@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "White@2x.png"; sourceTree = "<group>"; };
+		BF9079C1195E1819000E6E58 /* WhiteSelected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "WhiteSelected@2x.png"; sourceTree = "<group>"; };
+		BF9079C2195E1819000E6E58 /* Yellow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Yellow@2x.png"; sourceTree = "<group>"; };
+		BF9079C3195E1819000E6E58 /* YellowSelected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "YellowSelected@2x.png"; sourceTree = "<group>"; };
 		BFA3A2B2192D899D00C1BB7D /* ReflectorArrowLtD@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReflectorArrowLtD@2x.png"; sourceTree = "<group>"; };
 		BFA3A2B3192D899D00C1BB7D /* ReflectorArrowTtR@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReflectorArrowTtR@2x.png"; sourceTree = "<group>"; };
 		BFA3A2B61931401700C1BB7D /* ReflectorArrowLtDBlue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReflectorArrowLtDBlue@2x.png"; sourceTree = "<group>"; };
@@ -346,6 +386,26 @@
 		AF2C225A1874B95000082561 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				BF9079BC195E1819000E6E58 /* Blue@2x.png */,
+				BF9079BD195E1819000E6E58 /* BlueSelected@2x.png */,
+				BF9079BE195E1819000E6E58 /* Red@2x.png */,
+				BF9079BF195E1819000E6E58 /* RedSelected@2x.png */,
+				BF9079C0195E1819000E6E58 /* White@2x.png */,
+				BF9079C1195E1819000E6E58 /* WhiteSelected@2x.png */,
+				BF9079C2195E1819000E6E58 /* Yellow@2x.png */,
+				BF9079C3195E1819000E6E58 /* YellowSelected@2x.png */,
+				BF9079B4195E1040000E6E58 /* EmptyCircle@2x.png */,
+				BF9079B5195E1040000E6E58 /* FilledCircleBlue@2x.png */,
+				BF9079B6195E1040000E6E58 /* FilledCircleRed@2x.png */,
+				BF9079B7195E1040000E6E58 /* FilledCircleYellow@2x.png */,
+				BF9079A4195E073E000E6E58 /* BlockBlue@2x.png */,
+				BF9079A5195E073E000E6E58 /* BlockBrown@2x.png */,
+				BF9079A6195E073E000E6E58 /* BlockGreen@2x.png */,
+				BF9079A7195E073E000E6E58 /* BlockOrange@2x.png */,
+				BF9079A8195E073E000E6E58 /* BlockPurple@2x.png */,
+				BF9079A9195E073E000E6E58 /* BlockRed@2x.png */,
+				BF9079AA195E073E000E6E58 /* BlockWhite@2x.png */,
+				BF9079AB195E073E000E6E58 /* BlockYellow@2x.png */,
 				BF90798619560FE3000E6E58 /* connectorInnerBlue@2x.png */,
 				BF90798719560FE3000E6E58 /* connectorInnerBrown@2x.png */,
 				BF90798819560FE3000E6E58 /* connectorInnerGreen@2x.png */,
@@ -562,6 +622,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AFADA21F1877D20D00FADA22 /* BlockOrange.png in Resources */,
+				BF9079C4195E1819000E6E58 /* Blue@2x.png in Resources */,
 				BF90799619560FE3000E6E58 /* connectorInnerPurple@2x.png in Resources */,
 				BF90799A19560FE3000E6E58 /* connectorOuterBlue@2x.png in Resources */,
 				BF874D11192B28C1001701A2 /* ReflectorLtDGoal@2x.png in Resources */,
@@ -569,16 +630,22 @@
 				BF9079761953DF94000E6E58 /* zonerBlue@2x.png in Resources */,
 				BF90799D19560FE3000E6E58 /* connectorOuterYellow@2x.png in Resources */,
 				AFADA2281877D20D00FADA22 /* FilledCircleBlue.png in Resources */,
+				BF9079CA195E1819000E6E58 /* Yellow@2x.png in Resources */,
 				BF9079781953DF94000E6E58 /* zonerRed@2x.png in Resources */,
 				AFADA2321877D20D00FADA22 /* YellowSelected.png in Resources */,
+				BF9079C7195E1819000E6E58 /* RedSelected@2x.png in Resources */,
+				BF9079BB195E1040000E6E58 /* FilledCircleYellow@2x.png in Resources */,
 				AF2C22391874B8B800082561 /* Main_iPad.storyboard in Resources */,
+				BF9079C6195E1819000E6E58 /* Red@2x.png in Resources */,
 				AFADA22F1877D20D00FADA22 /* White.png in Resources */,
 				AF2C223E1874B8B800082561 /* Images.xcassets in Resources */,
 				AFADA22E1877D20D00FADA22 /* RedSelected.png in Resources */,
 				AFADA2311877D20D00FADA22 /* Yellow.png in Resources */,
 				AFADA2301877D20D00FADA22 /* WhiteSelected.png in Resources */,
+				BF9079AF195E073E000E6E58 /* BlockOrange@2x.png in Resources */,
 				AFADA2261877D20D00FADA22 /* ButtonBar.png in Resources */,
 				BFA3A2CC193AF4D900C1BB7D /* incompleteLevel@2x.png in Resources */,
+				BF9079C9195E1819000E6E58 /* WhiteSelected@2x.png in Resources */,
 				AFADA2241877D20D00FADA22 /* Blue.png in Resources */,
 				BFA3A2B5192D899D00C1BB7D /* ReflectorArrowTtR@2x.png in Resources */,
 				BFA3A2CB193AF4D900C1BB7D /* completeLevel@2x.png in Resources */,
@@ -594,6 +661,8 @@
 				BF90797A1953DF94000E6E58 /* zonerYellow@2x.png in Resources */,
 				AFADA2231877D20D00FADA22 /* BlockYellow.png in Resources */,
 				BF90799419560FE3000E6E58 /* connectorInnerGreen@2x.png in Resources */,
+				BF9079BA195E1040000E6E58 /* FilledCircleRed@2x.png in Resources */,
+				BF9079C8195E1819000E6E58 /* White@2x.png in Resources */,
 				BF9079771953DF94000E6E58 /* zonerGoal@2x.png in Resources */,
 				BFA3A2BE1931401700C1BB7D /* ReflectorArrowLtDYellow@2x.png in Resources */,
 				BF90799319560FE3000E6E58 /* connectorInnerBrown@2x.png in Resources */,
@@ -602,6 +671,8 @@
 				BF90799719560FE3000E6E58 /* connectorInnerRed@2x.png in Resources */,
 				AFADA22A1877D20D00FADA22 /* FilledCircleRed.png in Resources */,
 				AFADA2271877D20D00FADA22 /* EmptyCircle.png in Resources */,
+				BF9079B1195E073E000E6E58 /* BlockRed@2x.png in Resources */,
+				BF9079CB195E1819000E6E58 /* YellowSelected@2x.png in Resources */,
 				AFADA2291877D20D00FADA22 /* FilledCircleGreen.png in Resources */,
 				AFADA2211877D20D00FADA22 /* BlockRed.png in Resources */,
 				BF90799B19560FE3000E6E58 /* connectorOuterRed@2x.png in Resources */,
@@ -613,16 +684,25 @@
 				BF907965194D6284000E6E58 /* rainbow@2x.png in Resources */,
 				BFA3A2BD1931401700C1BB7D /* ReflectorArrowLtDRed@2x.png in Resources */,
 				BF90799819560FE3000E6E58 /* connectorInnerWhite@2x.png in Resources */,
+				BF9079B9195E1040000E6E58 /* FilledCircleBlue@2x.png in Resources */,
+				BF9079B8195E1040000E6E58 /* EmptyCircle@2x.png in Resources */,
 				AFB75A9B188339C900CAB736 /* GameLogo.png in Resources */,
+				BF9079AD195E073E000E6E58 /* BlockBrown@2x.png in Resources */,
 				BF90796C194D6E42000E6E58 /* 2stars@2x.png in Resources */,
+				BF9079AC195E073E000E6E58 /* BlockBlue@2x.png in Resources */,
+				BF9079AE195E073E000E6E58 /* BlockGreen@2x.png in Resources */,
 				BF9079821953EE21000E6E58 /* BlockBrown.png in Resources */,
+				BF9079C5195E1819000E6E58 /* BlueSelected@2x.png in Resources */,
 				BF90796A194D6E42000E6E58 /* 0stars@2x.png in Resources */,
 				BF90799219560FE3000E6E58 /* connectorInnerBlue@2x.png in Resources */,
 				BFA3A2B4192D899D00C1BB7D /* ReflectorArrowLtD@2x.png in Resources */,
 				AFADA2201877D20D00FADA22 /* BlockPurple.png in Resources */,
 				BFA3A2C11931401700C1BB7D /* ReflectorArrowTtRYellow@2x.png in Resources */,
 				AFB8969318822F2F003FAEF4 /* ButtonBar2.png in Resources */,
+				BF9079B2195E073E000E6E58 /* BlockWhite@2x.png in Resources */,
 				BFA3A2C01931401700C1BB7D /* ReflectorArrowTtRRed@2x.png in Resources */,
+				BF9079B3195E073E000E6E58 /* BlockYellow@2x.png in Resources */,
+				BF9079B0195E073E000E6E58 /* BlockPurple@2x.png in Resources */,
 				AFADA2221877D20D00FADA22 /* BlockWhite.png in Resources */,
 				AFADA21D1877D20D00FADA22 /* BlockBlue.png in Resources */,
 				BF90799C19560FE3000E6E58 /* connectorOuterWhite@2x.png in Resources */,

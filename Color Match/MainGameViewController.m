@@ -101,11 +101,17 @@
         case 3:
             boardParameters.colorCellSize = 50;
             boardParameters.colorCellSpacing = 14;
-            boardParameters.yOffsetForFirstTopGridButton= 15;
-            boardParameters.xOffsetForFirstLeftGridButton = 29;
+            boardParameters.yOffsetForFirstTopGridButton= 4;
+            boardParameters.xOffsetForFirstLeftGridButton = 31;
             boardParameters.emptyPaddingInGridButton = 13;
-            boardParameters.goalColorCellSize = 40;
+            boardParameters.goalColorCellSize = 46;
             boardParameters.goalColorCellSpacing = 8;
+            boardParameters.xAdjustmentForColorCells = -4;
+            boardParameters.reflectorArrowCellSize = 49;
+            boardParameters.reflectorLeftToDownArrowXAdjustment = 2;
+            boardParameters.reflectorLeftToDownArrowYAdjustment = 6;
+            boardParameters.reflectorTopToRightArrowXAdjustment = 6;
+            boardParameters.reflectorTopToRightArrowYAdjustment = 2;
             break;
         case 4:
             boardParameters.colorCellSize = 40;
@@ -113,8 +119,14 @@
             boardParameters.yOffsetForFirstTopGridButton= 6;
             boardParameters.xOffsetForFirstLeftGridButton = 27;
             boardParameters.emptyPaddingInGridButton = 11;
-            boardParameters.goalColorCellSize = 32;
+            boardParameters.goalColorCellSize = 34;
             boardParameters.goalColorCellSpacing = 6;
+            boardParameters.xAdjustmentForColorCells = -6;
+            boardParameters.reflectorArrowCellSize = 39;
+            boardParameters.reflectorLeftToDownArrowXAdjustment = 2;
+            boardParameters.reflectorLeftToDownArrowYAdjustment = 5;
+            boardParameters.reflectorTopToRightArrowXAdjustment = 5;
+            boardParameters.reflectorTopToRightArrowYAdjustment = 2;
             break;
         case 5:
             boardParameters.colorCellSize = 35;
@@ -124,6 +136,12 @@
             boardParameters.emptyPaddingInGridButton = 9;
             boardParameters.goalColorCellSize = 27;
             boardParameters.goalColorCellSpacing = 4;
+            boardParameters.xAdjustmentForColorCells = 0;
+            boardParameters.reflectorArrowCellSize = 35;
+            boardParameters.reflectorLeftToDownArrowXAdjustment = 1;
+            boardParameters.reflectorLeftToDownArrowYAdjustment = 2;
+            boardParameters.reflectorTopToRightArrowXAdjustment = 2;
+            boardParameters.reflectorTopToRightArrowYAdjustment = 1;
             break;
         default:
             [NSException raise:@"Invalid input" format:@"Invalid board size"];
@@ -432,6 +450,8 @@
         // Transition to next world
         self.worldId++;
         self.levelId=1;
+        
+        // TODO: Need to handle last world
     }
     
     int gameSize = [LevelsManager GetGameSizeForWorld:self.worldId levelId:self.levelId];

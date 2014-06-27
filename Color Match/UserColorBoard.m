@@ -56,13 +56,16 @@
     [self CreateConnectorLinesFrame];
     [self DrawVerticalConnectingLines];
     [self DrawHorizontalConnectingLines];
+    
+    // Hide certain grid color buttons if needed
+    [self adjustGridColorButtons];
 }
 
 - (void)initColorCells
 {
     // Color cell start 1 cell away from the left, so the xOffset is calculated by offset of the first column + 1 cellspacing
     int cellSizePlusSpace = self.boardParameters.colorCellSize + self.boardParameters.colorCellSpacing;
-    int xOffsetInitial = self.boardParameters.xOffsetForFirstLeftGridButton + cellSizePlusSpace;
+    int xOffsetInitial = self.boardParameters.xOffsetForFirstLeftGridButton + cellSizePlusSpace + self.boardParameters.xAdjustmentForColorCells;
     int xOffset = xOffsetInitial;
     
     // Color cells starts 1 cell away from the top due to grid buttons
@@ -115,7 +118,7 @@
         // Accounts for extra spacing in top button
         int topAdjustment = -1 * (self.boardParameters.emptyPaddingInGridButton);
         int topY = topConnection.frame.origin.y + topConnection.frame.size.height + topAdjustment;
-        int topX = topConnection.frame.origin.x + topConnection.frame.size.width / 2;
+        int topX = topConnection.frame.origin.x + topConnection.frame.size.width / 2 + 0.5;
         
         // Draw the line
         LineInfo *lineInfo = [[LineInfo alloc] init];
@@ -139,7 +142,7 @@
         GridColorButton *leftColorButton = [leftConnections objectAtIndex:i];
         UIView *leftConnection = leftColorButton.button;
         
-        int leftY = leftConnection.frame.origin.y + leftConnection.frame.size.height / 2;
+        int leftY = leftConnection.frame.origin.y + leftConnection.frame.size.height / 2 + 0.5;
         int leftAdjustment = -1 * (self.boardParameters.emptyPaddingInGridButton);   // Accounts for extra spacing in left button
         int leftX = leftConnection.frame.origin.x + leftConnection.frame.size.width + leftAdjustment;
         
@@ -242,7 +245,7 @@
 -(int)DrawHorizontalLineToConnection:(ColorCell*)connection lineInfo:(LineInfo*)lineInfo currentY:(int)currentY drawToCenter:(BOOL)drawToCenter
 {
     UIView *rightConnection = [connection image];
-    int rightAdjustment = 3;   // Accounts for extra spacing in right button
+    int rightAdjustment = 4;   // Accounts for extra spacing in right button
     int rightX = rightConnection.frame.origin.x + rightAdjustment;
     
     if (drawToCenter)
@@ -264,7 +267,7 @@
 -(int)DrawVerticalLineToConnection:(ColorCell*)connection lineInfo:(LineInfo*)lineInfo currentX:(int)currentX drawToCenter:(BOOL)drawToCenter
 {
     UIView *bottomConnection = [connection image];
-    int bottomAdjustment = 3;   // Accounts for extra spacing in bottom button
+    int bottomAdjustment = 4;   // Accounts for extra spacing in bottom button
     int bottomY = bottomConnection.frame.origin.y + bottomAdjustment;
     
     if (drawToCenter)
@@ -383,7 +386,7 @@
     
     // Color cell start 1 cell away from the left, so the xOffset is calculated by offset of the first column + 1 cellspacing
     int cellSizePlusSpace = self.boardParameters.colorCellSize + self.boardParameters.colorCellSpacing;
-    int xOffset = self.boardParameters.xOffsetForFirstLeftGridButton + cellSizePlusSpace;
+    int xOffset = self.boardParameters.xOffsetForFirstLeftGridButton + cellSizePlusSpace + self.boardParameters.xAdjustmentForColorCells;
     int yOffset = self.boardParameters.yOffsetForFirstTopGridButton;
     
     // Create top buttons
@@ -417,6 +420,38 @@
         [_leftGridColorButtons addObject:gridColorButton];
         yOffset += cellSizePlusSpace;
     }
+}
+
+-(void)adjustGridColorButtons
+{
+    NSArray *topButtons = self.topGridColorButtons;
+    NSArray *leftButtons = self.leftGridColorButtons;
+    NSArray *topRow = [self.colorCellSections objectAtIndex:0];
+    for (int i = 0; i < topRow.count; i++)
+    {
+        ColorCell *colorCell = [topRow objectAtIndex:i];
+        if (colorCell.cellType == ReflectorLeftToDown)
+        {
+            // If the first cell under a top button is a LeftToDown cell,
+            // there's no need for a top button so remove it
+            GridColorButton *gridColorButton = [topButtons objectAtIndex:i];
+            [gridColorButton.button removeFromSuperview];
+        }
+    }
+    
+    for (int i = 0; i < leftButtons.count; i++)
+    {
+        NSArray *row = [self.colorCellSections objectAtIndex:i];
+        ColorCell *colorCell = [row objectAtIndex:0];
+        if (colorCell.cellType == ReflectorTopToRight)
+        {
+            // If the first cell to the right of a left button is a TopToRight cell,
+            // there's no need for a left button so remove it
+            GridColorButton *gridColorButton = [leftButtons objectAtIndex:i];
+            [gridColorButton.button removeFromSuperview];
+        }
+    }
+    
 }
 
 -(void)resetCells
@@ -527,10 +562,15 @@
         
         if (colorCell.cellType == ReflectorLeftToDown || colorCell.cellType == ReflectorTopToRight)
         {
-            // Fix width for now for all layouts so arrows look consistent
-            size = 35;
-            int adjustmentX = [self getXAdjustmentForSpecialCell:colorCell.cellType];
-            int adjustmentY = [self getYAdjustmentForSpecialCell:colorCell.cellType];
+            size = self.boardParameters.reflectorArrowCellSize;
+            
+            int adjustmentX = colorCell.cellType == ReflectorLeftToDown ?
+                self.boardParameters.reflectorLeftToDownArrowXAdjustment :
+                self.boardParameters.reflectorTopToRightArrowXAdjustment;
+            
+            int adjustmentY = colorCell.cellType == ReflectorLeftToDown ?
+                self.boardParameters.reflectorLeftToDownArrowYAdjustment :
+                self.boardParameters.reflectorTopToRightArrowYAdjustment;
             
             x = colorCell.image.frame.origin.x + adjustmentX;
             y = colorCell.image.frame.origin.y + adjustmentY;
@@ -548,71 +588,6 @@
         colorCell.specialImage = specialImageView;
         [self.containerView addSubview:specialImageView];
     }
-}
-
--(int)getXAdjustmentForSpecialCell:(int)cellType
-{
-    switch (cellType)
-    {
-        case ReflectorLeftToDown:
-            if (self.boardParameters.gridSize == 4)
-            {
-                return 3;
-            }
-            else if (self.boardParameters.gridSize == 3)
-            {
-                return 8;
-            }
-            break;
-        case ReflectorTopToRight:
-            if (self.boardParameters.gridSize == 5)
-            {
-                return 2;
-            }
-            else if (self.boardParameters.gridSize == 4)
-            {
-                return 4;
-            }
-            else if (self.boardParameters.gridSize == 3)
-            {
-                return 12;
-            }
-            break;
-    }
-    
-    return 0;
-}
-
--(int)getYAdjustmentForSpecialCell:(int)cellType
-{
-    switch (cellType)
-    {
-        case ReflectorLeftToDown:
-            if (self.boardParameters.gridSize == 5)
-            {
-                return 2;
-            }
-            else if (self.boardParameters.gridSize == 4)
-            {
-                return 4;
-            }
-            else if (self.boardParameters.gridSize == 3)
-            {
-                return 12;
-            }
-        case ReflectorTopToRight:
-            if (self.boardParameters.gridSize == 4)
-            {
-                return 3;
-            }
-            else if (self.boardParameters.gridSize == 3)
-            {
-                return 8;
-            }
-            break;
-    }
-    
-    return 0;
 }
 
 -(UIView*)getUIViewForCell:(int)cellType xOffset:(int)xOffset yOffset:(int)yOffset size:(int)size colorCell:(ColorCell*)colorCell

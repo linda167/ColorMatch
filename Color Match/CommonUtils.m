@@ -147,17 +147,17 @@
 
 +(UIColor *) GetBlueColor
 {
-    return [UIColor colorWithRed:(0/255.0) green:(38/255.0) blue:(255/255.0) alpha:1];
+    return [UIColor colorWithRed:(41/255.0) green:(71/255.0) blue:(242/255.0) alpha:1];
 }
 
 +(UIColor *) GetYellowColor
 {
-    return [UIColor colorWithRed:(255/255.0) green:(216/255.0) blue:(0/255.0) alpha:1];
+    return [UIColor colorWithRed:(247/255.0) green:(206/255.0) blue:(0/255.0) alpha:1];
 }
 
 +(UIColor *) GetRedColor
 {
-    return [UIColor colorWithRed:(255/255.0) green:(0/255.0) blue:(0/255.0) alpha:1];
+    return [UIColor colorWithRed:(221/255.0) green:(37/255.0) blue:(37/255.0) alpha:1];
 }
 
 +(void) Log:(NSMutableString*)string

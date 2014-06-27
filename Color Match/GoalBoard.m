@@ -40,7 +40,7 @@
     int cellSizePlusSpace = self.boardParameters.goalColorCellSize + self.boardParameters.goalColorCellSpacing;
     int xOffsetInitial = 0;
     int xOffset = xOffsetInitial;
-    int yOffset = self.boardParameters.yOffsetForFirstTopGridButton;
+    int yOffset = 0;
     
     self.colorCellSections = [[NSMutableArray alloc] init];
     
@@ -67,26 +67,6 @@
         yOffset += cellSizePlusSpace;
         xOffset = xOffsetInitial;
     }
-}
-
-// TODO: lindach: Remove
-- (void)removeExistingGoalColorCells
-{
-    for (int i=0; i<self.colorCellSections.count; i++)
-    {
-        NSMutableArray *row = [self.colorCellSections objectAtIndex:i];
-        
-        for (int j=0; j<row.count; j++)
-        {
-            ColorCell *colorCell = [row objectAtIndex:j];
-            UIView *cellBlock = [colorCell image];
-            [cellBlock removeFromSuperview];
-        }
-        
-        [row removeAllObjects];
-    }
-    
-    [self.colorCellSections removeAllObjects];
 }
 
 -(void)randomGenGoalStates

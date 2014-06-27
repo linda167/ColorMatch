@@ -15,11 +15,17 @@ typedef struct BoardParameters
     int gridSize;
     int colorCellSize;
     int colorCellSpacing;
-    int yOffsetForFirstTopGridButton;
     int xOffsetForFirstLeftGridButton;
+    int yOffsetForFirstTopGridButton;
     int emptyPaddingInGridButton;
     int goalColorCellSize;
     int goalColorCellSpacing;
+    int xAdjustmentForColorCells;
+    int reflectorArrowCellSize;
+    int reflectorLeftToDownArrowXAdjustment;
+    int reflectorTopToRightArrowXAdjustment;
+    int reflectorLeftToDownArrowYAdjustment;
+    int reflectorTopToRightArrowYAdjustment;
 } BoardParameters;
 
 // Cell type
