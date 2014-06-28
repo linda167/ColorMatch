@@ -630,6 +630,13 @@
     int currentSelectedColor = (int)self.viewController.selectedColor;
     ZonerCellButton* zonerCellButton = (ZonerCellButton*)sender;
     
+    int existingInputColor = ((ZonerCell*)zonerCellButton.colorCell).inputColor;
+    if (existingInputColor == currentSelectedColor)
+    {
+        // Do nothing if color didn't change
+        return;
+    }
+    
     // Collect views to animate
     NSMutableArray* viewsToAnimate = [[NSMutableArray alloc] init];
     [viewsToAnimate addObject:zonerCellButton];
@@ -653,7 +660,6 @@
     
     [zonerCellButton setImage:newZonerImage forState:UIControlStateNormal];
     
-    int existingInputColor = ((ZonerCell*)zonerCellButton.colorCell).inputColor;
     if (existingInputColor != 0)
     {
         [self applySpecialCell:zonerCellButton.colorCell isAdd:false cellsAffected:NULL];
@@ -665,8 +671,7 @@
     // Do animation
     [CommonUtils AnimateViewsAffected:viewsToAnimate];
     
-    // User action was taken so we need to check for victory
-    [self.viewController checkAndDoVictory];
+    [self.viewController OnUserActionTaken];
 }
 
 - (IBAction)connectorCellPressed:(id)sender
@@ -677,6 +682,12 @@
     NSMutableArray* viewsToAnimate = [[NSMutableArray alloc] init];
     for (ConnectorCell* colorCell in self.allConnectorCells)
     {
+        if (colorCell.inputColor == currentSelectedColor)
+        {
+            // Do nothing if color didn't change
+            return;
+        }
+        
         // Remove existing connector input
         [self applySpecialCell:colorCell isAdd:false cellsAffected:NULL];
         
@@ -694,8 +705,7 @@
     // Do animation
     [CommonUtils AnimateViewsAffected:viewsToAnimate];
     
-    // User action was taken so we need to check for victory
-    [self.viewController checkAndDoVictory];
+    [self.viewController OnUserActionTaken];
 }
 
 @end

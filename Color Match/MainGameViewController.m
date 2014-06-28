@@ -354,22 +354,34 @@
     // Update moves count
     NSNumber* currentColorForButton = [_userColorBoard getCurrentColorForButton:sender];
 
-    if ([currentColorForButton intValue] != self.selectedColor)
+    if ([currentColorForButton intValue] == self.selectedColor)
     {
-        // Update moves count only if color changed
-        // Cap moves count at 99
-        if (self.movesCount < 99)
-        {
-            self.movesCount++;
-            [self updateMovesCountLabel];
-        }
+        // Do nothing if color didn't change
+        return;
     }
     
     // Handle selecting color
     int selectedColor = (int)self.selectedColor;
     [_userColorBoard pressGridButtonWithColor:sender :selectedColor];
     
+    [self OnUserActionTaken];
+}
+
+-(void)OnUserActionTaken
+{
+    // Update moves count and check for victory
+    [self incrementMoveCount];
     [self checkAndDoVictory];
+}
+
+-(void)incrementMoveCount
+{
+    // Cap moves count at 99
+    if (self.movesCount < 99)
+    {
+        self.movesCount++;
+        [self updateMovesCountLabel];
+    }
 }
 
 -(void)resetActionBar
