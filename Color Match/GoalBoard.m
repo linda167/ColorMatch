@@ -106,12 +106,12 @@
             if (colorCell.cellType == Zoner)
             {
                 ((ZonerCell*)colorCell).inputColor = [self getRandomColor].intValue;
-                [self applySpecialCell:colorCell isAdd:true];
+                [self applySpecialCell:colorCell isAdd:true cellsAffected:NULL];
             }
             else if (colorCell.cellType == Connector)
             {
                 ((ConnectorCell*)colorCell).inputColor = self.boardCells.connectorCellInput;
-                [self applySpecialCell:colorCell isAdd:true];
+                [self applySpecialCell:colorCell isAdd:true cellsAffected:NULL];
             }
         }
     }
@@ -337,12 +337,12 @@
             ColorCell *colorCell = [row objectAtIndex:j];
             if (colorCell.cellType == Zoner)
             {
-                [self applySpecialCell:colorCell isAdd:true];
+                [self applySpecialCell:colorCell isAdd:true cellsAffected:NULL];
             }
             else if (colorCell.cellType == Connector)
             {
                 ((ConnectorCell*)colorCell).inputColor = self.boardCells.connectorCellInput;
-                [self applySpecialCell:colorCell isAdd:true];
+                [self applySpecialCell:colorCell isAdd:true cellsAffected:NULL];
             }
         }
     }

@@ -104,7 +104,7 @@
     lineInfo.color = color;
     
     [self setNeedsDisplay];
-}
+} 
 
 - (void)clear
 {

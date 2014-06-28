@@ -221,4 +221,35 @@
     }
 }
 
++(void)AnimateViewsAffected:(NSMutableArray*)viewsToAnimate
+{
+    [UIView
+     animateWithDuration:.07
+     delay:0
+     options:UIViewAnimationOptionCurveLinear
+     animations:^
+     {
+         for (UIView* view in viewsToAnimate)
+         {
+             view.transform = CGAffineTransformMakeScale(1.2, 1.2);
+         }
+     }
+     completion:^(BOOL finished)
+     {
+         [UIView
+          animateWithDuration:.07
+          delay:0
+          options:UIViewAnimationOptionCurveLinear
+          animations:^
+          {
+              for (UIView* view in viewsToAnimate)
+              {
+                  view.transform = CGAffineTransformIdentity;
+              }
+          }
+          completion:^(BOOL finished){}];
+         
+     }];
+}
+
 @end

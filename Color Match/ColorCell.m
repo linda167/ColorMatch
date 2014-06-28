@@ -38,7 +38,7 @@
     }
 }
 
--(void)addInputColor: (NSNumber *)color
+-(void)addInputColor:(NSNumber*)color cellsAffected:(NSMutableArray*)cellsAffected
 {
     if (![ColorCell doesCellSupportCombineColor:self.cellType])
     {
@@ -48,9 +48,14 @@
     [_colorInputs addObject:color];
     [self recalculateOutputColor];
     [self recalculateSpecialCellImage];
+    
+    if (cellsAffected != NULL)
+    {
+        [cellsAffected addObject:self.image];
+    }
 }
 
--(void)removeInputColor: (NSNumber *)color;
+-(void)removeInputColor:(NSNumber*)color cellsAffected:(NSMutableArray*)cellsAffected
 {
     if (![ColorCell doesCellSupportCombineColor:self.cellType])
     {
@@ -65,6 +70,11 @@
     
     [_colorInputs removeObjectAtIndex:existingColorIndex];
     [self recalculateOutputColor];
+    
+    if (cellsAffected != NULL)
+    {
+        [cellsAffected addObject:self.image];
+    }
 }
 
 -(void)recalculateOutputColor

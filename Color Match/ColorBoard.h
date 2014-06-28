@@ -19,13 +19,13 @@
 @property UIView *containerView;
 
 -(void)updateAllColorCells;
--(void)removeColorForRow:(int)color rowIndex:(int)rowIndex;
--(void)removeColorForColumn:(int)color colIndex:(int)colIndex;
--(void)addColorForRow:(int)color rowIndex:(int)rowIndex;
--(void)addColorForColumn:(int)color colIndex:(int)colIndex;
+-(void)removeColorForRow:(int)color rowIndex:(int)rowIndex cellsAffected:(NSMutableArray*)cellsAffected;
+-(void)removeColorForColumn:(int)color colIndex:(int)colIndex cellsAffected:(NSMutableArray*)cellsAffected;
+-(void)addColorForRow:(int)color rowIndex:(int)rowIndex cellsAffected:(NSMutableArray*)cellsAffected;
+-(void)addColorForColumn:(int)color colIndex:(int)colIndex cellsAffected:(NSMutableArray*)cellsAffected;
 -(ColorCell*) getColorCellForType:(int)cellType xOffset:(int)xOffset yOffset:(int)yOffset size:(int)size row:(int)row col:(int)col boardCells:(BoardCells*)boardCells;
 -(UIImage*)GetImageForCellType:(int)cellType;
--(void)applySpecialCell:(ColorCell*)colorCell isAdd:(bool)isAdd;
+-(void)applySpecialCell:(ColorCell*)colorCell isAdd:(bool)isAdd cellsAffected:(NSMutableArray*)cellsAffected;
 -(UIView*)getUIViewForCell:(int)cellType xOffset:(int)xOffset yOffset:(int)yOffset size:(int)size colorCell:(ColorCell*)colorCell;
 - (void)removeExistingGridCells;
 

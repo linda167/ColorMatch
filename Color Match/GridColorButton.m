@@ -48,6 +48,7 @@
         UIImage *btnImage = [UIImage imageNamed:@"FilledCircleYellow.png"];
         [_button setImage:btnImage forState:UIControlStateNormal];
     }
+    
 }
 
 @end

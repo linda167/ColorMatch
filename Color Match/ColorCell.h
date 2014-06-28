@@ -18,8 +18,8 @@
 
 +(bool)doesCellSupportCombineColor:(CellType)cellType;
 -(id)init:(int)cellType;
--(void)addInputColor: (NSNumber *)color;
--(void)removeInputColor: (NSNumber *)color;
+-(void)addInputColor: (NSNumber *)color cellsAffected:(NSMutableArray*)cellsAffected;
+-(void)removeInputColor: (NSNumber *)color cellsAffected:(NSMutableArray*)cellsAffected;
 -(void)removeAllInputColors;
 -(void)recalculateSpecialCellImage;
 

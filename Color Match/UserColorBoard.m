@@ -302,6 +302,10 @@
         }
     }
     
+    // Collect the list of UIViews affected by this action, that we should animate
+    NSMutableArray* viewsToAnimate = [[NSMutableArray alloc] init];
+    [viewsToAnimate addObject:gridColorButtonClicked.button];
+    
     // Get the index of the grid button clicked
     NSInteger topIndex = [self.topGridColorButtons indexOfObject:gridColorButtonClicked];
     NSInteger leftIndex = [self.leftGridColorButtons indexOfObject:gridColorButtonClicked];
@@ -312,11 +316,11 @@
         int previousColor = gridColorButtonClicked.color.intValue;
         if (topIndex != NSNotFound)
         {
-            [self removeColorForColumn:previousColor colIndex:topIndex];
+            [self removeColorForColumn:previousColor colIndex:topIndex cellsAffected:NULL];
         }
         else
         {
-            [self removeColorForRow:previousColor rowIndex:leftIndex];
+            [self removeColorForRow:previousColor rowIndex:leftIndex cellsAffected:NULL];
         }
     }
     
@@ -370,12 +374,14 @@
     // Add new color
     if (topIndex != NSNotFound)
     {
-        [self addColorForColumn:selectedColor colIndex:topIndex];
+        [self addColorForColumn:selectedColor colIndex:topIndex cellsAffected:viewsToAnimate];
     }
     else
     {
-        [self addColorForRow:selectedColor rowIndex:leftIndex];
+        [self addColorForRow:selectedColor rowIndex:leftIndex cellsAffected:viewsToAnimate];
     }
+    
+    [CommonUtils AnimateViewsAffected:viewsToAnimate];
 }
 
 - (void)initGridColorButtons
@@ -624,6 +630,10 @@
     int currentSelectedColor = (int)self.viewController.selectedColor;
     ZonerCellButton* zonerCellButton = (ZonerCellButton*)sender;
     
+    // Collect views to animate
+    NSMutableArray* viewsToAnimate = [[NSMutableArray alloc] init];
+    [viewsToAnimate addObject:zonerCellButton];
+    
     UIImage* newZonerImage;
     switch (currentSelectedColor)
     {
@@ -646,11 +656,14 @@
     int existingInputColor = ((ZonerCell*)zonerCellButton.colorCell).inputColor;
     if (existingInputColor != 0)
     {
-        [self applySpecialCell:zonerCellButton.colorCell isAdd:false];
+        [self applySpecialCell:zonerCellButton.colorCell isAdd:false cellsAffected:NULL];
     }
     
     ((ZonerCell*)zonerCellButton.colorCell).inputColor = currentSelectedColor;
-    [self applySpecialCell:zonerCellButton.colorCell isAdd:true];
+    [self applySpecialCell:zonerCellButton.colorCell isAdd:true cellsAffected:viewsToAnimate];
+    
+    // Do animation
+    [CommonUtils AnimateViewsAffected:viewsToAnimate];
     
     // User action was taken so we need to check for victory
     [self.viewController checkAndDoVictory];
@@ -660,21 +673,26 @@
 {
     int currentSelectedColor = (int)self.viewController.selectedColor;
     
+    // Collect views to animate
+    NSMutableArray* viewsToAnimate = [[NSMutableArray alloc] init];
     for (ConnectorCell* colorCell in self.allConnectorCells)
     {
         // Remove existing connector input
-        [self applySpecialCell:colorCell isAdd:false];
+        [self applySpecialCell:colorCell isAdd:false cellsAffected:NULL];
         
         // Add new connector input
         self.connectorColorInput = currentSelectedColor;
         colorCell.inputColor = currentSelectedColor;
-        [self applySpecialCell:colorCell isAdd:true];
+        [self applySpecialCell:colorCell isAdd:true cellsAffected:viewsToAnimate];
         
         // Update the outer color
         UIImage* newConnectorImage = [CommonUtils GetConnectorOuterImageForColor:currentSelectedColor];
         UIButton* connectorButton = (UIButton*)colorCell.image;
         [connectorButton setImage:newConnectorImage forState:UIControlStateNormal];
     }
+    
+    // Do animation
+    [CommonUtils AnimateViewsAffected:viewsToAnimate];
     
     // User action was taken so we need to check for victory
     [self.viewController checkAndDoVictory];
