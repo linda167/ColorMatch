@@ -402,6 +402,8 @@
             return [UIImage imageNamed:@"zonerGoal@2x.png"];
         case Connector:
             return [UIImage imageNamed:@"connectorOuterWhite@2x.png"];
+        case Diverter:
+            return [UIImage imageNamed:@"diverterGoal@2x.png"];
     }
     
     return [super GetImageForCellType:cellType];

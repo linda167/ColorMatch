@@ -12,5 +12,6 @@
 
 @property int endX;
 @property int endY;
+@property int isHorizontal;
 
 @end

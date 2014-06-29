@@ -111,6 +111,7 @@
 		BF9079C9195E1819000E6E58 /* WhiteSelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF9079C1195E1819000E6E58 /* WhiteSelected@2x.png */; };
 		BF9079CA195E1819000E6E58 /* Yellow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF9079C2195E1819000E6E58 /* Yellow@2x.png */; };
 		BF9079CB195E1819000E6E58 /* YellowSelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF9079C3195E1819000E6E58 /* YellowSelected@2x.png */; };
+		BF9079CD195FD660000E6E58 /* diverterGoal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF9079CC195FD660000E6E58 /* diverterGoal@2x.png */; };
 		BFA3A2B4192D899D00C1BB7D /* ReflectorArrowLtD@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFA3A2B2192D899D00C1BB7D /* ReflectorArrowLtD@2x.png */; };
 		BFA3A2B5192D899D00C1BB7D /* ReflectorArrowTtR@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFA3A2B3192D899D00C1BB7D /* ReflectorArrowTtR@2x.png */; };
 		BFA3A2BC1931401700C1BB7D /* ReflectorArrowLtDBlue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFA3A2B61931401700C1BB7D /* ReflectorArrowLtDBlue@2x.png */; };
@@ -266,6 +267,7 @@
 		BF9079C1195E1819000E6E58 /* WhiteSelected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "WhiteSelected@2x.png"; sourceTree = "<group>"; };
 		BF9079C2195E1819000E6E58 /* Yellow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Yellow@2x.png"; sourceTree = "<group>"; };
 		BF9079C3195E1819000E6E58 /* YellowSelected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "YellowSelected@2x.png"; sourceTree = "<group>"; };
+		BF9079CC195FD660000E6E58 /* diverterGoal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "diverterGoal@2x.png"; sourceTree = "<group>"; };
 		BFA3A2B2192D899D00C1BB7D /* ReflectorArrowLtD@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReflectorArrowLtD@2x.png"; sourceTree = "<group>"; };
 		BFA3A2B3192D899D00C1BB7D /* ReflectorArrowTtR@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReflectorArrowTtR@2x.png"; sourceTree = "<group>"; };
 		BFA3A2B61931401700C1BB7D /* ReflectorArrowLtDBlue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReflectorArrowLtDBlue@2x.png"; sourceTree = "<group>"; };
@@ -386,6 +388,7 @@
 		AF2C225A1874B95000082561 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				BF9079CC195FD660000E6E58 /* diverterGoal@2x.png */,
 				BF9079BC195E1819000E6E58 /* Blue@2x.png */,
 				BF9079BD195E1819000E6E58 /* BlueSelected@2x.png */,
 				BF9079BE195E1819000E6E58 /* Red@2x.png */,
@@ -647,6 +650,7 @@
 				BFA3A2CC193AF4D900C1BB7D /* incompleteLevel@2x.png in Resources */,
 				BF9079C9195E1819000E6E58 /* WhiteSelected@2x.png in Resources */,
 				AFADA2241877D20D00FADA22 /* Blue.png in Resources */,
+				BF9079CD195FD660000E6E58 /* diverterGoal@2x.png in Resources */,
 				BFA3A2B5192D899D00C1BB7D /* ReflectorArrowTtR@2x.png in Resources */,
 				BFA3A2CB193AF4D900C1BB7D /* completeLevel@2x.png in Resources */,
 				AFADA22D1877D20D00FADA22 /* Red.png in Resources */,

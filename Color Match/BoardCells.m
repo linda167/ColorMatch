@@ -65,62 +65,87 @@
 
 - (void)generateRandomCellTypes
 {
-    // TODO: Need to modify this to add additional mechanics
-    int mechanicCount = 0;
+    int totalPossibleMechanics = 3;
+    int mechanicCount = arc4random()%totalPossibleMechanics;
+    NSMutableArray* mechanicsList = [[NSMutableArray alloc] init];
     
-    int random = arc4random()%2;
-    bool hasReflectorMechanic = random == 1;
-    if (random == 1) mechanicCount++;
-    
-    random = arc4random()%2;
-    bool hasZonerMechanic = random == 1;
-    if (random == 1) mechanicCount++;
-    
-    if (hasReflectorMechanic)
+    int i = 0;
+    while (i < mechanicCount)
     {
-        [self addReflectorMechanic:mechanicCount];
+        int mechanic = arc4random()%totalPossibleMechanics;
+        
+        if ([mechanicsList containsObject:[NSNumber numberWithInt:mechanic]])
+        {
+            continue;
+        }
+        
+        [mechanicsList addObject:[NSNumber numberWithInt:mechanic]];
+        
+        switch (mechanic)
+        {
+            case 0:
+                [self addReflectorMechanic:mechanicCount];
+                break;
+            case 1:
+                [self addZonerMechanic:mechanicCount];
+                break;
+            case 2:
+                [self addDiverterMechanic:mechanicCount];
+                break;
+        }
+            
+        i++;
     }
     
-    if (hasZonerMechanic)
-    {
-        [self addZonerMechanic:mechanicCount];
-    }
-    
-    random = arc4random()%2;
-    bool hasConnectorMechanic = random == 1;
-    if (hasConnectorMechanic)
+    if (arc4random()%2 == 1)
     {
         [self addConnectorMechanic];
-        self.connectorCellInput = arc4random()%4;
     }
     
     [self logBoardCellState];
 }
 
+- (void)addDiverterMechanic:(int)mechanicCount
+{
+    // Get number of cells to generate
+    int upperBound = self.boardParameters.diverterMechanicUpperBound;
+    int lowerBound = self.boardParameters.diverterMechanicLowerBound;
+    int specialCellsCount = arc4random()%(upperBound - lowerBound + 1) + lowerBound;
+    
+    // Adjust for number of other mechanics
+    specialCellsCount = specialCellsCount / mechanicCount;
+    if (specialCellsCount < 0)
+    {
+        specialCellsCount = 1;
+    }
+    
+    int i = 0;
+    while (i < specialCellsCount)
+    {
+        int randomRow = arc4random()%self.boardParameters.gridSize;
+        int randomCol = arc4random()%self.boardParameters.gridSize;
+        
+        NSMutableArray *row = [self.colorCellSections objectAtIndex:randomRow];
+        NSNumber *cellType = [row objectAtIndex:randomCol];
+        
+        // Only replace normal cells, not cells that already have mechanics
+        if (cellType.intValue != NormalCell)
+        {
+            continue;
+        }
+        
+        // Replace with special cell
+        [row replaceObjectAtIndex:randomCol withObject:[NSNumber numberWithInt:Diverter]];
+        i++;
+    }
+}
+
 - (void)addReflectorMechanic:(int)mechanicCount
 {
-    int specialCellsCount;
-    int upperBound;
-    int lowerBound;
-    switch (self.boardParameters.gridSize)
-    {
-        case 3:
-            specialCellsCount = 1;
-            break;
-        case 4:
-            upperBound = 2;
-            lowerBound = 1;
-            specialCellsCount = arc4random()%(upperBound - lowerBound + 1) + lowerBound;
-            break;
-        case 5:
-            upperBound = 4;
-            lowerBound = 2;
-            specialCellsCount = arc4random()%(upperBound - lowerBound + 1) + lowerBound;
-            break;
-        default:
-            [NSException raise:@"Invalid input" format:@"Invalid board size"];
-            break;
-    }
+    // Get number of cells to generate
+    int upperBound = self.boardParameters.reflectorMechanicUpperBound;
+    int lowerBound = self.boardParameters.reflectorMechanicLowerBound;
+    int specialCellsCount = arc4random()%(upperBound - lowerBound + 1) + lowerBound;
     
     // Adjust for number of other mechanics
     specialCellsCount = specialCellsCount / mechanicCount;
@@ -212,28 +237,10 @@
 
 - (void)addZonerMechanic:(int)mechanicCount
 {
-    int specialCellsCount;
-    int upperBound;
-    int lowerBound;
-    switch (self.boardParameters.gridSize)
-    {
-        case 3:
-            specialCellsCount = 1;
-            break;
-        case 4:
-            upperBound = 2;
-            lowerBound = 1;
-            specialCellsCount = arc4random()%(upperBound - lowerBound + 1) + lowerBound;
-            break;
-        case 5:
-            upperBound = 3;
-            lowerBound = 2;
-            specialCellsCount = arc4random()%(upperBound - lowerBound + 1) + lowerBound;
-            break;
-        default:
-            [NSException raise:@"Invalid input" format:@"Invalid board size"];
-            break;
-    }
+    // Get number of cells to generate
+    int upperBound = self.boardParameters.zonerMechanicUpperBound;
+    int lowerBound = self.boardParameters.zonerMechanicLowerBound;
+    int specialCellsCount = arc4random()%(upperBound - lowerBound + 1) + lowerBound;
     
     // Adjust for number of other mechanics
     specialCellsCount = specialCellsCount / mechanicCount;
@@ -265,28 +272,10 @@
 
 - (void)addConnectorMechanic
 {
-    int specialCellsCount;
-    int upperBound;
-    int lowerBound;
-    switch (self.boardParameters.gridSize)
-    {
-        case 3:
-            specialCellsCount = 2;
-            break;
-        case 4:
-            upperBound = 3;
-            lowerBound = 2;
-            specialCellsCount = arc4random()%(upperBound - lowerBound + 1) + lowerBound;
-            break;
-        case 5:
-            upperBound = 5;
-            lowerBound = 3;
-            specialCellsCount = arc4random()%(upperBound - lowerBound + 1) + lowerBound;
-            break;
-        default:
-            [NSException raise:@"Invalid input" format:@"Invalid board size"];
-            break;
-    }
+    // Get number of cells to generate
+    int upperBound = self.boardParameters.connectorMechanicUpperBound;
+    int lowerBound = self.boardParameters.connectorMechanicLowerBound;
+    int specialCellsCount = arc4random()%(upperBound - lowerBound + 1) + lowerBound;
     
     int i = 0;
     while (i < specialCellsCount)
@@ -307,6 +296,8 @@
         [row replaceObjectAtIndex:randomCol withObject:[NSNumber numberWithInt:Connector]];
         i++;
     }
+    
+    self.connectorCellInput = arc4random()%4;
 }
 
 - (void)logBoardCellState

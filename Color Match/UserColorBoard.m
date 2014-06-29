@@ -259,6 +259,7 @@
     LinePiece *linePiece = [[LinePiece alloc] init];
     linePiece.endX = rightX;
     linePiece.endY = currentY;
+    linePiece.isHorizontal = true;
     [lineInfo addLinePiece:linePiece];
     
     return rightX;
@@ -281,6 +282,7 @@
     LinePiece *linePiece = [[LinePiece alloc] init];
     linePiece.endX = currentX;
     linePiece.endY = bottomY;
+    linePiece.isHorizontal = false;
     [lineInfo addLinePiece:linePiece];
     
     return bottomY;

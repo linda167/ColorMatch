@@ -53,6 +53,7 @@
 
 - (void)drawLine:(LineInfo*)line
 {
+    int curveRadius = 10;
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetLineWidth(context, 3.0);
     
@@ -66,7 +67,26 @@
     for (int i = 0; i < line.linePieces.count; i++)
     {
         LinePiece *linePiece = [line.linePieces objectAtIndex:i];
-        CGContextAddLineToPoint(context, linePiece.endX, linePiece.endY);
+        
+        if (i + 1 == line.linePieces.count)
+        {
+            // Normal stroke for the last line
+            CGContextAddLineToPoint(context, linePiece.endX, linePiece.endY);
+        }
+        else
+        {
+            LinePiece *nextLinePiece = [line.linePieces objectAtIndex:i+1];
+            if (linePiece.isHorizontal == nextLinePiece.isHorizontal)
+            {
+                // Normal stroke for same direction connections
+                CGContextAddLineToPoint(context, linePiece.endX, linePiece.endY);
+            }
+            else
+            {
+                // Add curve
+                CGContextAddArcToPoint(context, linePiece.endX, linePiece.endY, nextLinePiece.endX, nextLinePiece.endY, curveRadius);
+            }
+        }
     }
     
     // Stroke path

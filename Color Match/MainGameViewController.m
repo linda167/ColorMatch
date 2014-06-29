@@ -112,6 +112,14 @@
             boardParameters.reflectorLeftToDownArrowYAdjustment = 6;
             boardParameters.reflectorTopToRightArrowXAdjustment = 6;
             boardParameters.reflectorTopToRightArrowYAdjustment = 2;
+            boardParameters.reflectorMechanicLowerBound = 1;
+            boardParameters.reflectorMechanicUpperBound = 1;
+            boardParameters.zonerMechanicLowerBound = 1;
+            boardParameters.zonerMechanicUpperBound = 1;
+            boardParameters.connectorMechanicLowerBound = 2;
+            boardParameters.connectorMechanicUpperBound = 2;
+            boardParameters.diverterMechanicLowerBound = 1;
+            boardParameters.diverterMechanicUpperBound = 1;
             break;
         case 4:
             boardParameters.colorCellSize = 40;
@@ -124,9 +132,17 @@
             boardParameters.xAdjustmentForColorCells = -6;
             boardParameters.reflectorArrowCellSize = 39;
             boardParameters.reflectorLeftToDownArrowXAdjustment = 2;
-            boardParameters.reflectorLeftToDownArrowYAdjustment = 5;
-            boardParameters.reflectorTopToRightArrowXAdjustment = 5;
+            boardParameters.reflectorLeftToDownArrowYAdjustment = 7;
+            boardParameters.reflectorTopToRightArrowXAdjustment = 7;
             boardParameters.reflectorTopToRightArrowYAdjustment = 2;
+            boardParameters.reflectorMechanicLowerBound = 1;
+            boardParameters.reflectorMechanicUpperBound = 2;
+            boardParameters.zonerMechanicLowerBound = 1;
+            boardParameters.zonerMechanicUpperBound = 2;
+            boardParameters.connectorMechanicLowerBound = 2;
+            boardParameters.connectorMechanicUpperBound = 3;
+            boardParameters.diverterMechanicLowerBound = 1;
+            boardParameters.diverterMechanicUpperBound = 2;
             break;
         case 5:
             boardParameters.colorCellSize = 35;
@@ -139,9 +155,17 @@
             boardParameters.xAdjustmentForColorCells = 0;
             boardParameters.reflectorArrowCellSize = 35;
             boardParameters.reflectorLeftToDownArrowXAdjustment = 1;
-            boardParameters.reflectorLeftToDownArrowYAdjustment = 2;
-            boardParameters.reflectorTopToRightArrowXAdjustment = 2;
+            boardParameters.reflectorLeftToDownArrowYAdjustment = 4;
+            boardParameters.reflectorTopToRightArrowXAdjustment = 4;
             boardParameters.reflectorTopToRightArrowYAdjustment = 1;
+            boardParameters.reflectorMechanicLowerBound = 2;
+            boardParameters.reflectorMechanicUpperBound = 4;
+            boardParameters.zonerMechanicLowerBound = 2;
+            boardParameters.zonerMechanicUpperBound = 3;
+            boardParameters.connectorMechanicLowerBound = 3;
+            boardParameters.connectorMechanicUpperBound = 5;
+            boardParameters.diverterMechanicLowerBound = 2;
+            boardParameters.diverterMechanicUpperBound = 4;
             break;
         default:
             [NSException raise:@"Invalid input" format:@"Invalid board size"];

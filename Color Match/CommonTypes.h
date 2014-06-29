@@ -26,6 +26,16 @@ typedef struct BoardParameters
     int reflectorTopToRightArrowXAdjustment;
     int reflectorLeftToDownArrowYAdjustment;
     int reflectorTopToRightArrowYAdjustment;
+    
+    // Mechanics lower and upper bound
+    int reflectorMechanicLowerBound;
+    int reflectorMechanicUpperBound;
+    int zonerMechanicLowerBound;
+    int zonerMechanicUpperBound;
+    int connectorMechanicLowerBound;
+    int connectorMechanicUpperBound;
+    int diverterMechanicLowerBound;
+    int diverterMechanicUpperBound;
 } BoardParameters;
 
 // Cell type
@@ -35,7 +45,8 @@ typedef NS_ENUM(NSUInteger, CellType)
     ReflectorLeftToDown = 1,
     ReflectorTopToRight = 2,
     Zoner = 3,
-    Connector = 4
+    Connector = 4,
+    Diverter = 5
 };
 
 
