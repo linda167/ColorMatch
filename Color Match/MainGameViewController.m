@@ -132,8 +132,8 @@
             boardParameters.xAdjustmentForColorCells = -6;
             boardParameters.reflectorArrowCellSize = 39;
             boardParameters.reflectorLeftToDownArrowXAdjustment = 2;
-            boardParameters.reflectorLeftToDownArrowYAdjustment = 7;
-            boardParameters.reflectorTopToRightArrowXAdjustment = 7;
+            boardParameters.reflectorLeftToDownArrowYAdjustment = 8;
+            boardParameters.reflectorTopToRightArrowXAdjustment = 8;
             boardParameters.reflectorTopToRightArrowYAdjustment = 2;
             boardParameters.reflectorMechanicLowerBound = 1;
             boardParameters.reflectorMechanicUpperBound = 2;
@@ -155,8 +155,8 @@
             boardParameters.xAdjustmentForColorCells = 0;
             boardParameters.reflectorArrowCellSize = 35;
             boardParameters.reflectorLeftToDownArrowXAdjustment = 1;
-            boardParameters.reflectorLeftToDownArrowYAdjustment = 4;
-            boardParameters.reflectorTopToRightArrowXAdjustment = 4;
+            boardParameters.reflectorLeftToDownArrowYAdjustment = 5;
+            boardParameters.reflectorTopToRightArrowXAdjustment = 5;
             boardParameters.reflectorTopToRightArrowYAdjustment = 1;
             boardParameters.reflectorMechanicLowerBound = 2;
             boardParameters.reflectorMechanicUpperBound = 4;

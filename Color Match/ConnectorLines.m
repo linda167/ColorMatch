@@ -53,7 +53,7 @@
 
 - (void)drawLine:(LineInfo*)line
 {
-    int curveRadius = 10;
+    int curveRadius = 11;
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetLineWidth(context, 3.0);
     

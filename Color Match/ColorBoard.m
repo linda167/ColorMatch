@@ -78,33 +78,13 @@
                     [cellsAffected addObject:colorCell.image];
                 }
             }
-            else if (colorCell.cellType == ReflectorLeftToDown)
+            else if (colorCell.cellType == ReflectorLeftToDown || colorCell.cellType == Diverter)
             {
                 // Trigger apply color vertically down
                 [self applyColor:currentRow currentCol:i isHorizontal:false color:color isAdd:isAdd cellsAffected:cellsAffected];
                 
                 // Change special image
-                UIImage *specialImage;
-                switch (color)
-                {
-                    case 0:
-                        specialImage = [UIImage imageNamed:@"ReflectorArrowLtD@2x.png"];
-                        break;
-                    case 1:
-                        specialImage = [UIImage imageNamed:@"ReflectorArrowLtDBlue@2x.png"];
-                        break;
-                    case 2:
-                        specialImage = [UIImage imageNamed:@"ReflectorArrowLtDRed@2x.png"];
-                        break;
-                    case 3:
-                        specialImage = [UIImage imageNamed:@"ReflectorArrowLtDYellow@2x.png"];
-                        break;
-                    default:
-                        [NSException raise:@"Invalid input" format:@"Invalid input color"];
-                        break;
-                }
-                
-                [colorCell.specialImage setImage:specialImage];
+                [self updateSpecialCellImagesOnApplyColor:colorCell color:color isHorizontal:isHorizontal];
                 break;
             }
             else if (colorCell.cellType == ReflectorTopToRight)
@@ -143,37 +123,46 @@
                 // NOOP since we're coming from top
                 break;
             }
-            else if (colorCell.cellType == ReflectorTopToRight)
+            else if (colorCell.cellType == ReflectorTopToRight || colorCell.cellType == Diverter)
             {
                 // Trigger apply color horizontal to the right
                 [self applyColor:i currentCol:currentCol isHorizontal:true color:color isAdd:isAdd cellsAffected:cellsAffected];
                 
                 // Change special image
-                UIImage *specialImage;
-                switch (color)
-                {
-                    case 0:
-                        specialImage = [UIImage imageNamed:@"ReflectorArrowTtR@2x.png"];
-                        break;
-                    case 1:
-                        specialImage = [UIImage imageNamed:@"ReflectorArrowTtRBlue@2x.png"];
-                        break;
-                    case 2:
-                        specialImage = [UIImage imageNamed:@"ReflectorArrowTtRRed@2x.png"];
-                        break;
-                    case 3:
-                        specialImage = [UIImage imageNamed:@"ReflectorArrowTtRYellow@2x.png"];
-                        break;
-                    default:
-                        [NSException raise:@"Invalid input" format:@"Invalid input color"];
-                        break;
-                }
-                
-                [colorCell.specialImage setImage:specialImage];
+                [self updateSpecialCellImagesOnApplyColor:colorCell color:color isHorizontal:isHorizontal];
                 break;
             }
         }
     }
+}
+
+-(void)updateSpecialCellImagesOnApplyColor:(ColorCell*)colorCell color:(int)color isHorizontal:(BOOL)isHorizontal
+{
+    // Change special image
+    UIImage *specialImage = [self getSpecialImageForCellWithColor:colorCell.cellType color:color isHorizontal:isHorizontal];
+    if (specialImage != NULL)
+    {
+        [colorCell.specialImage setImage:specialImage];
+    }
+    
+    // Change special image2
+    UIImage *specialImage2 = [self getSpecialImage2ForCellWithColor:colorCell.cellType color:color isHorizontal:isHorizontal];
+    if (specialImage2 != NULL)
+    {
+        [colorCell.specialImage2 setImage:specialImage2];
+    }
+}
+
+-(UIImage*)getSpecialImageForCellWithColor:(CellType)cellType color:(int)color isHorizontal:(BOOL)isHorizontal
+{
+    // NOOP in base class
+    return NULL;
+}
+
+-(UIImage*)getSpecialImage2ForCellWithColor:(CellType)cellType color:(int)color isHorizontal:(BOOL)isHorizontal
+{
+    // NOOP in base class
+    return NULL;
 }
 
 -(void)addColorToSingleCell:(int)rowValue col:(int)colValue color:(int)color cellsAffected:(NSMutableArray*)cellsAffected
@@ -392,8 +381,12 @@
             
             if (colorCell.specialImage != NULL)
             {
-                UIImageView *specialImageCell = colorCell.specialImage;
-                [specialImageCell removeFromSuperview];
+                [colorCell.specialImage removeFromSuperview];
+            }
+            
+            if (colorCell.specialImage2 != NULL)
+            {
+                [colorCell.specialImage2 removeFromSuperview];
             }
         }
         

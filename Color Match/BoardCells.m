@@ -134,6 +134,54 @@
             continue;
         }
         
+        // Do not allow Diverter mechanic on bottom row
+        if (randomRow == self.boardParameters.gridSize - 1)
+        {
+            continue;
+        }
+        
+        // Do not allow Diverter mechanic on right column
+        if (randomCol == self.boardParameters.gridSize - 1)
+        {
+            continue;
+        }
+        
+        // Make sure we don't have 2 Diverters next to each other
+        if ([self hasHorizontalAdjacentCellOfType:randomRow col:randomCol cellType:Diverter])
+        {
+            continue;
+        }
+        
+        // Make sure we don't have 2 Diverters on top of each other
+        if ([self hasVerticalAdjacentCellOfType:randomRow col:randomCol cellType:Diverter])
+        {
+            continue;
+        }
+        
+        // Make sure we don't have TtR to the right of Diverter
+        if ([self hasCellOfTypeOnRight:randomRow col:randomCol cellType:ReflectorTopToRight])
+        {
+            continue;
+        }
+        
+        // Make sure we don't have LtD below Diverter
+        if ([self hasCellOfTypeOnBottom:randomRow col:randomCol cellType:ReflectorLeftToDown])
+        {
+            continue;
+        }
+        
+        // Make sure there is a connection from the top
+        if (![self hasConnectionFromTop:randomRow col:randomCol])
+        {
+            continue;
+        }
+        
+        // Make sure there is a connection from the left
+        if (![self hasConnectionFromLeft:randomRow col:randomCol])
+        {
+            continue;
+        }
+        
         // Replace with special cell
         [row replaceObjectAtIndex:randomCol withObject:[NSNumber numberWithInt:Diverter]];
         i++;
@@ -201,7 +249,13 @@
             }
             
             // Make sure we don't have 2 TopToRight next to each other
-            if ([self hasAdjacentTopToRightCell:randomRow col:randomCol])
+            if ([self hasHorizontalAdjacentCellOfType:randomRow col:randomCol cellType:ReflectorTopToRight])
+            {
+                continue;
+            }
+            
+            // Make sure we don't have TtR to the right of Diverter
+            if ([self hasCellOfTypeOnLeft:randomRow col:randomCol cellType:Diverter])
             {
                 continue;
             }
@@ -223,7 +277,13 @@
             }
             
             // Make sure we don't have 2 LeftToDown on top of each other
-            if ([self hasAdjacentLeftToDownCell:randomRow col:randomCol])
+            if ([self hasVerticalAdjacentCellOfType:randomRow col:randomCol cellType:ReflectorLeftToDown])
+            {
+                continue;
+            }
+            
+            // Make sure we don't have LtD below Diverter
+            if ([self hasCellOfTypeOnTop:randomRow col:randomCol cellType:Diverter])
             {
                 continue;
             }
@@ -348,7 +408,7 @@
         NSMutableArray *tempRow = [self.colorCellSections objectAtIndex:j];
         NSNumber *tempCellType = [tempRow objectAtIndex:col];
         
-        if (tempCellType.intValue == ReflectorTopToRight)
+        if (tempCellType.intValue == ReflectorTopToRight || tempCellType.intValue == Diverter)
         {
             return true;
         }
@@ -390,7 +450,7 @@
     {
         NSNumber *tempCellType = [currentRow objectAtIndex:j];
         
-        if (tempCellType.intValue == ReflectorLeftToDown)
+        if (tempCellType.intValue == ReflectorLeftToDown || tempCellType.intValue == Diverter)
         {
             return true;
         }
@@ -403,56 +463,81 @@
     return false;
 }
 
-- (bool)hasAdjacentTopToRightCell:(int)row col:(int)col
+- (bool)hasHorizontalAdjacentCellOfType:(int)row col:(int)col cellType:(CellType)cellType
 {
-    // Check both sides for TopToRight cell
-    NSMutableArray *currentRow = [self.colorCellSections objectAtIndex:row];
-    if (col > 0)
+    // Check both sides for cell type
+    if ([self hasCellOfTypeOnLeft:row col:col cellType:cellType])
     {
-        NSNumber *leftCellType = [currentRow objectAtIndex:col - 1];
-        if (leftCellType.intValue == ReflectorTopToRight)
-        {
-            // 2 TopToRight cells next to each other
-            return true;
-        }
+        return true;
     }
     
-    if (col < self.boardParameters.gridSize - 1)
+    if ([self hasCellOfTypeOnRight:row col:col cellType:cellType])
     {
-        NSNumber *rightCellType = [currentRow objectAtIndex:col + 1];
-        if (rightCellType.intValue == ReflectorTopToRight)
-        {
-            // 2 TopToRight cells next to each other
-            return true;
-        }
+        return true;
     }
     
     return false;
 }
 
-- (bool)hasAdjacentLeftToDownCell:(int)row col:(int)col
+- (bool)hasVerticalAdjacentCellOfType:(int)row col:(int)col cellType:(CellType)cellType
 {
-    // Check both sides for LeftToDown cell
+    // Check top and bottom for cell type
+    if ([self hasCellOfTypeOnTop:row col:col cellType:cellType])
+    {
+        return true;
+    }
+    
+    if ([self hasCellOfTypeOnBottom:row col:col cellType:cellType])
+    {
+        return true;
+    }
+    
+    return false;
+}
+
+- (bool)hasCellOfTypeOnLeft:(int)row col:(int)col cellType:(CellType)cellType
+{
+    NSMutableArray *currentRow = [self.colorCellSections objectAtIndex:row];
+    if (col > 0)
+    {
+        NSNumber *leftCellType = [currentRow objectAtIndex:col - 1];
+        return leftCellType.intValue == cellType;
+    }
+    
+    return false;
+}
+
+- (bool)hasCellOfTypeOnRight:(int)row col:(int)col cellType:(CellType)cellType
+{
+    NSMutableArray *currentRow = [self.colorCellSections objectAtIndex:row];
+    if (col < self.boardParameters.gridSize - 1)
+    {
+        NSNumber *rightCellType = [currentRow objectAtIndex:col + 1];
+        return rightCellType.intValue == cellType;
+    }
+    
+    return false;
+}
+
+- (bool)hasCellOfTypeOnTop:(int)row col:(int)col cellType:(CellType)cellType
+{
     if (row > 0)
     {
         NSMutableArray *topRow = [self.colorCellSections objectAtIndex:row - 1];
         NSNumber *topCellType = [topRow objectAtIndex:col];
-        if (topCellType.intValue == ReflectorLeftToDown)
-        {
-            // 2 LeftToDown cells on top of each other
-            return true;
-        }
+        return topCellType.intValue == cellType;
     }
     
+    return false;
+}
+
+- (bool)hasCellOfTypeOnBottom:(int)row col:(int)col cellType:(CellType)cellType
+{
     if (row < self.boardParameters.gridSize - 1)
     {
         NSMutableArray *bottomRow = [self.colorCellSections objectAtIndex:row + 1];
         NSNumber *bottomCellType = [bottomRow objectAtIndex:col];
-        if (bottomCellType.intValue == ReflectorLeftToDown)
-        {
-            // 2 LeftToDown cells on top of each other
-            return true;
-        }
+        return bottomCellType.intValue == cellType;
     }
     
     return false;

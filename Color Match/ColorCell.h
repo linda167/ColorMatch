@@ -12,6 +12,7 @@
 
 @property (nonatomic, strong) UIView *image;
 @property (nonatomic, strong) UIImageView *specialImage;
+@property (nonatomic, strong) UIImageView *specialImage2;
 @property NSMutableArray *colorInputs;
 @property int cellType;
 @property int currentColor;

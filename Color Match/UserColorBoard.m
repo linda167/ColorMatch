@@ -166,7 +166,7 @@
         for (int i = currentCol+1; i < row.count; i++)
         {
             ColorCell *colorCell = [row objectAtIndex:i];
-            if (colorCell.cellType == ReflectorLeftToDown)
+            if (colorCell.cellType == ReflectorLeftToDown || colorCell.cellType == Diverter)
             {
                 // Draw line to reflector
                 int rightX = [self DrawHorizontalLineToConnection:colorCell lineInfo:lineInfo currentY:currentY drawToCenter:true];
@@ -219,7 +219,7 @@
                 connectionFound = true;
                 break;
             }
-            else if (colorCell.cellType == ReflectorTopToRight)
+            else if (colorCell.cellType == ReflectorTopToRight || colorCell.cellType == Diverter)
             {
                 // Draw line to reflector
                 int bottomY = [self DrawVerticalLineToConnection:colorCell lineInfo:lineInfo currentX:currentX drawToCenter:true];
@@ -534,8 +534,9 @@
     switch (cellType)
     {
         case ReflectorLeftToDown:
-            return [UIImage imageNamed:@"BlockClear.png"];
         case ReflectorTopToRight:
+        case Diverter:
+            return [UIImage imageNamed:@"BlockClear.png"];
             return [UIImage imageNamed:@"BlockClear.png"];
         case Zoner:
             return [UIImage imageNamed:@"zonerWhite@2x.png"];
@@ -548,54 +549,149 @@
 
 -(void)GetSpecialImageForCellIfNeeded:(ColorCell*)colorCell boardCells:(BoardCells*)boardCells
 {
+    [self GetSpecialImage1ForCell:colorCell boardCells:boardCells];
+    [self GetSpecialImage2ForCell:colorCell boardCells:boardCells];
+}
+
+-(void)GetSpecialImage1ForCell:(ColorCell*)colorCell boardCells:(BoardCells*)boardCells
+{
     UIImage *specialImage = NULL;
-    
+    int x, y, size;
     switch (colorCell.cellType)
     {
         case ReflectorLeftToDown:
+        case Diverter:
             specialImage = [UIImage imageNamed:@"ReflectorArrowLtD@2x.png"];
+            size = self.boardParameters.reflectorArrowCellSize;
+            x = colorCell.image.frame.origin.x + self.boardParameters.reflectorLeftToDownArrowXAdjustment;
+            y = colorCell.image.frame.origin.y + self.boardParameters.reflectorLeftToDownArrowYAdjustment;
             break;
+            
         case ReflectorTopToRight:
             specialImage = [UIImage imageNamed:@"ReflectorArrowTtR@2x.png"];
+            size = self.boardParameters.reflectorArrowCellSize;
+            x = colorCell.image.frame.origin.x + self.boardParameters.reflectorTopToRightArrowXAdjustment;
+            y = colorCell.image.frame.origin.y + self.boardParameters.reflectorTopToRightArrowYAdjustment;
             break;
+        
         case Connector:
             // Initialize to white cell
             specialImage = [CommonUtils GetConnectorInnerImageForColor:0];
-            break;
-    }
-    
-    if (specialImage != NULL)
-    {
-        int x, y, size;
-        
-        if (colorCell.cellType == ReflectorLeftToDown || colorCell.cellType == ReflectorTopToRight)
-        {
-            size = self.boardParameters.reflectorArrowCellSize;
-            
-            int adjustmentX = colorCell.cellType == ReflectorLeftToDown ?
-                self.boardParameters.reflectorLeftToDownArrowXAdjustment :
-                self.boardParameters.reflectorTopToRightArrowXAdjustment;
-            
-            int adjustmentY = colorCell.cellType == ReflectorLeftToDown ?
-                self.boardParameters.reflectorLeftToDownArrowYAdjustment :
-                self.boardParameters.reflectorTopToRightArrowYAdjustment;
-            
-            x = colorCell.image.frame.origin.x + adjustmentX;
-            y = colorCell.image.frame.origin.y + adjustmentY;
-        }
-        else
-        {
             size = colorCell.image.frame.size.width;
             x = colorCell.image.frame.origin.x;
             y = colorCell.image.frame.origin.y;
-        }
-        
-        UIImageView *specialImageView = [[UIImageView alloc] initWithFrame:CGRectMake(x, y, size, size)];
-        
-        specialImageView.image = specialImage;
-        colorCell.specialImage = specialImageView;
-        [self.containerView addSubview:specialImageView];
+            break;
+            
+        default:
+            // No special cell needed
+            return;
     }
+    
+    UIImageView *specialImageView = [[UIImageView alloc] initWithFrame:CGRectMake(x, y, size, size)];
+    
+    specialImageView.image = specialImage;
+    colorCell.specialImage = specialImageView;
+    [self.containerView addSubview:specialImageView];
+}
+
+-(void)GetSpecialImage2ForCell:(ColorCell*)colorCell boardCells:(BoardCells*)boardCells
+{
+    UIImage *specialImage = NULL;
+    int x, y, size;
+    switch (colorCell.cellType)
+    {
+        case Diverter:
+            specialImage = [UIImage imageNamed:@"ReflectorArrowTtR@2x.png"];
+            size = self.boardParameters.reflectorArrowCellSize;
+            x = colorCell.image.frame.origin.x + self.boardParameters.reflectorTopToRightArrowXAdjustment;
+            y = colorCell.image.frame.origin.y + self.boardParameters.reflectorTopToRightArrowYAdjustment;
+            break;
+        default:
+            // No special cell needed
+            return;
+    }
+    
+    UIImageView *specialImageView = [[UIImageView alloc] initWithFrame:CGRectMake(x, y, size, size)];
+    
+    specialImageView.image = specialImage;
+    colorCell.specialImage2 = specialImageView;
+    [self.containerView addSubview:specialImageView];
+}
+
+-(UIImage*)getSpecialImageForCellWithColor:(CellType)cellType color:(int)color isHorizontal:(BOOL)isHorizontal
+{
+    if (cellType == ReflectorLeftToDown || (cellType == Diverter && isHorizontal))
+    {
+        return [self getArrowLtDWithColor:color];
+    }
+    else if (cellType == ReflectorTopToRight)
+    {
+        return [self getArrowTtRWithColor:color];
+    }
+    
+    return NULL;
+}
+
+-(UIImage*)getSpecialImage2ForCellWithColor:(CellType)cellType color:(int)color isHorizontal:(BOOL)isHorizontal
+{
+    if (cellType == ReflectorLeftToDown)
+    {
+        return [self getArrowLtDWithColor:color];
+    }
+    else if (cellType == ReflectorTopToRight || (cellType == Diverter && !isHorizontal))
+    {
+        return [self getArrowTtRWithColor:color];
+    }
+    
+    return NULL;
+}
+
+-(UIImage*)getArrowLtDWithColor:(int)color
+{
+    switch (color)
+    {
+        case 0:
+            return [UIImage imageNamed:@"ReflectorArrowLtD@2x.png"];
+            break;
+        case 1:
+            return [UIImage imageNamed:@"ReflectorArrowLtDBlue@2x.png"];
+            break;
+        case 2:
+            return [UIImage imageNamed:@"ReflectorArrowLtDRed@2x.png"];
+            break;
+        case 3:
+            return [UIImage imageNamed:@"ReflectorArrowLtDYellow@2x.png"];
+            break;
+        default:
+            [NSException raise:@"Invalid input" format:@"Invalid input color"];
+            break;
+    }
+    
+    return NULL;
+}
+
+-(UIImage*)getArrowTtRWithColor:(int)color
+{
+    switch (color)
+    {
+        case 0:
+            return [UIImage imageNamed:@"ReflectorArrowTtR@2x.png"];
+            break;
+        case 1:
+            return [UIImage imageNamed:@"ReflectorArrowTtRBlue@2x.png"];
+            break;
+        case 2:
+            return [UIImage imageNamed:@"ReflectorArrowTtRRed@2x.png"];
+            break;
+        case 3:
+            return [UIImage imageNamed:@"ReflectorArrowTtRYellow@2x.png"];
+            break;
+        default:
+            [NSException raise:@"Invalid input" format:@"Invalid input color"];
+            break;
+    }
+    
+    return NULL;
 }
 
 -(UIView*)getUIViewForCell:(int)cellType xOffset:(int)xOffset yOffset:(int)yOffset size:(int)size colorCell:(ColorCell*)colorCell
