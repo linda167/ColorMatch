@@ -12,6 +12,7 @@
 #import "LevelsManager.h"
 #import "ZonerCell.h"
 #import "ConnectorCell.h"
+#import "SplitterCell.h"
 
 @interface GoalBoard ()
 @end
@@ -111,6 +112,11 @@
             else if (colorCell.cellType == Connector)
             {
                 ((ConnectorCell*)colorCell).inputColor = self.boardCells.connectorCellInput;
+                [self applySpecialCell:colorCell isAdd:true cellsAffected:NULL];
+            }
+            else if (colorCell.cellType == Splitter)
+            {
+                ((SplitterCell*)colorCell).inputColor = [self getRandomColor].intValue;
                 [self applySpecialCell:colorCell isAdd:true cellsAffected:NULL];
             }
         }
@@ -404,6 +410,10 @@
             return [UIImage imageNamed:@"connectorOuterWhite@2x.png"];
         case Diverter:
             return [UIImage imageNamed:@"diverterGoal@2x.png"];
+        case Splitter:
+            return [UIImage imageNamed:@"splitterWhite@2x.png"];
+        case Converter:
+            return [UIImage imageNamed:@"converterWhite@2x.png"];
     }
     
     return [super GetImageForCellType:cellType];

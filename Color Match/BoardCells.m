@@ -65,8 +65,8 @@
 
 - (void)generateRandomCellTypes
 {
-    int totalPossibleMechanics = 3;
-    int mechanicCount = arc4random()%totalPossibleMechanics;
+    int totalPossibleMechanics = 6;
+    int mechanicCount = arc4random()%3; // Max 2 mechanics
     NSMutableArray* mechanicsList = [[NSMutableArray alloc] init];
     
     int i = 0;
@@ -92,18 +92,100 @@
             case 2:
                 [self addDiverterMechanic:mechanicCount];
                 break;
+            case 3:
+                [self addSplitterMechanic:mechanicCount];
+                break;
+            case 4:
+                [self addConnectorMechanic:mechanicCount];
+                break;
+            case 5:
+                [self addConverterMechanic:mechanicCount];
+                break;
         }
             
         i++;
     }
     
-    if (arc4random()%2 == 1)
-    {
-        [self addConnectorMechanic];
-    }
-    
     [self logBoardCellState];
 }
+
+- (void)addConverterMechanic:(int)mechanicCount
+{
+    // Get number of cells to generate
+    int upperBound = self.boardParameters.splitterMechanicUpperBound;
+    int lowerBound = self.boardParameters.splitterMechanicLowerBound;
+    int specialCellsCount = arc4random()%(upperBound - lowerBound + 1) + lowerBound;
+    
+    // Adjust for number of other mechanics
+    specialCellsCount = specialCellsCount / mechanicCount;
+    if (specialCellsCount < 0)
+    {
+        specialCellsCount = 1;
+    }
+    
+    int i = 0;
+    while (i < specialCellsCount)
+    {
+        int randomRow = arc4random()%self.boardParameters.gridSize;
+        int randomCol = arc4random()%self.boardParameters.gridSize;
+        
+        NSMutableArray *row = [self.colorCellSections objectAtIndex:randomRow];
+        NSNumber *cellType = [row objectAtIndex:randomCol];
+        
+        // Only replace normal cells, not cells that already have mechanics
+        if (cellType.intValue != NormalCell)
+        {
+            continue;
+        }
+        
+        // Do not allow converter in the last row/col
+        if (randomRow == self.boardParameters.gridSize - 1 &&
+            randomCol == self.boardParameters.gridSize - 1)
+        {
+            continue;
+        }
+        
+        // Replace with special cell
+        [row replaceObjectAtIndex:randomCol withObject:[NSNumber numberWithInt:Converter]];
+        i++;
+    }
+}
+
+- (void)addSplitterMechanic:(int)mechanicCount
+{
+    // Get number of cells to generate
+    int upperBound = self.boardParameters.splitterMechanicUpperBound;
+    int lowerBound = self.boardParameters.splitterMechanicLowerBound;
+    int specialCellsCount = arc4random()%(upperBound - lowerBound + 1) + lowerBound;
+    
+    // Adjust for number of other mechanics
+    specialCellsCount = specialCellsCount / mechanicCount;
+    if (specialCellsCount < 0)
+    {
+        specialCellsCount = 1;
+    }
+    
+    int i = 0;
+    while (i < specialCellsCount)
+    {
+        int randomRow = arc4random()%self.boardParameters.gridSize;
+        int randomCol = arc4random()%self.boardParameters.gridSize;
+        
+        NSMutableArray *row = [self.colorCellSections objectAtIndex:randomRow];
+        NSNumber *cellType = [row objectAtIndex:randomCol];
+        
+        // Only replace normal cells, not cells that already have mechanics
+        if (cellType.intValue != NormalCell)
+        {
+            continue;
+        }
+        
+        // Replace with special cell
+        [row replaceObjectAtIndex:randomCol withObject:[NSNumber numberWithInt:Splitter]];
+        i++;
+    }
+}
+
 
 - (void)addDiverterMechanic:(int)mechanicCount
 {
@@ -142,18 +224,6 @@
         
         // Do not allow Diverter mechanic on right column
         if (randomCol == self.boardParameters.gridSize - 1)
-        {
-            continue;
-        }
-        
-        // Make sure we don't have 2 Diverters next to each other
-        if ([self hasHorizontalAdjacentCellOfType:randomRow col:randomCol cellType:Diverter])
-        {
-            continue;
-        }
-        
-        // Make sure we don't have 2 Diverters on top of each other
-        if ([self hasVerticalAdjacentCellOfType:randomRow col:randomCol cellType:Diverter])
         {
             continue;
         }
@@ -330,12 +400,20 @@
     }
 }
 
-- (void)addConnectorMechanic
+- (void)addConnectorMechanic:(int)mechanicCount
 {
     // Get number of cells to generate
     int upperBound = self.boardParameters.connectorMechanicUpperBound;
     int lowerBound = self.boardParameters.connectorMechanicLowerBound;
     int specialCellsCount = arc4random()%(upperBound - lowerBound + 1) + lowerBound;
+    
+    // Adjust for number of other mechanics
+    specialCellsCount = specialCellsCount / mechanicCount;
+    if (specialCellsCount < 2)
+    {
+        // Connector needs a minium of 2
+        specialCellsCount = 2;
+    }
     
     int i = 0;
     while (i < specialCellsCount)

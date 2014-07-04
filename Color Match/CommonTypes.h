@@ -36,6 +36,8 @@ typedef struct BoardParameters
     int connectorMechanicUpperBound;
     int diverterMechanicLowerBound;
     int diverterMechanicUpperBound;
+    int splitterMechanicLowerBound;
+    int splitterMechanicUpperBound;
 } BoardParameters;
 
 // Cell type
@@ -46,7 +48,9 @@ typedef NS_ENUM(NSUInteger, CellType)
     ReflectorTopToRight = 2,
     Zoner = 3,
     Connector = 4,
-    Diverter = 5
+    Diverter = 5,
+    Splitter = 6,
+    Converter = 7
 };
 
 

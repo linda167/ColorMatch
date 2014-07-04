@@ -112,6 +112,18 @@
 		BF9079CA195E1819000E6E58 /* Yellow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF9079C2195E1819000E6E58 /* Yellow@2x.png */; };
 		BF9079CB195E1819000E6E58 /* YellowSelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF9079C3195E1819000E6E58 /* YellowSelected@2x.png */; };
 		BF9079CD195FD660000E6E58 /* diverterGoal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF9079CC195FD660000E6E58 /* diverterGoal@2x.png */; };
+		BF9079CF19626C0D000E6E58 /* splitterWhite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF9079CE19626C0D000E6E58 /* splitterWhite@2x.png */; };
+		BF9079D21963AA6A000E6E58 /* SplitterCellButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BF9079D11963AA6A000E6E58 /* SplitterCellButton.m */; };
+		BF9079D51963AD6D000E6E58 /* SplitterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BF9079D41963AD6D000E6E58 /* SplitterCell.m */; };
+		BF9079D91963B954000E6E58 /* splitterBlue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF9079D61963B954000E6E58 /* splitterBlue@2x.png */; };
+		BF9079DA1963B954000E6E58 /* splitterRed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF9079D71963B954000E6E58 /* splitterRed@2x.png */; };
+		BF9079DB1963B954000E6E58 /* splitterYellow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF9079D81963B954000E6E58 /* splitterYellow@2x.png */; };
+		BF9079DE1964F933000E6E58 /* ConverterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BF9079DD1964F933000E6E58 /* ConverterCell.m */; };
+		BF9079E11964F94C000E6E58 /* ConverterCellButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BF9079E01964F94C000E6E58 /* ConverterCellButton.m */; };
+		BF9079E619664916000E6E58 /* converterBlue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF9079E219664916000E6E58 /* converterBlue@2x.png */; };
+		BF9079E719664916000E6E58 /* converterRed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF9079E319664916000E6E58 /* converterRed@2x.png */; };
+		BF9079E819664916000E6E58 /* converterWhite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF9079E419664916000E6E58 /* converterWhite@2x.png */; };
+		BF9079E919664916000E6E58 /* converterYellow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF9079E519664916000E6E58 /* converterYellow@2x.png */; };
 		BFA3A2B4192D899D00C1BB7D /* ReflectorArrowLtD@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFA3A2B2192D899D00C1BB7D /* ReflectorArrowLtD@2x.png */; };
 		BFA3A2B5192D899D00C1BB7D /* ReflectorArrowTtR@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFA3A2B3192D899D00C1BB7D /* ReflectorArrowTtR@2x.png */; };
 		BFA3A2BC1931401700C1BB7D /* ReflectorArrowLtDBlue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFA3A2B61931401700C1BB7D /* ReflectorArrowLtDBlue@2x.png */; };
@@ -268,6 +280,22 @@
 		BF9079C2195E1819000E6E58 /* Yellow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Yellow@2x.png"; sourceTree = "<group>"; };
 		BF9079C3195E1819000E6E58 /* YellowSelected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "YellowSelected@2x.png"; sourceTree = "<group>"; };
 		BF9079CC195FD660000E6E58 /* diverterGoal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "diverterGoal@2x.png"; sourceTree = "<group>"; };
+		BF9079CE19626C0D000E6E58 /* splitterWhite@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "splitterWhite@2x.png"; sourceTree = "<group>"; };
+		BF9079D01963AA6A000E6E58 /* SplitterCellButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SplitterCellButton.h; sourceTree = "<group>"; };
+		BF9079D11963AA6A000E6E58 /* SplitterCellButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SplitterCellButton.m; sourceTree = "<group>"; };
+		BF9079D31963AD6D000E6E58 /* SplitterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SplitterCell.h; sourceTree = "<group>"; };
+		BF9079D41963AD6D000E6E58 /* SplitterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SplitterCell.m; sourceTree = "<group>"; };
+		BF9079D61963B954000E6E58 /* splitterBlue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "splitterBlue@2x.png"; sourceTree = "<group>"; };
+		BF9079D71963B954000E6E58 /* splitterRed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "splitterRed@2x.png"; sourceTree = "<group>"; };
+		BF9079D81963B954000E6E58 /* splitterYellow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "splitterYellow@2x.png"; sourceTree = "<group>"; };
+		BF9079DC1964F933000E6E58 /* ConverterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConverterCell.h; sourceTree = "<group>"; };
+		BF9079DD1964F933000E6E58 /* ConverterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConverterCell.m; sourceTree = "<group>"; };
+		BF9079DF1964F94C000E6E58 /* ConverterCellButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConverterCellButton.h; sourceTree = "<group>"; };
+		BF9079E01964F94C000E6E58 /* ConverterCellButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConverterCellButton.m; sourceTree = "<group>"; };
+		BF9079E219664916000E6E58 /* converterBlue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "converterBlue@2x.png"; sourceTree = "<group>"; };
+		BF9079E319664916000E6E58 /* converterRed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "converterRed@2x.png"; sourceTree = "<group>"; };
+		BF9079E419664916000E6E58 /* converterWhite@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "converterWhite@2x.png"; sourceTree = "<group>"; };
+		BF9079E519664916000E6E58 /* converterYellow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "converterYellow@2x.png"; sourceTree = "<group>"; };
 		BFA3A2B2192D899D00C1BB7D /* ReflectorArrowLtD@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReflectorArrowLtD@2x.png"; sourceTree = "<group>"; };
 		BFA3A2B3192D899D00C1BB7D /* ReflectorArrowTtR@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReflectorArrowTtR@2x.png"; sourceTree = "<group>"; };
 		BFA3A2B61931401700C1BB7D /* ReflectorArrowLtDBlue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReflectorArrowLtDBlue@2x.png"; sourceTree = "<group>"; };
@@ -388,6 +416,14 @@
 		AF2C225A1874B95000082561 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				BF9079E219664916000E6E58 /* converterBlue@2x.png */,
+				BF9079E319664916000E6E58 /* converterRed@2x.png */,
+				BF9079E419664916000E6E58 /* converterWhite@2x.png */,
+				BF9079E519664916000E6E58 /* converterYellow@2x.png */,
+				BF9079D61963B954000E6E58 /* splitterBlue@2x.png */,
+				BF9079D71963B954000E6E58 /* splitterRed@2x.png */,
+				BF9079D81963B954000E6E58 /* splitterYellow@2x.png */,
+				BF9079CE19626C0D000E6E58 /* splitterWhite@2x.png */,
 				BF9079CC195FD660000E6E58 /* diverterGoal@2x.png */,
 				BF9079BC195E1819000E6E58 /* Blue@2x.png */,
 				BF9079BD195E1819000E6E58 /* BlueSelected@2x.png */,
@@ -524,6 +560,14 @@
 				BF9079841953FEAF000E6E58 /* ZonerCellButton.m */,
 				BF90799E19564F29000E6E58 /* ConnectorCell.h */,
 				BF90799F19564F29000E6E58 /* ConnectorCell.m */,
+				BF9079D31963AD6D000E6E58 /* SplitterCell.h */,
+				BF9079D41963AD6D000E6E58 /* SplitterCell.m */,
+				BF9079D01963AA6A000E6E58 /* SplitterCellButton.h */,
+				BF9079D11963AA6A000E6E58 /* SplitterCellButton.m */,
+				BF9079DC1964F933000E6E58 /* ConverterCell.h */,
+				BF9079DD1964F933000E6E58 /* ConverterCell.m */,
+				BF9079DF1964F94C000E6E58 /* ConverterCellButton.h */,
+				BF9079E01964F94C000E6E58 /* ConverterCellButton.m */,
 			);
 			name = "Game Core";
 			sourceTree = "<group>";
@@ -626,10 +670,12 @@
 			files = (
 				AFADA21F1877D20D00FADA22 /* BlockOrange.png in Resources */,
 				BF9079C4195E1819000E6E58 /* Blue@2x.png in Resources */,
+				BF9079D91963B954000E6E58 /* splitterBlue@2x.png in Resources */,
 				BF90799619560FE3000E6E58 /* connectorInnerPurple@2x.png in Resources */,
 				BF90799A19560FE3000E6E58 /* connectorOuterBlue@2x.png in Resources */,
 				BF874D11192B28C1001701A2 /* ReflectorLtDGoal@2x.png in Resources */,
 				BFA3A2BF1931401700C1BB7D /* ReflectorArrowTtRBlue@2x.png in Resources */,
+				BF9079E819664916000E6E58 /* converterWhite@2x.png in Resources */,
 				BF9079761953DF94000E6E58 /* zonerBlue@2x.png in Resources */,
 				BF90799D19560FE3000E6E58 /* connectorOuterYellow@2x.png in Resources */,
 				AFADA2281877D20D00FADA22 /* FilledCircleBlue.png in Resources */,
@@ -663,9 +709,12 @@
 				BFA3A2BC1931401700C1BB7D /* ReflectorArrowLtDBlue@2x.png in Resources */,
 				BF90799919560FE3000E6E58 /* connectorInnerYellow@2x.png in Resources */,
 				BF90797A1953DF94000E6E58 /* zonerYellow@2x.png in Resources */,
+				BF9079DB1963B954000E6E58 /* splitterYellow@2x.png in Resources */,
 				AFADA2231877D20D00FADA22 /* BlockYellow.png in Resources */,
 				BF90799419560FE3000E6E58 /* connectorInnerGreen@2x.png in Resources */,
+				BF9079CF19626C0D000E6E58 /* splitterWhite@2x.png in Resources */,
 				BF9079BA195E1040000E6E58 /* FilledCircleRed@2x.png in Resources */,
+				BF9079E719664916000E6E58 /* converterRed@2x.png in Resources */,
 				BF9079C8195E1819000E6E58 /* White@2x.png in Resources */,
 				BF9079771953DF94000E6E58 /* zonerGoal@2x.png in Resources */,
 				BFA3A2BE1931401700C1BB7D /* ReflectorArrowLtDYellow@2x.png in Resources */,
@@ -675,12 +724,14 @@
 				BF90799719560FE3000E6E58 /* connectorInnerRed@2x.png in Resources */,
 				AFADA22A1877D20D00FADA22 /* FilledCircleRed.png in Resources */,
 				AFADA2271877D20D00FADA22 /* EmptyCircle.png in Resources */,
+				BF9079DA1963B954000E6E58 /* splitterRed@2x.png in Resources */,
 				BF9079B1195E073E000E6E58 /* BlockRed@2x.png in Resources */,
 				BF9079CB195E1819000E6E58 /* YellowSelected@2x.png in Resources */,
 				AFADA2291877D20D00FADA22 /* FilledCircleGreen.png in Resources */,
 				AFADA2211877D20D00FADA22 /* BlockRed.png in Resources */,
 				BF90799B19560FE3000E6E58 /* connectorOuterRed@2x.png in Resources */,
 				BF90796B194D6E42000E6E58 /* 1stars@2x.png in Resources */,
+				BF9079E619664916000E6E58 /* converterBlue@2x.png in Resources */,
 				AFB75A9F18834ECD00CAB736 /* AppIcon120.png in Resources */,
 				AF2C222D1874B8B700082561 /* InfoPlist.strings in Resources */,
 				BF9079791953DF94000E6E58 /* zonerWhite@2x.png in Resources */,
@@ -695,6 +746,7 @@
 				BF90796C194D6E42000E6E58 /* 2stars@2x.png in Resources */,
 				BF9079AC195E073E000E6E58 /* BlockBlue@2x.png in Resources */,
 				BF9079AE195E073E000E6E58 /* BlockGreen@2x.png in Resources */,
+				BF9079E919664916000E6E58 /* converterYellow@2x.png in Resources */,
 				BF9079821953EE21000E6E58 /* BlockBrown.png in Resources */,
 				BF9079C5195E1819000E6E58 /* BlueSelected@2x.png in Resources */,
 				BF90796A194D6E42000E6E58 /* 0stars@2x.png in Resources */,
@@ -733,6 +785,7 @@
 				BF90795C194CE618000E6E58 /* LevelsManager.m in Sources */,
 				BF9079801953E6D6000E6E58 /* ZonerCell.m in Sources */,
 				AFB896851881E011003FAEF4 /* ColorBoard.m in Sources */,
+				BF9079D51963AD6D000E6E58 /* SplitterCell.m in Sources */,
 				AFB8968B1881EDD0003FAEF4 /* UserColorBoard.m in Sources */,
 				AFB8969118822186003FAEF4 /* ChooseGameSizeViewController.m in Sources */,
 				BF0D4BD41929429E00AACB5A /* LinePiece.m in Sources */,
@@ -744,11 +797,14 @@
 				AF2C22331874B8B800082561 /* CMAppDelegate.m in Sources */,
 				BF9079851953FEAF000E6E58 /* ZonerCellButton.m in Sources */,
 				BF0D4BCC1921DEE700AACB5A /* ConnectorLines.m in Sources */,
+				BF9079E11964F94C000E6E58 /* ConverterCellButton.m in Sources */,
 				BFA3A2CF1944386400C1BB7D /* LevelSelectButton.m in Sources */,
 				BF6304391895F231002F3C9E /* ColorCell.m in Sources */,
 				AFADA23518791E4400FADA22 /* GridColorButton.m in Sources */,
+				BF9079D21963AA6A000E6E58 /* SplitterCellButton.m in Sources */,
 				BF90795F194D22B0000E6E58 /* DebugModeViewController.m in Sources */,
 				AF2C222F1874B8B700082561 /* main.m in Sources */,
+				BF9079DE1964F933000E6E58 /* ConverterCell.m in Sources */,
 				AF2C223C1874B8B800082561 /* MainGameViewController.m in Sources */,
 				BF9079A019564F29000E6E58 /* ConnectorCell.m in Sources */,
 				BF0D4BC5192010BB00AACB5A /* BoardCells.m in Sources */,

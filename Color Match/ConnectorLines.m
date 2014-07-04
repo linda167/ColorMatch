@@ -12,6 +12,8 @@
 @interface ConnectorLines ()
 @property NSMutableArray *verticalLines;
 @property NSMutableArray *horizontalLines;
+@property NSMutableArray *converterVerticalLines;
+@property NSMutableArray *converterHorizontalLines;
 @property BOOL needToClear;
 @end
 
@@ -23,7 +25,9 @@
     if (self) {
         self.verticalLines = [[NSMutableArray alloc] init];
         self.horizontalLines = [[NSMutableArray alloc] init];
-        [self setBackgroundColor:[UIColor whiteColor]];
+        self.converterVerticalLines = [[NSMutableArray alloc] init];
+        self.converterHorizontalLines = [[NSMutableArray alloc] init];
+        [self setBackgroundColor:[UIColor clearColor]];
     }
     return self;
 }
@@ -49,13 +53,25 @@
         LineInfo *lineInfo = [self.verticalLines objectAtIndex:i];
         [self drawLine:lineInfo];
     }
+    
+    for (int i = 0; i < self.converterHorizontalLines.count; i++)
+    {
+        LineInfo *lineInfo = [self.converterHorizontalLines objectAtIndex:i];
+        [self drawLine:lineInfo];
+    }
+    
+    for (int i = 0; i < self.converterVerticalLines.count; i++)
+    {
+        LineInfo *lineInfo = [self.converterVerticalLines objectAtIndex:i];
+        [self drawLine:lineInfo];
+    }
 }
 
 - (void)drawLine:(LineInfo*)line
 {
     int curveRadius = 11;
     CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSetLineWidth(context, 3.0);
+    CGContextSetLineWidth(context, line.lineThickness);
     
     // Begin path
     CGContextSetStrokeColorWithColor(context, line.color.CGColor);
@@ -108,6 +124,20 @@
     [self setNeedsDisplay];
 }
 
+- (void)addConverterLine:(LineInfo*)lineInfo isHorizontal:(BOOL)isHorizontal
+{
+    if (isHorizontal)
+    {
+        [self.converterHorizontalLines addObject:lineInfo];
+    }
+    else
+    {
+        [self.converterVerticalLines addObject:lineInfo];
+    }
+    
+    [self setNeedsDisplay];
+}
+
 - (void)updateLine:(int)lineIndex isHorizontal:(BOOL)isHorizontal color:(UIColor*)color
 {
     LineInfo *lineInfo;
@@ -124,7 +154,19 @@
     lineInfo.color = color;
     
     [self setNeedsDisplay];
-} 
+}
+
+- (void)updateConverterLine:(int)lineIndex color:(UIColor*)color
+{
+    // Update both lines
+    LineInfo *verticalLineInfo = [self.converterVerticalLines objectAtIndex:lineIndex];
+    verticalLineInfo.color = color;
+    
+    LineInfo *horizontalLineInfo = [self.converterHorizontalLines objectAtIndex:lineIndex];
+    horizontalLineInfo.color = color;
+    
+    [self setNeedsDisplay];
+}
 
 - (void)clear
 {

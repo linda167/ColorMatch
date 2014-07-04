@@ -21,5 +21,6 @@
 +(UIImage *) GetConnectorInnerImageForColor:(int)color;
 +(UIImage *) GetConnectorOuterImageForColor:(int)color;
 +(void)AnimateViewsAffected:(NSMutableArray*)viewsToAnimate;
++(UIColor *) GetUIColorForColor:(int)colorValue;
 
 @end

@@ -15,6 +15,8 @@
 @property int startX;
 @property int startY;
 @property NSMutableArray *linePieces;
+@property int lineThickness;
+
 - (void)addLinePiece:(LinePiece*) linePiece;
 
 @end

@@ -16,7 +16,7 @@
 +(int) IsRandomLevel:(int)worldId levelId:(int)levelId;
 +(void)GetBoardStatesForLevel:(int)worldId levelId:(int)levelId topColorsState:(NSMutableArray*)topColorsState leftColorsState:(NSMutableArray*)leftColorsState;
 +(BoardCells*)LoadBoardCellTypes:(int)worldId levelId:(int)levelId boardParameters:(BoardParameters)boardParameters;
-+(int)CalculateStarsEarned:(int)boardSize time:(int)time worldId:(int)worldId;
++(int)CalculateStarsEarned:(int)boardSize time:(int)time worldId:(int)worldId levelId:(int)levelId;
 +(int)GetTotalWorldCount;
 
 @end

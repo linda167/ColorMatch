@@ -160,6 +160,29 @@
     return [UIColor colorWithRed:(221/255.0) green:(37/255.0) blue:(37/255.0) alpha:1];
 }
 
++(UIColor *) GetUIColorForColor:(int)colorValue
+{
+    UIColor *color;
+    if (colorValue == 0)
+    {
+        color = [CommonUtils GetGrayColor];
+    }
+    else if (colorValue == 1)
+    {
+        color = [CommonUtils GetBlueColor];
+    }
+    else if (colorValue == 2)
+    {
+        color = [CommonUtils GetRedColor];
+    }
+    else if (colorValue == 3)
+    {
+        color = [CommonUtils GetYellowColor];
+    }
+    
+    return color;
+}
+
 +(void) Log:(NSMutableString*)string
 {
     NSLog(@"%@", string);
@@ -231,7 +254,7 @@
      {
          for (UIView* view in viewsToAnimate)
          {
-             view.transform = CGAffineTransformMakeScale(1.2, 1.2);
+             view.transform = CGAffineTransformMakeScale(1.3, 1.3);
          }
      }
      completion:^(BOOL finished)

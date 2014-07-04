@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "ColorCell.h"
+#import "ZonerCell.h"
 
 @interface ZonerCellButton : UIButton
-@property ColorCell* colorCell;
+@property ZonerCell* colorCell;
 @end

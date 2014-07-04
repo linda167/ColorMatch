@@ -120,6 +120,8 @@
             boardParameters.connectorMechanicUpperBound = 2;
             boardParameters.diverterMechanicLowerBound = 1;
             boardParameters.diverterMechanicUpperBound = 1;
+            boardParameters.splitterMechanicLowerBound = 1;
+            boardParameters.splitterMechanicUpperBound = 1;
             break;
         case 4:
             boardParameters.colorCellSize = 40;
@@ -143,6 +145,8 @@
             boardParameters.connectorMechanicUpperBound = 3;
             boardParameters.diverterMechanicLowerBound = 1;
             boardParameters.diverterMechanicUpperBound = 2;
+            boardParameters.splitterMechanicLowerBound = 1;
+            boardParameters.splitterMechanicUpperBound = 2;
             break;
         case 5:
             boardParameters.colorCellSize = 35;
@@ -166,6 +170,8 @@
             boardParameters.connectorMechanicUpperBound = 5;
             boardParameters.diverterMechanicLowerBound = 2;
             boardParameters.diverterMechanicUpperBound = 4;
+            boardParameters.splitterMechanicLowerBound = 2;
+            boardParameters.splitterMechanicUpperBound = 3;
             break;
         default:
             [NSException raise:@"Invalid input" format:@"Invalid board size"];
@@ -366,7 +372,7 @@
 
 -(int)storeLevelCompleteProgress
 {
-    int stars = [LevelsManager CalculateStarsEarned:_boardParameters.gridSize time:self.timeInterval worldId:self.worldId];
+    int stars = [LevelsManager CalculateStarsEarned:_boardParameters.gridSize time:self.timeInterval worldId:self.worldId levelId:self.levelId];
     
     [[UserData sharedUserData] storeLevelComplete:self.worldId levelId:self.levelId stars:stars];
     
