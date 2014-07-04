@@ -18,5 +18,9 @@
 -(void)generateRandomCellTypes;
 -(void)addZonerValueAt:(int)row col:(int)col value:(int)value;
 -(int)getZonerValueAt:(int)row col:(int)col;
+-(void)addSplitterValueAt:(int)row col:(int)col value:(int)value;
+-(int)getSplitterValueAt:(int)row col:(int)col;
+-(void)addConverterValueAt:(int)row col:(int)col value:(int)value;
+-(int)getConverterValueAt:(int)row col:(int)col;
 
 @end

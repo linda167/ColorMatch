@@ -13,6 +13,7 @@
 #import "ZonerCell.h"
 #import "ConnectorCell.h"
 #import "SplitterCell.h"
+#import "ConverterCell.h"
 
 @interface GoalBoard ()
 @end
@@ -58,6 +59,14 @@
             if (cellType.intValue == Zoner)
             {
                 ((ZonerCell*)colorCell).inputColor = [self.boardCells getZonerValueAt:i col:j];
+            }
+            else if (cellType.intValue == Splitter)
+            {
+                ((SplitterCell*)colorCell).inputColor = [self.boardCells getSplitterValueAt:i col:j];
+            }
+            else if (cellType.intValue == Converter)
+            {
+                ((ConverterCell*)colorCell).inputColor = [self.boardCells getConverterValueAt:i col:j];
             }
             
             [row addObject:colorCell];
@@ -341,7 +350,7 @@
         for (int j=0; j<row.count; j++)
         {
             ColorCell *colorCell = [row objectAtIndex:j];
-            if (colorCell.cellType == Zoner)
+            if (colorCell.cellType == Zoner || colorCell.cellType == Splitter || colorCell.cellType == Converter)
             {
                 [self applySpecialCell:colorCell isAdd:true cellsAffected:NULL];
             }

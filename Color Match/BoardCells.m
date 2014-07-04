@@ -14,6 +14,8 @@
 @interface BoardCells ()
 @property BoardParameters boardParameters;
 @property NSMutableDictionary *zonerValueDictionary;
+@property NSMutableDictionary *splitterValueDictionary;
+@property NSMutableDictionary *converterValueDictionary;
 @end
 
 @implementation BoardCells
@@ -25,6 +27,8 @@
     {
         self.boardParameters = boardParameters;
         self.zonerValueDictionary = [[NSMutableDictionary alloc] init];
+        self.splitterValueDictionary = [[NSMutableDictionary alloc] init];
+        self.converterValueDictionary = [[NSMutableDictionary alloc] init];
         
         [self initCells];
     }
@@ -60,6 +64,32 @@
 {
     NSString* key = [NSString stringWithFormat:@"%d_%d", row, col];
     NSNumber* number = [self.zonerValueDictionary objectForKey:(key)];
+    return number.intValue;
+}
+
+-(void)addSplitterValueAt:(int)row col:(int)col value:(int)value
+{
+    NSString* key = [NSString stringWithFormat:@"%d_%d", row, col];
+    [self.splitterValueDictionary setObject:[NSNumber numberWithInt:value] forKey:key];
+}
+
+-(int)getSplitterValueAt:(int)row col:(int)col
+{
+    NSString* key = [NSString stringWithFormat:@"%d_%d", row, col];
+    NSNumber* number = [self.splitterValueDictionary objectForKey:(key)];
+    return number.intValue;
+}
+
+-(void)addConverterValueAt:(int)row col:(int)col value:(int)value
+{
+    NSString* key = [NSString stringWithFormat:@"%d_%d", row, col];
+    [self.converterValueDictionary setObject:[NSNumber numberWithInt:value] forKey:key];
+}
+
+-(int)getConverterValueAt:(int)row col:(int)col
+{
+    NSString* key = [NSString stringWithFormat:@"%d_%d", row, col];
+    NSNumber* number = [self.converterValueDictionary objectForKey:(key)];
     return number.intValue;
 }
 
