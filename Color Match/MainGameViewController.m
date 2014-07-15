@@ -122,6 +122,13 @@
             boardParameters.diverterMechanicUpperBound = 1;
             boardParameters.splitterMechanicLowerBound = 1;
             boardParameters.splitterMechanicUpperBound = 1;
+            boardParameters.transporterMechanicLowerBound = 1;
+            boardParameters.transporterMechanicUpperBound = 1;
+            boardParameters.transporterPerGroupLowerBound = 1;
+            boardParameters.transporterPerGroupUpperBound = 1;
+            boardParameters.transporterArrowSize = 49;
+            boardParameters.transporterArrowDownXAdjustment = 2;
+            boardParameters.transporterArrowDownYAdjustment = 6;
             break;
         case 4:
             boardParameters.colorCellSize = 40;
@@ -147,6 +154,13 @@
             boardParameters.diverterMechanicUpperBound = 2;
             boardParameters.splitterMechanicLowerBound = 1;
             boardParameters.splitterMechanicUpperBound = 2;
+            boardParameters.transporterMechanicLowerBound = 1;
+            boardParameters.transporterMechanicUpperBound = 1;
+            boardParameters.transporterPerGroupLowerBound = 1;
+            boardParameters.transporterPerGroupUpperBound = 2;
+            boardParameters.transporterArrowSize = 39;
+            boardParameters.transporterArrowDownXAdjustment = 2;
+            boardParameters.transporterArrowDownYAdjustment = 8;
             break;
         case 5:
             boardParameters.colorCellSize = 35;
@@ -172,6 +186,17 @@
             boardParameters.diverterMechanicUpperBound = 4;
             boardParameters.splitterMechanicLowerBound = 2;
             boardParameters.splitterMechanicUpperBound = 3;
+            boardParameters.transporterMechanicLowerBound = 1;
+            boardParameters.transporterMechanicUpperBound = 1;
+            boardParameters.transporterPerGroupLowerBound = 1;
+            boardParameters.transporterPerGroupUpperBound = 2;
+            boardParameters.transporterArrowSize = 29;
+            boardParameters.transporterArrowDownXAdjustment = 4;
+            boardParameters.transporterArrowDownYAdjustment = -12;
+            boardParameters.transporterArrowDownYAdjustment2 = 7;
+            boardParameters.transporterArrowRightXAdjustment = 7;
+            boardParameters.transporterArrowRightXAdjustment2 = -10;
+            boardParameters.transporterArrowRightYAdjustment = 4;
             break;
         default:
             [NSException raise:@"Invalid input" format:@"Invalid board size"];
@@ -503,8 +528,7 @@
 - (void)removeExistingBoard
 {
     [_userColorBoard removeExistingBoard];
-    [_goalBoard removeExistingGridCells];
-    [_goalBoard removeExistingGoalColorsState];
+    [_goalBoard removeExistingBoard];
 }
 
 - (void)clearExistingGame

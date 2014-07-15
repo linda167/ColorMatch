@@ -84,7 +84,7 @@
     if (self.cellType == NormalCell)
     {
         UIImage *image = [CommonUtils GetCellImageForColor:combinedColor];
-        [((UIImageView*)_image) setImage:image];
+        [_image setImage:image];
     }
     
     self.currentColor = combinedColor;

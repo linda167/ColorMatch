@@ -14,6 +14,7 @@
 @property NSMutableArray *horizontalLines;
 @property NSMutableArray *converterVerticalLines;
 @property NSMutableArray *converterHorizontalLines;
+@property NSMutableDictionary *transporterGroups;
 @property BOOL needToClear;
 @end
 
@@ -27,6 +28,7 @@
         self.horizontalLines = [[NSMutableArray alloc] init];
         self.converterVerticalLines = [[NSMutableArray alloc] init];
         self.converterHorizontalLines = [[NSMutableArray alloc] init];
+        self.transporterGroups = [[NSMutableDictionary alloc] init];
         [self setBackgroundColor:[UIColor clearColor]];
     }
     return self;
@@ -64,6 +66,17 @@
     {
         LineInfo *lineInfo = [self.converterVerticalLines objectAtIndex:i];
         [self drawLine:lineInfo];
+    }
+    
+    for (id key in self.transporterGroups)
+    {
+        NSMutableArray* groupLines = [self.transporterGroups objectForKey:key];
+        
+        for (int j = 0; j < groupLines.count; j++)
+        {
+            LineInfo *lineInfo = [groupLines objectAtIndex:j];
+            [self drawLine:lineInfo];
+        }
     }
 }
 
@@ -138,6 +151,34 @@
     [self setNeedsDisplay];
 }
 
+- (void)addTransporterGroupLines:(int)groupId groupLines:(NSMutableArray*)groupLines
+{
+    NSString* key = [NSString stringWithFormat:@"%d", groupId];
+    [self.transporterGroups setObject:groupLines forKey:key];
+}
+
+-(NSMutableArray*)getTransporterGroupLines:(int)groupId
+{
+    NSString* key = [NSString stringWithFormat:@"%d", groupId];
+    NSMutableArray* transporterGroupLines = [self.transporterGroups objectForKey:(key)];
+    
+    if (transporterGroupLines == NULL)
+    {
+        transporterGroupLines = [[NSMutableArray alloc] init];
+        [self addTransporterGroupLines:groupId groupLines:transporterGroupLines];
+    }
+    
+    return transporterGroupLines;
+}
+
+- (void)addTransporterLine:(int)groupId lineInfo:(LineInfo*)lineInfo
+{
+    NSMutableArray* groupLines = [self getTransporterGroupLines:groupId];
+    [groupLines addObject:lineInfo];
+    
+    [self setNeedsDisplay];
+}
+
 - (void)updateLine:(int)lineIndex isHorizontal:(BOOL)isHorizontal color:(UIColor*)color
 {
     LineInfo *lineInfo;
@@ -164,6 +205,19 @@
     
     LineInfo *horizontalLineInfo = [self.converterHorizontalLines objectAtIndex:lineIndex];
     horizontalLineInfo.color = color;
+    
+    [self setNeedsDisplay];
+}
+
+- (void)updateTransporterLine:(int)groupId color:(UIColor*)color
+{
+    NSMutableArray* groupLines = [self getTransporterGroupLines:groupId];
+    
+    for (LineInfo* line in groupLines)
+    {
+        // Update both lines
+        line.color = color;
+    }
     
     [self setNeedsDisplay];
 }

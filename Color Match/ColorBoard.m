@@ -13,8 +13,23 @@
 #import "ConnectorCell.h"
 #import "SplitterCell.h"
 #import "ConverterCell.h"
+#import "TransporterCell.h"
+#import "TransporterGroup.h"
+#import "UserColorBoard.h"
 
 @implementation ColorBoard
+
+- (id)initWithParameters:(BoardCells*) boardCells
+{
+    self = [super init];
+    if (self)
+    {
+        self.boardCells = boardCells;
+        self.transporterGroups = [[NSMutableDictionary alloc] init];
+    }
+    
+    return self;
+}
 
 -(void)updateAllColorCells
 {
@@ -93,6 +108,11 @@
                 // Stop color flow when hitting a converter
                 break;
             }
+            else if (colorCell.cellType == TransporterInputLeft)
+            {
+                [self applyColorForTransporterInput:colorCell color:color isAdd:isAdd cellsAffected:cellsAffected];
+                break;
+            }
         }
     }
     else    // if vertical
@@ -132,14 +152,69 @@
                 // Stop color flow when hitting a converter
                 break;
             }
+            else if (colorCell.cellType == TransporterInputTop)
+            {
+                [self applyColorForTransporterInput:colorCell color:color isAdd:isAdd cellsAffected:cellsAffected];
+                break;
+            }
         }
     }
+}
+
+-(void)applyColorForTransporterInput:(ColorCell*)colorCell color:(int)color isAdd:(int)isAdd cellsAffected:(NSMutableArray*)cellsAffected
+{
+    TransporterCell *transporterCell = (TransporterCell*)colorCell;
+    TransporterGroup* transporterGroup = [self getTransporterGroup:transporterCell.groupId];
+    
+    // Apply color to group
+    [transporterGroup applyColorToGroup:[NSNumber numberWithInt:color] isAdd:isAdd];
+    
+    if (cellsAffected != NULL)
+    {
+        // Add transporter input to list of cells affected
+        [cellsAffected addObject:transporterCell.image];
+    }
+    
+    if ([self isKindOfClass:[UserColorBoard class]])
+    {
+        // Change transporter input image
+        [transporterCell.image setImage:[self getTransporterImageWithColor:transporterCell color:color]];
+        
+        // Change special image, direction doesn't matter
+        [self updateSpecialCellImagesOnApplyColor:transporterCell color:color isHorizontal:true cellsAffected:cellsAffected];
+    }
+
+    for (TransporterCell *outputCell in transporterGroup.teleporterOutputs)
+    {
+        if (cellsAffected != NULL)
+        {
+            // Add transporter output to list of cells affected
+            [cellsAffected addObject:outputCell.image];
+        }
+        
+        // Only need to change output cell on add
+        if (isAdd)
+        {
+            [self updateTransporterOutputCell:outputCell transporterGroup:transporterGroup cellsAffected:cellsAffected];
+        }
+        
+        bool outputHorizontal = outputCell.cellType == TransporterOutputRight;
+        
+        [CommonUtils Log:[NSMutableString stringWithFormat: @"Applying color for transport output at:(%d,%d), isHorizontal:%d", outputCell.row, outputCell.col, outputHorizontal]];
+        
+        [self applyColor:outputCell.row currentCol:outputCell.col isHorizontal:outputHorizontal color:color isAdd:isAdd cellsAffected:cellsAffected];
+    }
+}
+
+-(void)updateTransporterOutputCell:(TransporterCell*)outputCell transporterGroup:(TransporterGroup*)transporterGroup cellsAffected:(NSMutableArray*)cellsAffected
+{
+    // NOOP in base class
 }
 
 -(void)updateSpecialCellImagesOnApplyColor:(ColorCell*)colorCell color:(int)color isHorizontal:(BOOL)isHorizontal cellsAffected:(NSMutableArray*)cellsAffected
 {
     // Change special image
-    UIImage *specialImage = [self getSpecialImageForCellWithColor:colorCell.cellType color:color isHorizontal:isHorizontal];
+    UIImage *specialImage = [self updateSpecialImageForCellWithColor:colorCell.cellType color:color isHorizontal:isHorizontal];
     if (specialImage != NULL)
     {
         [colorCell.specialImage setImage:specialImage];
@@ -150,7 +225,7 @@
     }
     
     // Change special image2
-    UIImage *specialImage2 = [self getSpecialImage2ForCellWithColor:colorCell.cellType color:color isHorizontal:isHorizontal];
+    UIImage *specialImage2 = [self updateSpecialImage2ForCellWithColor:colorCell.cellType color:color isHorizontal:isHorizontal];
     if (specialImage2 != NULL)
     {
         [colorCell.specialImage2 setImage:specialImage2];
@@ -161,13 +236,13 @@
     }
 }
 
--(UIImage*)getSpecialImageForCellWithColor:(CellType)cellType color:(int)color isHorizontal:(BOOL)isHorizontal
+-(UIImage*)updateSpecialImageForCellWithColor:(CellType)cellType color:(int)color isHorizontal:(BOOL)isHorizontal
 {
     // NOOP in base class
     return NULL;
 }
 
--(UIImage*)getSpecialImage2ForCellWithColor:(CellType)cellType color:(int)color isHorizontal:(BOOL)isHorizontal
+-(UIImage*)updateSpecialImage2ForCellWithColor:(CellType)cellType color:(int)color isHorizontal:(BOOL)isHorizontal
 {
     // NOOP in base class
     return NULL;
@@ -206,7 +281,7 @@
 -(UIView*)getUIViewForCell:(int)cellType xOffset:(int)xOffset yOffset:(int)yOffset size:(int)size colorCell:(ColorCell*)colorCell
 {
     UIImageView* cellBlock = [[UIImageView alloc] initWithFrame:CGRectMake(xOffset, yOffset, size, size)];
-    cellBlock.image = [self GetImageForCellType:cellType];
+    cellBlock.image = [self GetImageForCellType:colorCell];
     
     return cellBlock;
 }
@@ -236,6 +311,14 @@
             ((ConverterCell*)colorCell).row = row;
             ((ConverterCell*)colorCell).col = col;
             break;
+        case TransporterInputLeft:
+        case TransporterInputTop:
+            colorCell = [self createTransporterCell:cellType row:row col:col boardCells:boardCells isInput:true];
+            break;
+        case TransporterOutputDown:
+        case TransporterOutputRight:
+            colorCell = [self createTransporterCell:cellType row:row col:col boardCells:boardCells isInput:false];
+            break;
         default:
             colorCell = [[ColorCell alloc] init:cellType];
     }
@@ -250,7 +333,50 @@
     return colorCell;
 }
 
--(UIImage*)GetImageForCellType:(int)cellType
+-(ColorCell*)createTransporterCell:(int)cellType row:(int)row col:(int)col boardCells:(BoardCells*)boardCells isInput:(bool)isInput
+{
+    TransporterCell* colorCell = [[TransporterCell alloc] init:cellType];
+    int transporterGroupNumber = [self.boardCells getTransporterGroupMapping:row col:col];
+    colorCell.isInput = isInput;
+    colorCell.groupId = transporterGroupNumber;
+    colorCell.row = row;
+    colorCell.col = col;
+    
+    TransporterGroup* transporterGroup = [self getTransporterGroup:transporterGroupNumber];
+    
+    if (isInput)
+    {
+        [transporterGroup.teleporterInputs addObject:colorCell];
+    }
+    else
+    {
+        [transporterGroup.teleporterOutputs addObject:colorCell];
+    }
+    
+    return colorCell;
+}
+
+-(void)addTransporterGroup:(int)groupId transporterGroup:(TransporterGroup*)transporterGroup
+{
+    NSString* key = [NSString stringWithFormat:@"%d", groupId];
+    [self.transporterGroups setObject:transporterGroup forKey:key];
+}
+
+-(TransporterGroup*)getTransporterGroup:(int)groupId
+{
+    NSString* key = [NSString stringWithFormat:@"%d", groupId];
+    TransporterGroup* transporterGroup = [self.transporterGroups objectForKey:(key)];
+    
+    if (transporterGroup == NULL)
+    {
+        transporterGroup = [[TransporterGroup alloc] init];
+        [self addTransporterGroup:groupId transporterGroup:transporterGroup];
+    }
+    
+    return transporterGroup;
+}
+
+-(UIImage*)GetImageForCellType:(ColorCell*)colorCell
 {
     // Default image
     return [UIImage imageNamed:@"BlockWhite.png"];
@@ -430,6 +556,73 @@
     }
     
     [self.colorCellSections removeAllObjects];
+}
+
+- (void)resetBoardState
+{
+    [self.transporterGroups removeAllObjects];
+}
+
+-(UIImage*)getTransporterImageWithColor:(ColorCell*)colorCell color:(int)color
+{
+    TransporterCell *transporterCell = (TransporterCell*)colorCell;
+    
+    NSMutableString *imageString = [[NSMutableString alloc] init];
+    int groupId = transporterCell.groupId;
+    if (groupId == 0)
+    {
+        switch (transporterCell.cellType)
+        {
+            case TransporterInputLeft:
+                [imageString appendString:@"transporterInputLeft"];
+                break;
+            case TransporterInputTop:
+                [imageString appendString:@"transporterInputTop"];
+                break;
+            case TransporterOutputDown:
+                [imageString appendString:@"transporterOutputDown"];
+                break;
+            case TransporterOutputRight:
+                [imageString appendString:@"transporterOutputRight"];
+                break;
+        }
+        
+        [imageString appendString:[self getTransporterColorString:color]];
+        [imageString appendString:@".png"];
+        
+        return [UIImage imageNamed:imageString];
+    }
+    
+    [NSException raise:@"Invalid group Id" format:@"Invalid group Id"];
+    
+    // Should not be hit
+    return NULL;
+}
+
+
+-(NSString*)getTransporterColorString:(int)color
+{
+    switch (color)
+    {
+        case 0:
+            return @"White";
+        case 1:
+            return @"Blue";
+        case 2:
+            return @"Red";
+        case 3:
+            return @"Yellow";
+        case 4:
+            return @"Purple";
+        case 5:
+            return @"Green";
+        case 6:
+            return @"Orange";
+        case 7:
+            return @"Brown";
+    }
+    // Should not be hit
+    return NULL;
 }
 
 @end

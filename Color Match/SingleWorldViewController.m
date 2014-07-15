@@ -53,7 +53,7 @@
     
     // Do any additional setup after loading the view.
     [self renderWorldTitleDisplay];
-    if (self.worldId < 8)
+    if (self.worldId < 9)
     {
         // TODO: add support for other worlds
         [self renderLevelsDisplay];

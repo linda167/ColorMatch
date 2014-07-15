@@ -124,6 +124,48 @@
 		BF9079E719664916000E6E58 /* converterRed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF9079E319664916000E6E58 /* converterRed@2x.png */; };
 		BF9079E819664916000E6E58 /* converterWhite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF9079E419664916000E6E58 /* converterWhite@2x.png */; };
 		BF9079E919664916000E6E58 /* converterYellow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF9079E519664916000E6E58 /* converterYellow@2x.png */; };
+		BF9807AB196721BA00BAF9ED /* TransporterGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = BF9807AA196721BA00BAF9ED /* TransporterGroup.m */; };
+		BF9807AE1967230600BAF9ED /* TransporterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BF9807AD1967230600BAF9ED /* TransporterCell.m */; };
+		BF980861196E664E00BAF9ED /* transporterInputLeftBlue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF980841196E664E00BAF9ED /* transporterInputLeftBlue@2x.png */; };
+		BF980862196E664E00BAF9ED /* transporterInputLeftBrown@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF980842196E664E00BAF9ED /* transporterInputLeftBrown@2x.png */; };
+		BF980863196E664E00BAF9ED /* transporterInputLeftGreen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF980843196E664E00BAF9ED /* transporterInputLeftGreen@2x.png */; };
+		BF980864196E664E00BAF9ED /* transporterInputLeftOrange@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF980844196E664E00BAF9ED /* transporterInputLeftOrange@2x.png */; };
+		BF980865196E664E00BAF9ED /* transporterInputLeftPurple@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF980845196E664E00BAF9ED /* transporterInputLeftPurple@2x.png */; };
+		BF980866196E664E00BAF9ED /* transporterInputLeftRed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF980846196E664E00BAF9ED /* transporterInputLeftRed@2x.png */; };
+		BF980867196E664E00BAF9ED /* transporterInputLeftWhite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF980847196E664E00BAF9ED /* transporterInputLeftWhite@2x.png */; };
+		BF980868196E664E00BAF9ED /* transporterInputLeftYellow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF980848196E664E00BAF9ED /* transporterInputLeftYellow@2x.png */; };
+		BF980869196E664E00BAF9ED /* transporterInputTopBlue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF980849196E664E00BAF9ED /* transporterInputTopBlue@2x.png */; };
+		BF98086A196E664E00BAF9ED /* transporterInputTopBrown@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF98084A196E664E00BAF9ED /* transporterInputTopBrown@2x.png */; };
+		BF98086B196E664E00BAF9ED /* transporterInputTopGreen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF98084B196E664E00BAF9ED /* transporterInputTopGreen@2x.png */; };
+		BF98086C196E664E00BAF9ED /* transporterInputTopOrange@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF98084C196E664E00BAF9ED /* transporterInputTopOrange@2x.png */; };
+		BF98086D196E664E00BAF9ED /* transporterInputTopPurple@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF98084D196E664E00BAF9ED /* transporterInputTopPurple@2x.png */; };
+		BF98086E196E664E00BAF9ED /* transporterInputTopRed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF98084E196E664E00BAF9ED /* transporterInputTopRed@2x.png */; };
+		BF98086F196E664E00BAF9ED /* transporterInputTopWhite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF98084F196E664E00BAF9ED /* transporterInputTopWhite@2x.png */; };
+		BF980870196E664E00BAF9ED /* transporterInputTopYellow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF980850196E664E00BAF9ED /* transporterInputTopYellow@2x.png */; };
+		BF980871196E664E00BAF9ED /* transporterOutputDownBlue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF980851196E664E00BAF9ED /* transporterOutputDownBlue@2x.png */; };
+		BF980872196E664E00BAF9ED /* transporterOutputDownBrown@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF980852196E664E00BAF9ED /* transporterOutputDownBrown@2x.png */; };
+		BF980873196E664E00BAF9ED /* transporterOutputDownGreen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF980853196E664E00BAF9ED /* transporterOutputDownGreen@2x.png */; };
+		BF980874196E664E00BAF9ED /* transporterOutputDownOrange@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF980854196E664E00BAF9ED /* transporterOutputDownOrange@2x.png */; };
+		BF980875196E664E00BAF9ED /* transporterOutputDownPurple@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF980855196E664E00BAF9ED /* transporterOutputDownPurple@2x.png */; };
+		BF980876196E664E00BAF9ED /* transporterOutputDownRed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF980856196E664E00BAF9ED /* transporterOutputDownRed@2x.png */; };
+		BF980877196E664E00BAF9ED /* transporterOutputDownWhite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF980857196E664E00BAF9ED /* transporterOutputDownWhite@2x.png */; };
+		BF980878196E664E00BAF9ED /* transporterOutputDownYellow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF980858196E664E00BAF9ED /* transporterOutputDownYellow@2x.png */; };
+		BF980879196E664E00BAF9ED /* transporterOutputRightBlue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF980859196E664E00BAF9ED /* transporterOutputRightBlue@2x.png */; };
+		BF98087A196E664E00BAF9ED /* transporterOutputRightBrown@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF98085A196E664E00BAF9ED /* transporterOutputRightBrown@2x.png */; };
+		BF98087B196E664E00BAF9ED /* transporterOutputRightGreen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF98085B196E664E00BAF9ED /* transporterOutputRightGreen@2x.png */; };
+		BF98087C196E664E00BAF9ED /* transporterOutputRightOrange@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF98085C196E664E00BAF9ED /* transporterOutputRightOrange@2x.png */; };
+		BF98087D196E664E00BAF9ED /* transporterOutputRightPurple@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF98085D196E664E00BAF9ED /* transporterOutputRightPurple@2x.png */; };
+		BF98087E196E664E00BAF9ED /* transporterOutputRightRed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF98085E196E664E00BAF9ED /* transporterOutputRightRed@2x.png */; };
+		BF98087F196E664E00BAF9ED /* transporterOutputRightWhite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF98085F196E664E00BAF9ED /* transporterOutputRightWhite@2x.png */; };
+		BF980880196E664E00BAF9ED /* transporterOutputRightYellow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF980860196E664E00BAF9ED /* transporterOutputRightYellow@2x.png */; };
+		BF9808851974EA4C00BAF9ED /* ReflectorArrowLtDBrown@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF9808811974EA4C00BAF9ED /* ReflectorArrowLtDBrown@2x.png */; };
+		BF9808861974EA4C00BAF9ED /* ReflectorArrowLtDGreen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF9808821974EA4C00BAF9ED /* ReflectorArrowLtDGreen@2x.png */; };
+		BF9808871974EA4C00BAF9ED /* ReflectorArrowLtDOrange@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF9808831974EA4C00BAF9ED /* ReflectorArrowLtDOrange@2x.png */; };
+		BF9808881974EA4C00BAF9ED /* ReflectorArrowLtDPurple@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF9808841974EA4C00BAF9ED /* ReflectorArrowLtDPurple@2x.png */; };
+		BF98088D1974F13D00BAF9ED /* ReflectorArrowTtRBrown@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF9808891974F13D00BAF9ED /* ReflectorArrowTtRBrown@2x.png */; };
+		BF98088E1974F13D00BAF9ED /* ReflectorArrowTtRGreen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF98088A1974F13D00BAF9ED /* ReflectorArrowTtRGreen@2x.png */; };
+		BF98088F1974F13D00BAF9ED /* ReflectorArrowTtROrange@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF98088B1974F13D00BAF9ED /* ReflectorArrowTtROrange@2x.png */; };
+		BF9808901974F13D00BAF9ED /* ReflectorArrowTtRPurple@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF98088C1974F13D00BAF9ED /* ReflectorArrowTtRPurple@2x.png */; };
 		BFA3A2B4192D899D00C1BB7D /* ReflectorArrowLtD@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFA3A2B2192D899D00C1BB7D /* ReflectorArrowLtD@2x.png */; };
 		BFA3A2B5192D899D00C1BB7D /* ReflectorArrowTtR@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFA3A2B3192D899D00C1BB7D /* ReflectorArrowTtR@2x.png */; };
 		BFA3A2BC1931401700C1BB7D /* ReflectorArrowLtDBlue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFA3A2B61931401700C1BB7D /* ReflectorArrowLtDBlue@2x.png */; };
@@ -296,6 +338,50 @@
 		BF9079E319664916000E6E58 /* converterRed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "converterRed@2x.png"; sourceTree = "<group>"; };
 		BF9079E419664916000E6E58 /* converterWhite@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "converterWhite@2x.png"; sourceTree = "<group>"; };
 		BF9079E519664916000E6E58 /* converterYellow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "converterYellow@2x.png"; sourceTree = "<group>"; };
+		BF9807A9196721BA00BAF9ED /* TransporterGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransporterGroup.h; sourceTree = "<group>"; };
+		BF9807AA196721BA00BAF9ED /* TransporterGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransporterGroup.m; sourceTree = "<group>"; };
+		BF9807AC1967230600BAF9ED /* TransporterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransporterCell.h; sourceTree = "<group>"; };
+		BF9807AD1967230600BAF9ED /* TransporterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransporterCell.m; sourceTree = "<group>"; };
+		BF980841196E664E00BAF9ED /* transporterInputLeftBlue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "transporterInputLeftBlue@2x.png"; sourceTree = "<group>"; };
+		BF980842196E664E00BAF9ED /* transporterInputLeftBrown@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "transporterInputLeftBrown@2x.png"; sourceTree = "<group>"; };
+		BF980843196E664E00BAF9ED /* transporterInputLeftGreen@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "transporterInputLeftGreen@2x.png"; sourceTree = "<group>"; };
+		BF980844196E664E00BAF9ED /* transporterInputLeftOrange@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "transporterInputLeftOrange@2x.png"; sourceTree = "<group>"; };
+		BF980845196E664E00BAF9ED /* transporterInputLeftPurple@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "transporterInputLeftPurple@2x.png"; sourceTree = "<group>"; };
+		BF980846196E664E00BAF9ED /* transporterInputLeftRed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "transporterInputLeftRed@2x.png"; sourceTree = "<group>"; };
+		BF980847196E664E00BAF9ED /* transporterInputLeftWhite@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "transporterInputLeftWhite@2x.png"; sourceTree = "<group>"; };
+		BF980848196E664E00BAF9ED /* transporterInputLeftYellow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "transporterInputLeftYellow@2x.png"; sourceTree = "<group>"; };
+		BF980849196E664E00BAF9ED /* transporterInputTopBlue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "transporterInputTopBlue@2x.png"; sourceTree = "<group>"; };
+		BF98084A196E664E00BAF9ED /* transporterInputTopBrown@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "transporterInputTopBrown@2x.png"; sourceTree = "<group>"; };
+		BF98084B196E664E00BAF9ED /* transporterInputTopGreen@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "transporterInputTopGreen@2x.png"; sourceTree = "<group>"; };
+		BF98084C196E664E00BAF9ED /* transporterInputTopOrange@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "transporterInputTopOrange@2x.png"; sourceTree = "<group>"; };
+		BF98084D196E664E00BAF9ED /* transporterInputTopPurple@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "transporterInputTopPurple@2x.png"; sourceTree = "<group>"; };
+		BF98084E196E664E00BAF9ED /* transporterInputTopRed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "transporterInputTopRed@2x.png"; sourceTree = "<group>"; };
+		BF98084F196E664E00BAF9ED /* transporterInputTopWhite@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "transporterInputTopWhite@2x.png"; sourceTree = "<group>"; };
+		BF980850196E664E00BAF9ED /* transporterInputTopYellow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "transporterInputTopYellow@2x.png"; sourceTree = "<group>"; };
+		BF980851196E664E00BAF9ED /* transporterOutputDownBlue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "transporterOutputDownBlue@2x.png"; sourceTree = "<group>"; };
+		BF980852196E664E00BAF9ED /* transporterOutputDownBrown@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "transporterOutputDownBrown@2x.png"; sourceTree = "<group>"; };
+		BF980853196E664E00BAF9ED /* transporterOutputDownGreen@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "transporterOutputDownGreen@2x.png"; sourceTree = "<group>"; };
+		BF980854196E664E00BAF9ED /* transporterOutputDownOrange@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "transporterOutputDownOrange@2x.png"; sourceTree = "<group>"; };
+		BF980855196E664E00BAF9ED /* transporterOutputDownPurple@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "transporterOutputDownPurple@2x.png"; sourceTree = "<group>"; };
+		BF980856196E664E00BAF9ED /* transporterOutputDownRed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "transporterOutputDownRed@2x.png"; sourceTree = "<group>"; };
+		BF980857196E664E00BAF9ED /* transporterOutputDownWhite@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "transporterOutputDownWhite@2x.png"; sourceTree = "<group>"; };
+		BF980858196E664E00BAF9ED /* transporterOutputDownYellow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "transporterOutputDownYellow@2x.png"; sourceTree = "<group>"; };
+		BF980859196E664E00BAF9ED /* transporterOutputRightBlue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "transporterOutputRightBlue@2x.png"; sourceTree = "<group>"; };
+		BF98085A196E664E00BAF9ED /* transporterOutputRightBrown@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "transporterOutputRightBrown@2x.png"; sourceTree = "<group>"; };
+		BF98085B196E664E00BAF9ED /* transporterOutputRightGreen@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "transporterOutputRightGreen@2x.png"; sourceTree = "<group>"; };
+		BF98085C196E664E00BAF9ED /* transporterOutputRightOrange@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "transporterOutputRightOrange@2x.png"; sourceTree = "<group>"; };
+		BF98085D196E664E00BAF9ED /* transporterOutputRightPurple@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "transporterOutputRightPurple@2x.png"; sourceTree = "<group>"; };
+		BF98085E196E664E00BAF9ED /* transporterOutputRightRed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "transporterOutputRightRed@2x.png"; sourceTree = "<group>"; };
+		BF98085F196E664E00BAF9ED /* transporterOutputRightWhite@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "transporterOutputRightWhite@2x.png"; sourceTree = "<group>"; };
+		BF980860196E664E00BAF9ED /* transporterOutputRightYellow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "transporterOutputRightYellow@2x.png"; sourceTree = "<group>"; };
+		BF9808811974EA4C00BAF9ED /* ReflectorArrowLtDBrown@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReflectorArrowLtDBrown@2x.png"; sourceTree = "<group>"; };
+		BF9808821974EA4C00BAF9ED /* ReflectorArrowLtDGreen@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReflectorArrowLtDGreen@2x.png"; sourceTree = "<group>"; };
+		BF9808831974EA4C00BAF9ED /* ReflectorArrowLtDOrange@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReflectorArrowLtDOrange@2x.png"; sourceTree = "<group>"; };
+		BF9808841974EA4C00BAF9ED /* ReflectorArrowLtDPurple@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReflectorArrowLtDPurple@2x.png"; sourceTree = "<group>"; };
+		BF9808891974F13D00BAF9ED /* ReflectorArrowTtRBrown@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReflectorArrowTtRBrown@2x.png"; sourceTree = "<group>"; };
+		BF98088A1974F13D00BAF9ED /* ReflectorArrowTtRGreen@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReflectorArrowTtRGreen@2x.png"; sourceTree = "<group>"; };
+		BF98088B1974F13D00BAF9ED /* ReflectorArrowTtROrange@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReflectorArrowTtROrange@2x.png"; sourceTree = "<group>"; };
+		BF98088C1974F13D00BAF9ED /* ReflectorArrowTtRPurple@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReflectorArrowTtRPurple@2x.png"; sourceTree = "<group>"; };
 		BFA3A2B2192D899D00C1BB7D /* ReflectorArrowLtD@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReflectorArrowLtD@2x.png"; sourceTree = "<group>"; };
 		BFA3A2B3192D899D00C1BB7D /* ReflectorArrowTtR@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReflectorArrowTtR@2x.png"; sourceTree = "<group>"; };
 		BFA3A2B61931401700C1BB7D /* ReflectorArrowLtDBlue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReflectorArrowLtDBlue@2x.png"; sourceTree = "<group>"; };
@@ -416,6 +502,46 @@
 		AF2C225A1874B95000082561 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				BF9808891974F13D00BAF9ED /* ReflectorArrowTtRBrown@2x.png */,
+				BF98088A1974F13D00BAF9ED /* ReflectorArrowTtRGreen@2x.png */,
+				BF98088B1974F13D00BAF9ED /* ReflectorArrowTtROrange@2x.png */,
+				BF98088C1974F13D00BAF9ED /* ReflectorArrowTtRPurple@2x.png */,
+				BF9808811974EA4C00BAF9ED /* ReflectorArrowLtDBrown@2x.png */,
+				BF9808821974EA4C00BAF9ED /* ReflectorArrowLtDGreen@2x.png */,
+				BF9808831974EA4C00BAF9ED /* ReflectorArrowLtDOrange@2x.png */,
+				BF9808841974EA4C00BAF9ED /* ReflectorArrowLtDPurple@2x.png */,
+				BF980841196E664E00BAF9ED /* transporterInputLeftBlue@2x.png */,
+				BF980842196E664E00BAF9ED /* transporterInputLeftBrown@2x.png */,
+				BF980843196E664E00BAF9ED /* transporterInputLeftGreen@2x.png */,
+				BF980844196E664E00BAF9ED /* transporterInputLeftOrange@2x.png */,
+				BF980845196E664E00BAF9ED /* transporterInputLeftPurple@2x.png */,
+				BF980846196E664E00BAF9ED /* transporterInputLeftRed@2x.png */,
+				BF980847196E664E00BAF9ED /* transporterInputLeftWhite@2x.png */,
+				BF980848196E664E00BAF9ED /* transporterInputLeftYellow@2x.png */,
+				BF980849196E664E00BAF9ED /* transporterInputTopBlue@2x.png */,
+				BF98084A196E664E00BAF9ED /* transporterInputTopBrown@2x.png */,
+				BF98084B196E664E00BAF9ED /* transporterInputTopGreen@2x.png */,
+				BF98084C196E664E00BAF9ED /* transporterInputTopOrange@2x.png */,
+				BF98084D196E664E00BAF9ED /* transporterInputTopPurple@2x.png */,
+				BF98084E196E664E00BAF9ED /* transporterInputTopRed@2x.png */,
+				BF98084F196E664E00BAF9ED /* transporterInputTopWhite@2x.png */,
+				BF980850196E664E00BAF9ED /* transporterInputTopYellow@2x.png */,
+				BF980851196E664E00BAF9ED /* transporterOutputDownBlue@2x.png */,
+				BF980852196E664E00BAF9ED /* transporterOutputDownBrown@2x.png */,
+				BF980853196E664E00BAF9ED /* transporterOutputDownGreen@2x.png */,
+				BF980854196E664E00BAF9ED /* transporterOutputDownOrange@2x.png */,
+				BF980855196E664E00BAF9ED /* transporterOutputDownPurple@2x.png */,
+				BF980856196E664E00BAF9ED /* transporterOutputDownRed@2x.png */,
+				BF980857196E664E00BAF9ED /* transporterOutputDownWhite@2x.png */,
+				BF980858196E664E00BAF9ED /* transporterOutputDownYellow@2x.png */,
+				BF980859196E664E00BAF9ED /* transporterOutputRightBlue@2x.png */,
+				BF98085A196E664E00BAF9ED /* transporterOutputRightBrown@2x.png */,
+				BF98085B196E664E00BAF9ED /* transporterOutputRightGreen@2x.png */,
+				BF98085C196E664E00BAF9ED /* transporterOutputRightOrange@2x.png */,
+				BF98085D196E664E00BAF9ED /* transporterOutputRightPurple@2x.png */,
+				BF98085E196E664E00BAF9ED /* transporterOutputRightRed@2x.png */,
+				BF98085F196E664E00BAF9ED /* transporterOutputRightWhite@2x.png */,
+				BF980860196E664E00BAF9ED /* transporterOutputRightYellow@2x.png */,
 				BF9079E219664916000E6E58 /* converterBlue@2x.png */,
 				BF9079E319664916000E6E58 /* converterRed@2x.png */,
 				BF9079E419664916000E6E58 /* converterWhite@2x.png */,
@@ -568,6 +694,10 @@
 				BF9079DD1964F933000E6E58 /* ConverterCell.m */,
 				BF9079DF1964F94C000E6E58 /* ConverterCellButton.h */,
 				BF9079E01964F94C000E6E58 /* ConverterCellButton.m */,
+				BF9807A9196721BA00BAF9ED /* TransporterGroup.h */,
+				BF9807AA196721BA00BAF9ED /* TransporterGroup.m */,
+				BF9807AC1967230600BAF9ED /* TransporterCell.h */,
+				BF9807AD1967230600BAF9ED /* TransporterCell.m */,
 			);
 			name = "Game Core";
 			sourceTree = "<group>";
@@ -668,61 +798,85 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF980876196E664E00BAF9ED /* transporterOutputDownRed@2x.png in Resources */,
 				AFADA21F1877D20D00FADA22 /* BlockOrange.png in Resources */,
 				BF9079C4195E1819000E6E58 /* Blue@2x.png in Resources */,
 				BF9079D91963B954000E6E58 /* splitterBlue@2x.png in Resources */,
+				BF980878196E664E00BAF9ED /* transporterOutputDownYellow@2x.png in Resources */,
 				BF90799619560FE3000E6E58 /* connectorInnerPurple@2x.png in Resources */,
 				BF90799A19560FE3000E6E58 /* connectorOuterBlue@2x.png in Resources */,
+				BF980874196E664E00BAF9ED /* transporterOutputDownOrange@2x.png in Resources */,
 				BF874D11192B28C1001701A2 /* ReflectorLtDGoal@2x.png in Resources */,
 				BFA3A2BF1931401700C1BB7D /* ReflectorArrowTtRBlue@2x.png in Resources */,
 				BF9079E819664916000E6E58 /* converterWhite@2x.png in Resources */,
+				BF9808881974EA4C00BAF9ED /* ReflectorArrowLtDPurple@2x.png in Resources */,
 				BF9079761953DF94000E6E58 /* zonerBlue@2x.png in Resources */,
 				BF90799D19560FE3000E6E58 /* connectorOuterYellow@2x.png in Resources */,
 				AFADA2281877D20D00FADA22 /* FilledCircleBlue.png in Resources */,
 				BF9079CA195E1819000E6E58 /* Yellow@2x.png in Resources */,
+				BF98087C196E664E00BAF9ED /* transporterOutputRightOrange@2x.png in Resources */,
 				BF9079781953DF94000E6E58 /* zonerRed@2x.png in Resources */,
 				AFADA2321877D20D00FADA22 /* YellowSelected.png in Resources */,
 				BF9079C7195E1819000E6E58 /* RedSelected@2x.png in Resources */,
 				BF9079BB195E1040000E6E58 /* FilledCircleYellow@2x.png in Resources */,
+				BF980877196E664E00BAF9ED /* transporterOutputDownWhite@2x.png in Resources */,
+				BF98087F196E664E00BAF9ED /* transporterOutputRightWhite@2x.png in Resources */,
 				AF2C22391874B8B800082561 /* Main_iPad.storyboard in Resources */,
 				BF9079C6195E1819000E6E58 /* Red@2x.png in Resources */,
 				AFADA22F1877D20D00FADA22 /* White.png in Resources */,
 				AF2C223E1874B8B800082561 /* Images.xcassets in Resources */,
 				AFADA22E1877D20D00FADA22 /* RedSelected.png in Resources */,
+				BF98088E1974F13D00BAF9ED /* ReflectorArrowTtRGreen@2x.png in Resources */,
 				AFADA2311877D20D00FADA22 /* Yellow.png in Resources */,
 				AFADA2301877D20D00FADA22 /* WhiteSelected.png in Resources */,
+				BF980879196E664E00BAF9ED /* transporterOutputRightBlue@2x.png in Resources */,
 				BF9079AF195E073E000E6E58 /* BlockOrange@2x.png in Resources */,
 				AFADA2261877D20D00FADA22 /* ButtonBar.png in Resources */,
 				BFA3A2CC193AF4D900C1BB7D /* incompleteLevel@2x.png in Resources */,
 				BF9079C9195E1819000E6E58 /* WhiteSelected@2x.png in Resources */,
 				AFADA2241877D20D00FADA22 /* Blue.png in Resources */,
+				BF980867196E664E00BAF9ED /* transporterInputLeftWhite@2x.png in Resources */,
 				BF9079CD195FD660000E6E58 /* diverterGoal@2x.png in Resources */,
 				BFA3A2B5192D899D00C1BB7D /* ReflectorArrowTtR@2x.png in Resources */,
 				BFA3A2CB193AF4D900C1BB7D /* completeLevel@2x.png in Resources */,
+				BF980880196E664E00BAF9ED /* transporterOutputRightYellow@2x.png in Resources */,
+				BF9808871974EA4C00BAF9ED /* ReflectorArrowLtDOrange@2x.png in Resources */,
 				AFADA22D1877D20D00FADA22 /* Red.png in Resources */,
 				AFADA22B1877D20D00FADA22 /* FilledCircleYellow.png in Resources */,
+				BF980864196E664E00BAF9ED /* transporterInputLeftOrange@2x.png in Resources */,
 				BFA3A2C5193A566F00C1BB7D /* logo@2x.png in Resources */,
+				BF980871196E664E00BAF9ED /* transporterOutputDownBlue@2x.png in Resources */,
+				BF98088F1974F13D00BAF9ED /* ReflectorArrowTtROrange@2x.png in Resources */,
+				BF98086B196E664E00BAF9ED /* transporterInputTopGreen@2x.png in Resources */,
 				AF2C22361874B8B800082561 /* Main_iPhone.storyboard in Resources */,
 				AFADA2251877D20D00FADA22 /* BlueSelected.png in Resources */,
 				BF0D4BD119293E5500AACB5A /* BlockClear.png in Resources */,
+				BF98086D196E664E00BAF9ED /* transporterInputTopPurple@2x.png in Resources */,
 				AFADA22C1877D20D00FADA22 /* Green.png in Resources */,
 				BFA3A2BC1931401700C1BB7D /* ReflectorArrowLtDBlue@2x.png in Resources */,
 				BF90799919560FE3000E6E58 /* connectorInnerYellow@2x.png in Resources */,
 				BF90797A1953DF94000E6E58 /* zonerYellow@2x.png in Resources */,
 				BF9079DB1963B954000E6E58 /* splitterYellow@2x.png in Resources */,
+				BF9808851974EA4C00BAF9ED /* ReflectorArrowLtDBrown@2x.png in Resources */,
 				AFADA2231877D20D00FADA22 /* BlockYellow.png in Resources */,
 				BF90799419560FE3000E6E58 /* connectorInnerGreen@2x.png in Resources */,
 				BF9079CF19626C0D000E6E58 /* splitterWhite@2x.png in Resources */,
 				BF9079BA195E1040000E6E58 /* FilledCircleRed@2x.png in Resources */,
 				BF9079E719664916000E6E58 /* converterRed@2x.png in Resources */,
+				BF980873196E664E00BAF9ED /* transporterOutputDownGreen@2x.png in Resources */,
+				BF98086A196E664E00BAF9ED /* transporterInputTopBrown@2x.png in Resources */,
 				BF9079C8195E1819000E6E58 /* White@2x.png in Resources */,
 				BF9079771953DF94000E6E58 /* zonerGoal@2x.png in Resources */,
 				BFA3A2BE1931401700C1BB7D /* ReflectorArrowLtDYellow@2x.png in Resources */,
+				BF9808901974F13D00BAF9ED /* ReflectorArrowTtRPurple@2x.png in Resources */,
 				BF90799319560FE3000E6E58 /* connectorInnerBrown@2x.png in Resources */,
+				BF98088D1974F13D00BAF9ED /* ReflectorArrowTtRBrown@2x.png in Resources */,
 				BF90796D194D6E42000E6E58 /* 3stars@2x.png in Resources */,
 				BF90799519560FE3000E6E58 /* connectorInnerOrange@2x.png in Resources */,
 				BF90799719560FE3000E6E58 /* connectorInnerRed@2x.png in Resources */,
+				BF980868196E664E00BAF9ED /* transporterInputLeftYellow@2x.png in Resources */,
 				AFADA22A1877D20D00FADA22 /* FilledCircleRed.png in Resources */,
+				BF980875196E664E00BAF9ED /* transporterOutputDownPurple@2x.png in Resources */,
 				AFADA2271877D20D00FADA22 /* EmptyCircle.png in Resources */,
 				BF9079DA1963B954000E6E58 /* splitterRed@2x.png in Resources */,
 				BF9079B1195E073E000E6E58 /* BlockRed@2x.png in Resources */,
@@ -730,34 +884,50 @@
 				AFADA2291877D20D00FADA22 /* FilledCircleGreen.png in Resources */,
 				AFADA2211877D20D00FADA22 /* BlockRed.png in Resources */,
 				BF90799B19560FE3000E6E58 /* connectorOuterRed@2x.png in Resources */,
+				BF980863196E664E00BAF9ED /* transporterInputLeftGreen@2x.png in Resources */,
 				BF90796B194D6E42000E6E58 /* 1stars@2x.png in Resources */,
+				BF98086E196E664E00BAF9ED /* transporterInputTopRed@2x.png in Resources */,
 				BF9079E619664916000E6E58 /* converterBlue@2x.png in Resources */,
 				AFB75A9F18834ECD00CAB736 /* AppIcon120.png in Resources */,
 				AF2C222D1874B8B700082561 /* InfoPlist.strings in Resources */,
 				BF9079791953DF94000E6E58 /* zonerWhite@2x.png in Resources */,
+				BF98087E196E664E00BAF9ED /* transporterOutputRightRed@2x.png in Resources */,
+				BF980861196E664E00BAF9ED /* transporterInputLeftBlue@2x.png in Resources */,
 				BF874D15192B2CBB001701A2 /* ReflectorTtRGoal@2x.png in Resources */,
+				BF9808861974EA4C00BAF9ED /* ReflectorArrowLtDGreen@2x.png in Resources */,
+				BF980872196E664E00BAF9ED /* transporterOutputDownBrown@2x.png in Resources */,
+				BF98086C196E664E00BAF9ED /* transporterInputTopOrange@2x.png in Resources */,
 				BF907965194D6284000E6E58 /* rainbow@2x.png in Resources */,
 				BFA3A2BD1931401700C1BB7D /* ReflectorArrowLtDRed@2x.png in Resources */,
+				BF98086F196E664E00BAF9ED /* transporterInputTopWhite@2x.png in Resources */,
 				BF90799819560FE3000E6E58 /* connectorInnerWhite@2x.png in Resources */,
+				BF98087A196E664E00BAF9ED /* transporterOutputRightBrown@2x.png in Resources */,
 				BF9079B9195E1040000E6E58 /* FilledCircleBlue@2x.png in Resources */,
+				BF980865196E664E00BAF9ED /* transporterInputLeftPurple@2x.png in Resources */,
 				BF9079B8195E1040000E6E58 /* EmptyCircle@2x.png in Resources */,
 				AFB75A9B188339C900CAB736 /* GameLogo.png in Resources */,
 				BF9079AD195E073E000E6E58 /* BlockBrown@2x.png in Resources */,
+				BF98087B196E664E00BAF9ED /* transporterOutputRightGreen@2x.png in Resources */,
+				BF980866196E664E00BAF9ED /* transporterInputLeftRed@2x.png in Resources */,
 				BF90796C194D6E42000E6E58 /* 2stars@2x.png in Resources */,
 				BF9079AC195E073E000E6E58 /* BlockBlue@2x.png in Resources */,
+				BF980862196E664E00BAF9ED /* transporterInputLeftBrown@2x.png in Resources */,
 				BF9079AE195E073E000E6E58 /* BlockGreen@2x.png in Resources */,
 				BF9079E919664916000E6E58 /* converterYellow@2x.png in Resources */,
 				BF9079821953EE21000E6E58 /* BlockBrown.png in Resources */,
 				BF9079C5195E1819000E6E58 /* BlueSelected@2x.png in Resources */,
+				BF98087D196E664E00BAF9ED /* transporterOutputRightPurple@2x.png in Resources */,
 				BF90796A194D6E42000E6E58 /* 0stars@2x.png in Resources */,
 				BF90799219560FE3000E6E58 /* connectorInnerBlue@2x.png in Resources */,
 				BFA3A2B4192D899D00C1BB7D /* ReflectorArrowLtD@2x.png in Resources */,
+				BF980870196E664E00BAF9ED /* transporterInputTopYellow@2x.png in Resources */,
 				AFADA2201877D20D00FADA22 /* BlockPurple.png in Resources */,
 				BFA3A2C11931401700C1BB7D /* ReflectorArrowTtRYellow@2x.png in Resources */,
 				AFB8969318822F2F003FAEF4 /* ButtonBar2.png in Resources */,
 				BF9079B2195E073E000E6E58 /* BlockWhite@2x.png in Resources */,
 				BFA3A2C01931401700C1BB7D /* ReflectorArrowTtRRed@2x.png in Resources */,
 				BF9079B3195E073E000E6E58 /* BlockYellow@2x.png in Resources */,
+				BF980869196E664E00BAF9ED /* transporterInputTopBlue@2x.png in Resources */,
 				BF9079B0195E073E000E6E58 /* BlockPurple@2x.png in Resources */,
 				AFADA2221877D20D00FADA22 /* BlockWhite.png in Resources */,
 				AFADA21D1877D20D00FADA22 /* BlockBlue.png in Resources */,
@@ -807,6 +977,8 @@
 				BF9079DE1964F933000E6E58 /* ConverterCell.m in Sources */,
 				AF2C223C1874B8B800082561 /* MainGameViewController.m in Sources */,
 				BF9079A019564F29000E6E58 /* ConnectorCell.m in Sources */,
+				BF9807AB196721BA00BAF9ED /* TransporterGroup.m in Sources */,
+				BF9807AE1967230600BAF9ED /* TransporterCell.m in Sources */,
 				BF0D4BC5192010BB00AACB5A /* BoardCells.m in Sources */,
 				AFB896811881C0C7003FAEF4 /* GoalBoard.m in Sources */,
 			);

@@ -160,6 +160,26 @@
     return [UIColor colorWithRed:(221/255.0) green:(37/255.0) blue:(37/255.0) alpha:1];
 }
 
++(UIColor *) GetPurpleColor
+{
+    return [UIColor colorWithRed:(155/255.0) green:(51/255.0) blue:(204/255.0) alpha:1];
+}
+
++(UIColor *) GetGreenColor
+{
+    return [UIColor colorWithRed:(79/255.0) green:(175/255.0) blue:(38/255.0) alpha:1];
+}
+
++(UIColor *) GetOrangeColor
+{
+    return [UIColor colorWithRed:(255/255.0) green:(125/255.0) blue:(56/255.0) alpha:1];
+}
+
++(UIColor *) GetBrownColor
+{
+    return [UIColor colorWithRed:(173/255.0) green:(98/255.0) blue:(0/255.0) alpha:1];
+}
+
 +(UIColor *) GetUIColorForColor:(int)colorValue
 {
     UIColor *color;
@@ -178,6 +198,22 @@
     else if (colorValue == 3)
     {
         color = [CommonUtils GetYellowColor];
+    }
+    else if (colorValue == 4)
+    {
+        color = [CommonUtils GetPurpleColor];
+    }
+    else if (colorValue == 5)
+    {
+        color = [CommonUtils GetGreenColor];
+    }
+    else if (colorValue == 6)
+    {
+        color = [CommonUtils GetOrangeColor];
+    }
+    else if (colorValue == 7)
+    {
+        color = [CommonUtils GetBrownColor];
     }
     
     return color;
@@ -273,6 +309,42 @@
           completion:^(BOOL finished){}];
          
      }];
+}
+
++(bool) IsTransporterCell:(CellType)cellType
+{
+    return [CommonUtils IsTransporterInput:cellType] ||
+        [CommonUtils IsTransporterOutput:cellType];
+}
+
++(bool) IsTransporterOutput:(CellType)cellType
+{
+    switch (cellType)
+    {
+        case TransporterOutputDown:
+            return true;
+        case TransporterOutputRight:
+            return true;
+        default:
+            return false;
+    }
+    
+    return false;
+}
+
++(bool) IsTransporterInput:(CellType)cellType
+{
+    switch (cellType)
+    {
+        case TransporterInputLeft:
+            return true;
+        case TransporterInputTop:
+            return true;
+        default:
+            return false;
+    }
+    
+    return false;
 }
 
 @end

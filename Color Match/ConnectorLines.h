@@ -16,5 +16,8 @@
 - (void)clear;
 - (void)addConverterLine:(LineInfo*)lineInfo isHorizontal:(BOOL)isHorizontal;
 - (void)updateConverterLine:(int)lineIndex color:(UIColor*)color;
+- (NSMutableArray*)getTransporterGroupLines:(int)groupId;
+- (void)addTransporterLine:(int)groupId lineInfo:(LineInfo*)lineInfo;
+- (void)updateTransporterLine:(int)groupId color:(UIColor*)color;
 
 @end

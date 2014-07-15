@@ -10,7 +10,7 @@
 
 @interface ColorCell : NSObject
 
-@property (nonatomic, strong) UIView *image;
+@property (nonatomic, strong) UIImageView *image;
 @property (nonatomic, strong) UIImageView *specialImage;
 @property (nonatomic, strong) UIImageView *specialImage2;
 @property NSMutableArray *colorInputs;
@@ -23,5 +23,6 @@
 -(void)removeInputColor: (NSNumber *)color cellsAffected:(NSMutableArray*)cellsAffected;
 -(void)removeAllInputColors;
 -(void)recalculateSpecialCellImage;
+-(void)recalculateOutputColor;
 
 @end

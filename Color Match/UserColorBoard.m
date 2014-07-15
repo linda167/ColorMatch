@@ -17,6 +17,8 @@
 #import "SplitterCellButton.h"
 #import "ConverterCell.h"
 #import "ConverterCellButton.h"
+#import "TransporterGroup.h"
+#import "TransporterCell.h"
 
 @interface UserColorBoard ()
 @property MainGameViewController *viewController;
@@ -36,12 +38,11 @@
     viewController:(MainGameViewController*)viewController
     boardCells:(BoardCells*) boardCells
 {
-    self = [super init];
+    self = [super initWithParameters:boardCells];
     if (self)
     {
         self.boardParameters = boardParameters;
         self.containerView = containerView;
-        self.boardCells = boardCells;
         _viewController = viewController;
         self.allConnectorCells = [[NSMutableArray alloc] init];
         self.allSplitterCells = [[NSMutableArray alloc] init];
@@ -64,6 +65,7 @@
     [self DrawVerticalConnectingLines];
     [self DrawHorizontalConnectingLines];
     [self DrawConverterCellLines];
+    [self DrawTransporterCellLines];
     
     // Hide certain grid color buttons if needed
     [self adjustGridColorButtons];
@@ -187,11 +189,11 @@
                 connectionFound = true;
                 break;
             }
-            else if (colorCell.cellType == ReflectorTopToRight)
+            else if (colorCell.cellType == ReflectorTopToRight || colorCell.cellType == TransporterOutputRight)
             {
                 if (i > currentCol + 1)
                 {
-                    // Draw line to cell before the reflector
+                    // Draw line to cell before the cell
                     ColorCell *colorCell = [row objectAtIndex:i-1];
                     [self DrawHorizontalLineToConnection:colorCell lineInfo:lineInfo currentY:currentY drawToCenter:true];
                 }
@@ -199,9 +201,9 @@
                 connectionFound = true;
                 break;
             }
-            else if (colorCell.cellType == Converter)
+            else if (colorCell.cellType == Converter || colorCell.cellType == TransporterInputLeft)
             {
-                // Draw line to converter
+                // Draw line to cell
                 ColorCell *colorCell = [row objectAtIndex:i];
                 [self DrawHorizontalLineToConnection:colorCell lineInfo:lineInfo currentY:currentY drawToCenter:true];
                 
@@ -225,11 +227,11 @@
             NSArray *row = [self.colorCellSections objectAtIndex:i];
             ColorCell *colorCell = [row objectAtIndex:currentCol];
             
-            if (colorCell.cellType == ReflectorLeftToDown)
+            if (colorCell.cellType == ReflectorLeftToDown || colorCell.cellType == TransporterOutputDown)
             {
                 if (i > currentRow + 1)
                 {
-                    // Draw line to cell before the reflector
+                    // Draw line to cell before the cell
                     NSArray *row = [self.colorCellSections objectAtIndex:i-1];
                     ColorCell *colorCell = [row objectAtIndex:currentCol];
                     [self DrawVerticalLineToConnection:colorCell lineInfo:lineInfo currentX:currentX drawToCenter:true];
@@ -249,7 +251,7 @@
                 connectionFound = true;
                 break;
             }
-            else if (colorCell.cellType == Converter)
+            else if (colorCell.cellType == Converter || colorCell.cellType == TransporterInputTop)
             {
                 // Draw line to converter
                 [self DrawVerticalLineToConnection:colorCell lineInfo:lineInfo currentX:currentX drawToCenter:true];
@@ -323,6 +325,44 @@
         [self DrawSingleConverterLine:true converterCell:converterCell];
         [self DrawSingleConverterLine:false converterCell:converterCell];
     }
+}
+
+-(void)DrawTransporterCellLines
+{
+    for (NSString* key in self.transporterGroups)
+    {
+        TransporterGroup* transporterGroup = [self.transporterGroups objectForKey:key];
+        for (TransporterCell* cell in transporterGroup.teleporterOutputs)
+        {
+            bool isHorizontal = cell.cellType == TransporterOutputRight;
+            
+            [CommonUtils Log:[NSMutableString stringWithFormat: @"Drawing transporter line from:(%d,%d), isHorizontal:%d", cell.row, cell.col, isHorizontal]];
+            
+            [self DrawSingleTransporterLine:isHorizontal transporterCell:cell];
+        }
+    }
+}
+
+-(void)DrawSingleTransporterLine:(BOOL)isHorizontal transporterCell:(TransporterCell*)transporterCell
+{
+    // Draw from center of cell
+    int leftY = transporterCell.image.frame.origin.y + transporterCell.image.frame.size.height / 2 + 0.5;
+    int leftX = transporterCell.image.frame.origin.x + transporterCell.image.frame.size.width / 2 + 0.5;
+    
+    // Draw the line
+    LineInfo *lineInfo = [[LineInfo alloc] init];
+    lineInfo.lineThickness = 3;
+    lineInfo.startX = leftX;
+    lineInfo.startY = leftY;
+    lineInfo.color = [CommonUtils GetGrayColor];
+    
+    int rowValue = transporterCell.row;
+    int colValue = transporterCell.col;
+    
+    // Draw line
+    [self DrawLineToNextConnectionPoint:rowValue currentCol:colValue currentX:leftX currentY:leftY isHorizontal:isHorizontal lineInfo:lineInfo];
+    
+    [self.connectorLines addTransporterLine:transporterCell.groupId lineInfo:lineInfo];
 }
 
 -(void)DrawSingleConverterLine:(BOOL)isHorizontal converterCell:(ConverterCell*)converterCell
@@ -556,6 +596,8 @@
     [self.allSplitterCells removeAllObjects];
     [self.allConverterCells removeAllObjects];
     self.connectorColorInput = 0;
+    
+    [super resetBoardState];
 }
 
 -(NSNumber*)getCurrentColorForButton:(UIButton *)button;
@@ -573,9 +615,9 @@
 }
 
 // override base class
--(UIImage*)GetImageForCellType:(int)cellType
+-(UIImage*)GetImageForCellType:(ColorCell*)colorCell
 {
-    switch (cellType)
+    switch (colorCell.cellType)
     {
         case ReflectorLeftToDown:
         case ReflectorTopToRight:
@@ -590,9 +632,14 @@
             return [UIImage imageNamed:@"splitterWhite@2x.png"];
         case Converter:
             return [UIImage imageNamed:@"converterWhite@2x.png"];
+        case TransporterInputLeft:
+        case TransporterInputTop:
+        case TransporterOutputDown:
+        case TransporterOutputRight:
+            return [self getTransporterImageWithColor:colorCell color:0];
     }
     
-    return [super GetImageForCellType:cellType];
+    return [super GetImageForCellType:colorCell];
 }
 
 -(void)GetSpecialImageForCellIfNeeded:(ColorCell*)colorCell boardCells:(BoardCells*)boardCells
@@ -628,6 +675,35 @@
             size = colorCell.image.frame.size.width;
             x = colorCell.image.frame.origin.x;
             y = colorCell.image.frame.origin.y;
+            break;
+            
+        case TransporterInputTop:
+            specialImage = [UIImage imageNamed:@"ReflectorArrowLtD@2x.png"];
+            size = self.boardParameters.transporterArrowSize;
+            x = colorCell.image.frame.origin.x + self.boardParameters.transporterArrowDownXAdjustment;
+            y = colorCell.image.frame.origin.y + self.boardParameters.transporterArrowDownYAdjustment;
+            break;
+        
+        case TransporterOutputRight:
+            specialImage = [UIImage imageNamed:@"ReflectorArrowTtR@2x.png"];
+            size = self.boardParameters.transporterArrowSize;
+            x = colorCell.image.frame.origin.x + self.boardParameters.transporterArrowRightXAdjustment;
+            y = colorCell.image.frame.origin.y + self.boardParameters.transporterArrowRightYAdjustment;
+            break;
+            
+        case TransporterInputLeft:
+            specialImage = [UIImage imageNamed:@"ReflectorArrowTtR@2x.png"];
+            size = self.boardParameters.transporterArrowSize;
+            x = colorCell.image.frame.origin.x + self.boardParameters.transporterArrowRightXAdjustment2;
+            y = colorCell.image.frame.origin.y + self.boardParameters.transporterArrowRightYAdjustment;
+            break;
+            
+        case TransporterOutputDown:
+            specialImage = [UIImage imageNamed:@"ReflectorArrowLtD@2x.png"];
+            size = self.boardParameters.transporterArrowSize;
+            x = colorCell.image.frame.origin.x + self.boardParameters.transporterArrowDownXAdjustment;
+            y = colorCell.image.frame.origin.y + self.boardParameters.transporterArrowDownYAdjustment2;
+            break;
             break;
             
         default:
@@ -666,13 +742,18 @@
     [self.containerView addSubview:specialImageView];
 }
 
--(UIImage*)getSpecialImageForCellWithColor:(CellType)cellType color:(int)color isHorizontal:(BOOL)isHorizontal
+-(UIImage*)updateSpecialImageForCellWithColor:(CellType)cellType color:(int)color isHorizontal:(BOOL)isHorizontal
 {
-    if (cellType == ReflectorLeftToDown || (cellType == Diverter && isHorizontal))
+    if (cellType == ReflectorLeftToDown ||
+        (cellType == Diverter && isHorizontal) ||
+        cellType == TransporterInputTop ||
+        cellType == TransporterOutputDown)
     {
         return [self getArrowLtDWithColor:color];
     }
-    else if (cellType == ReflectorTopToRight)
+    else if (cellType == ReflectorTopToRight ||
+             cellType == TransporterInputLeft ||
+             cellType == TransporterOutputRight)
     {
         return [self getArrowTtRWithColor:color];
     }
@@ -680,7 +761,7 @@
     return NULL;
 }
 
--(UIImage*)getSpecialImage2ForCellWithColor:(CellType)cellType color:(int)color isHorizontal:(BOOL)isHorizontal
+-(UIImage*)updateSpecialImage2ForCellWithColor:(CellType)cellType color:(int)color isHorizontal:(BOOL)isHorizontal
 {
     if (cellType == Diverter && !isHorizontal)
     {
@@ -688,6 +769,12 @@
     }
     
     return NULL;
+}
+
+-(UIImage*)getTransporterSpecialImageWithColor:(CellType)cellType color:(int)color
+{
+    // TODO: lindach: Update arrows
+    return [UIImage imageNamed:@"BlockClear@.png"];
 }
 
 -(UIImage*)getArrowLtDWithColor:(int)color
@@ -705,6 +792,18 @@
             break;
         case 3:
             return [UIImage imageNamed:@"ReflectorArrowLtDYellow@2x.png"];
+            break;
+        case 4:
+            return [UIImage imageNamed:@"ReflectorArrowLtDPurple@2x.png"];
+            break;
+        case 5:
+            return [UIImage imageNamed:@"ReflectorArrowLtDGreen@2x.png"];
+            break;
+        case 6:
+            return [UIImage imageNamed:@"ReflectorArrowLtDOrange@2x.png"];
+            break;
+        case 7:
+            return [UIImage imageNamed:@"ReflectorArrowLtDBrown@2x.png"];
             break;
         default:
             [NSException raise:@"Invalid input" format:@"Invalid input color"];
@@ -730,6 +829,18 @@
         case 3:
             return [UIImage imageNamed:@"ReflectorArrowTtRYellow@2x.png"];
             break;
+        case 4:
+            return [UIImage imageNamed:@"ReflectorArrowTtRPurple@2x.png"];
+            break;
+        case 5:
+            return [UIImage imageNamed:@"ReflectorArrowTtRGreen@2x.png"];
+            break;
+        case 6:
+            return [UIImage imageNamed:@"ReflectorArrowTtROrange@2x.png"];
+            break;
+        case 7:
+            return [UIImage imageNamed:@"ReflectorArrowTtRBrown@2x.png"];
+            break;
         default:
             [NSException raise:@"Invalid input" format:@"Invalid input color"];
             break;
@@ -744,7 +855,7 @@
     {
         ZonerCellButton* cellBlock = [[ZonerCellButton alloc] initWithFrame:CGRectMake(xOffset, yOffset, size, size)];
         cellBlock.colorCell = (ZonerCell*)colorCell;
-        [cellBlock setImage:[self GetImageForCellType:cellType] forState:UIControlStateNormal];
+        [cellBlock setImage:[self GetImageForCellType:colorCell] forState:UIControlStateNormal];
         
         [cellBlock addTarget:self action:@selector(zonerCellPressed:) forControlEvents:UIControlEventTouchUpInside];
         
@@ -753,7 +864,7 @@
     else if (cellType == Connector)
     {
         UIButton* connectorButton = [[UIButton alloc] initWithFrame:CGRectMake(xOffset, yOffset, size, size)];
-        [connectorButton setImage:[self GetImageForCellType:cellType] forState:UIControlStateNormal];
+        [connectorButton setImage:[self GetImageForCellType:colorCell] forState:UIControlStateNormal];
         
         [connectorButton addTarget:self action:@selector(connectorCellPressed:) forControlEvents:UIControlEventTouchUpInside];
         
@@ -764,7 +875,7 @@
     else if (cellType == Splitter)
     {
         SplitterCellButton* splitterButton = [[SplitterCellButton alloc] initWithFrame:CGRectMake(xOffset, yOffset, size, size)];
-        [splitterButton setImage:[self GetImageForCellType:cellType] forState:UIControlStateNormal];
+        [splitterButton setImage:[self GetImageForCellType:colorCell] forState:UIControlStateNormal];
         splitterButton.splitterCell = (SplitterCell*)colorCell;
         [self.allSplitterCells addObject:colorCell];
         
@@ -775,7 +886,7 @@
     else if (cellType == Converter)
     {
         ConverterCellButton* converterButton = [[ConverterCellButton alloc] initWithFrame:CGRectMake(xOffset, yOffset, size, size)];
-        [converterButton setImage:[self GetImageForCellType:cellType] forState:UIControlStateNormal];
+        [converterButton setImage:[self GetImageForCellType:colorCell] forState:UIControlStateNormal];
         converterButton.converterCell = (ConverterCell*)colorCell;
         [self.allConverterCells addObject:colorCell];
         
@@ -973,6 +1084,17 @@
     [CommonUtils AnimateViewsAffected:viewsToAnimate];
     
     [self.viewController OnUserActionTaken];
+}
+
+-(void)updateTransporterOutputCell:(TransporterCell*)outputCell transporterGroup:(TransporterGroup*)transporterGroup cellsAffected:(NSMutableArray*)cellsAffected
+{
+    // Change transporter input image
+    [outputCell.image setImage:[self getTransporterImageWithColor:outputCell color:transporterGroup.currentColor]];
+    
+    // Change special image, direction doesn't matter
+    [self updateSpecialCellImagesOnApplyColor:outputCell color:transporterGroup.currentColor isHorizontal:true cellsAffected:cellsAffected];
+    
+    [self.connectorLines updateTransporterLine:outputCell.groupId                                       color:[CommonUtils GetUIColorForColor:transporterGroup.currentColor]];
 }
 
 @end

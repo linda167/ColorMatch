@@ -22,5 +22,8 @@
 +(UIImage *) GetConnectorOuterImageForColor:(int)color;
 +(void)AnimateViewsAffected:(NSMutableArray*)viewsToAnimate;
 +(UIColor *) GetUIColorForColor:(int)colorValue;
++(bool) IsTransporterOutput:(CellType)cellType;
++(bool) IsTransporterInput:(CellType)cellType;
++(bool) IsTransporterCell:(CellType)cellType;
 
 @end

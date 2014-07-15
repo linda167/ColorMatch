@@ -9,13 +9,16 @@
 //  Copyright (c) 2014 SunSpark Entertainment. All rights reserved.
 //
 
-#import "BoardCells.h"
+#import "BoardCells.h"\
 
 @interface BoardCells ()
 @property BoardParameters boardParameters;
 @property NSMutableDictionary *zonerValueDictionary;
 @property NSMutableDictionary *splitterValueDictionary;
 @property NSMutableDictionary *converterValueDictionary;
+
+// Maps teleporter location to teleporter group
+@property NSMutableDictionary *teleporterGroupDictionary;
 @end
 
 @implementation BoardCells
@@ -29,6 +32,7 @@
         self.zonerValueDictionary = [[NSMutableDictionary alloc] init];
         self.splitterValueDictionary = [[NSMutableDictionary alloc] init];
         self.converterValueDictionary = [[NSMutableDictionary alloc] init];
+        self.teleporterGroupDictionary = [[NSMutableDictionary alloc] init];
         
         [self initCells];
     }
@@ -93,10 +97,23 @@
     return number.intValue;
 }
 
+-(void)addTransporterGroupMapping:(int)row col:(int)col group:(int)group
+{
+    NSString* key = [NSString stringWithFormat:@"%d_%d", row, col];
+    [self.teleporterGroupDictionary setObject:[NSNumber numberWithInt:group] forKey:key];
+}
+
+-(int)getTransporterGroupMapping:(int)row col:(int)col
+{
+    NSString* key = [NSString stringWithFormat:@"%d_%d", row, col];
+    NSNumber* group = [self.teleporterGroupDictionary objectForKey:(key)];
+    return group.intValue;
+}
+
 - (void)generateRandomCellTypes
 {
     int totalPossibleMechanics = 6;
-    int mechanicCount = arc4random()%3; // Max 2 mechanics
+    int mechanicCount = arc4random()%3; // Max 3 mechanics
     NSMutableArray* mechanicsList = [[NSMutableArray alloc] init];
     
     int i = 0;
@@ -137,6 +154,152 @@
     }
     
     [self logBoardCellState];
+}
+
+- (void)addTransporterMechanic:(int)mechanicCount
+{
+    // TODO: lindach: Should not output down when only cell below is an OutputRight
+    // TODO: lindach: Hide input grid button when there's an output directly next to it
+    // TODO: lindach: Need to prevent infinite loop (input/output) circles
+    // TODO: lindach: Change this so that mechanics are added in order.
+    
+    // Get number of cells to generate
+    int upperBound = self.boardParameters.transporterMechanicUpperBound;
+    int lowerBound = self.boardParameters.transporterMechanicLowerBound;
+    int transporterGroupCount = arc4random()%(upperBound - lowerBound + 1) + lowerBound;
+    
+    // Adjust for number of other mechanics
+    transporterGroupCount = transporterGroupCount / mechanicCount;
+    if (transporterGroupCount < 1)
+    {
+        transporterGroupCount = 1;
+    }
+    
+    [CommonUtils Log:[NSMutableString stringWithFormat: @"Transporter group count: %d", transporterGroupCount]];
+    
+    for (int i = 0; i < transporterGroupCount; i++)
+    {
+        upperBound = self.boardParameters.transporterPerGroupUpperBound;
+        lowerBound = self.boardParameters.transporterPerGroupLowerBound;
+        int inputCounts = arc4random()%(upperBound - lowerBound + 1) + lowerBound;
+        int outputCounts = arc4random()%(upperBound - lowerBound + 1) + lowerBound;
+        
+        [CommonUtils Log:[NSMutableString stringWithFormat: @"Transporter group id: %d, inputCounts:%d, outputCounts:%d", i, inputCounts, outputCounts]];
+        
+        // Add transporter inputs
+        int j = 0;
+        while (j < inputCounts)
+        {
+            int randomRow = arc4random()%self.boardParameters.gridSize;
+            int randomCol = arc4random()%self.boardParameters.gridSize;
+            
+            NSMutableArray *row = [self.colorCellSections objectAtIndex:randomRow];
+            NSNumber *cellType = [row objectAtIndex:randomCol];
+            
+            // Only replace normal cells, not cells that already have mechanics
+            if (cellType.intValue != NormalCell)
+            {
+                continue;
+            }
+            
+            int transporterDirection = arc4random()%2;
+            CellType transporterType = transporterDirection == 1 ? TransporterInputLeft : TransporterInputTop;
+            
+            // If this is a left input transporter, make sure there is a connection from the left
+            if (transporterType == TransporterInputLeft &&
+                ![self hasConnectionFromLeft:randomRow col:randomCol])
+            {
+                continue;
+            }
+            
+            // If this is a top input transporter, make sure there is a connection from the top
+            if (transporterType == TransporterInputTop &&
+                ![self hasConnectionFromTop:randomRow col:randomCol])
+            {
+                continue;
+            }
+            
+            // If left input transporter, make sure we don't need a connection on the right
+            if (transporterType == TransporterInputLeft && [self needConnectionOnRight:randomRow col:randomCol])
+            {
+                continue;
+            }
+            
+            // If top input transporter, make sure we don't need a connection on the bottom
+            if (transporterType == TransporterInputTop && [self needConnectionOnBottom:randomRow col:randomCol])
+            {
+                continue;
+            }
+            
+            // Replace with special cell
+            [self addTransporterGroupMapping:randomRow col:randomCol group:i];
+            [row replaceObjectAtIndex:randomCol withObject:[NSNumber numberWithInt:transporterType]];
+            j++;
+        }
+        
+        // Add transporter outputs
+        j = 0;
+        while (j < outputCounts)
+        {
+            int randomRow = arc4random()%self.boardParameters.gridSize;
+            int randomCol = arc4random()%self.boardParameters.gridSize;
+            
+            NSMutableArray *row = [self.colorCellSections objectAtIndex:randomRow];
+            NSNumber *cellType = [row objectAtIndex:randomCol];
+            
+            // Only replace normal cells, not cells that already have mechanics
+            if (cellType.intValue != NormalCell)
+            {
+                continue;
+            }
+            
+            int transporterDirection = arc4random()%2;
+            CellType transporterType = transporterDirection == 1 ? TransporterOutputRight : TransporterOutputDown;
+            
+            // If this is output right, make sure we don't have TtR to the right
+            if (transporterType == TransporterOutputRight &&
+                [self hasCellOfTypeOnRight:randomRow col:randomCol cellType:ReflectorTopToRight])
+            {
+                continue;
+            }
+            
+            // Make sure we don't have 2 OutputRight next to each other
+            if (transporterType == TransporterOutputRight && [self hasHorizontalAdjacentCellOfType:randomRow col:randomCol cellType:TransporterOutputRight])
+            {
+                continue;
+            }
+            
+            // If this is output down, make sure we don't have LtD on the bottom
+            if (transporterType == TransporterOutputDown &&
+                [self hasCellOfTypeOnBottom:randomRow col:randomCol cellType:ReflectorLeftToDown])
+            {
+                continue;
+            }
+            
+            // Make sure we don't have 2 OutputDown on top of each other
+            if (transporterType == TransporterOutputDown && [self hasVerticalAdjacentCellOfType:randomRow col:randomCol cellType:TransporterOutputDown])
+            {
+                continue;
+            }
+            
+            // Do not allow output right on right column
+            if (transporterType == TransporterOutputRight && randomCol == self.boardParameters.gridSize - 1)
+            {
+                continue;
+            }
+            
+            // Do not allow output down mechanic on bottom row
+            if (transporterType == TransporterOutputDown && randomRow == self.boardParameters.gridSize - 1)
+            {
+                continue;
+            }
+            
+            // Replace with special cell
+            [self addTransporterGroupMapping:randomRow col:randomCol group:i];
+            [row replaceObjectAtIndex:randomCol withObject:[NSNumber numberWithInt:transporterType]];
+            j++;
+        }
+    }
 }
 
 - (void)addConverterMechanic:(int)mechanicCount
@@ -359,6 +522,12 @@
             {
                 continue;
             }
+            
+            // Make sure we don't have TtR to the right of TransporterOutputRight
+            if ([self hasCellOfTypeOnLeft:randomRow col:randomCol cellType:TransporterOutputRight])
+            {
+                continue;
+            }
         }
         
         if (reflectorType == ReflectorLeftToDown)
@@ -384,6 +553,12 @@
             
             // Make sure we don't have LtD below Diverter
             if ([self hasCellOfTypeOnTop:randomRow col:randomCol cellType:Diverter])
+            {
+                continue;
+            }
+            
+            // Make sure we don't have LtD below TransporterOutputDown
+            if ([self hasCellOfTypeOnTop:randomRow col:randomCol cellType:TransporterOutputDown])
             {
                 continue;
             }
@@ -478,7 +653,7 @@
         for (int j=0; j<self.colorCellSections.count; j++)
         {
             NSNumber *cellType = [row objectAtIndex:j];
-            [string appendString:[NSString stringWithFormat: @"%d", cellType.intValue]];
+            [string appendString:[NSString stringWithFormat: @"%d ", cellType.intValue]];
         }
         
         [string appendString:@"\n "];
@@ -495,11 +670,11 @@
         NSMutableArray *tempRow = [self.colorCellSections objectAtIndex:j];
         NSNumber *tempCellType = [tempRow objectAtIndex:col];
         
-        if (tempCellType.intValue == ReflectorTopToRight)
+        if (tempCellType.intValue == ReflectorTopToRight || tempCellType.intValue == TransporterInputTop)
         {
             return false;
         }
-        else if (tempCellType.intValue == ReflectorLeftToDown)
+        else if (tempCellType.intValue == ReflectorLeftToDown || tempCellType.intValue == TransporterOutputDown)
         {
             return true;
         }
@@ -516,7 +691,7 @@
         NSMutableArray *tempRow = [self.colorCellSections objectAtIndex:j];
         NSNumber *tempCellType = [tempRow objectAtIndex:col];
         
-        if (tempCellType.intValue == ReflectorTopToRight || tempCellType.intValue == Diverter)
+        if (tempCellType.intValue == ReflectorTopToRight || tempCellType.intValue == Diverter || tempCellType.intValue == TransporterInputTop)
         {
             return true;
         }
@@ -537,11 +712,11 @@
     {
         NSNumber *tempCellType = [currentRow objectAtIndex:j];
         
-        if (tempCellType.intValue == ReflectorLeftToDown)
+        if (tempCellType.intValue == ReflectorLeftToDown || tempCellType.intValue == TransporterInputLeft)
         {
             return false;
         }
-        else if (tempCellType.intValue == ReflectorTopToRight)
+        else if (tempCellType.intValue == ReflectorTopToRight || tempCellType.intValue == TransporterOutputRight)
         {
             return true;
         }
@@ -558,7 +733,7 @@
     {
         NSNumber *tempCellType = [currentRow objectAtIndex:j];
         
-        if (tempCellType.intValue == ReflectorLeftToDown || tempCellType.intValue == Diverter)
+        if (tempCellType.intValue == ReflectorLeftToDown || tempCellType.intValue == Diverter || tempCellType.intValue == TransporterInputLeft)
         {
             return true;
         }

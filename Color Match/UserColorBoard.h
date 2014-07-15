@@ -15,7 +15,6 @@
 
 @property NSMutableArray *topGridColorButtons;
 @property NSMutableArray *leftGridColorButtons;
-@property BoardCells *boardCells;
 
 -(id)initWithParameters:
     (BoardParameters)boardParameters

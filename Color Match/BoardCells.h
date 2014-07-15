@@ -22,5 +22,7 @@
 -(int)getSplitterValueAt:(int)row col:(int)col;
 -(void)addConverterValueAt:(int)row col:(int)col value:(int)value;
 -(int)getConverterValueAt:(int)row col:(int)col;
+-(void)addTransporterGroupMapping:(int)row col:(int)col group:(int)group;
+-(int)getTransporterGroupMapping:(int)row col:(int)col;
 
 @end

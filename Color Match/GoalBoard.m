@@ -14,6 +14,7 @@
 #import "ConnectorCell.h"
 #import "SplitterCell.h"
 #import "ConverterCell.h"
+#import "TransporterCell.h"
 
 @interface GoalBoard ()
 @end
@@ -22,12 +23,11 @@
 
 -(id)initWithParameters:(BoardParameters)boardParameters containerView:(UIView*)containerView boardCells:(BoardCells*)boardCells
 {
-    self = [super init];
+    self = [super initWithParameters:boardCells];
     if (self)
     {
         self.boardParameters = boardParameters;
         self.containerView = containerView;
-        self.boardCells = boardCells;
         self.topColorsState = [[NSMutableArray alloc] init];
         self.leftColorsState = [[NSMutableArray alloc] init];
         
@@ -384,6 +384,13 @@
     while ([self checkGoalSufficientDifficulty] == false && tryCount < 10);
 }
 
+- (void)removeExistingBoard
+{
+    [self removeExistingGridCells];
+    [self removeExistingGoalColorsState];
+    [self resetBoardState];
+}
+
 - (void)removeExistingGoalColorsState
 {
     [self.topColorsState removeAllObjects];
@@ -405,9 +412,9 @@
 }
 
 // override base class
--(UIImage*)GetImageForCellType:(int)cellType
+-(UIImage*)GetImageForCellType:(ColorCell*)colorCell
 {
-    switch (cellType)
+    switch (colorCell.cellType)
     {
         case ReflectorLeftToDown:
             return [UIImage imageNamed:@"ReflectorLtDGoal@2x.png"];
@@ -423,9 +430,14 @@
             return [UIImage imageNamed:@"splitterWhite@2x.png"];
         case Converter:
             return [UIImage imageNamed:@"converterWhite@2x.png"];
+        case TransporterInputLeft:
+        case TransporterInputTop:
+        case TransporterOutputDown:
+        case TransporterOutputRight:
+            return [self getTransporterImageWithColor:colorCell color:0];
     }
     
-    return [super GetImageForCellType:cellType];
+    return [super GetImageForCellType:colorCell];
 }
 
 -(void)GetSpecialImageForCellIfNeeded:(ColorCell*)colorCell boardCells:(BoardCells*)boardCells
