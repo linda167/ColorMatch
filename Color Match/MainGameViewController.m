@@ -126,9 +126,13 @@
             boardParameters.transporterMechanicUpperBound = 1;
             boardParameters.transporterPerGroupLowerBound = 1;
             boardParameters.transporterPerGroupUpperBound = 1;
-            boardParameters.transporterArrowSize = 49;
-            boardParameters.transporterArrowDownXAdjustment = 2;
-            boardParameters.transporterArrowDownYAdjustment = 6;
+            boardParameters.transporterArrowSize = 43;
+            boardParameters.transporterArrowDownXAdjustment = 4;
+            boardParameters.transporterArrowDownYAdjustment = -16;
+            boardParameters.transporterArrowDownYAdjustment2 = 7;
+            boardParameters.transporterArrowRightXAdjustment = 7;
+            boardParameters.transporterArrowRightXAdjustment2 = -16;
+            boardParameters.transporterArrowRightYAdjustment = 4;
             break;
         case 4:
             boardParameters.colorCellSize = 40;
@@ -158,9 +162,13 @@
             boardParameters.transporterMechanicUpperBound = 1;
             boardParameters.transporterPerGroupLowerBound = 1;
             boardParameters.transporterPerGroupUpperBound = 2;
-            boardParameters.transporterArrowSize = 39;
-            boardParameters.transporterArrowDownXAdjustment = 2;
-            boardParameters.transporterArrowDownYAdjustment = 8;
+            boardParameters.transporterArrowSize = 35;
+            boardParameters.transporterArrowDownXAdjustment = 3;
+            boardParameters.transporterArrowDownYAdjustment = -14;
+            boardParameters.transporterArrowDownYAdjustment2 = 7;
+            boardParameters.transporterArrowRightXAdjustment = 7;
+            boardParameters.transporterArrowRightXAdjustment2 = -16;
+            boardParameters.transporterArrowRightYAdjustment = 3;
             break;
         case 5:
             boardParameters.colorCellSize = 35;

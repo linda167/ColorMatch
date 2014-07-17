@@ -193,9 +193,13 @@
             {
                 if (i > currentCol + 1)
                 {
-                    // Draw line to cell before the cell
-                    ColorCell *colorCell = [row objectAtIndex:i-1];
-                    [self DrawHorizontalLineToConnection:colorCell lineInfo:lineInfo currentY:currentY drawToCenter:true];
+                    // Draw line to closest cell to the left that would need a line
+                    ColorCell *colorCell = [self FindClosestCellReceivingLinesToLeft:currentRow colStartVal:currentCol colEndVal:i];
+                    
+                    if (colorCell != NULL)
+                    {
+                        [self DrawHorizontalLineToConnection:colorCell lineInfo:lineInfo currentY:currentY drawToCenter:true];
+                    }
                 }
         
                 connectionFound = true;
@@ -231,10 +235,12 @@
             {
                 if (i > currentRow + 1)
                 {
-                    // Draw line to cell before the cell
-                    NSArray *row = [self.colorCellSections objectAtIndex:i-1];
-                    ColorCell *colorCell = [row objectAtIndex:currentCol];
-                    [self DrawVerticalLineToConnection:colorCell lineInfo:lineInfo currentX:currentX drawToCenter:true];
+                    // Draw line to closest cell above that would need a line
+                    ColorCell *colorCell = [self FindClosestCellReceivingLinesOnTop:i rowStartVal:currentCol rowEndVal:i];
+                    if (colorCell != NULL)
+                    {
+                        [self DrawVerticalLineToConnection:colorCell lineInfo:lineInfo currentX:currentX drawToCenter:true];
+                    }
                 }
                  
                 connectionFound = true;
@@ -315,6 +321,46 @@
     [lineInfo addLinePiece:linePiece];
     
     return bottomY;
+}
+
+-(ColorCell*)FindClosestCellReceivingLinesToLeft:(int)rowVal colStartVal:(int)colStartVal colEndVal:(int)colEndVal
+{
+    NSArray *row = [self.colorCellSections objectAtIndex:rowVal];
+    for (int i = colEndVal-1; i > colStartVal; i--)
+    {
+        ColorCell *colorCell = [row objectAtIndex:i];
+        if (colorCell.cellType != ReflectorTopToRight &&
+            colorCell.cellType != Zoner &&
+            colorCell.cellType != Splitter &&
+            colorCell.cellType != TransporterInputTop &&
+            colorCell.cellType != TransporterOutputRight &&
+            colorCell.cellType != TransporterOutputDown)
+        {
+            return colorCell;
+        }
+    }
+    
+    return NULL;
+}
+
+-(ColorCell*)FindClosestCellReceivingLinesOnTop:(int)colVal rowStartVal:(int)rowStartVal rowEndVal:(int)rowEndVal
+{
+    for (int i = rowEndVal-1; i > rowStartVal; i--)
+    {
+        NSArray *row = [self.colorCellSections objectAtIndex:i];
+        ColorCell *colorCell = [row objectAtIndex:colVal];
+        if (colorCell.cellType != ReflectorLeftToDown &&
+            colorCell.cellType != Zoner &&
+            colorCell.cellType != Splitter &&
+            colorCell.cellType != TransporterInputLeft &&
+            colorCell.cellType != TransporterOutputRight &&
+            colorCell.cellType != TransporterOutputDown)
+        {
+            return colorCell;
+        }
+    }
+    
+    return NULL;
 }
 
 -(void)DrawConverterCellLines
@@ -769,12 +815,6 @@
     }
     
     return NULL;
-}
-
--(UIImage*)getTransporterSpecialImageWithColor:(CellType)cellType color:(int)color
-{
-    // TODO: lindach: Update arrows
-    return [UIImage imageNamed:@"BlockClear@.png"];
 }
 
 -(UIImage*)getArrowLtDWithColor:(int)color

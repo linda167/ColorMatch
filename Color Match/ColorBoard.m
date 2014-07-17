@@ -113,6 +113,11 @@
                 [self applyColorForTransporterInput:colorCell color:color isAdd:isAdd cellsAffected:cellsAffected];
                 break;
             }
+            else if (colorCell.cellType == TransporterOutputRight)
+            {
+                // Stop color flow when hitting a transporter output right
+                break;
+            }
         }
     }
     else    // if vertical
@@ -155,6 +160,11 @@
             else if (colorCell.cellType == TransporterInputTop)
             {
                 [self applyColorForTransporterInput:colorCell color:color isAdd:isAdd cellsAffected:cellsAffected];
+                break;
+            }
+            else if (colorCell.cellType == TransporterOutputDown)
+            {
+                // Stop color flow when hitting a transporter output down
                 break;
             }
         }

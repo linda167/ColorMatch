@@ -1437,9 +1437,19 @@
         {
             boardCells.colorCellSections =
             [NSMutableArray arrayWithObjects:
-             [NSArray arrayWithObjects:@"0", @"8", @"0", nil],
+             [NSArray arrayWithObjects:@"8", @"10", @"9", nil],
+             [NSArray arrayWithObjects:@"0", @"11", @"0", nil],
              [NSArray arrayWithObjects:@"0", @"0", @"0", nil],
-             [NSArray arrayWithObjects:@"10", @"0", @"0", nil],
+             nil];
+        }
+        else if (worldId == 8 && levelId == 5)
+        {
+            boardCells.colorCellSections =
+            [NSMutableArray arrayWithObjects:
+             [NSArray arrayWithObjects:@"8", @"0", @"0", @"0", nil],
+             [NSArray arrayWithObjects:@"0", @"0", @"9", @"0", nil],
+             [NSArray arrayWithObjects:@"0", @"11", @"10", @"0", nil],
+             [NSArray arrayWithObjects:@"0", @"0", @"0", @"0", nil],
              nil];
         }
         else if (worldId == 8 && levelId == 9)
@@ -2007,6 +2017,11 @@
     {
         [topColorsState addObjectsFromArray:[NSArray arrayWithObjects:@"1", @"2", @"3", nil]];
         [leftColorsState addObjectsFromArray:[NSArray arrayWithObjects:@"3", @"2", @"1", nil]];
+    }
+    else if (worldId == 8 && levelId == 5)
+    {
+        [topColorsState addObjectsFromArray:[NSArray arrayWithObjects:@"1", @"2", @"3", @"1", nil]];
+        [leftColorsState addObjectsFromArray:[NSArray arrayWithObjects:@"3", @"2", @"1", @"2", nil]];
     }
     else if (worldId == 8 && levelId == 9)
     {
