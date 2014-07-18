@@ -236,7 +236,7 @@
                 if (i > currentRow + 1)
                 {
                     // Draw line to closest cell above that would need a line
-                    ColorCell *colorCell = [self FindClosestCellReceivingLinesOnTop:i rowStartVal:currentCol rowEndVal:i];
+                    ColorCell *colorCell = [self FindClosestCellReceivingLinesOnTop:i rowStartVal:currentRow rowEndVal:i];
                     if (colorCell != NULL)
                     {
                         [self DrawVerticalLineToConnection:colorCell lineInfo:lineInfo currentX:currentX drawToCenter:true];
