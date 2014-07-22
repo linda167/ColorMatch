@@ -16,6 +16,7 @@
 #import "TransporterCell.h"
 #import "TransporterGroup.h"
 #import "UserColorBoard.h"
+#import "GridColorButton.h"
 
 @implementation ColorBoard
 
@@ -105,8 +106,13 @@
             }
             else if (colorCell.cellType == Converter)
             {
-                // Stop color flow when hitting a converter
-                break;
+                [self OnApplyColorOnConverterCell:(ConverterCell*)colorCell color:color isHorizontal:isHorizontal];
+                
+                if (!((ConverterCell*)colorCell).isDirectionRight)
+                {
+                    // Stop color flow when hitting a vertical converter
+                    break;
+                }
             }
             else if (colorCell.cellType == TransporterInputLeft)
             {
@@ -154,8 +160,13 @@
             }
             else if (colorCell.cellType == Converter)
             {
-                // Stop color flow when hitting a converter
-                break;
+                [self OnApplyColorOnConverterCell:(ConverterCell*)colorCell color:color isHorizontal:isHorizontal];
+                
+                if (((ConverterCell*)colorCell).isDirectionRight)
+                {
+                    // Stop color flow when hitting a horizontal converter
+                    break;
+                }
             }
             else if (colorCell.cellType == TransporterInputTop)
             {
@@ -423,9 +434,11 @@
     int row = converterCell.row;
     int col = converterCell.col;
     
+    /* TODO: lindach
     // Apply color in both directions
     [self applyColor:row currentCol:col isHorizontal:true color:converterCell.inputColor isAdd:isAdd cellsAffected:cellsAffected];
     [self applyColor:row currentCol:col isHorizontal:false color:converterCell.inputColor isAdd:isAdd cellsAffected:cellsAffected];
+     */
 }
 
 -(void)applySpecialCellSplitter:(ColorCell*)colorCell isAdd:(bool)isAdd cellsAffected:(NSMutableArray*)cellsAffected
@@ -633,6 +646,16 @@
     }
     // Should not be hit
     return NULL;
+}
+
+-(GridColorButton*)getGridColorButtonFromButton:(UIButton*)button
+{
+    return NULL;
+}
+
+-(void)OnApplyColorOnConverterCell:(ConverterCell*)converterCell color:(int)color isHorizontal:(BOOL)isHorizontal
+{
+    // NOOP in base class
 }
 
 @end

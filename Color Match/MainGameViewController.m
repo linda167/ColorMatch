@@ -425,7 +425,7 @@
     
     // Handle selecting color
     int selectedColor = (int)self.selectedColor;
-    [_userColorBoard pressGridButtonWithColor:sender :selectedColor];
+    [_userColorBoard pressGridButtonWithColor:sender :selectedColor doAnimate:true];
     
     [self OnUserActionTaken];
 }

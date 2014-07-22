@@ -11,13 +11,16 @@
 
 @interface ConnectorLines : UIView
 
+@property NSMutableArray *converterLines;
+
 - (void)addLine:(LineInfo*)lineInfo isHorizontal:(BOOL)isHorizontal;
 - (void)updateLine:(int)lineIndex isHorizontal:(BOOL)isHorizontal color:(UIColor*)color;
 - (void)clear;
-- (void)addConverterLine:(LineInfo*)lineInfo isHorizontal:(BOOL)isHorizontal;
+- (void)addConverterLine:(LineInfo*)lineInfo;
 - (void)updateConverterLine:(int)lineIndex color:(UIColor*)color;
 - (NSMutableArray*)getTransporterGroupLines:(int)groupId;
 - (void)addTransporterLine:(int)groupId lineInfo:(LineInfo*)lineInfo;
 - (void)updateTransporterLine:(int)groupId color:(UIColor*)color;
+- (void)replaceConverterLine:(LineInfo*)lineInfo index:(int)index;
 
 @end

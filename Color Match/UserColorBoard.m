@@ -168,6 +168,26 @@
     }
 }
 
+-(LineInfo*)DrawHorizontalConnectingLine:(GridColorButton*)gridColorbutton index:(int)index
+{
+    UIView *leftConnection = gridColorbutton.button;
+    
+    int leftY = leftConnection.frame.origin.y + leftConnection.frame.size.height / 2 + 0.5;
+    int leftAdjustment = -1 * (self.boardParameters.emptyPaddingInGridButton);   // Accounts for extra spacing in left button
+    int leftX = leftConnection.frame.origin.x + leftConnection.frame.size.width + leftAdjustment;
+    
+    // Draw the line
+    LineInfo *lineInfo = [[LineInfo alloc] init];
+    lineInfo.lineThickness = 3;
+    lineInfo.startX = leftX;
+    lineInfo.startY = leftY;
+    lineInfo.color = [CommonUtils GetGrayColor];
+    [self DrawLineToNextConnectionPoint:index currentCol:-1 currentX:leftX currentY:leftY isHorizontal:true lineInfo:lineInfo];
+    [self.connectorLines addLine:lineInfo isHorizontal:true];
+    
+    return lineInfo;
+}
+
 -(void)DrawLineToNextConnectionPoint:(int)currentRow currentCol:(int)currentCol currentX:(int)currentX currentY:(int)currentY isHorizontal:(BOOL)isHorizontal lineInfo:(LineInfo*)lineInfo
 {
     if (isHorizontal)
@@ -189,7 +209,9 @@
                 connectionFound = true;
                 break;
             }
-            else if (colorCell.cellType == ReflectorTopToRight || colorCell.cellType == TransporterOutputRight)
+            else if (colorCell.cellType == ReflectorTopToRight ||
+                     colorCell.cellType == TransporterOutputRight ||
+                     colorCell.cellType == Converter)
             {
                 if (i > currentCol + 1)
                 {
@@ -205,7 +227,7 @@
                 connectionFound = true;
                 break;
             }
-            else if (colorCell.cellType == Converter || colorCell.cellType == TransporterInputLeft)
+            else if (colorCell.cellType == TransporterInputLeft)
             {
                 // Draw line to cell
                 ColorCell *colorCell = [row objectAtIndex:i];
@@ -231,7 +253,9 @@
             NSArray *row = [self.colorCellSections objectAtIndex:i];
             ColorCell *colorCell = [row objectAtIndex:currentCol];
             
-            if (colorCell.cellType == ReflectorLeftToDown || colorCell.cellType == TransporterOutputDown)
+            if (colorCell.cellType == ReflectorLeftToDown ||
+                colorCell.cellType == TransporterOutputDown ||
+                colorCell.cellType == Converter)
             {
                 if (i > currentRow + 1)
                 {
@@ -246,7 +270,8 @@
                 connectionFound = true;
                 break;
             }
-            else if (colorCell.cellType == ReflectorTopToRight || colorCell.cellType == Diverter)
+            else if (colorCell.cellType == ReflectorTopToRight ||
+                     colorCell.cellType == Diverter)
             {
                 // Draw line to reflector
                 int bottomY = [self DrawVerticalLineToConnection:colorCell lineInfo:lineInfo currentX:currentX drawToCenter:true];
@@ -325,6 +350,7 @@
 
 -(ColorCell*)FindClosestCellReceivingLinesToLeft:(int)rowVal colStartVal:(int)colStartVal colEndVal:(int)colEndVal
 {
+    // Search between but not including start and end val
     NSArray *row = [self.colorCellSections objectAtIndex:rowVal];
     for (int i = colEndVal-1; i > colStartVal; i--)
     {
@@ -345,6 +371,7 @@
 
 -(ColorCell*)FindClosestCellReceivingLinesOnTop:(int)colVal rowStartVal:(int)rowStartVal rowEndVal:(int)rowEndVal
 {
+    // Search between but not including start and end val
     for (int i = rowEndVal-1; i > rowStartVal; i--)
     {
         NSArray *row = [self.colorCellSections objectAtIndex:i];
@@ -361,16 +388,6 @@
     }
     
     return NULL;
-}
-
--(void)DrawConverterCellLines
-{
-    for (ConverterCell* converterCell in self.allConverterCells)
-    {
-        // Draw both horizontal and vertical lines
-        [self DrawSingleConverterLine:true converterCell:converterCell];
-        [self DrawSingleConverterLine:false converterCell:converterCell];
-    }
 }
 
 -(void)DrawTransporterCellLines
@@ -411,11 +428,38 @@
     [self.connectorLines addTransporterLine:transporterCell.groupId lineInfo:lineInfo];
 }
 
--(void)DrawSingleConverterLine:(BOOL)isHorizontal converterCell:(ConverterCell*)converterCell
+
+-(void)DrawConverterCellLines
 {
-    // Draw from center of converter cell
-    int leftY = converterCell.image.frame.origin.y + converterCell.image.frame.size.height / 2 + 0.5;
-    int leftX = converterCell.image.frame.origin.x + converterCell.image.frame.size.width / 2 + 0.5;
+    for (int i = 0; i < self.allConverterCells.count; i++)
+    {
+        ConverterCell* converterCell = [self.allConverterCells objectAtIndex:i];
+        [self DrawSingleConverterLine:converterCell index:i];
+    }
+}
+
+-(void)DrawSingleConverterLine:(ConverterCell*)converterCell index:(int)index
+{
+    bool isHorizontal = converterCell.isDirectionRight;
+    
+    ColorCell* previousCellWithInputLine;
+    if (isHorizontal)
+    {
+        previousCellWithInputLine = [self FindClosestCellReceivingLinesToLeft:converterCell.row colStartVal:-1 colEndVal:converterCell.col];
+    }
+    else
+    {
+        previousCellWithInputLine = [self FindClosestCellReceivingLinesOnTop:converterCell.col rowStartVal:-1 rowEndVal:converterCell.row];
+    }
+    
+    if (previousCellWithInputLine == NULL)
+    {
+        return;
+    }
+        
+    // Draw from center of previous input cell cell
+    int leftY = previousCellWithInputLine.image.frame.origin.y + previousCellWithInputLine.image.frame.size.height / 2 + 0.5;
+    int leftX = previousCellWithInputLine.image.frame.origin.x + previousCellWithInputLine.image.frame.size.width / 2 + 0.5;
     
     // Draw the line
     LineInfo *lineInfo = [[LineInfo alloc] init];
@@ -430,24 +474,25 @@
     // Draw line
     [self DrawLineToNextConnectionPoint:rowValue currentCol:colValue currentX:leftX currentY:leftY isHorizontal:isHorizontal lineInfo:lineInfo];
     
-    [self.connectorLines addConverterLine:lineInfo isHorizontal:isHorizontal];
+    if (index >= self.connectorLines.converterLines.count)
+    {
+        // Append new line to end
+        [self.connectorLines addConverterLine:lineInfo];
+    }
+    else
+    {
+        // Line already exists so replace instead
+        [self.connectorLines replaceConverterLine:lineInfo index:index];
+    }
 }
 
--(void)pressGridButtonWithColor:(UIButton *)button :(int)selectedColor
+-(void)pressGridButtonWithColor:(UIButton *)button :(int)selectedColor doAnimate:(bool)doAnimate;
 {
     NSNumber* wrappedSelectedColor = [NSNumber numberWithInt:selectedColor];
     
     // Update grid color button state
     // Find the grid button that was clicked
-    GridColorButton* gridColorButtonClicked;
-    for (GridColorButton* gridColorButton in _allGridColorButtons)
-    {
-        if (gridColorButton.button == button)
-        {
-            gridColorButtonClicked = gridColorButton;
-            break;
-        }
-    }
+    GridColorButton* gridColorButtonClicked = [self getGridColorButtonFromButton:button];
     
     // Collect the list of UIViews affected by this action, that we should animate
     NSMutableArray* viewsToAnimate = [[NSMutableArray alloc] init];
@@ -512,7 +557,24 @@
         [self addColorForRow:selectedColor rowIndex:leftIndex cellsAffected:viewsToAnimate];
     }
     
-    [CommonUtils AnimateViewsAffected:viewsToAnimate];
+    if (doAnimate)
+    {
+        [CommonUtils AnimateViewsAffected:viewsToAnimate];
+    }
+}
+
+-(GridColorButton*)getGridColorButtonFromButton:(UIButton*)button
+{
+    // Find the grid button from button
+    for (GridColorButton* gridColorButton in _allGridColorButtons)
+    {
+        if (gridColorButton.button == button)
+        {
+            return gridColorButton;
+        }
+    }
+    
+    return NULL;
 }
 
 - (void)initGridColorButtons
@@ -597,7 +659,7 @@
     {
         GridColorButton *gridColorButton = [_topGridColorButtons objectAtIndex:i];
         UIButton *button = gridColorButton.button;
-        [self pressGridButtonWithColor:button :0];
+        [self pressGridButtonWithColor:button :0 doAnimate:false];
     }
     
     // Clear left color buttons
@@ -605,7 +667,7 @@
     {
         GridColorButton *gridColorButton = [_leftGridColorButtons objectAtIndex:i];
         UIButton *button = gridColorButton.button;
-        [self pressGridButtonWithColor:button :0];
+        [self pressGridButtonWithColor:button :0 doAnimate:false];
     }
 }
 
@@ -677,7 +739,8 @@
         case Splitter:
             return [UIImage imageNamed:@"splitterWhite@2x.png"];
         case Converter:
-            return [UIImage imageNamed:@"converterWhite@2x.png"];
+            ((ConverterCell*)colorCell).isDirectionRight = 1;
+            return [UIImage imageNamed:@"converterLeftToRight@2x.png"];
         case TransporterInputLeft:
         case TransporterInputTop:
         case TransporterOutputDown:
@@ -943,55 +1006,54 @@
 - (IBAction)converterButtonPressed:(id)sender
 {
     ConverterCellButton* converterButton = (ConverterCellButton*)sender;
+    ConverterCell* converterCell = converterButton.converterCell;
     
-    int currentSelectedColor = (int)self.viewController.selectedColor;
-    int existingInputColor = converterButton.converterCell.inputColor;
-    if (existingInputColor == currentSelectedColor)
+    bool isDirectionRight = converterCell.isDirectionRight;
+    isDirectionRight = !isDirectionRight;
+    converterCell.isDirectionRight = isDirectionRight;
+    
+    UIImage* newConverterImage;
+    if (isDirectionRight)
     {
-        // Do nothing if color didn't change
-        return;
+        newConverterImage = [UIImage imageNamed:@"converterLeftToRight@2x.png"];
+    }
+    else
+    {
+        newConverterImage = [UIImage imageNamed:@"converterTopToDown@2x.png"];
+    }
+    
+    [converterButton setImage:newConverterImage forState:UIControlStateNormal];
+    
+    int newColorToApply = isDirectionRight ? converterCell.horizontalColorInput : converterCell.verticalColorInput;
+    
+    // Replace previous converter line
+    int lineIndex = [self.allConverterCells indexOfObject:converterCell];
+    [self DrawSingleConverterLine:converterCell index:lineIndex];
+    [self.connectorLines updateConverterLine:lineIndex color:[CommonUtils GetUIColorForColor:newColorToApply]];
+    
+    // Remove color from current direction
+    int oldColorToRemove = isDirectionRight ? converterCell.verticalColorInput : converterCell.horizontalColorInput;
+    if (oldColorToRemove != 0)
+    {
+        [self applyColor:converterCell.row currentCol:converterCell.col isHorizontal:!isDirectionRight color:oldColorToRemove isAdd:false cellsAffected:NULL];
     }
     
     // Collect views to animate
     NSMutableArray* viewsToAnimate = [[NSMutableArray alloc] init];
     [viewsToAnimate addObject:converterButton];
     
-    UIImage* newConverterImage;
-    switch (currentSelectedColor)
-    {
-        case 0:
-            newConverterImage = [UIImage imageNamed:@"converterWhite@2x.png"];
-            break;
-        case 1:
-            newConverterImage = [UIImage imageNamed:@"converterBlue@2x.png"];
-            break;
-        case 2:
-            newConverterImage = [UIImage imageNamed:@"converterRed@2x.png"];
-            break;
-        case 3:
-            newConverterImage = [UIImage imageNamed:@"converterYellow@2x.png"];
-            break;
-    }
-    
-    [converterButton setImage:newConverterImage forState:UIControlStateNormal];
-    
-    if (existingInputColor != 0)
-    {
-        [self applySpecialCell:converterButton.converterCell isAdd:false cellsAffected:NULL];
-    }
-    
-    ((ConverterCell*)converterButton.converterCell).inputColor = currentSelectedColor;
-    [self applySpecialCell:converterButton.converterCell isAdd:true cellsAffected:viewsToAnimate];
-    
-    // Update converter lines
-    int lineIndex = [self.allConverterCells indexOfObject:converterButton.converterCell];
-    [self.connectorLines updateConverterLine:lineIndex
-        color:[CommonUtils GetUIColorForColor:currentSelectedColor]];
+    // Apply color in new direction
+    [self applyColor:converterCell.row currentCol:converterCell.col isHorizontal:isDirectionRight color:newColorToApply isAdd:true cellsAffected:viewsToAnimate];
     
     // Do animation
     [CommonUtils AnimateViewsAffected:viewsToAnimate];
     
     [self.viewController OnUserActionTaken];
+}
+
+-(void)OnApplyColorOnConverterCell
+{
+    // NOOP in base class
 }
 
 - (IBAction)splitterButtonPressed:(id)sender
@@ -1135,6 +1197,25 @@
     [self updateSpecialCellImagesOnApplyColor:outputCell color:transporterGroup.currentColor isHorizontal:true cellsAffected:cellsAffected];
     
     [self.connectorLines updateTransporterLine:outputCell.groupId                                       color:[CommonUtils GetUIColorForColor:transporterGroup.currentColor]];
+}
+
+-(void)OnApplyColorOnConverterCell:(ConverterCell*)converterCell color:(int)color isHorizontal:(BOOL)isHorizontal
+{
+    int lineIndex = [self.allConverterCells indexOfObject:converterCell];
+    
+    if (isHorizontal == converterCell.isDirectionRight)
+    {
+        [self.connectorLines updateConverterLine:lineIndex color:[CommonUtils GetUIColorForColor:color]];
+    }
+    
+    if (isHorizontal)
+    {
+        converterCell.horizontalColorInput = color;
+    }
+    else
+    {
+        converterCell.verticalColorInput = color;
+    }
 }
 
 @end

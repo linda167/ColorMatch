@@ -12,8 +12,6 @@
 @interface ConnectorLines ()
 @property NSMutableArray *verticalLines;
 @property NSMutableArray *horizontalLines;
-@property NSMutableArray *converterVerticalLines;
-@property NSMutableArray *converterHorizontalLines;
 @property NSMutableDictionary *transporterGroups;
 @property BOOL needToClear;
 @end
@@ -26,8 +24,7 @@
     if (self) {
         self.verticalLines = [[NSMutableArray alloc] init];
         self.horizontalLines = [[NSMutableArray alloc] init];
-        self.converterVerticalLines = [[NSMutableArray alloc] init];
-        self.converterHorizontalLines = [[NSMutableArray alloc] init];
+        self.converterLines = [[NSMutableArray alloc] init];
         self.transporterGroups = [[NSMutableDictionary alloc] init];
         [self setBackgroundColor:[UIColor clearColor]];
     }
@@ -56,15 +53,9 @@
         [self drawLine:lineInfo];
     }
     
-    for (int i = 0; i < self.converterHorizontalLines.count; i++)
+    for (int i = 0; i < self.converterLines.count; i++)
     {
-        LineInfo *lineInfo = [self.converterHorizontalLines objectAtIndex:i];
-        [self drawLine:lineInfo];
-    }
-    
-    for (int i = 0; i < self.converterVerticalLines.count; i++)
-    {
-        LineInfo *lineInfo = [self.converterVerticalLines objectAtIndex:i];
+        LineInfo *lineInfo = [self.converterLines objectAtIndex:i];
         [self drawLine:lineInfo];
     }
     
@@ -137,16 +128,22 @@
     [self setNeedsDisplay];
 }
 
-- (void)addConverterLine:(LineInfo*)lineInfo isHorizontal:(BOOL)isHorizontal
+- (void)addConverterLine:(LineInfo*)lineInfo
 {
-    if (isHorizontal)
-    {
-        [self.converterHorizontalLines addObject:lineInfo];
-    }
-    else
-    {
-        [self.converterVerticalLines addObject:lineInfo];
-    }
+    [self.converterLines addObject:lineInfo];
+    [self setNeedsDisplay];
+}
+
+- (void)replaceConverterLine:(LineInfo*)lineInfo index:(int)index
+{
+    [self.converterLines replaceObjectAtIndex:index withObject:lineInfo];
+    [self setNeedsDisplay];
+}
+
+- (void)updateConverterLine:(int)lineIndex color:(UIColor*)color
+{
+    LineInfo *lineInfo = [self.converterLines objectAtIndex:lineIndex];
+    lineInfo.color = color;
     
     [self setNeedsDisplay];
 }
@@ -193,18 +190,6 @@
     }
     
     lineInfo.color = color;
-    
-    [self setNeedsDisplay];
-}
-
-- (void)updateConverterLine:(int)lineIndex color:(UIColor*)color
-{
-    // Update both lines
-    LineInfo *verticalLineInfo = [self.converterVerticalLines objectAtIndex:lineIndex];
-    verticalLineInfo.color = color;
-    
-    LineInfo *horizontalLineInfo = [self.converterHorizontalLines objectAtIndex:lineIndex];
-    horizontalLineInfo.color = color;
     
     [self setNeedsDisplay];
 }

@@ -66,7 +66,7 @@
             }
             else if (cellType.intValue == Converter)
             {
-                ((ConverterCell*)colorCell).inputColor = [self.boardCells getConverterValueAt:i col:j];
+                // TODO: lindach
             }
             
             [row addObject:colorCell];
@@ -429,7 +429,7 @@
         case Splitter:
             return [UIImage imageNamed:@"splitterWhite@2x.png"];
         case Converter:
-            return [UIImage imageNamed:@"converterWhite@2x.png"];
+            return [UIImage imageNamed:@"converterGoal@2x.png"];
         case TransporterInputLeft:
         case TransporterInputTop:
         case TransporterOutputDown:

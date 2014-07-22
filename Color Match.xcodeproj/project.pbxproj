@@ -180,6 +180,9 @@
 		BFA3A2CC193AF4D900C1BB7D /* incompleteLevel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFA3A2CA193AF4D900C1BB7D /* incompleteLevel@2x.png */; };
 		BFA3A2CF1944386400C1BB7D /* LevelSelectButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BFA3A2CE1944386400C1BB7D /* LevelSelectButton.m */; };
 		BFA3A2D21944B6B900C1BB7D /* UserData.m in Sources */ = {isa = PBXBuildFile; fileRef = BFA3A2D11944B6B900C1BB7D /* UserData.m */; };
+		BFA761401978EBFE00AF6723 /* converterLeftToRight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFA7613E1978EBFE00AF6723 /* converterLeftToRight@2x.png */; };
+		BFA761411978EBFE00AF6723 /* converterTopToDown@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFA7613F1978EBFE00AF6723 /* converterTopToDown@2x.png */; };
+		BFA76143197B623400AF6723 /* converterGoal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFA76142197B623400AF6723 /* converterGoal@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -399,6 +402,9 @@
 		BFA3A2CE1944386400C1BB7D /* LevelSelectButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LevelSelectButton.m; sourceTree = "<group>"; };
 		BFA3A2D01944B6B900C1BB7D /* UserData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserData.h; sourceTree = "<group>"; };
 		BFA3A2D11944B6B900C1BB7D /* UserData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserData.m; sourceTree = "<group>"; };
+		BFA7613E1978EBFE00AF6723 /* converterLeftToRight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "converterLeftToRight@2x.png"; sourceTree = "<group>"; };
+		BFA7613F1978EBFE00AF6723 /* converterTopToDown@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "converterTopToDown@2x.png"; sourceTree = "<group>"; };
+		BFA76142197B623400AF6723 /* converterGoal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "converterGoal@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -502,6 +508,9 @@
 		AF2C225A1874B95000082561 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				BFA76142197B623400AF6723 /* converterGoal@2x.png */,
+				BFA7613E1978EBFE00AF6723 /* converterLeftToRight@2x.png */,
+				BFA7613F1978EBFE00AF6723 /* converterTopToDown@2x.png */,
 				BF9808891974F13D00BAF9ED /* ReflectorArrowTtRBrown@2x.png */,
 				BF98088A1974F13D00BAF9ED /* ReflectorArrowTtRGreen@2x.png */,
 				BF98088B1974F13D00BAF9ED /* ReflectorArrowTtROrange@2x.png */,
@@ -810,6 +819,7 @@
 				BFA3A2BF1931401700C1BB7D /* ReflectorArrowTtRBlue@2x.png in Resources */,
 				BF9079E819664916000E6E58 /* converterWhite@2x.png in Resources */,
 				BF9808881974EA4C00BAF9ED /* ReflectorArrowLtDPurple@2x.png in Resources */,
+				BFA76143197B623400AF6723 /* converterGoal@2x.png in Resources */,
 				BF9079761953DF94000E6E58 /* zonerBlue@2x.png in Resources */,
 				BF90799D19560FE3000E6E58 /* connectorOuterYellow@2x.png in Resources */,
 				AFADA2281877D20D00FADA22 /* FilledCircleBlue.png in Resources */,
@@ -850,6 +860,7 @@
 				BF98086B196E664E00BAF9ED /* transporterInputTopGreen@2x.png in Resources */,
 				AF2C22361874B8B800082561 /* Main_iPhone.storyboard in Resources */,
 				AFADA2251877D20D00FADA22 /* BlueSelected.png in Resources */,
+				BFA761401978EBFE00AF6723 /* converterLeftToRight@2x.png in Resources */,
 				BF0D4BD119293E5500AACB5A /* BlockClear.png in Resources */,
 				BF98086D196E664E00BAF9ED /* transporterInputTopPurple@2x.png in Resources */,
 				AFADA22C1877D20D00FADA22 /* Green.png in Resources */,
@@ -874,6 +885,7 @@
 				BF90796D194D6E42000E6E58 /* 3stars@2x.png in Resources */,
 				BF90799519560FE3000E6E58 /* connectorInnerOrange@2x.png in Resources */,
 				BF90799719560FE3000E6E58 /* connectorInnerRed@2x.png in Resources */,
+				BFA761411978EBFE00AF6723 /* converterTopToDown@2x.png in Resources */,
 				BF980868196E664E00BAF9ED /* transporterInputLeftYellow@2x.png in Resources */,
 				AFADA22A1877D20D00FADA22 /* FilledCircleRed.png in Resources */,
 				BF980875196E664E00BAF9ED /* transporterOutputDownPurple@2x.png in Resources */,

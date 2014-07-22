@@ -20,9 +20,9 @@
 -(int)getZonerValueAt:(int)row col:(int)col;
 -(void)addSplitterValueAt:(int)row col:(int)col value:(int)value;
 -(int)getSplitterValueAt:(int)row col:(int)col;
--(void)addConverterValueAt:(int)row col:(int)col value:(int)value;
--(int)getConverterValueAt:(int)row col:(int)col;
 -(void)addTransporterGroupMapping:(int)row col:(int)col group:(int)group;
 -(int)getTransporterGroupMapping:(int)row col:(int)col;
+-(void)setConverterDirectionAt:(int)row col:(int)col isDirectionRight:(int)isDirectionRight;
+-(int)getConverterDirectionAt:(int)row col:(int)col;
 
 @end

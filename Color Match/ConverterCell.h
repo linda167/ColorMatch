@@ -7,9 +7,12 @@
 //
 
 #import "ColorCell.h"
+#import "GridColorButton.h"
 
 @interface ConverterCell : ColorCell
-@property int inputColor;
+@property bool isDirectionRight;
 @property int row;
 @property int col;
+@property int horizontalColorInput;
+@property int verticalColorInput;
 @end

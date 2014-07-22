@@ -23,7 +23,7 @@
     boardCells:(BoardCells*) boardCells;
 -(void)removeExistingBoard;
 -(void)resetCells;
--(void)pressGridButtonWithColor:(UIButton *)button :(int)selectedColor;
+-(void)pressGridButtonWithColor:(UIButton *)button :(int)selectedColor doAnimate:(bool)doAnimate;
 -(NSNumber*)getCurrentColorForButton:(UIButton *)button;
 
 @end

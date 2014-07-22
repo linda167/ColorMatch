@@ -15,7 +15,7 @@
 @property BoardParameters boardParameters;
 @property NSMutableDictionary *zonerValueDictionary;
 @property NSMutableDictionary *splitterValueDictionary;
-@property NSMutableDictionary *converterValueDictionary;
+@property NSMutableDictionary *converterDirectionDictionary;
 
 // Maps teleporter location to teleporter group
 @property NSMutableDictionary *teleporterGroupDictionary;
@@ -31,7 +31,6 @@
         self.boardParameters = boardParameters;
         self.zonerValueDictionary = [[NSMutableDictionary alloc] init];
         self.splitterValueDictionary = [[NSMutableDictionary alloc] init];
-        self.converterValueDictionary = [[NSMutableDictionary alloc] init];
         self.teleporterGroupDictionary = [[NSMutableDictionary alloc] init];
         
         [self initCells];
@@ -84,19 +83,6 @@
     return number.intValue;
 }
 
--(void)addConverterValueAt:(int)row col:(int)col value:(int)value
-{
-    NSString* key = [NSString stringWithFormat:@"%d_%d", row, col];
-    [self.converterValueDictionary setObject:[NSNumber numberWithInt:value] forKey:key];
-}
-
--(int)getConverterValueAt:(int)row col:(int)col
-{
-    NSString* key = [NSString stringWithFormat:@"%d_%d", row, col];
-    NSNumber* number = [self.converterValueDictionary objectForKey:(key)];
-    return number.intValue;
-}
-
 -(void)addTransporterGroupMapping:(int)row col:(int)col group:(int)group
 {
     NSString* key = [NSString stringWithFormat:@"%d_%d", row, col];
@@ -108,6 +94,19 @@
     NSString* key = [NSString stringWithFormat:@"%d_%d", row, col];
     NSNumber* group = [self.teleporterGroupDictionary objectForKey:(key)];
     return group.intValue;
+}
+
+-(void)setConverterDirectionAt:(int)row col:(int)col isDirectionRight:(int)isDirectionRight
+{
+    NSString* key = [NSString stringWithFormat:@"%d_%d", row, col];
+    [self.converterDirectionDictionary setObject:[NSNumber numberWithInt:isDirectionRight] forKey:key];
+}
+
+-(int)getConverterDirectionAt:(int)row col:(int)col
+{
+    NSString* key = [NSString stringWithFormat:@"%d_%d", row, col];
+    NSNumber* number = [self.converterDirectionDictionary objectForKey:(key)];
+    return number.intValue;
 }
 
 - (void)generateRandomCellTypes
