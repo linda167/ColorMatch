@@ -24,5 +24,7 @@
 -(int)getTransporterGroupMapping:(int)row col:(int)col;
 -(void)setConverterDirectionAt:(int)row col:(int)col isDirectionRight:(int)isDirectionRight;
 -(int)getConverterDirectionAt:(int)row col:(int)col;
+-(void)setConverterInitialDirectionAt:(int)row col:(int)col isDirectionRight:(int)isDirectionRight;
+-(int)getConverterInitialDirectionAt:(int)row col:(int)col;
 
 @end

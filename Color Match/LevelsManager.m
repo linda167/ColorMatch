@@ -1225,7 +1225,8 @@
              [NSArray arrayWithObjects:@"0", @"0", @"0", nil],
              nil];
             
-            [boardCells setConverterDirectionAt:1 col:1 isDirectionRight:1];
+            [boardCells setConverterDirectionAt:1 col:1 isDirectionRight:0];
+            [boardCells setConverterInitialDirectionAt:1 col:1 isDirectionRight:1];
         }
         else if (worldId == 7 && levelId == 2)
         {
@@ -1236,7 +1237,8 @@
              [NSArray arrayWithObjects:@"0", @"0", @"0", nil],
              nil];
             
-            [boardCells setConverterDirectionAt:1 col:1 isDirectionRight:0];
+            [boardCells setConverterDirectionAt:1 col:1 isDirectionRight:1];
+            [boardCells setConverterInitialDirectionAt:1 col:1 isDirectionRight:0];
         }
         else if (worldId == 7 && levelId == 3)
         {
@@ -1246,6 +1248,9 @@
              [NSArray arrayWithObjects:@"0", @"7", @"0", nil],
              [NSArray arrayWithObjects:@"0", @"0", @"0", nil],
              nil];
+            
+            [boardCells setConverterDirectionAt:1 col:1 isDirectionRight:0];
+            [boardCells setConverterInitialDirectionAt:1 col:1 isDirectionRight:1];
         }
         else if (worldId == 7 && levelId == 4)
         {
@@ -1255,6 +1260,9 @@
              [NSArray arrayWithObjects:@"0", @"7", @"0", nil],
              [NSArray arrayWithObjects:@"0", @"0", @"0", nil],
              nil];
+            
+            [boardCells setConverterDirectionAt:1 col:1 isDirectionRight:1];
+            [boardCells setConverterInitialDirectionAt:1 col:1 isDirectionRight:0];
         }
         else if (worldId == 7 && levelId == 5)
         {

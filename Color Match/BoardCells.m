@@ -16,6 +16,7 @@
 @property NSMutableDictionary *zonerValueDictionary;
 @property NSMutableDictionary *splitterValueDictionary;
 @property NSMutableDictionary *converterDirectionDictionary;
+@property NSMutableDictionary *converterInitialDirectionDictionary;
 
 // Maps teleporter location to teleporter group
 @property NSMutableDictionary *teleporterGroupDictionary;
@@ -32,6 +33,8 @@
         self.zonerValueDictionary = [[NSMutableDictionary alloc] init];
         self.splitterValueDictionary = [[NSMutableDictionary alloc] init];
         self.teleporterGroupDictionary = [[NSMutableDictionary alloc] init];
+        self.converterDirectionDictionary = [[NSMutableDictionary alloc] init];
+        self.converterInitialDirectionDictionary = [[NSMutableDictionary alloc] init];
         
         [self initCells];
     }
@@ -106,6 +109,19 @@
 {
     NSString* key = [NSString stringWithFormat:@"%d_%d", row, col];
     NSNumber* number = [self.converterDirectionDictionary objectForKey:(key)];
+    return number.intValue;
+}
+
+-(void)setConverterInitialDirectionAt:(int)row col:(int)col isDirectionRight:(int)isDirectionRight
+{
+    NSString* key = [NSString stringWithFormat:@"%d_%d", row, col];
+    [self.converterInitialDirectionDictionary setObject:[NSNumber numberWithInt:isDirectionRight] forKey:key];
+}
+
+-(int)getConverterInitialDirectionAt:(int)row col:(int)col
+{
+    NSString* key = [NSString stringWithFormat:@"%d_%d", row, col];
+    NSNumber* number = [self.converterInitialDirectionDictionary objectForKey:(key)];
     return number.intValue;
 }
 

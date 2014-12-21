@@ -93,8 +93,8 @@
             NSNumber *cellType = [boardCellTypeRow objectAtIndex:j];
             
             ColorCell *colorCell = [self getColorCellForType:cellType.intValue xOffset:xOffset yOffset:yOffset size:self.boardParameters.colorCellSize row:i col:j boardCells:self.boardCells];
-            [row addObject:colorCell];
             
+            [row addObject:colorCell];
             xOffset += cellSizePlusSpace;
         }
         
@@ -728,8 +728,14 @@
         case Splitter:
             return [UIImage imageNamed:@"splitterWhite@2x.png"];
         case Converter:
-            ((ConverterCell*)colorCell).isDirectionRight = 1;
-            return [UIImage imageNamed:@"converterLeftToRight@2x.png"];
+            if (((ConverterCell*)colorCell).isDirectionRight == 1)
+            {
+                return [UIImage imageNamed:@"converterLeftToRight@2x.png"];
+            }
+            else
+            {
+                return [UIImage imageNamed:@"converterTopToDown@2x.png"];
+            }
         case TransporterInputLeft:
         case TransporterInputTop:
         case TransporterOutputDown:
@@ -977,10 +983,12 @@
     }
     else if (cellType == Converter)
     {
+        ConverterCell* converterCell = (ConverterCell*)colorCell;
+        converterCell.isDirectionRight = [self.boardCells getConverterInitialDirectionAt:converterCell.row col:converterCell.col] == 1;
         ConverterCellButton* converterButton = [[ConverterCellButton alloc] initWithFrame:CGRectMake(xOffset, yOffset, size, size)];
         [converterButton setImage:[self GetImageForCellType:colorCell] forState:UIControlStateNormal];
-        converterButton.converterCell = (ConverterCell*)colorCell;
-        [self.allConverterCells addObject:colorCell];
+        converterButton.converterCell = converterCell;
+        [self.allConverterCells addObject:converterCell];
         
         [converterButton addTarget:self action:@selector(converterButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         

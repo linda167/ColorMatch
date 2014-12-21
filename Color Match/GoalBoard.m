@@ -64,6 +64,10 @@
             {
                 ((SplitterCell*)colorCell).inputColor = [self.boardCells getSplitterValueAt:i col:j];
             }
+            else if (cellType.intValue == Converter)
+            {
+                ((ConverterCell*)colorCell).isDirectionRight = [self.boardCells getConverterDirectionAt:i col:j] == 1;
+            }
             
             [row addObject:colorCell];
             xOffset += cellSizePlusSpace;

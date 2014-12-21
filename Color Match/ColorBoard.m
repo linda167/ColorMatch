@@ -345,7 +345,7 @@
     }
     
     UIView* cellBlock = [self getUIViewForCell:cellType xOffset:xOffset yOffset:yOffset size:size colorCell:colorCell];
-    colorCell.image = cellBlock;
+    colorCell.image = (UIImageView*)cellBlock;
     
     // Add cell image to view
     [self.containerView addSubview:cellBlock];
