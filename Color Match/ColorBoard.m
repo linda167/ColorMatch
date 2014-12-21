@@ -422,23 +422,6 @@
     {
         [self applySpecialCellSplitter:colorCell isAdd:isAdd cellsAffected:cellsAffected];
     }
-    else if (colorCell.cellType == Converter)
-    {
-        [self applySpecialCellConverter:colorCell isAdd:isAdd cellsAffected:cellsAffected];
-    }
-}
-
--(void)applySpecialCellConverter:(ColorCell*)colorCell isAdd:(bool)isAdd cellsAffected:(NSMutableArray*)cellsAffected
-{
-    ConverterCell *converterCell = (ConverterCell*)colorCell;
-    int row = converterCell.row;
-    int col = converterCell.col;
-    
-    /* TODO: lindach
-    // Apply color in both directions
-    [self applyColor:row currentCol:col isHorizontal:true color:converterCell.inputColor isAdd:isAdd cellsAffected:cellsAffected];
-    [self applyColor:row currentCol:col isHorizontal:false color:converterCell.inputColor isAdd:isAdd cellsAffected:cellsAffected];
-     */
 }
 
 -(void)applySpecialCellSplitter:(ColorCell*)colorCell isAdd:(bool)isAdd cellsAffected:(NSMutableArray*)cellsAffected

@@ -64,10 +64,6 @@
             {
                 ((SplitterCell*)colorCell).inputColor = [self.boardCells getSplitterValueAt:i col:j];
             }
-            else if (cellType.intValue == Converter)
-            {
-                // TODO: lindach
-            }
             
             [row addObject:colorCell];
             xOffset += cellSizePlusSpace;

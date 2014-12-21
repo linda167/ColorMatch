@@ -157,10 +157,10 @@
 
 - (void)addTransporterMechanic:(int)mechanicCount
 {
-    // TODO: lindach: Should not output down when only cell below is an OutputRight
-    // TODO: lindach: Hide input grid button when there's an output directly next to it
-    // TODO: lindach: Need to prevent infinite loop (input/output) circles
-    // TODO: lindach: Change this so that mechanics are added in order.
+    // TODO: future: Should not output down when only cell below is an OutputRight
+    // TODO: future: Hide input grid button when there's an output directly next to it
+    // TODO: future: Need to prevent infinite loop (input/output) circles
+    // TODO: future: Change this so that mechanics are added in order.
     
     // Get number of cells to generate
     int upperBound = self.boardParameters.transporterMechanicUpperBound;

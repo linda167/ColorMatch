@@ -168,26 +168,6 @@
     }
 }
 
--(LineInfo*)DrawHorizontalConnectingLine:(GridColorButton*)gridColorbutton index:(int)index
-{
-    UIView *leftConnection = gridColorbutton.button;
-    
-    int leftY = leftConnection.frame.origin.y + leftConnection.frame.size.height / 2 + 0.5;
-    int leftAdjustment = -1 * (self.boardParameters.emptyPaddingInGridButton);   // Accounts for extra spacing in left button
-    int leftX = leftConnection.frame.origin.x + leftConnection.frame.size.width + leftAdjustment;
-    
-    // Draw the line
-    LineInfo *lineInfo = [[LineInfo alloc] init];
-    lineInfo.lineThickness = 3;
-    lineInfo.startX = leftX;
-    lineInfo.startY = leftY;
-    lineInfo.color = [CommonUtils GetGrayColor];
-    [self DrawLineToNextConnectionPoint:index currentCol:-1 currentX:leftX currentY:leftY isHorizontal:true lineInfo:lineInfo];
-    [self.connectorLines addLine:lineInfo isHorizontal:true];
-    
-    return lineInfo;
-}
-
 -(void)DrawLineToNextConnectionPoint:(int)currentRow currentCol:(int)currentCol currentX:(int)currentX currentY:(int)currentY isHorizontal:(BOOL)isHorizontal lineInfo:(LineInfo*)lineInfo
 {
     if (isHorizontal)
@@ -442,24 +422,33 @@
 {
     bool isHorizontal = converterCell.isDirectionRight;
     
-    ColorCell* previousCellWithInputLine;
+    UIView* previousCellWithInputLine;
     if (isHorizontal)
     {
-        previousCellWithInputLine = [self FindClosestCellReceivingLinesToLeft:converterCell.row colStartVal:-1 colEndVal:converterCell.col];
+        previousCellWithInputLine = [self FindClosestCellReceivingLinesToLeft:converterCell.row colStartVal:-1 colEndVal:converterCell.col].image;
+        
+        if (previousCellWithInputLine == NULL)
+        {
+            // If we're on edge, return grid color cell
+            GridColorButton *gridColorButton = [self.leftGridColorButtons objectAtIndex:converterCell.row];
+            previousCellWithInputLine = gridColorButton.button;
+        }
     }
     else
     {
-        previousCellWithInputLine = [self FindClosestCellReceivingLinesOnTop:converterCell.col rowStartVal:-1 rowEndVal:converterCell.row];
+        previousCellWithInputLine = [self FindClosestCellReceivingLinesOnTop:converterCell.col rowStartVal:-1 rowEndVal:converterCell.row].image;
+        
+        if (previousCellWithInputLine == NULL)
+        {
+            // If we're on edge, return grid color cell
+            GridColorButton *gridColorButton = [self.topGridColorButtons objectAtIndex:converterCell.col];
+            previousCellWithInputLine = gridColorButton.button;
+        }
     }
     
-    if (previousCellWithInputLine == NULL)
-    {
-        return;
-    }
-        
     // Draw from center of previous input cell cell
-    int leftY = previousCellWithInputLine.image.frame.origin.y + previousCellWithInputLine.image.frame.size.height / 2 + 0.5;
-    int leftX = previousCellWithInputLine.image.frame.origin.x + previousCellWithInputLine.image.frame.size.width / 2 + 0.5;
+    int leftY = previousCellWithInputLine.frame.origin.y + previousCellWithInputLine.frame.size.height / 2 + 0.5;
+    int leftX = previousCellWithInputLine.frame.origin.x + previousCellWithInputLine.frame.size.width / 2 + 0.5;
     
     // Draw the line
     LineInfo *lineInfo = [[LineInfo alloc] init];
@@ -1026,6 +1015,10 @@
     
     int newColorToApply = isDirectionRight ? converterCell.horizontalColorInput : converterCell.verticalColorInput;
     
+    // Collect views to animate
+    NSMutableArray* viewsToAnimate = [[NSMutableArray alloc] init];
+    [viewsToAnimate addObject:converterButton];
+    
     // Replace previous converter line
     int lineIndex = [self.allConverterCells indexOfObject:converterCell];
     [self DrawSingleConverterLine:converterCell index:lineIndex];
@@ -1035,12 +1028,8 @@
     int oldColorToRemove = isDirectionRight ? converterCell.verticalColorInput : converterCell.horizontalColorInput;
     if (oldColorToRemove != 0)
     {
-        [self applyColor:converterCell.row currentCol:converterCell.col isHorizontal:!isDirectionRight color:oldColorToRemove isAdd:false cellsAffected:NULL];
+        [self applyColor:converterCell.row currentCol:converterCell.col isHorizontal:!isDirectionRight color:oldColorToRemove isAdd:false cellsAffected:viewsToAnimate];
     }
-    
-    // Collect views to animate
-    NSMutableArray* viewsToAnimate = [[NSMutableArray alloc] init];
-    [viewsToAnimate addObject:converterButton];
     
     // Apply color in new direction
     [self applyColor:converterCell.row currentCol:converterCell.col isHorizontal:isDirectionRight color:newColorToApply isAdd:true cellsAffected:viewsToAnimate];

@@ -1291,8 +1291,8 @@
             boardCells.colorCellSections =
             [NSMutableArray arrayWithObjects:
              [NSArray arrayWithObjects:@"0", @"0", @"0", @"0", nil],
-             [NSArray arrayWithObjects:@"7", @"0", @"7", @"0", nil],
-             [NSArray arrayWithObjects:@"0", @"0", @"0", @"0", nil],
+             [NSArray arrayWithObjects:@"7", @"0", @"0", @"0", nil],
+             [NSArray arrayWithObjects:@"0", @"0", @"7", @"0", nil],
              [NSArray arrayWithObjects:@"0", @"0", @"0", @"0", nil],
              nil];
         }
@@ -1324,8 +1324,8 @@
             [NSMutableArray arrayWithObjects:
              [NSArray arrayWithObjects:@"0", @"0", @"0", @"0", @"0", nil],
              [NSArray arrayWithObjects:@"0", @"0", @"7", @"0", @"0", nil],
-             [NSArray arrayWithObjects:@"7", @"0", @"0", @"7", @"0", nil],
-             [NSArray arrayWithObjects:@"0", @"0", @"0", @"0", @"0", nil],
+             [NSArray arrayWithObjects:@"7", @"0", @"0", @"0", @"0", nil],
+             [NSArray arrayWithObjects:@"0", @"0", @"0", @"7", @"0", nil],
              [NSArray arrayWithObjects:@"0", @"0", @"0", @"0", @"0", nil],
              nil];
         }
@@ -1334,10 +1334,10 @@
             boardCells.colorCellSections =
             [NSMutableArray arrayWithObjects:
              [NSArray arrayWithObjects:@"0", @"0", @"0", @"0", @"0", nil],
-             [NSArray arrayWithObjects:@"0", @"7", @"0", @"7", @"0", nil],
-             [NSArray arrayWithObjects:@"0", @"0", @"0", @"0", @"0", nil],
-             [NSArray arrayWithObjects:@"0", @"7", @"0", @"7", @"0", nil],
-             [NSArray arrayWithObjects:@"0", @"0", @"0", @"0", @"0", nil],
+             [NSArray arrayWithObjects:@"0", @"7", @"0", @"0", @"0", nil],
+             [NSArray arrayWithObjects:@"0", @"0", @"0", @"7", @"0", nil],
+             [NSArray arrayWithObjects:@"0", @"0", @"7", @"0", @"0", nil],
+             [NSArray arrayWithObjects:@"7", @"0", @"0", @"0", @"0", nil],
              nil];
         }
         else if (worldId == 7 && levelId == 13)
@@ -1345,8 +1345,8 @@
             boardCells.colorCellSections =
             [NSMutableArray arrayWithObjects:
              [NSArray arrayWithObjects:@"0", @"0", @"0", @"0", @"0", nil],
-             [NSArray arrayWithObjects:@"0", @"7", @"0", @"5", @"0", nil],
-             [NSArray arrayWithObjects:@"0", @"0", @"0", @"0", @"0", nil],
+             [NSArray arrayWithObjects:@"0", @"0", @"0", @"5", @"0", nil],
+             [NSArray arrayWithObjects:@"0", @"7", @"0", @"0", @"0", nil],
              [NSArray arrayWithObjects:@"0", @"0", @"3", @"0", @"4", nil],
              [NSArray arrayWithObjects:@"4", @"0", @"0", @"0", @"0", nil],
              nil];
@@ -1371,10 +1371,10 @@
         {
             boardCells.colorCellSections =
             [NSMutableArray arrayWithObjects:
-             [NSArray arrayWithObjects:@"0", @"0", @"0", @"0", @"0", nil],
-             [NSArray arrayWithObjects:@"0", @"5", @"7", @"0", @"0", nil],
-             [NSArray arrayWithObjects:@"0", @"7", @"0", @"0", @"0", nil],
+             [NSArray arrayWithObjects:@"0", @"0", @"7", @"0", @"0", nil],
+             [NSArray arrayWithObjects:@"0", @"5", @"0", @"0", @"0", nil],
              [NSArray arrayWithObjects:@"0", @"0", @"0", @"3", @"0", nil],
+             [NSArray arrayWithObjects:@"7", @"0", @"0", @"0", @"0", nil],
              [NSArray arrayWithObjects:@"0", @"0", @"0", @"0", @"0", nil],
              nil];
             
@@ -1384,10 +1384,10 @@
         {
             boardCells.colorCellSections =
             [NSMutableArray arrayWithObjects:
-             [NSArray arrayWithObjects:@"4", @"0", @"0", @"0", @"0", nil],
-             [NSArray arrayWithObjects:@"7", @"0", @"1", @"0", @"0", nil],
-             [NSArray arrayWithObjects:@"0", @"0", @"0", @"0", @"4", nil],
-             [NSArray arrayWithObjects:@"0", @"2", @"7", @"0", @"0", nil],
+             [NSArray arrayWithObjects:@"4", @"0", @"0", @"7", @"0", nil],
+             [NSArray arrayWithObjects:@"0", @"0", @"1", @"0", @"0", nil],
+             [NSArray arrayWithObjects:@"7", @"0", @"0", @"0", @"4", nil],
+             [NSArray arrayWithObjects:@"0", @"2", @"0", @"0", @"0", nil],
              [NSArray arrayWithObjects:@"0", @"4", @"0", @"0", @"0", nil],
              nil];
             
