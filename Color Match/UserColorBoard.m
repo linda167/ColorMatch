@@ -728,14 +728,7 @@
         case Splitter:
             return [UIImage imageNamed:@"splitterWhite@2x.png"];
         case Converter:
-            if (((ConverterCell*)colorCell).isDirectionRight == 1)
-            {
-                return [UIImage imageNamed:@"converterLeftToRight@2x.png"];
-            }
-            else
-            {
-                return [UIImage imageNamed:@"converterTopToDown@2x.png"];
-            }
+            return [self getConverterImageForColor:0 directionRight:((ConverterCell*)colorCell).isDirectionRight];
         case TransporterInputLeft:
         case TransporterInputTop:
         case TransporterOutputDown:
@@ -988,6 +981,7 @@
         ConverterCellButton* converterButton = [[ConverterCellButton alloc] initWithFrame:CGRectMake(xOffset, yOffset, size, size)];
         [converterButton setImage:[self GetImageForCellType:colorCell] forState:UIControlStateNormal];
         converterButton.converterCell = converterCell;
+        converterCell.converterButton = converterButton;
         [self.allConverterCells addObject:converterCell];
         
         [converterButton addTarget:self action:@selector(converterButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -1009,18 +1003,6 @@
     isDirectionRight = !isDirectionRight;
     converterCell.isDirectionRight = isDirectionRight;
     
-    UIImage* newConverterImage;
-    if (isDirectionRight)
-    {
-        newConverterImage = [UIImage imageNamed:@"converterLeftToRight@2x.png"];
-    }
-    else
-    {
-        newConverterImage = [UIImage imageNamed:@"converterTopToDown@2x.png"];
-    }
-    
-    [converterButton setImage:newConverterImage forState:UIControlStateNormal];
-    
     int newColorToApply = isDirectionRight ? converterCell.horizontalColorInput : converterCell.verticalColorInput;
     
     // Collect views to animate
@@ -1039,6 +1021,10 @@
         [self applyColor:converterCell.row currentCol:converterCell.col isHorizontal:!isDirectionRight color:oldColorToRemove isAdd:false cellsAffected:viewsToAnimate];
     }
     
+    converterCell.lineColor = newColorToApply;
+    UIImage* newConverterImage = [self getConverterImageForColor:converterCell.lineColor directionRight:isDirectionRight];
+    [converterButton setImage:newConverterImage forState:UIControlStateNormal];
+    
     // Apply color in new direction
     [self applyColor:converterCell.row currentCol:converterCell.col isHorizontal:isDirectionRight color:newColorToApply isAdd:true cellsAffected:viewsToAnimate];
     
@@ -1046,11 +1032,6 @@
     [CommonUtils AnimateViewsAffected:viewsToAnimate];
     
     [self.viewController OnUserActionTaken];
-}
-
--(void)OnApplyColorOnConverterCell
-{
-    // NOOP in base class
 }
 
 - (IBAction)splitterButtonPressed:(id)sender
@@ -1198,6 +1179,12 @@
 
 -(void)OnApplyColorOnConverterCell:(ConverterCell*)converterCell color:(int)color isHorizontal:(BOOL)isHorizontal
 {
+    // Update arrow color on button
+    converterCell.lineColor = color;
+    UIImage* newConverterImage = [self getConverterImageForColor:color directionRight:converterCell.isDirectionRight];
+    
+    [converterCell.converterButton setImage:newConverterImage forState:UIControlStateNormal];
+    
     int lineIndex = [self.allConverterCells indexOfObject:converterCell];
     
     if (isHorizontal == converterCell.isDirectionRight)
@@ -1213,6 +1200,36 @@
     {
         converterCell.verticalColorInput = color;
     }
+}
+
+-(UIImage*)getConverterImageForColor:(int)color directionRight:(int)directionright
+{
+    switch (color)
+    {
+        case 0:
+            return directionright ?
+                [UIImage imageNamed:@"converterLeftToRightWhite@2x.png"] :
+                [UIImage imageNamed:@"converterTopToDownWhite@2x.png"];
+            break;
+        case 1:
+            return directionright ?
+                [UIImage imageNamed:@"converterLeftToRightBlue@2x.png"] :
+                [UIImage imageNamed:@"converterTopToDownBlue@2x.png"];
+            break;
+        case 2:
+            return directionright ?
+                [UIImage imageNamed:@"converterLeftToRightRed@2x.png"] :
+                [UIImage imageNamed:@"converterTopToDownRed@2x.png"];
+            break;
+        case 3:
+            return directionright ?
+                [UIImage imageNamed:@"converterLeftToRightYellow@2x.png"] :
+                [UIImage imageNamed:@"converterTopToDownYellow@2x.png"];
+            break;
+    }
+    
+    // Should not be hit
+    return NULL;
 }
 
 @end
