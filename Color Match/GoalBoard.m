@@ -15,6 +15,7 @@
 #import "SplitterCell.h"
 #import "ConverterCell.h"
 #import "TransporterCell.h"
+#import "ShifterCell.h"
 
 @interface GoalBoard ()
 @end
@@ -350,7 +351,10 @@
         for (int j=0; j<row.count; j++)
         {
             ColorCell *colorCell = [row objectAtIndex:j];
-            if (colorCell.cellType == Zoner || colorCell.cellType == Splitter || colorCell.cellType == Converter)
+            if (colorCell.cellType == Zoner ||
+                colorCell.cellType == Splitter ||
+                colorCell.cellType == Converter ||
+                colorCell.cellType == Shifter)
             {
                 [self applySpecialCell:colorCell isAdd:true cellsAffected:NULL];
             }
@@ -435,6 +439,8 @@
         case TransporterOutputDown:
         case TransporterOutputRight:
             return [self getTransporterImageWithColor:colorCell color:0];
+        case Shifter:
+            return [UIImage imageNamed:@"shifterGoal@2x.png"];
     }
     
     return [super GetImageForCellType:colorCell];
@@ -447,11 +453,13 @@
     switch (colorCell.cellType)
     {
         case Connector:
-        {
             // Initialize to white cell
             specialImage = [CommonUtils GetConnectorInnerImageForColor:0];
             break;
-        }
+        case Shifter:
+            // Initialize to white cell
+            specialImage = [CommonUtils GetShifterInnerImageForColor:0];
+            break;
     }
     
     if (specialImage != NULL)
@@ -466,6 +474,13 @@
         colorCell.specialImage = specialImageView;
         [self.containerView addSubview:specialImageView];
     }
+}
+
+-(ShifterCell*)createShifterCell:(int)cellType row:(int)row col:(int)col boardCells:(BoardCells*)boardCells
+{
+    ShifterCell* shifterCell = [[ShifterCell alloc] init:cellType];
+    shifterCell.outerColor = [boardCells getShifterValueAt:row col:col];
+    return shifterCell;
 }
 
 @end

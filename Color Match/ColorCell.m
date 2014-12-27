@@ -27,7 +27,7 @@
 
 +(bool)doesCellSupportCombineColor:(CellType)cellType
 {
-    return cellType == NormalCell || cellType == Connector;
+    return cellType == NormalCell || cellType == Connector || cellType == Shifter;
 }
 
 -(void)recalculateSpecialCellImage
@@ -35,6 +35,10 @@
     if (self.cellType == Connector)
     {
         [self.specialImage setImage:[CommonUtils GetConnectorInnerImageForColor:self.currentColor]];
+    }
+    else if (self.cellType == Shifter)
+    {
+        [self.specialImage setImage:[CommonUtils GetShifterInnerImageForColor:self.currentColor]];
     }
 }
 

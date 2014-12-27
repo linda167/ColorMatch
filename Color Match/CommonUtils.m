@@ -258,6 +258,40 @@
     }
 }
 
++(UIImage *) GetShifterInnerImageForColor:(int)color
+{
+    switch (color)
+    {
+        case 0:
+            return [UIImage imageNamed:@"shifterInnerWhite@2x.png"];
+            break;
+        case 1:
+            return [UIImage imageNamed:@"shifterInnerBlue@2x.png"];
+            break;
+        case 2:
+            return [UIImage imageNamed:@"shifterInnerRed@2x.png"];
+            break;
+        case 3:
+            return [UIImage imageNamed:@"shifterInnerYellow@2x.png"];
+            break;
+        case 4:
+            return [UIImage imageNamed:@"shifterInnerPurple@2x.png"];
+            break;
+        case 5:
+            return [UIImage imageNamed:@"shifterInnerGreen@2x.png"];
+            break;
+        case 6:
+            return [UIImage imageNamed:@"shifterInnerOrange@2x.png"];
+            break;
+        case 7:
+            return [UIImage imageNamed:@"shifterInnerBrown@2x.png"];
+            break;
+        default:
+            return [UIImage imageNamed:@"BlockWhite.png"];
+            break;
+    }
+}
+
 +(UIImage *) GetConnectorOuterImageForColor:(int)color
 {
     switch (color)

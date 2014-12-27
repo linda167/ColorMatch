@@ -35,5 +35,6 @@
 -(UIImage*)getTransporterImageWithColor:(ColorCell*)colorCell color:(int)color;
 -(void)updateSpecialCellImagesOnApplyColor:(ColorCell*)colorCell color:(int)color isHorizontal:(BOOL)isHorizontal cellsAffected:(NSMutableArray*)cellsAffected;
 -(void)applyColor:(int)currentRow currentCol:(int)currentCol isHorizontal:(BOOL)isHorizontal color:(int)color isAdd:(BOOL)isAdd cellsAffected:(NSMutableArray*)cellsAffected;
+-(int)shiftColor:(int)color backwards:(bool)backwards shiftCount:(int)shiftCount;
 
 @end

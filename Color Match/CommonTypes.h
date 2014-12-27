@@ -65,7 +65,8 @@ typedef NS_ENUM(NSUInteger, CellType)
     TransporterInputLeft = 8,
     TransporterInputTop = 9,
     TransporterOutputRight = 10,
-    TransporterOutputDown = 11
+    TransporterOutputDown = 11,
+    Shifter = 12
 };
 
 

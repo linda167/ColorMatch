@@ -19,6 +19,7 @@
 #import "ConverterCellButton.h"
 #import "TransporterGroup.h"
 #import "TransporterCell.h"
+#import "ShifterCell.h"
 
 @interface UserColorBoard ()
 @property MainGameViewController *viewController;
@@ -27,6 +28,7 @@
 @property NSMutableArray *allConnectorCells;
 @property NSMutableArray *allSplitterCells;
 @property NSMutableArray *allConverterCells;
+@property NSMutableArray *allShifterCells;
 @property int connectorColorInput;
 @end
 
@@ -47,6 +49,7 @@
         self.allConnectorCells = [[NSMutableArray alloc] init];
         self.allSplitterCells = [[NSMutableArray alloc] init];
         self.allConverterCells = [[NSMutableArray alloc] init];
+        self.allShifterCells = [[NSMutableArray alloc] init];
         self.connectorColorInput = 0;
         
         [self createNewBoard];
@@ -59,6 +62,7 @@
 {
     [self initGridColorButtons];
     [self initColorCells];
+    [self applySpecialCells];
     
     // Draw connecting lines
     [self CreateConnectorLinesFrame];
@@ -101,6 +105,23 @@
         [self.colorCellSections addObject:row];
         yOffset += cellSizePlusSpace;
         xOffset = xOffsetInitial;
+    }
+}
+
+- (void)applySpecialCells
+{
+    for (int i=0; i<self.colorCellSections.count; i++)
+    {
+        NSMutableArray *row = [self.colorCellSections objectAtIndex:i];
+        
+        for (int j=0; j<row.count; j++)
+        {
+            ColorCell *colorCell = [row objectAtIndex:j];
+            if (colorCell.cellType == Shifter)
+            {
+                [self applySpecialCell:colorCell isAdd:true cellsAffected:NULL];
+            }
+        }
     }
 }
 
@@ -692,6 +713,7 @@
     [self.allConnectorCells removeAllObjects];
     [self.allSplitterCells removeAllObjects];
     [self.allConverterCells removeAllObjects];
+    [self.allShifterCells removeAllObjects];
     self.connectorColorInput = 0;
     
     [super resetBoardState];
@@ -734,6 +756,8 @@
         case TransporterOutputDown:
         case TransporterOutputRight:
             return [self getTransporterImageWithColor:colorCell color:0];
+        case Shifter:
+            return [self getShifterImage:(ShifterCell*)colorCell];
     }
     
     return [super GetImageForCellType:colorCell];
@@ -769,6 +793,14 @@
         case Connector:
             // Initialize to white cell
             specialImage = [CommonUtils GetConnectorInnerImageForColor:0];
+            size = colorCell.image.frame.size.width;
+            x = colorCell.image.frame.origin.x;
+            y = colorCell.image.frame.origin.y;
+            break;
+            
+        case Shifter:
+            // Initialize to white cell
+            specialImage = [CommonUtils GetShifterInnerImageForColor:0];
             size = colorCell.image.frame.size.width;
             x = colorCell.image.frame.origin.x;
             y = colorCell.image.frame.origin.y;
@@ -988,10 +1020,46 @@
         
         return converterButton;
     }
+    else if (cellType == Shifter)
+    {
+        UIButton* shifterButton = [[UIButton alloc] initWithFrame:CGRectMake(xOffset, yOffset, size, size)];
+        [shifterButton setImage:[self GetImageForCellType:colorCell] forState:UIControlStateNormal];
+        
+        [shifterButton addTarget:self action:@selector(shifterCellPressed:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [self.allShifterCells addObject:colorCell];
+        
+        return shifterButton;
+    }
     else
     {
         return [super getUIViewForCell:cellType xOffset:xOffset yOffset:yOffset size:size colorCell:colorCell];
     }
+}
+
+- (IBAction)shifterCellPressed:(id)sender
+{
+    // Collect views to animate
+    NSMutableArray* viewsToAnimate = [[NSMutableArray alloc] init];
+    for (ShifterCell* colorCell in self.allShifterCells)
+    {
+        // Remove existing outer color
+        [self applySpecialCell:colorCell isAdd:false cellsAffected:NULL];
+        
+        // Set and apply new outer color
+        colorCell.outerColor = [self shiftColor:colorCell.outerColor backwards:false shiftCount:1];
+        [self applySpecialCell:colorCell isAdd:true cellsAffected:viewsToAnimate];
+        
+        // Update the outer color
+        UIImage* newConnectorImage = [self getShifterImage:colorCell];
+        UIButton* connectorButton = (UIButton*)colorCell.image;
+        [connectorButton setImage:newConnectorImage forState:UIControlStateNormal];
+    }
+    
+    // Do animation
+    [CommonUtils AnimateViewsAffected:viewsToAnimate];
+    
+    [self.viewController OnUserActionTaken];
 }
 
 - (IBAction)converterButtonPressed:(id)sender
@@ -1179,17 +1247,16 @@
 
 -(void)OnApplyColorOnConverterCell:(ConverterCell*)converterCell color:(int)color isHorizontal:(BOOL)isHorizontal
 {
-    // Update arrow color on button
-    converterCell.lineColor = color;
-    UIImage* newConverterImage = [self getConverterImageForColor:color directionRight:converterCell.isDirectionRight];
-    
-    [converterCell.converterButton setImage:newConverterImage forState:UIControlStateNormal];
-    
     int lineIndex = [self.allConverterCells indexOfObject:converterCell];
     
     if (isHorizontal == converterCell.isDirectionRight)
     {
         [self.connectorLines updateConverterLine:lineIndex color:[CommonUtils GetUIColorForColor:color]];
+        converterCell.lineColor = color;
+        
+        UIImage* newConverterImage = [self getConverterImageForColor:color directionRight:converterCell.isDirectionRight];
+        
+        [converterCell.converterButton setImage:newConverterImage forState:UIControlStateNormal];
     }
     
     if (isHorizontal)
@@ -1230,6 +1297,33 @@
     
     // Should not be hit
     return NULL;
+}
+
+-(UIImage*)getShifterImage:(ShifterCell*)shifterCell
+{
+    switch (shifterCell.outerColor)
+    {
+        case 1:
+            return [UIImage imageNamed:@"shifterOuterBlue@2x.png"];
+            break;
+        case 2:
+            return [UIImage imageNamed:@"shifterOuterRed@2x.png"];
+            break;
+        case 3:
+            return [UIImage imageNamed:@"shifterOuterYellow@2x.png"];
+            break;
+    }
+    
+    // Should not be hit
+    return NULL;
+}
+
+-(ShifterCell*)createShifterCell:(int)cellType row:(int)row col:(int)col boardCells:(BoardCells*)boardCells
+{
+    ShifterCell* shifterCell = [[ShifterCell alloc] init:cellType];
+    int finalColor = [boardCells getShifterValueAt:row col:col];
+    shifterCell.outerColor = [self shiftColor:finalColor backwards:true shiftCount:boardCells.shiftCount];
+    return shifterCell;
 }
 
 @end

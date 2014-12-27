@@ -25,5 +25,6 @@
 +(bool) IsTransporterOutput:(CellType)cellType;
 +(bool) IsTransporterInput:(CellType)cellType;
 +(bool) IsTransporterCell:(CellType)cellType;
++(UIImage *) GetShifterInnerImageForColor:(int)color;
 
 @end

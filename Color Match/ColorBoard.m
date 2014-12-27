@@ -15,8 +15,14 @@
 #import "ConverterCell.h"
 #import "TransporterCell.h"
 #import "TransporterGroup.h"
+#import "ShifterCell.h"
 #import "UserColorBoard.h"
 #import "GridColorButton.h"
+
+@interface ColorBoard ()
+@property int shifterCellCount;
+@property int shifterCellFirstColor;
+@end
 
 @implementation ColorBoard
 
@@ -340,6 +346,9 @@
         case TransporterOutputRight:
             colorCell = [self createTransporterCell:cellType row:row col:col boardCells:boardCells isInput:false];
             break;
+        case Shifter:
+            colorCell = [self createShifterCell:cellType row:row col:col boardCells:boardCells];
+            break;
         default:
             colorCell = [[ColorCell alloc] init:cellType];
     }
@@ -397,6 +406,33 @@
     return transporterGroup;
 }
 
+-(ShifterCell*)createShifterCell:(int)cellType row:(int)row col:(int)col boardCells:(BoardCells*)boardCells
+{
+    // NOOP in base class
+    return NULL;
+}
+
+-(int)shiftColor:(int)color backwards:(bool)backwards shiftCount:(int)shiftCount
+{
+    for (int i = 0; i < shiftCount; i++)
+    {
+        switch (color)
+        {
+            case 1:
+                color = backwards ? 3 : 2;
+                break;
+            case 2:
+                color = backwards ? 1 : 3;
+                break;
+            case 3:
+                color = backwards ? 2 : 1;
+                break;
+        }
+    }
+    
+    return color;
+}
+
 -(UIImage*)GetImageForCellType:(ColorCell*)colorCell
 {
     // Default image
@@ -421,6 +457,10 @@
     else if (colorCell.cellType == Splitter)
     {
         [self applySpecialCellSplitter:colorCell isAdd:isAdd cellsAffected:cellsAffected];
+    }
+    else if (colorCell.cellType == Shifter)
+    {
+        [self applySpecialCellShifter:colorCell isAdd:isAdd cellsAffected:cellsAffected];
     }
 }
 
@@ -475,6 +515,22 @@
         if (connectorCell.inputColor != 0)
         {
             [connectorCell removeInputColor:[NSNumber numberWithInt:connectorCell.inputColor] cellsAffected:cellsAffected];
+        }
+    }
+}
+
+-(void)applySpecialCellShifter:(ColorCell*)colorCell isAdd:(bool)isAdd cellsAffected:(NSMutableArray*)cellsAffected
+{
+    ShifterCell *shifterCell = (ShifterCell*)colorCell;
+    if (isAdd)
+    {
+        [shifterCell addInputColor:[NSNumber numberWithInt:shifterCell.outerColor] cellsAffected:cellsAffected];
+    }
+    else
+    {
+        if (shifterCell.outerColor != 0)
+        {
+            [shifterCell removeInputColor:[NSNumber numberWithInt:shifterCell.outerColor] cellsAffected:cellsAffected];
         }
     }
 }

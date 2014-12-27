@@ -12,6 +12,7 @@
 
 @property NSMutableArray *colorCellSections;
 @property int connectorCellInput;
+@property int shiftCount;
 
 -(id)initWithParameters: (BoardParameters)boardParameters;
 -(void)logBoardCellState;
@@ -26,5 +27,7 @@
 -(int)getConverterDirectionAt:(int)row col:(int)col;
 -(void)setConverterInitialDirectionAt:(int)row col:(int)col isDirectionRight:(int)isDirectionRight;
 -(int)getConverterInitialDirectionAt:(int)row col:(int)col;
+-(void)addShifterValueAt:(int)row col:(int)col value:(int)value;
+-(int)getShifterValueAt:(int)row col:(int)col;
 
 @end

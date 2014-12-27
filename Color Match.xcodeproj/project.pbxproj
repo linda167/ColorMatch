@@ -68,6 +68,19 @@
 		BF85C8301A47BABE00A494B6 /* converterTopToDownYellow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF85C82A1A47BABE00A494B6 /* converterTopToDownYellow@2x.png */; };
 		BF85C8331A47BFD500A494B6 /* converterLeftToRightWhite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF85C8311A47BFD500A494B6 /* converterLeftToRightWhite@2x.png */; };
 		BF85C8341A47BFD500A494B6 /* converterTopToDownWhite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF85C8321A47BFD500A494B6 /* converterTopToDownWhite@2x.png */; };
+		BF85C8391A49484500A494B6 /* ShifterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BF85C8381A49484500A494B6 /* ShifterCell.m */; };
+		BF85C83D1A4E9C5300A494B6 /* shifterOuterBlue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF85C83A1A4E9C5300A494B6 /* shifterOuterBlue@2x.png */; };
+		BF85C83E1A4E9C5300A494B6 /* shifterOuterRed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF85C83B1A4E9C5300A494B6 /* shifterOuterRed@2x.png */; };
+		BF85C83F1A4E9C5300A494B6 /* shifterOuterYellow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF85C83C1A4E9C5300A494B6 /* shifterOuterYellow@2x.png */; };
+		BF85C8421A4F5A0C00A494B6 /* shifterGoal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF85C8401A4F5A0C00A494B6 /* shifterGoal@2x.png */; };
+		BF85C8431A4F5A0C00A494B6 /* shifterInnerWhite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF85C8411A4F5A0C00A494B6 /* shifterInnerWhite@2x.png */; };
+		BF85C84B1A4F5B4A00A494B6 /* shifterInnerBlue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF85C8441A4F5B4A00A494B6 /* shifterInnerBlue@2x.png */; };
+		BF85C84C1A4F5B4A00A494B6 /* shifterInnerBrown@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF85C8451A4F5B4A00A494B6 /* shifterInnerBrown@2x.png */; };
+		BF85C84D1A4F5B4A00A494B6 /* shifterInnerGreen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF85C8461A4F5B4A00A494B6 /* shifterInnerGreen@2x.png */; };
+		BF85C84E1A4F5B4A00A494B6 /* shifterInnerOrange@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF85C8471A4F5B4A00A494B6 /* shifterInnerOrange@2x.png */; };
+		BF85C84F1A4F5B4A00A494B6 /* shifterInnerPurple@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF85C8481A4F5B4A00A494B6 /* shifterInnerPurple@2x.png */; };
+		BF85C8501A4F5B4A00A494B6 /* shifterInnerRed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF85C8491A4F5B4A00A494B6 /* shifterInnerRed@2x.png */; };
+		BF85C8511A4F5B4A00A494B6 /* shifterInnerYellow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF85C84A1A4F5B4A00A494B6 /* shifterInnerYellow@2x.png */; };
 		BF874D11192B28C1001701A2 /* ReflectorLtDGoal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF874D0D192B28C1001701A2 /* ReflectorLtDGoal@2x.png */; };
 		BF874D15192B2CBB001701A2 /* ReflectorTtRGoal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF874D14192B2CBB001701A2 /* ReflectorTtRGoal@2x.png */; };
 		BF90795C194CE618000E6E58 /* LevelsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BF90795B194CE618000E6E58 /* LevelsManager.m */; };
@@ -281,6 +294,20 @@
 		BF85C82A1A47BABE00A494B6 /* converterTopToDownYellow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "converterTopToDownYellow@2x.png"; sourceTree = "<group>"; };
 		BF85C8311A47BFD500A494B6 /* converterLeftToRightWhite@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "converterLeftToRightWhite@2x.png"; sourceTree = "<group>"; };
 		BF85C8321A47BFD500A494B6 /* converterTopToDownWhite@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "converterTopToDownWhite@2x.png"; sourceTree = "<group>"; };
+		BF85C8371A49484500A494B6 /* ShifterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShifterCell.h; sourceTree = "<group>"; };
+		BF85C8381A49484500A494B6 /* ShifterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShifterCell.m; sourceTree = "<group>"; };
+		BF85C83A1A4E9C5300A494B6 /* shifterOuterBlue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shifterOuterBlue@2x.png"; sourceTree = "<group>"; };
+		BF85C83B1A4E9C5300A494B6 /* shifterOuterRed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shifterOuterRed@2x.png"; sourceTree = "<group>"; };
+		BF85C83C1A4E9C5300A494B6 /* shifterOuterYellow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shifterOuterYellow@2x.png"; sourceTree = "<group>"; };
+		BF85C8401A4F5A0C00A494B6 /* shifterGoal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shifterGoal@2x.png"; sourceTree = "<group>"; };
+		BF85C8411A4F5A0C00A494B6 /* shifterInnerWhite@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shifterInnerWhite@2x.png"; sourceTree = "<group>"; };
+		BF85C8441A4F5B4A00A494B6 /* shifterInnerBlue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shifterInnerBlue@2x.png"; sourceTree = "<group>"; };
+		BF85C8451A4F5B4A00A494B6 /* shifterInnerBrown@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shifterInnerBrown@2x.png"; sourceTree = "<group>"; };
+		BF85C8461A4F5B4A00A494B6 /* shifterInnerGreen@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shifterInnerGreen@2x.png"; sourceTree = "<group>"; };
+		BF85C8471A4F5B4A00A494B6 /* shifterInnerOrange@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shifterInnerOrange@2x.png"; sourceTree = "<group>"; };
+		BF85C8481A4F5B4A00A494B6 /* shifterInnerPurple@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shifterInnerPurple@2x.png"; sourceTree = "<group>"; };
+		BF85C8491A4F5B4A00A494B6 /* shifterInnerRed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shifterInnerRed@2x.png"; sourceTree = "<group>"; };
+		BF85C84A1A4F5B4A00A494B6 /* shifterInnerYellow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shifterInnerYellow@2x.png"; sourceTree = "<group>"; };
 		BF874D0D192B28C1001701A2 /* ReflectorLtDGoal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReflectorLtDGoal@2x.png"; sourceTree = "<group>"; };
 		BF874D14192B2CBB001701A2 /* ReflectorTtRGoal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReflectorTtRGoal@2x.png"; sourceTree = "<group>"; };
 		BF90795A194CE618000E6E58 /* LevelsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelsManager.h; sourceTree = "<group>"; };
@@ -520,6 +547,18 @@
 		AF2C225A1874B95000082561 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				BF85C8441A4F5B4A00A494B6 /* shifterInnerBlue@2x.png */,
+				BF85C8451A4F5B4A00A494B6 /* shifterInnerBrown@2x.png */,
+				BF85C8461A4F5B4A00A494B6 /* shifterInnerGreen@2x.png */,
+				BF85C8471A4F5B4A00A494B6 /* shifterInnerOrange@2x.png */,
+				BF85C8481A4F5B4A00A494B6 /* shifterInnerPurple@2x.png */,
+				BF85C8491A4F5B4A00A494B6 /* shifterInnerRed@2x.png */,
+				BF85C84A1A4F5B4A00A494B6 /* shifterInnerYellow@2x.png */,
+				BF85C8401A4F5A0C00A494B6 /* shifterGoal@2x.png */,
+				BF85C8411A4F5A0C00A494B6 /* shifterInnerWhite@2x.png */,
+				BF85C83A1A4E9C5300A494B6 /* shifterOuterBlue@2x.png */,
+				BF85C83B1A4E9C5300A494B6 /* shifterOuterRed@2x.png */,
+				BF85C83C1A4E9C5300A494B6 /* shifterOuterYellow@2x.png */,
 				BF85C8311A47BFD500A494B6 /* converterLeftToRightWhite@2x.png */,
 				BF85C8321A47BFD500A494B6 /* converterTopToDownWhite@2x.png */,
 				BF85C8251A47BABE00A494B6 /* converterLeftToRightBlue@2x.png */,
@@ -725,6 +764,8 @@
 				BF9807AA196721BA00BAF9ED /* TransporterGroup.m */,
 				BF9807AC1967230600BAF9ED /* TransporterCell.h */,
 				BF9807AD1967230600BAF9ED /* TransporterCell.m */,
+				BF85C8371A49484500A494B6 /* ShifterCell.h */,
+				BF85C8381A49484500A494B6 /* ShifterCell.m */,
 			);
 			name = "Game Core";
 			sourceTree = "<group>";
@@ -857,6 +898,7 @@
 				AFADA22E1877D20D00FADA22 /* RedSelected.png in Resources */,
 				BF98088E1974F13D00BAF9ED /* ReflectorArrowTtRGreen@2x.png in Resources */,
 				AFADA2311877D20D00FADA22 /* Yellow.png in Resources */,
+				BF85C84E1A4F5B4A00A494B6 /* shifterInnerOrange@2x.png in Resources */,
 				AFADA2301877D20D00FADA22 /* WhiteSelected.png in Resources */,
 				BF980879196E664E00BAF9ED /* transporterOutputRightBlue@2x.png in Resources */,
 				BF85C8341A47BFD500A494B6 /* converterTopToDownWhite@2x.png in Resources */,
@@ -866,7 +908,9 @@
 				BF9079C9195E1819000E6E58 /* WhiteSelected@2x.png in Resources */,
 				AFADA2241877D20D00FADA22 /* Blue.png in Resources */,
 				BF980867196E664E00BAF9ED /* transporterInputLeftWhite@2x.png in Resources */,
+				BF85C83F1A4E9C5300A494B6 /* shifterOuterYellow@2x.png in Resources */,
 				BF9079CD195FD660000E6E58 /* diverterGoal@2x.png in Resources */,
+				BF85C8421A4F5A0C00A494B6 /* shifterGoal@2x.png in Resources */,
 				BFA3A2B5192D899D00C1BB7D /* ReflectorArrowTtR@2x.png in Resources */,
 				BFA3A2CB193AF4D900C1BB7D /* completeLevel@2x.png in Resources */,
 				BF980880196E664E00BAF9ED /* transporterOutputRightYellow@2x.png in Resources */,
@@ -884,6 +928,8 @@
 				BF98086D196E664E00BAF9ED /* transporterInputTopPurple@2x.png in Resources */,
 				AFADA22C1877D20D00FADA22 /* Green.png in Resources */,
 				BFA3A2BC1931401700C1BB7D /* ReflectorArrowLtDBlue@2x.png in Resources */,
+				BF85C84B1A4F5B4A00A494B6 /* shifterInnerBlue@2x.png in Resources */,
+				BF85C8511A4F5B4A00A494B6 /* shifterInnerYellow@2x.png in Resources */,
 				BF90799919560FE3000E6E58 /* connectorInnerYellow@2x.png in Resources */,
 				BF85C82F1A47BABE00A494B6 /* converterTopToDownRed@2x.png in Resources */,
 				BF90797A1953DF94000E6E58 /* zonerYellow@2x.png in Resources */,
@@ -916,9 +962,12 @@
 				AFADA2211877D20D00FADA22 /* BlockRed.png in Resources */,
 				BF90799B19560FE3000E6E58 /* connectorOuterRed@2x.png in Resources */,
 				BF980863196E664E00BAF9ED /* transporterInputLeftGreen@2x.png in Resources */,
+				BF85C84F1A4F5B4A00A494B6 /* shifterInnerPurple@2x.png in Resources */,
 				BF90796B194D6E42000E6E58 /* 1stars@2x.png in Resources */,
+				BF85C84C1A4F5B4A00A494B6 /* shifterInnerBrown@2x.png in Resources */,
 				BF98086E196E664E00BAF9ED /* transporterInputTopRed@2x.png in Resources */,
 				BF9079E619664916000E6E58 /* converterBlue@2x.png in Resources */,
+				BF85C83E1A4E9C5300A494B6 /* shifterOuterRed@2x.png in Resources */,
 				BF85C82E1A47BABE00A494B6 /* converterTopToDownBlue@2x.png in Resources */,
 				AFB75A9F18834ECD00CAB736 /* AppIcon120.png in Resources */,
 				AF2C222D1874B8B700082561 /* InfoPlist.strings in Resources */,
@@ -928,8 +977,10 @@
 				BF980861196E664E00BAF9ED /* transporterInputLeftBlue@2x.png in Resources */,
 				BF874D15192B2CBB001701A2 /* ReflectorTtRGoal@2x.png in Resources */,
 				BF9808861974EA4C00BAF9ED /* ReflectorArrowLtDGreen@2x.png in Resources */,
+				BF85C8501A4F5B4A00A494B6 /* shifterInnerRed@2x.png in Resources */,
 				BF980872196E664E00BAF9ED /* transporterOutputDownBrown@2x.png in Resources */,
 				BF98086C196E664E00BAF9ED /* transporterInputTopOrange@2x.png in Resources */,
+				BF85C8431A4F5A0C00A494B6 /* shifterInnerWhite@2x.png in Resources */,
 				BF907965194D6284000E6E58 /* rainbow@2x.png in Resources */,
 				BFA3A2BD1931401700C1BB7D /* ReflectorArrowLtDRed@2x.png in Resources */,
 				BF98086F196E664E00BAF9ED /* transporterInputTopWhite@2x.png in Resources */,
@@ -938,6 +989,7 @@
 				BF9079B9195E1040000E6E58 /* FilledCircleBlue@2x.png in Resources */,
 				BF980865196E664E00BAF9ED /* transporterInputLeftPurple@2x.png in Resources */,
 				BF85C82B1A47BABE00A494B6 /* converterLeftToRightBlue@2x.png in Resources */,
+				BF85C84D1A4F5B4A00A494B6 /* shifterInnerGreen@2x.png in Resources */,
 				BF9079B8195E1040000E6E58 /* EmptyCircle@2x.png in Resources */,
 				AFB75A9B188339C900CAB736 /* GameLogo.png in Resources */,
 				BF9079AD195E073E000E6E58 /* BlockBrown@2x.png in Resources */,
@@ -962,6 +1014,7 @@
 				AFB8969318822F2F003FAEF4 /* ButtonBar2.png in Resources */,
 				BF9079B2195E073E000E6E58 /* BlockWhite@2x.png in Resources */,
 				BFA3A2C01931401700C1BB7D /* ReflectorArrowTtRRed@2x.png in Resources */,
+				BF85C83D1A4E9C5300A494B6 /* shifterOuterBlue@2x.png in Resources */,
 				BF9079B3195E073E000E6E58 /* BlockYellow@2x.png in Resources */,
 				BF980869196E664E00BAF9ED /* transporterInputTopBlue@2x.png in Resources */,
 				BF9079B0195E073E000E6E58 /* BlockPurple@2x.png in Resources */,
@@ -1005,6 +1058,7 @@
 				BF0D4BCC1921DEE700AACB5A /* ConnectorLines.m in Sources */,
 				BF9079E11964F94C000E6E58 /* ConverterCellButton.m in Sources */,
 				BFA3A2CF1944386400C1BB7D /* LevelSelectButton.m in Sources */,
+				BF85C8391A49484500A494B6 /* ShifterCell.m in Sources */,
 				BF6304391895F231002F3C9E /* ColorCell.m in Sources */,
 				AFADA23518791E4400FADA22 /* GridColorButton.m in Sources */,
 				BF9079D21963AA6A000E6E58 /* SplitterCellButton.m in Sources */,
