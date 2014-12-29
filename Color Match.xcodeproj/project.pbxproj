@@ -31,7 +31,6 @@
 		AFADA2231877D20D00FADA22 /* BlockYellow.png in Resources */ = {isa = PBXBuildFile; fileRef = AFADA20D1877D20D00FADA22 /* BlockYellow.png */; };
 		AFADA2241877D20D00FADA22 /* Blue.png in Resources */ = {isa = PBXBuildFile; fileRef = AFADA20E1877D20D00FADA22 /* Blue.png */; };
 		AFADA2251877D20D00FADA22 /* BlueSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = AFADA20F1877D20D00FADA22 /* BlueSelected.png */; };
-		AFADA2261877D20D00FADA22 /* ButtonBar.png in Resources */ = {isa = PBXBuildFile; fileRef = AFADA2101877D20D00FADA22 /* ButtonBar.png */; };
 		AFADA2271877D20D00FADA22 /* EmptyCircle.png in Resources */ = {isa = PBXBuildFile; fileRef = AFADA2111877D20D00FADA22 /* EmptyCircle.png */; };
 		AFADA2281877D20D00FADA22 /* FilledCircleBlue.png in Resources */ = {isa = PBXBuildFile; fileRef = AFADA2121877D20D00FADA22 /* FilledCircleBlue.png */; };
 		AFADA2291877D20D00FADA22 /* FilledCircleGreen.png in Resources */ = {isa = PBXBuildFile; fileRef = AFADA2131877D20D00FADA22 /* FilledCircleGreen.png */; };
@@ -81,6 +80,8 @@
 		BF85C84F1A4F5B4A00A494B6 /* shifterInnerPurple@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF85C8481A4F5B4A00A494B6 /* shifterInnerPurple@2x.png */; };
 		BF85C8501A4F5B4A00A494B6 /* shifterInnerRed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF85C8491A4F5B4A00A494B6 /* shifterInnerRed@2x.png */; };
 		BF85C8511A4F5B4A00A494B6 /* shifterInnerYellow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF85C84A1A4F5B4A00A494B6 /* shifterInnerYellow@2x.png */; };
+		BF85C8531A50B2D900A494B6 /* ButtonBar3.png in Resources */ = {isa = PBXBuildFile; fileRef = BF85C8521A50B2D900A494B6 /* ButtonBar3.png */; };
+		BF85C8561A50DFF200A494B6 /* WelcomeScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF85C8551A50DFF200A494B6 /* WelcomeScreenViewController.m */; };
 		BF874D11192B28C1001701A2 /* ReflectorLtDGoal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF874D0D192B28C1001701A2 /* ReflectorLtDGoal@2x.png */; };
 		BF874D15192B2CBB001701A2 /* ReflectorTtRGoal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF874D14192B2CBB001701A2 /* ReflectorTtRGoal@2x.png */; };
 		BF90795C194CE618000E6E58 /* LevelsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BF90795B194CE618000E6E58 /* LevelsManager.m */; };
@@ -244,7 +245,6 @@
 		AFADA20D1877D20D00FADA22 /* BlockYellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlockYellow.png; sourceTree = "<group>"; };
 		AFADA20E1877D20D00FADA22 /* Blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Blue.png; sourceTree = "<group>"; };
 		AFADA20F1877D20D00FADA22 /* BlueSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlueSelected.png; sourceTree = "<group>"; };
-		AFADA2101877D20D00FADA22 /* ButtonBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ButtonBar.png; sourceTree = "<group>"; };
 		AFADA2111877D20D00FADA22 /* EmptyCircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = EmptyCircle.png; sourceTree = "<group>"; };
 		AFADA2121877D20D00FADA22 /* FilledCircleBlue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FilledCircleBlue.png; sourceTree = "<group>"; };
 		AFADA2131877D20D00FADA22 /* FilledCircleGreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FilledCircleGreen.png; sourceTree = "<group>"; };
@@ -308,6 +308,9 @@
 		BF85C8481A4F5B4A00A494B6 /* shifterInnerPurple@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shifterInnerPurple@2x.png"; sourceTree = "<group>"; };
 		BF85C8491A4F5B4A00A494B6 /* shifterInnerRed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shifterInnerRed@2x.png"; sourceTree = "<group>"; };
 		BF85C84A1A4F5B4A00A494B6 /* shifterInnerYellow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shifterInnerYellow@2x.png"; sourceTree = "<group>"; };
+		BF85C8521A50B2D900A494B6 /* ButtonBar3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ButtonBar3.png; sourceTree = "<group>"; };
+		BF85C8541A50DFF200A494B6 /* WelcomeScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WelcomeScreenViewController.h; sourceTree = "<group>"; };
+		BF85C8551A50DFF200A494B6 /* WelcomeScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WelcomeScreenViewController.m; sourceTree = "<group>"; };
 		BF874D0D192B28C1001701A2 /* ReflectorLtDGoal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReflectorLtDGoal@2x.png"; sourceTree = "<group>"; };
 		BF874D14192B2CBB001701A2 /* ReflectorTtRGoal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReflectorTtRGoal@2x.png"; sourceTree = "<group>"; };
 		BF90795A194CE618000E6E58 /* LevelsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelsManager.h; sourceTree = "<group>"; };
@@ -547,6 +550,7 @@
 		AF2C225A1874B95000082561 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				BF85C8521A50B2D900A494B6 /* ButtonBar3.png */,
 				BF85C8441A4F5B4A00A494B6 /* shifterInnerBlue@2x.png */,
 				BF85C8451A4F5B4A00A494B6 /* shifterInnerBrown@2x.png */,
 				BF85C8461A4F5B4A00A494B6 /* shifterInnerGreen@2x.png */,
@@ -691,7 +695,6 @@
 				AFADA2131877D20D00FADA22 /* FilledCircleGreen.png */,
 				AFADA2141877D20D00FADA22 /* FilledCircleRed.png */,
 				AFADA2151877D20D00FADA22 /* FilledCircleYellow.png */,
-				AFADA2101877D20D00FADA22 /* ButtonBar.png */,
 				AFADA2161877D20D00FADA22 /* Green.png */,
 				AFADA2171877D20D00FADA22 /* Red.png */,
 				AFADA2181877D20D00FADA22 /* RedSelected.png */,
@@ -721,6 +724,8 @@
 				BF90796F194E737E000E6E58 /* SingleWorldViewController.m */,
 				AFADA23318791E4400FADA22 /* GridColorButton.h */,
 				AFADA23418791E4400FADA22 /* GridColorButton.m */,
+				BF85C8541A50DFF200A494B6 /* WelcomeScreenViewController.h */,
+				BF85C8551A50DFF200A494B6 /* WelcomeScreenViewController.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -903,7 +908,6 @@
 				BF980879196E664E00BAF9ED /* transporterOutputRightBlue@2x.png in Resources */,
 				BF85C8341A47BFD500A494B6 /* converterTopToDownWhite@2x.png in Resources */,
 				BF9079AF195E073E000E6E58 /* BlockOrange@2x.png in Resources */,
-				AFADA2261877D20D00FADA22 /* ButtonBar.png in Resources */,
 				BFA3A2CC193AF4D900C1BB7D /* incompleteLevel@2x.png in Resources */,
 				BF9079C9195E1819000E6E58 /* WhiteSelected@2x.png in Resources */,
 				AFADA2241877D20D00FADA22 /* Blue.png in Resources */,
@@ -988,6 +992,7 @@
 				BF98087A196E664E00BAF9ED /* transporterOutputRightBrown@2x.png in Resources */,
 				BF9079B9195E1040000E6E58 /* FilledCircleBlue@2x.png in Resources */,
 				BF980865196E664E00BAF9ED /* transporterInputLeftPurple@2x.png in Resources */,
+				BF85C8531A50B2D900A494B6 /* ButtonBar3.png in Resources */,
 				BF85C82B1A47BABE00A494B6 /* converterLeftToRightBlue@2x.png in Resources */,
 				BF85C84D1A4F5B4A00A494B6 /* shifterInnerGreen@2x.png in Resources */,
 				BF9079B8195E1040000E6E58 /* EmptyCircle@2x.png in Resources */,
@@ -1043,6 +1048,7 @@
 				BF907970194E737E000E6E58 /* SingleWorldViewController.m in Sources */,
 				BF90795C194CE618000E6E58 /* LevelsManager.m in Sources */,
 				BF9079801953E6D6000E6E58 /* ZonerCell.m in Sources */,
+				BF85C8561A50DFF200A494B6 /* WelcomeScreenViewController.m in Sources */,
 				AFB896851881E011003FAEF4 /* ColorBoard.m in Sources */,
 				BF9079D51963AD6D000E6E58 /* SplitterCell.m in Sources */,
 				AFB8968B1881EDD0003FAEF4 /* UserColorBoard.m in Sources */,
