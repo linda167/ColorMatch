@@ -153,7 +153,7 @@
                                 </connections>
                             </pageControl>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="2R1-RH-8Gf">
-                                <rect key="frame" x="0.0" y="66" width="320" height="437"/>
+                                <rect key="frame" x="0.0" y="60" width="320" height="471"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </scrollView>
                         </subviews>
@@ -178,28 +178,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" id="GNd-Na-t03">
-                                <rect key="frame" x="-36" y="45" width="391" height="208"/>
+                            <view contentMode="scaleToFill" id="GUh-Vz-Oba">
+                                <rect key="frame" x="-1" y="67" width="321" height="182"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" id="GUh-Vz-Oba">
-                                        <rect key="frame" x="20" y="20" width="351" height="180"/>
+                                    <view contentMode="scaleToFill" id="rnp-b2-6nP">
+                                        <rect key="frame" x="160" y="12" width="161" height="153"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <subviews>
-                                            <view contentMode="scaleToFill" id="rnp-b2-6nP">
-                                                <rect key="frame" x="155" y="18" width="161" height="153"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <color key="backgroundColor" red="0.95294117647058818" green="0.95294117647058818" blue="0.93725490196078431" alpha="1" colorSpace="calibratedRGB"/>
-                                            </view>
-                                        </subviews>
-                                        <color key="backgroundColor" red="0.95294117647058818" green="0.95294117647058818" blue="0.94901960784313721" alpha="1" colorSpace="calibratedRGB"/>
-                                        <color key="tintColor" red="0.75199558420000001" green="0.75199558420000001" blue="0.75199558420000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.95294117647058818" green="0.95294117647058818" blue="0.93725490196078431" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.95294117647058818" green="0.95294117647058818" blue="0.94901960784313721" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="0.75199558420000001" green="0.75199558420000001" blue="0.75199558420000001" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ButtonBar3.png" id="mtq-Bf-BNg">
-                                <rect key="frame" x="-16" y="244" width="336" height="52"/>
+                                <rect key="frame" x="-1" y="244" width="321" height="52"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="4Uo-bZ-bKf">

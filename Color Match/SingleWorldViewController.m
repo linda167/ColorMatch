@@ -39,6 +39,8 @@
         // Custom initialization
         self.worldId = worldId;
         self.parentWorldController = parentWorldController;
+        
+        self.view.backgroundColor = [UIColor colorWithRed:(139/255.0) green:(204/255.0) blue:(112/255.0) alpha:1];
     }
     return self;
 }
@@ -97,22 +99,19 @@
     
     int totalLevelsToRender = [LevelsManager GetLevelCountForWorld:self.worldId];
     int xOffsetInitial = 15;
-    int yOffsetInitial = 48;
+    int yOffsetInitial = 68;
     int xOffset = xOffsetInitial;
     int yOffset = yOffsetInitial;
     int size = 60;
     int heightBetweenRows = 95;
     int widthBetweenCols = 75;
-    int starYOffset = 57;
-    int starXOffset = 8;
-    int starWidth=44;
-    int starHeight=16;
+    int levelNameYOffset = 57;
     for (int i=0; i<totalLevelsToRender; i++)
     {
         // Figure out if level is complete
         int levelId = i+1;
         bool isLevelComplete = [[UserData sharedUserData] getLevelCompleteState:self.worldId levelId:levelId];
-        UIImage *buttonImage = [self getImageForLevel:isLevelComplete];
+        UIImage *buttonImage = [self getImageForLevel:isLevelComplete levelId:levelId];
         
         // Add level button
         LevelSelectButton *levelButton = [[LevelSelectButton alloc] initWithFrame:CGRectMake(xOffset, yOffset, size, size)];
@@ -124,17 +123,8 @@
         [self.levelButtons addObject:levelButton];
         [self.view addSubview:levelButton];
         
-        // Add stars
-        int starCount = [[UserData sharedUserData] getStarCount:self.worldId levelId:levelId];
-        int starYPosition = yOffset+starYOffset;
-        UIImageView *starsImage = [[UIImageView alloc] initWithFrame:CGRectMake(xOffset+starXOffset, starYPosition, starWidth, starHeight)];
-        starsImage.image = [self getImageForStars:starCount];
-        levelButton.starsImage = starsImage;
-        levelButton.starCount = starCount;
-        [self.view addSubview:starsImage];
-        
         // Add level text
-        UILabel *levelName = [[UILabel alloc] initWithFrame:CGRectMake(xOffset+20, starYPosition+15, size, 25)];
+        UILabel *levelName = [[UILabel alloc] initWithFrame:CGRectMake(xOffset+20, yOffset+levelNameYOffset, size, 25)];
         levelName.font = [UIFont fontWithName:@"Futura-Medium" size:12.0];
         NSMutableString *levelString = [UserData getLevelString:self.worldId levelId:levelId];
         levelName.text = levelString;
@@ -153,23 +143,27 @@
     }
 }
 
-- (UIImage*)getImageForLevel:(bool)isComplete
+- (UIImage*)getImageForLevel:(bool)isComplete levelId:(int)levelId
 {
-    return isComplete ?
-    [UIImage imageNamed:@"completeLevel@2x.png"] :
-    [UIImage imageNamed:@"incompleteLevel@2x.png"];
+    if (!isComplete)
+    {
+        return [UIImage imageNamed:@"incompleteLevel@2x.png"];
+    }
+    else
+    {
+        int starCount = [[UserData sharedUserData] getStarCount:self.worldId levelId:levelId];
+        return [self getImageForStars:starCount];
+    }
 }
 
 - (UIImage*)getImageForStars:(int)starCount
 {
-    if (starCount == 1)
+    if (starCount == 1 || starCount == 2)
         return [UIImage imageNamed:@"1stars@2x.png"];
-    else if (starCount == 2)
-        return [UIImage imageNamed:@"2stars@2x.png"];
     else if (starCount == 3)
-        return [UIImage imageNamed:@"3stars@2x.png"];
+        return [UIImage imageNamed:@"2stars@2x.png"];
     else if (starCount == 4)
-        return [UIImage imageNamed:@"rainbow@2x.png"];
+        return [UIImage imageNamed:@"3stars@2x.png"];
     else
         return [UIImage imageNamed:@"0stars@2x.png"];
     
@@ -186,7 +180,7 @@
         bool isLevelComplete = [[UserData sharedUserData] getLevelCompleteState:self.worldId levelId:levelId];
         if (isLevelComplete != levelButton.isComplete)
         {
-            UIImage *buttonImage = [self getImageForLevel:isLevelComplete];
+            UIImage *buttonImage = [self getImageForLevel:isLevelComplete levelId:levelId];
             [levelButton setImage:buttonImage forState:UIControlStateNormal];
             levelButton.isComplete = isLevelComplete;
         }

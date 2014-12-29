@@ -52,6 +52,9 @@
     self.pageControl.currentPage = 0;
     self.pageControl.enabled = TRUE;
     
+    self.pageControl.frame = CGRectMake(0, self.view.frame.size.height - 30, self.view.frame.size.width, 30);
+    [self.pageControl setNeedsLayout];
+    
     // Get last world that we completed a level
     int lastLevelCompletedInWorld = [[UserData sharedUserData] getLastLevelCompletedInWorld];
     if (lastLevelCompletedInWorld > 1)

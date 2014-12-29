@@ -51,7 +51,6 @@
 		AFB896881881E2E6003FAEF4 /* CommonUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB896871881E2E6003FAEF4 /* CommonUtils.m */; };
 		AFB8968B1881EDD0003FAEF4 /* UserColorBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB8968A1881EDD0003FAEF4 /* UserColorBoard.m */; };
 		AFB8969118822186003FAEF4 /* ChooseGameSizeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB8969018822186003FAEF4 /* ChooseGameSizeViewController.m */; };
-		AFB8969318822F2F003FAEF4 /* ButtonBar2.png in Resources */ = {isa = PBXBuildFile; fileRef = AFB8969218822F2F003FAEF4 /* ButtonBar2.png */; };
 		AFB8969618823E6E003FAEF4 /* MainUINavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB8969518823E6E003FAEF4 /* MainUINavigationController.m */; };
 		BF0D4BC5192010BB00AACB5A /* BoardCells.m in Sources */ = {isa = PBXBuildFile; fileRef = BF0D4BC4192010BB00AACB5A /* BoardCells.m */; };
 		BF0D4BCC1921DEE700AACB5A /* ConnectorLines.m in Sources */ = {isa = PBXBuildFile; fileRef = BF0D4BCB1921DEE700AACB5A /* ConnectorLines.m */; };
@@ -82,6 +81,10 @@
 		BF85C8511A4F5B4A00A494B6 /* shifterInnerYellow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF85C84A1A4F5B4A00A494B6 /* shifterInnerYellow@2x.png */; };
 		BF85C8531A50B2D900A494B6 /* ButtonBar3.png in Resources */ = {isa = PBXBuildFile; fileRef = BF85C8521A50B2D900A494B6 /* ButtonBar3.png */; };
 		BF85C8561A50DFF200A494B6 /* WelcomeScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF85C8551A50DFF200A494B6 /* WelcomeScreenViewController.m */; };
+		BF85C8591A51068200A494B6 /* transporterGoalOutputDown@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF85C8571A51068200A494B6 /* transporterGoalOutputDown@2x.png */; };
+		BF85C85A1A51068200A494B6 /* transporterGoalOutputRight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF85C8581A51068200A494B6 /* transporterGoalOutputRight@2x.png */; };
+		BF85C85D1A5106CD00A494B6 /* transporterGoalInputLeft@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF85C85B1A5106CD00A494B6 /* transporterGoalInputLeft@2x.png */; };
+		BF85C85E1A5106CD00A494B6 /* transporterGoalInputTop@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF85C85C1A5106CD00A494B6 /* transporterGoalInputTop@2x.png */; };
 		BF874D11192B28C1001701A2 /* ReflectorLtDGoal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF874D0D192B28C1001701A2 /* ReflectorLtDGoal@2x.png */; };
 		BF874D15192B2CBB001701A2 /* ReflectorTtRGoal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF874D14192B2CBB001701A2 /* ReflectorTtRGoal@2x.png */; };
 		BF90795C194CE618000E6E58 /* LevelsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BF90795B194CE618000E6E58 /* LevelsManager.m */; };
@@ -272,7 +275,6 @@
 		AFB8968A1881EDD0003FAEF4 /* UserColorBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserColorBoard.m; sourceTree = "<group>"; };
 		AFB8968F18822186003FAEF4 /* ChooseGameSizeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseGameSizeViewController.h; sourceTree = "<group>"; };
 		AFB8969018822186003FAEF4 /* ChooseGameSizeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseGameSizeViewController.m; sourceTree = "<group>"; };
-		AFB8969218822F2F003FAEF4 /* ButtonBar2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ButtonBar2.png; sourceTree = "<group>"; };
 		AFB8969418823E6E003FAEF4 /* MainUINavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainUINavigationController.h; sourceTree = "<group>"; };
 		AFB8969518823E6E003FAEF4 /* MainUINavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainUINavigationController.m; sourceTree = "<group>"; };
 		BF0D4BC3192010BB00AACB5A /* BoardCells.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoardCells.h; sourceTree = "<group>"; };
@@ -311,6 +313,10 @@
 		BF85C8521A50B2D900A494B6 /* ButtonBar3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ButtonBar3.png; sourceTree = "<group>"; };
 		BF85C8541A50DFF200A494B6 /* WelcomeScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WelcomeScreenViewController.h; sourceTree = "<group>"; };
 		BF85C8551A50DFF200A494B6 /* WelcomeScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WelcomeScreenViewController.m; sourceTree = "<group>"; };
+		BF85C8571A51068200A494B6 /* transporterGoalOutputDown@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "transporterGoalOutputDown@2x.png"; sourceTree = "<group>"; };
+		BF85C8581A51068200A494B6 /* transporterGoalOutputRight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "transporterGoalOutputRight@2x.png"; sourceTree = "<group>"; };
+		BF85C85B1A5106CD00A494B6 /* transporterGoalInputLeft@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "transporterGoalInputLeft@2x.png"; sourceTree = "<group>"; };
+		BF85C85C1A5106CD00A494B6 /* transporterGoalInputTop@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "transporterGoalInputTop@2x.png"; sourceTree = "<group>"; };
 		BF874D0D192B28C1001701A2 /* ReflectorLtDGoal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReflectorLtDGoal@2x.png"; sourceTree = "<group>"; };
 		BF874D14192B2CBB001701A2 /* ReflectorTtRGoal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReflectorTtRGoal@2x.png"; sourceTree = "<group>"; };
 		BF90795A194CE618000E6E58 /* LevelsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelsManager.h; sourceTree = "<group>"; };
@@ -550,6 +556,10 @@
 		AF2C225A1874B95000082561 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				BF85C85B1A5106CD00A494B6 /* transporterGoalInputLeft@2x.png */,
+				BF85C85C1A5106CD00A494B6 /* transporterGoalInputTop@2x.png */,
+				BF85C8571A51068200A494B6 /* transporterGoalOutputDown@2x.png */,
+				BF85C8581A51068200A494B6 /* transporterGoalOutputRight@2x.png */,
 				BF85C8521A50B2D900A494B6 /* ButtonBar3.png */,
 				BF85C8441A4F5B4A00A494B6 /* shifterInnerBlue@2x.png */,
 				BF85C8451A4F5B4A00A494B6 /* shifterInnerBrown@2x.png */,
@@ -680,7 +690,6 @@
 				BF0D4BD019293E5500AACB5A /* BlockClear.png */,
 				AFB75A9D18834ECD00CAB736 /* AppIcon120.png */,
 				AFB75A9A188339C900CAB736 /* GameLogo.png */,
-				AFB8969218822F2F003FAEF4 /* ButtonBar2.png */,
 				AFADA2071877D20D00FADA22 /* BlockBlue.png */,
 				AFADA2081877D20D00FADA22 /* BlockGreen.png */,
 				AFADA2091877D20D00FADA22 /* BlockOrange.png */,
@@ -871,10 +880,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF85C8591A51068200A494B6 /* transporterGoalOutputDown@2x.png in Resources */,
 				BF980876196E664E00BAF9ED /* transporterOutputDownRed@2x.png in Resources */,
 				AFADA21F1877D20D00FADA22 /* BlockOrange.png in Resources */,
 				BF9079C4195E1819000E6E58 /* Blue@2x.png in Resources */,
 				BF9079D91963B954000E6E58 /* splitterBlue@2x.png in Resources */,
+				BF85C85E1A5106CD00A494B6 /* transporterGoalInputTop@2x.png in Resources */,
+				BF85C85D1A5106CD00A494B6 /* transporterGoalInputLeft@2x.png in Resources */,
 				BF980878196E664E00BAF9ED /* transporterOutputDownYellow@2x.png in Resources */,
 				BF90799619560FE3000E6E58 /* connectorInnerPurple@2x.png in Resources */,
 				BF90799A19560FE3000E6E58 /* connectorOuterBlue@2x.png in Resources */,
@@ -948,6 +960,7 @@
 				BF98086A196E664E00BAF9ED /* transporterInputTopBrown@2x.png in Resources */,
 				BF9079C8195E1819000E6E58 /* White@2x.png in Resources */,
 				BF9079771953DF94000E6E58 /* zonerGoal@2x.png in Resources */,
+				BF85C85A1A51068200A494B6 /* transporterGoalOutputRight@2x.png in Resources */,
 				BFA3A2BE1931401700C1BB7D /* ReflectorArrowLtDYellow@2x.png in Resources */,
 				BF9808901974F13D00BAF9ED /* ReflectorArrowTtRPurple@2x.png in Resources */,
 				BF90799319560FE3000E6E58 /* connectorInnerBrown@2x.png in Resources */,
@@ -1016,7 +1029,6 @@
 				AFADA2201877D20D00FADA22 /* BlockPurple.png in Resources */,
 				BF85C8331A47BFD500A494B6 /* converterLeftToRightWhite@2x.png in Resources */,
 				BFA3A2C11931401700C1BB7D /* ReflectorArrowTtRYellow@2x.png in Resources */,
-				AFB8969318822F2F003FAEF4 /* ButtonBar2.png in Resources */,
 				BF9079B2195E073E000E6E58 /* BlockWhite@2x.png in Resources */,
 				BFA3A2C01931401700C1BB7D /* ReflectorArrowTtRRed@2x.png in Resources */,
 				BF85C83D1A4E9C5300A494B6 /* shifterOuterBlue@2x.png in Resources */,

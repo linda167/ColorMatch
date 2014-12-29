@@ -483,4 +483,39 @@
     return shifterCell;
 }
 
+-(UIImage*)getTransporterImageWithColor:(ColorCell*)colorCell color:(int)color
+{
+    TransporterCell *transporterCell = (TransporterCell*)colorCell;
+    
+    NSMutableString *imageString = [[NSMutableString alloc] init];
+    int groupId = transporterCell.groupId;
+    if (groupId == 0)
+    {
+        switch (transporterCell.cellType)
+        {
+            case TransporterInputLeft:
+                [imageString appendString:@"transporterGoalInputLeft"];
+                break;
+            case TransporterInputTop:
+                [imageString appendString:@"transporterGoalInputTop"];
+                break;
+            case TransporterOutputDown:
+                [imageString appendString:@"transporterGoalOutputDown"];
+                break;
+            case TransporterOutputRight:
+                [imageString appendString:@"transporterGoalOutputRight"];
+                break;
+        }
+        
+        [imageString appendString:@"@2x.png"];
+        
+        return [UIImage imageNamed:imageString];
+    }
+    
+    [NSException raise:@"Invalid group Id" format:@"Invalid group Id"];
+    
+    // Should not be hit
+    return NULL;
+}
+
 @end
