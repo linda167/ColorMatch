@@ -40,9 +40,54 @@
         self.worldId = worldId;
         self.parentWorldController = parentWorldController;
         
-        self.view.backgroundColor = [UIColor colorWithRed:(139/255.0) green:(204/255.0) blue:(112/255.0) alpha:1];
+        // TODO: lindach
+        self.view.backgroundColor = [self getBackgroundColorForWorld:worldId];
     }
     return self;
+}
+
+- (UIColor*)getBackgroundColorForWorld:(int)worldId
+{
+    switch (worldId)
+    {
+        case 1:
+        case 7:
+            // Aqua
+            return [UIColor colorWithRed:(124/255.0) green:(190/255.0) blue:(204/255.0) alpha:1];
+            break;
+            
+        case 2:
+        case 8:
+            // Yellow
+            return [UIColor colorWithRed:(255/255.0) green:(233/255.0) blue:(127/255.0) alpha:1];
+            break;
+            
+        case 3:
+        case 9:
+            // Red
+            return [UIColor colorWithRed:(255/255.0) green:(186/255.0) blue:(186/255.0) alpha:1];
+            break;
+            
+        case 4:
+        case 10:
+            // Green
+            return [UIColor colorWithRed:(161/255.0) green:(204/255.0) blue:(142/255.0) alpha:1];
+            break;
+        
+        case 5:
+            // Orange
+            return [UIColor colorWithRed:(255/255.0) green:(178/255.0) blue:(147/255.0) alpha:1];
+            break;
+        
+        case 6:
+            // Purple
+            return [UIColor colorWithRed:(190/255.0) green:(163/255.0) blue:(204/255.0) alpha:1];
+            break;
+            
+        default:
+            return [UIColor colorWithRed:(255/255.0) green:(255/255.0) blue:(255/255.0) alpha:1];;
+            break;
+    }
 }
 
 - (void)viewDidLoad
@@ -57,7 +102,6 @@
     [self renderWorldTitleDisplay];
     if (self.worldId < 10)
     {
-        // TODO: add support for other worlds
         [self renderLevelsDisplay];
     }
 }
@@ -80,11 +124,12 @@
 
 - (void)renderWorldTitleDisplay
 {
-    UILabel *worldTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 20)];
+    UILabel *worldTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
     worldTitle.font = [UIFont fontWithName:@"Futura-Medium" size:16.0];
+    worldTitle.textColor = [UIColor colorWithRed:(64/255.0) green:(64/255.0) blue:(64/255.0) alpha:1];
     worldTitle.text = [NSString stringWithFormat: @"World %d", self.worldId];
     [worldTitle sizeToFit];
-    [worldTitle setCenter:CGPointMake(self.view.frame.size.width / 2, 23)];
+    [worldTitle setCenter:CGPointMake(self.view.frame.size.width / 2, 42)];
     [self.view addSubview:worldTitle];
 }
 
@@ -105,7 +150,7 @@
     int size = 60;
     int heightBetweenRows = 95;
     int widthBetweenCols = 75;
-    int levelNameYOffset = 57;
+    int levelNameYOffset = 55;
     for (int i=0; i<totalLevelsToRender; i++)
     {
         // Figure out if level is complete
@@ -126,6 +171,7 @@
         // Add level text
         UILabel *levelName = [[UILabel alloc] initWithFrame:CGRectMake(xOffset+20, yOffset+levelNameYOffset, size, 25)];
         levelName.font = [UIFont fontWithName:@"Futura-Medium" size:12.0];
+        levelName.textColor = [UIColor colorWithRed:(64/255.0) green:(64/255.0) blue:(64/255.0) alpha:1];
         NSMutableString *levelString = [UserData getLevelString:self.worldId levelId:levelId];
         levelName.text = levelString;
         [self.view addSubview:levelName];
