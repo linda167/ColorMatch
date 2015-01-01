@@ -85,6 +85,8 @@
 		BF85C85A1A51068200A494B6 /* transporterGoalOutputRight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF85C8581A51068200A494B6 /* transporterGoalOutputRight@2x.png */; };
 		BF85C85D1A5106CD00A494B6 /* transporterGoalInputLeft@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF85C85B1A5106CD00A494B6 /* transporterGoalInputLeft@2x.png */; };
 		BF85C85E1A5106CD00A494B6 /* transporterGoalInputTop@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF85C85C1A5106CD00A494B6 /* transporterGoalInputTop@2x.png */; };
+		BF85C8601A56029300A494B6 /* Logo3.png in Resources */ = {isa = PBXBuildFile; fileRef = BF85C85F1A56029200A494B6 /* Logo3.png */; };
+		BF85C8621A56071900A494B6 /* divider.png in Resources */ = {isa = PBXBuildFile; fileRef = BF85C8611A56071900A494B6 /* divider.png */; };
 		BF874D11192B28C1001701A2 /* ReflectorLtDGoal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF874D0D192B28C1001701A2 /* ReflectorLtDGoal@2x.png */; };
 		BF874D15192B2CBB001701A2 /* ReflectorTtRGoal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF874D14192B2CBB001701A2 /* ReflectorTtRGoal@2x.png */; };
 		BF90795C194CE618000E6E58 /* LevelsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BF90795B194CE618000E6E58 /* LevelsManager.m */; };
@@ -317,6 +319,8 @@
 		BF85C8581A51068200A494B6 /* transporterGoalOutputRight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "transporterGoalOutputRight@2x.png"; sourceTree = "<group>"; };
 		BF85C85B1A5106CD00A494B6 /* transporterGoalInputLeft@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "transporterGoalInputLeft@2x.png"; sourceTree = "<group>"; };
 		BF85C85C1A5106CD00A494B6 /* transporterGoalInputTop@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "transporterGoalInputTop@2x.png"; sourceTree = "<group>"; };
+		BF85C85F1A56029200A494B6 /* Logo3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Logo3.png; sourceTree = "<group>"; };
+		BF85C8611A56071900A494B6 /* divider.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = divider.png; sourceTree = "<group>"; };
 		BF874D0D192B28C1001701A2 /* ReflectorLtDGoal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReflectorLtDGoal@2x.png"; sourceTree = "<group>"; };
 		BF874D14192B2CBB001701A2 /* ReflectorTtRGoal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReflectorTtRGoal@2x.png"; sourceTree = "<group>"; };
 		BF90795A194CE618000E6E58 /* LevelsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelsManager.h; sourceTree = "<group>"; };
@@ -556,6 +560,8 @@
 		AF2C225A1874B95000082561 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				BF85C8611A56071900A494B6 /* divider.png */,
+				BF85C85F1A56029200A494B6 /* Logo3.png */,
 				BF85C85B1A5106CD00A494B6 /* transporterGoalInputLeft@2x.png */,
 				BF85C85C1A5106CD00A494B6 /* transporterGoalInputTop@2x.png */,
 				BF85C8571A51068200A494B6 /* transporterGoalOutputDown@2x.png */,
@@ -913,6 +919,7 @@
 				AFADA22F1877D20D00FADA22 /* White.png in Resources */,
 				AF2C223E1874B8B800082561 /* Images.xcassets in Resources */,
 				AFADA22E1877D20D00FADA22 /* RedSelected.png in Resources */,
+				BF85C8621A56071900A494B6 /* divider.png in Resources */,
 				BF98088E1974F13D00BAF9ED /* ReflectorArrowTtRGreen@2x.png in Resources */,
 				AFADA2311877D20D00FADA22 /* Yellow.png in Resources */,
 				BF85C84E1A4F5B4A00A494B6 /* shifterInnerOrange@2x.png in Resources */,
@@ -976,6 +983,7 @@
 				BF9079B1195E073E000E6E58 /* BlockRed@2x.png in Resources */,
 				BF9079CB195E1819000E6E58 /* YellowSelected@2x.png in Resources */,
 				AFADA2291877D20D00FADA22 /* FilledCircleGreen.png in Resources */,
+				BF85C8601A56029300A494B6 /* Logo3.png in Resources */,
 				AFADA2211877D20D00FADA22 /* BlockRed.png in Resources */,
 				BF90799B19560FE3000E6E58 /* connectorOuterRed@2x.png in Resources */,
 				BF980863196E664E00BAF9ED /* transporterInputLeftGreen@2x.png in Resources */,

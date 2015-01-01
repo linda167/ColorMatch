@@ -40,7 +40,6 @@
         self.worldId = worldId;
         self.parentWorldController = parentWorldController;
         
-        // TODO: lindach
         self.view.backgroundColor = [self getBackgroundColorForWorld:worldId];
     }
     return self;
@@ -204,14 +203,12 @@
 
 - (UIImage*)getImageForStars:(int)starCount
 {
-    if (starCount == 1 || starCount == 2)
+    if (starCount == 1)
         return [UIImage imageNamed:@"1stars@2x.png"];
-    else if (starCount == 3)
+    else if (starCount == 2 || starCount == 3)
         return [UIImage imageNamed:@"2stars@2x.png"];
-    else if (starCount == 4)
+    else 
         return [UIImage imageNamed:@"3stars@2x.png"];
-    else
-        return [UIImage imageNamed:@"0stars@2x.png"];
     
 }
 
@@ -236,7 +233,7 @@
         if (starCount != levelButton.starCount)
         {
             levelButton.starCount = starCount;
-            levelButton.starsImage.image = [self getImageForStars:starCount];
+            [levelButton setImage:[self getImageForStars:starCount] forState:UIControlStateNormal];
         }
     }
 }
