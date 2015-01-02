@@ -9,5 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface WelcomeScreenViewController : UIViewController
+@property (weak, nonatomic) IBOutlet UIImageView *logo;
+@property (weak, nonatomic) IBOutlet UIImageView *divider;
+@property (weak, nonatomic) IBOutlet UIButton *button1;
+@property (weak, nonatomic) IBOutlet UIButton *button2;
 
 @end

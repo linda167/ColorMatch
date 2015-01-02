@@ -414,7 +414,7 @@
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo3.png" id="cOw-Vj-hjh">
-                                <rect key="frame" x="0.0" y="76" width="320" height="225"/>
+                                <rect key="frame" x="0.0" y="-225" width="320" height="225"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="divider.png" id="DfI-xk-VeF">
@@ -425,6 +425,12 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="CEC-Zd-8xO"/>
+                    <connections>
+                        <outlet property="button1" destination="pHQ-bR-4XX" id="5ZE-h8-7za"/>
+                        <outlet property="button2" destination="drx-Vc-dci" id="qaB-43-QZj"/>
+                        <outlet property="divider" destination="DfI-xk-VeF" id="gsD-PU-FGe"/>
+                        <outlet property="logo" destination="cOw-Vj-hjh" id="0rN-Yn-tLf"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uKi-xh-kd9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
