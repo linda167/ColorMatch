@@ -21,6 +21,7 @@
     _divider.alpha = 0;
     _button1.alpha = 0;
     _button2.alpha = 0;
+    _button3.alpha = 0;
     
     [self showLogo];
 }
@@ -77,7 +78,7 @@
      options:UIViewAnimationOptionCurveLinear
      animations:^
      {
-         _logo.center = CGPointMake(_logo.center.x, 200);
+         _logo.center = CGPointMake(_logo.center.x, 182);
      }
      completion:^(BOOL finished)
      {
@@ -113,6 +114,7 @@
      {
          _button1.alpha = 1.0;
          _button2.alpha = 1.0;
+         _button3.alpha = 1.0;
      }
      completion:^(BOOL finished)
      {

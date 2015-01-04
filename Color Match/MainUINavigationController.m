@@ -34,6 +34,12 @@
     {
         self.interactivePopGestureRecognizer.enabled = NO;
     }
+    
+    // Make background of navigation bar transparent
+    [self.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    self.navigationController.navigationBar.translucent = YES;
+    self.navigationController.view.backgroundColor = [UIColor clearColor];
 	
     // Do any additional setup after loading the view.
 }

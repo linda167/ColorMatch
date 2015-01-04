@@ -87,6 +87,9 @@
 		BF85C85E1A5106CD00A494B6 /* transporterGoalInputTop@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF85C85C1A5106CD00A494B6 /* transporterGoalInputTop@2x.png */; };
 		BF85C8601A56029300A494B6 /* Logo3.png in Resources */ = {isa = PBXBuildFile; fileRef = BF85C85F1A56029200A494B6 /* Logo3.png */; };
 		BF85C8621A56071900A494B6 /* divider.png in Resources */ = {isa = PBXBuildFile; fileRef = BF85C8611A56071900A494B6 /* divider.png */; };
+		BF85C8651A578D5C00A494B6 /* buttonPlayGame@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF85C8631A578D5C00A494B6 /* buttonPlayGame@2x.png */; };
+		BF85C8661A578D5C00A494B6 /* buttonSettings@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF85C8641A578D5C00A494B6 /* buttonSettings@2x.png */; };
+		BF85C8681A57988600A494B6 /* buttonCredits@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF85C8671A57988600A494B6 /* buttonCredits@2x.png */; };
 		BF874D11192B28C1001701A2 /* ReflectorLtDGoal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF874D0D192B28C1001701A2 /* ReflectorLtDGoal@2x.png */; };
 		BF874D15192B2CBB001701A2 /* ReflectorTtRGoal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF874D14192B2CBB001701A2 /* ReflectorTtRGoal@2x.png */; };
 		BF90795C194CE618000E6E58 /* LevelsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BF90795B194CE618000E6E58 /* LevelsManager.m */; };
@@ -151,6 +154,8 @@
 		BF9079E719664916000E6E58 /* converterRed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF9079E319664916000E6E58 /* converterRed@2x.png */; };
 		BF9079E819664916000E6E58 /* converterWhite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF9079E419664916000E6E58 /* converterWhite@2x.png */; };
 		BF9079E919664916000E6E58 /* converterYellow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF9079E519664916000E6E58 /* converterYellow@2x.png */; };
+		BF97FFF01A5913D300ABA450 /* backgroundImage.png in Resources */ = {isa = PBXBuildFile; fileRef = BF97FFEF1A5913D300ABA450 /* backgroundImage.png */; };
+		BF97FFF21A59257F00ABA450 /* World1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF97FFF11A59257F00ABA450 /* World1@2x.png */; };
 		BF9807AB196721BA00BAF9ED /* TransporterGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = BF9807AA196721BA00BAF9ED /* TransporterGroup.m */; };
 		BF9807AE1967230600BAF9ED /* TransporterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BF9807AD1967230600BAF9ED /* TransporterCell.m */; };
 		BF980861196E664E00BAF9ED /* transporterInputLeftBlue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF980841196E664E00BAF9ED /* transporterInputLeftBlue@2x.png */; };
@@ -321,6 +326,9 @@
 		BF85C85C1A5106CD00A494B6 /* transporterGoalInputTop@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "transporterGoalInputTop@2x.png"; sourceTree = "<group>"; };
 		BF85C85F1A56029200A494B6 /* Logo3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Logo3.png; sourceTree = "<group>"; };
 		BF85C8611A56071900A494B6 /* divider.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = divider.png; sourceTree = "<group>"; };
+		BF85C8631A578D5C00A494B6 /* buttonPlayGame@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "buttonPlayGame@2x.png"; sourceTree = "<group>"; };
+		BF85C8641A578D5C00A494B6 /* buttonSettings@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "buttonSettings@2x.png"; sourceTree = "<group>"; };
+		BF85C8671A57988600A494B6 /* buttonCredits@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "buttonCredits@2x.png"; sourceTree = "<group>"; };
 		BF874D0D192B28C1001701A2 /* ReflectorLtDGoal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReflectorLtDGoal@2x.png"; sourceTree = "<group>"; };
 		BF874D14192B2CBB001701A2 /* ReflectorTtRGoal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReflectorTtRGoal@2x.png"; sourceTree = "<group>"; };
 		BF90795A194CE618000E6E58 /* LevelsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelsManager.h; sourceTree = "<group>"; };
@@ -395,6 +403,8 @@
 		BF9079E319664916000E6E58 /* converterRed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "converterRed@2x.png"; sourceTree = "<group>"; };
 		BF9079E419664916000E6E58 /* converterWhite@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "converterWhite@2x.png"; sourceTree = "<group>"; };
 		BF9079E519664916000E6E58 /* converterYellow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "converterYellow@2x.png"; sourceTree = "<group>"; };
+		BF97FFEF1A5913D300ABA450 /* backgroundImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backgroundImage.png; sourceTree = "<group>"; };
+		BF97FFF11A59257F00ABA450 /* World1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "World1@2x.png"; sourceTree = "<group>"; };
 		BF9807A9196721BA00BAF9ED /* TransporterGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransporterGroup.h; sourceTree = "<group>"; };
 		BF9807AA196721BA00BAF9ED /* TransporterGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransporterGroup.m; sourceTree = "<group>"; };
 		BF9807AC1967230600BAF9ED /* TransporterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransporterCell.h; sourceTree = "<group>"; };
@@ -560,6 +570,11 @@
 		AF2C225A1874B95000082561 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				BF97FFF11A59257F00ABA450 /* World1@2x.png */,
+				BF97FFEF1A5913D300ABA450 /* backgroundImage.png */,
+				BF85C8671A57988600A494B6 /* buttonCredits@2x.png */,
+				BF85C8631A578D5C00A494B6 /* buttonPlayGame@2x.png */,
+				BF85C8641A578D5C00A494B6 /* buttonSettings@2x.png */,
 				BF85C8611A56071900A494B6 /* divider.png */,
 				BF85C85F1A56029200A494B6 /* Logo3.png */,
 				BF85C85B1A5106CD00A494B6 /* transporterGoalInputLeft@2x.png */,
@@ -969,17 +984,21 @@
 				BF9079771953DF94000E6E58 /* zonerGoal@2x.png in Resources */,
 				BF85C85A1A51068200A494B6 /* transporterGoalOutputRight@2x.png in Resources */,
 				BFA3A2BE1931401700C1BB7D /* ReflectorArrowLtDYellow@2x.png in Resources */,
+				BF85C8681A57988600A494B6 /* buttonCredits@2x.png in Resources */,
 				BF9808901974F13D00BAF9ED /* ReflectorArrowTtRPurple@2x.png in Resources */,
 				BF90799319560FE3000E6E58 /* connectorInnerBrown@2x.png in Resources */,
+				BF85C8661A578D5C00A494B6 /* buttonSettings@2x.png in Resources */,
 				BF98088D1974F13D00BAF9ED /* ReflectorArrowTtRBrown@2x.png in Resources */,
 				BF90796D194D6E42000E6E58 /* 3stars@2x.png in Resources */,
 				BF90799519560FE3000E6E58 /* connectorInnerOrange@2x.png in Resources */,
 				BF90799719560FE3000E6E58 /* connectorInnerRed@2x.png in Resources */,
 				BF980868196E664E00BAF9ED /* transporterInputLeftYellow@2x.png in Resources */,
 				AFADA22A1877D20D00FADA22 /* FilledCircleRed.png in Resources */,
+				BF97FFF01A5913D300ABA450 /* backgroundImage.png in Resources */,
 				BF980875196E664E00BAF9ED /* transporterOutputDownPurple@2x.png in Resources */,
 				AFADA2271877D20D00FADA22 /* EmptyCircle.png in Resources */,
 				BF9079DA1963B954000E6E58 /* splitterRed@2x.png in Resources */,
+				BF85C8651A578D5C00A494B6 /* buttonPlayGame@2x.png in Resources */,
 				BF9079B1195E073E000E6E58 /* BlockRed@2x.png in Resources */,
 				BF9079CB195E1819000E6E58 /* YellowSelected@2x.png in Resources */,
 				AFADA2291877D20D00FADA22 /* FilledCircleGreen.png in Resources */,
@@ -1009,6 +1028,7 @@
 				BF907965194D6284000E6E58 /* rainbow@2x.png in Resources */,
 				BFA3A2BD1931401700C1BB7D /* ReflectorArrowLtDRed@2x.png in Resources */,
 				BF98086F196E664E00BAF9ED /* transporterInputTopWhite@2x.png in Resources */,
+				BF97FFF21A59257F00ABA450 /* World1@2x.png in Resources */,
 				BF90799819560FE3000E6E58 /* connectorInnerWhite@2x.png in Resources */,
 				BF98087A196E664E00BAF9ED /* transporterOutputRightBrown@2x.png in Resources */,
 				BF9079B9195E1040000E6E58 /* FilledCircleBlue@2x.png in Resources */,

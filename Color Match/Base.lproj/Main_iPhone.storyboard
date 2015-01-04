@@ -146,6 +146,7 @@
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" id="aKm-1a-EGS">
                                 <rect key="frame" x="141" y="504" width="39" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="pageIndicatorTintColor" red="0.75199558423913038" green="0.75199558423913038" blue="0.75199558423913038" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="currentPageIndicatorTintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
@@ -153,8 +154,9 @@
                                 </connections>
                             </pageControl>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="2R1-RH-8Gf">
-                                <rect key="frame" x="0.0" y="60" width="320" height="471"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="529"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -365,33 +367,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" id="drx-Vc-dci">
-                                <rect key="frame" x="78" y="421" width="165" height="39"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" id="drx-Vc-dci">
+                                <rect key="frame" x="85" y="382" width="150" height="56"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal">
-                                    <attributedString key="attributedTitle">
-                                        <fragment content="Freeplay Mode">
-                                            <attributes>
-                                                <font key="NSFont" size="18" name="Futura-Medium"/>
-                                            </attributes>
-                                        </fragment>
-                                    </attributedString>
+                                <state key="normal" image="buttonSettings.png">
+                                    <attributedString key="attributedTitle"/>
                                 </state>
-                                <connections>
-                                    <segue destination="93e-Hz-0Io" kind="push" id="X24-cy-YwP"/>
-                                </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" id="pHQ-bR-4XX">
-                                <rect key="frame" x="78" y="389" width="165" height="39"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" id="pHQ-bR-4XX">
+                                <rect key="frame" x="85" y="332" width="150" height="56"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal">
-                                    <attributedString key="attributedTitle">
-                                        <fragment content="Play Game">
-                                            <attributes>
-                                                <font key="NSFont" size="18" name="Futura-Medium"/>
-                                            </attributes>
-                                        </fragment>
-                                    </attributedString>
+                                <state key="normal" image="buttonPlayGame.png">
+                                    <attributedString key="attributedTitle"/>
                                 </state>
                                 <connections>
                                     <segue destination="MmH-K3-vAA" kind="push" id="x2f-0g-08e"/>
@@ -418,9 +405,16 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="divider.png" id="DfI-xk-VeF">
-                                <rect key="frame" x="0.0" y="266" width="320" height="35"/>
+                                <rect key="frame" x="0.0" y="248" width="320" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" id="uMU-ND-x8Q">
+                                <rect key="frame" x="85" y="432" width="150" height="56"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="buttonCredits.png">
+                                    <attributedString key="attributedTitle"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -428,6 +422,7 @@
                     <connections>
                         <outlet property="button1" destination="pHQ-bR-4XX" id="5ZE-h8-7za"/>
                         <outlet property="button2" destination="drx-Vc-dci" id="qaB-43-QZj"/>
+                        <outlet property="button3" destination="uMU-ND-x8Q" id="b64-bS-EGJ"/>
                         <outlet property="divider" destination="DfI-xk-VeF" id="gsD-PU-FGe"/>
                         <outlet property="logo" destination="cOw-Vj-hjh" id="0rN-Yn-tLf"/>
                     </connections>
@@ -444,6 +439,9 @@
         <image name="Red.png" width="60" height="60"/>
         <image name="White.png" width="60" height="60"/>
         <image name="Yellow.png" width="60" height="60"/>
+        <image name="buttonCredits.png" width="200" height="75"/>
+        <image name="buttonPlayGame.png" width="200" height="75"/>
+        <image name="buttonSettings.png" width="200" height="75"/>
         <image name="divider.png" width="640" height="69"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

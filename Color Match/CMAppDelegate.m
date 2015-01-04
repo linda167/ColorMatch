@@ -13,9 +13,18 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-    /* In case we want to change in future
+    // In case we want to change in future
+    
+    /* TODO: lindach
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:(79/255.0) green:(159/255.0) blue:(208/255.0) alpha:1]];
+    */
+    
+    /*
+    [[UINavigationBar appearance] setTintColor:[UIColor clearColor]];
+    [[UINavigationBar appearance] setBarTintColor:[UIColor clearColor]];
+    [UINavigationBar appearance].translucent = YES;
+    [UINavigationBar appearance].opaque = NO;
      */
     return YES;
 }
