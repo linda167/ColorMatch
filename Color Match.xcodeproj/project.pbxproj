@@ -155,7 +155,6 @@
 		BF9079E819664916000E6E58 /* converterWhite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF9079E419664916000E6E58 /* converterWhite@2x.png */; };
 		BF9079E919664916000E6E58 /* converterYellow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF9079E519664916000E6E58 /* converterYellow@2x.png */; };
 		BF97FFF01A5913D300ABA450 /* backgroundImage.png in Resources */ = {isa = PBXBuildFile; fileRef = BF97FFEF1A5913D300ABA450 /* backgroundImage.png */; };
-		BF97FFF21A59257F00ABA450 /* World1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF97FFF11A59257F00ABA450 /* World1@2x.png */; };
 		BF9807AB196721BA00BAF9ED /* TransporterGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = BF9807AA196721BA00BAF9ED /* TransporterGroup.m */; };
 		BF9807AE1967230600BAF9ED /* TransporterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BF9807AD1967230600BAF9ED /* TransporterCell.m */; };
 		BF980861196E664E00BAF9ED /* transporterInputLeftBlue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF980841196E664E00BAF9ED /* transporterInputLeftBlue@2x.png */; };
@@ -404,7 +403,6 @@
 		BF9079E419664916000E6E58 /* converterWhite@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "converterWhite@2x.png"; sourceTree = "<group>"; };
 		BF9079E519664916000E6E58 /* converterYellow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "converterYellow@2x.png"; sourceTree = "<group>"; };
 		BF97FFEF1A5913D300ABA450 /* backgroundImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backgroundImage.png; sourceTree = "<group>"; };
-		BF97FFF11A59257F00ABA450 /* World1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "World1@2x.png"; sourceTree = "<group>"; };
 		BF9807A9196721BA00BAF9ED /* TransporterGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransporterGroup.h; sourceTree = "<group>"; };
 		BF9807AA196721BA00BAF9ED /* TransporterGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransporterGroup.m; sourceTree = "<group>"; };
 		BF9807AC1967230600BAF9ED /* TransporterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransporterCell.h; sourceTree = "<group>"; };
@@ -570,7 +568,6 @@
 		AF2C225A1874B95000082561 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				BF97FFF11A59257F00ABA450 /* World1@2x.png */,
 				BF97FFEF1A5913D300ABA450 /* backgroundImage.png */,
 				BF85C8671A57988600A494B6 /* buttonCredits@2x.png */,
 				BF85C8631A578D5C00A494B6 /* buttonPlayGame@2x.png */,
@@ -1028,7 +1025,6 @@
 				BF907965194D6284000E6E58 /* rainbow@2x.png in Resources */,
 				BFA3A2BD1931401700C1BB7D /* ReflectorArrowLtDRed@2x.png in Resources */,
 				BF98086F196E664E00BAF9ED /* transporterInputTopWhite@2x.png in Resources */,
-				BF97FFF21A59257F00ABA450 /* World1@2x.png in Resources */,
 				BF90799819560FE3000E6E58 /* connectorInnerWhite@2x.png in Resources */,
 				BF98087A196E664E00BAF9ED /* transporterOutputRightBrown@2x.png in Resources */,
 				BF9079B9195E1040000E6E58 /* FilledCircleBlue@2x.png in Resources */,

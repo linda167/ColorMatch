@@ -40,13 +40,6 @@
         self.worldId = worldId;
         self.parentWorldController = parentWorldController;
         
-        UIGraphicsBeginImageContext(self.view.frame.size);
-        [[UIImage imageNamed:@"backgroundImage.png"] drawInRect:self.view.bounds];
-        UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
-        
-        self.view.backgroundColor = [UIColor colorWithPatternImage:image];
-        
         // Uncomment if we want colored wrolds in future
         // self.view.backgroundColor = [self getBackgroundColorForWorld:worldId];
     }
@@ -105,9 +98,6 @@
     self.levelButtons = [[NSMutableArray alloc] init];
     self.isFirstTimeViewCreation = true;
     
-    // Change navigation bar appearance
-    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
-    
     // Do any additional setup after loading the view.
     [self renderWorldTitleDisplay];
     if (self.worldId < 10)
@@ -134,25 +124,17 @@
 
 - (void)renderWorldTitleDisplay
 {
-    if (self.worldId != 1)
-    {
-        UILabel *worldTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
-        worldTitle.font = [UIFont fontWithName:@"Harrington" size:26.0];
-        worldTitle.textColor = [UIColor colorWithRed:(255/255.0) green:(255/255.0) blue:(255/255.0) alpha:1];
-        worldTitle.text = [NSString stringWithFormat: @"World %d", self.worldId];
-        [worldTitle sizeToFit];
-        [worldTitle setCenter:CGPointMake(self.view.frame.size.width / 2, 97)];
-        
-        [self.view addSubview:worldTitle];
-    }
-    else
-    {
-        // TODO: lindach
-        UIImageView *worldTitle = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 123, 34)];
-        worldTitle.image = [UIImage imageNamed:@"World1@2x.png"];
-        [worldTitle setCenter:CGPointMake(self.view.frame.size.width / 2, 100)];
-        [self.view addSubview:worldTitle];
-    }
+    UILabel *worldTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
+    worldTitle.font = [UIFont fontWithName:@"Futura-Medium" size:20.0];
+    worldTitle.textColor = [UIColor whiteColor];
+    worldTitle.shadowColor = [UIColor colorWithRed:(64/255.0) green:(64/255.0) blue:(64/255.0) alpha:1];
+    worldTitle.shadowOffset = CGSizeMake(1,1);
+    
+    worldTitle.text = [NSString stringWithFormat: @"World %d", self.worldId];
+    [worldTitle sizeToFit];
+    [worldTitle setCenter:CGPointMake(self.view.frame.size.width / 2, 40)];
+    
+    [self.view addSubview:worldTitle];
 }
 
 - (void)renderLevelsDisplay
@@ -166,7 +148,7 @@
     
     int totalLevelsToRender = [LevelsManager GetLevelCountForWorld:self.worldId];
     int xOffsetInitial = 15;
-    int yOffsetInitial = 135;
+    int yOffsetInitial = 75;
     int xOffset = xOffsetInitial;
     int yOffset = yOffsetInitial;
     int size = 60;

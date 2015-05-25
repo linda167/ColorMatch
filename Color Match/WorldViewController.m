@@ -52,8 +52,16 @@
     self.pageControl.currentPage = 0;
     self.pageControl.enabled = TRUE;
     
-    self.pageControl.frame = CGRectMake(0, self.view.frame.size.height - 35, self.view.frame.size.width, 35);
+    self.pageControl.frame = CGRectMake(0, self.view.frame.size.height - 45, self.view.frame.size.width, 35);
     [self.pageControl setNeedsLayout];
+    
+    // Set background image
+    UIGraphicsBeginImageContext(self.view.frame.size);
+    [[UIImage imageNamed:@"backgroundImage.png"] drawInRect:self.view.bounds];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    self.view.backgroundColor = [UIColor colorWithPatternImage:image];
     
     // Get last world that we completed a level
     int lastLevelCompletedInWorld = [[UserData sharedUserData] getLastLevelCompletedInWorld];
@@ -70,12 +78,26 @@
     {
         [self scrollToCurrentPage:false /* animated */ ];
     }
+    
+    // Change navigation bar appearance
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    // Change navigation bar appearance
+    [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
+    
     [super viewWillAppear:animated];
     [[self getCurrentPageViewController] onViewShown];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    // Change navigation bar appearance
+    [self.navigationController.navigationBar setTintColor:nil];
+    
+    [super viewDidDisappear:animated];
 }
 
 - (SingleWorldViewController*)getCurrentPageViewController

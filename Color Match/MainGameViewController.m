@@ -37,6 +37,9 @@
     
     // Start new game
     [self startNewGame];
+    
+    // Change navigation bar appearance
+    [self.navigationController.navigationBar setTintColor:nil];
 }
 
 - (void)SetParametersForNewGame:(int)size worldId:(int)worldId levelId:(int)levelId
