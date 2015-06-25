@@ -18,6 +18,7 @@
 #import "ShifterCell.h"
 #import "UserColorBoard.h"
 #import "GridColorButton.h"
+#import "DiverterCell.h"
 
 @interface ColorBoard ()
 @property int shifterCellCount;
@@ -87,7 +88,7 @@
             ColorCell *colorCell = [row objectAtIndex:i];
             if ([ColorCell doesCellSupportCombineColor:colorCell.cellType])
             {
-                [self applyColorToSingleCell:colorCell color:color cellsAffected:cellsAffected isAdd:isAdd];
+                [self applyColorToSingleCell:colorCell color:color cellsAffected:cellsAffected isAdd:isAdd isHorizontal:isHorizontal];
                 
                 if (cellsAffected != NULL)
                 {
@@ -95,7 +96,8 @@
                     [cellsAffected addObject:colorCell.image];
                 }
             }
-            else if (colorCell.cellType == ReflectorLeftToDown || colorCell.cellType == Diverter)
+            
+            if (colorCell.cellType == ReflectorLeftToDown || colorCell.cellType == Diverter)
             {
                 // Trigger apply color vertically down
                 [self applyColor:currentRow currentCol:i isHorizontal:false color:color isAdd:isAdd cellsAffected:cellsAffected];
@@ -141,7 +143,7 @@
             
             if ([ColorCell doesCellSupportCombineColor:colorCell.cellType])
             {
-                [self applyColorToSingleCell:colorCell color:color cellsAffected:cellsAffected isAdd:isAdd];
+                [self applyColorToSingleCell:colorCell color:color cellsAffected:cellsAffected isAdd:isAdd isHorizontal:isHorizontal];
                 
                 if (cellsAffected != NULL)
                 {
@@ -149,7 +151,8 @@
                     [cellsAffected addObject:colorCell.image];
                 }
             }
-            else if (colorCell.cellType == ReflectorLeftToDown)
+            
+            if (colorCell.cellType == ReflectorLeftToDown)
             {
                 // NOOP since we're coming from top
                 break;
@@ -241,7 +244,7 @@
 -(void)updateSpecialCellImagesOnApplyColor:(ColorCell*)colorCell color:(int)color isHorizontal:(BOOL)isHorizontal cellsAffected:(NSMutableArray*)cellsAffected
 {
     // Change special image
-    UIImage *specialImage = [self updateSpecialImageForCellWithColor:colorCell.cellType color:color isHorizontal:isHorizontal];
+    UIImage *specialImage = [self updateSpecialImageForCellWithColor:colorCell color:color isHorizontal:isHorizontal];
     if (specialImage != NULL)
     {
         [colorCell.specialImage setImage:specialImage];
@@ -252,7 +255,7 @@
     }
     
     // Change special image2
-    UIImage *specialImage2 = [self updateSpecialImage2ForCellWithColor:colorCell.cellType color:color isHorizontal:isHorizontal];
+    UIImage *specialImage2 = [self updateSpecialImage2ForCellWithColor:colorCell color:color isHorizontal:isHorizontal];
     if (specialImage2 != NULL)
     {
         [colorCell.specialImage2 setImage:specialImage2];
@@ -263,37 +266,37 @@
     }
 }
 
--(UIImage*)updateSpecialImageForCellWithColor:(CellType)cellType color:(int)color isHorizontal:(BOOL)isHorizontal
+-(UIImage*)updateSpecialImageForCellWithColor:(ColorCell*)colorCell color:(int)color isHorizontal:(BOOL)isHorizontal
 {
     // NOOP in base class
     return NULL;
 }
 
--(UIImage*)updateSpecialImage2ForCellWithColor:(CellType)cellType color:(int)color isHorizontal:(BOOL)isHorizontal
+-(UIImage*)updateSpecialImage2ForCellWithColor:(ColorCell*)colorCell color:(int)color isHorizontal:(BOOL)isHorizontal
 {
     // NOOP in base class
     return NULL;
 }
 
--(void)addColorToSingleCell:(ColorCell*)colorCell color:(int)color cellsAffected:(NSMutableArray*)cellsAffected
+-(void)addColorToSingleCell:(ColorCell*)colorCell color:(int)color cellsAffected:(NSMutableArray*)cellsAffected isHorizontal:(bool)isHorizontal
 {
-    [colorCell addInputColor:[NSNumber numberWithInt:color] cellsAffected:cellsAffected];
+    [colorCell addInputColor:[NSNumber numberWithInt:color] cellsAffected:cellsAffected isHorizontal:isHorizontal];
 }
 
--(void)removeColorFromSingleCell:(ColorCell*)colorCell color:(int)color cellsAffected:(NSMutableArray*)cellsAffected
+-(void)removeColorFromSingleCell:(ColorCell*)colorCell color:(int)color cellsAffected:(NSMutableArray*)cellsAffected isHorizontal:(bool)isHorizontal
 {
-    [colorCell removeInputColor:[NSNumber numberWithInt:color] cellsAffected:cellsAffected];
+    [colorCell removeInputColor:[NSNumber numberWithInt:color] cellsAffected:cellsAffected isHorizontal:isHorizontal];
 }
 
--(void)applyColorToSingleCell:(ColorCell*)colorCell color:(int)color cellsAffected:(NSMutableArray*)cellsAffected isAdd:(bool)isAdd
+-(void)applyColorToSingleCell:(ColorCell*)colorCell color:(int)color cellsAffected:(NSMutableArray*)cellsAffected isAdd:(bool)isAdd isHorizontal:(bool)isHorizontal
 {
     if (isAdd)
     {
-        [self addColorToSingleCell:colorCell color:color cellsAffected:cellsAffected];
+        [self addColorToSingleCell:colorCell color:color cellsAffected:cellsAffected isHorizontal:isHorizontal];
     }
     else
     {
-        [self removeColorFromSingleCell:colorCell color:color cellsAffected:cellsAffected];
+        [self removeColorFromSingleCell:colorCell color:color cellsAffected:cellsAffected isHorizontal:isHorizontal];
     }
 }
 
@@ -302,7 +305,8 @@
     NSArray *row = [self.colorCellSections objectAtIndex:rowValue];
     ColorCell *colorCell = [row objectAtIndex:colValue];
     
-    [self applyColorToSingleCell:colorCell color:color cellsAffected:cellsAffected isAdd:isAdd];
+    // Direction doesn't matter
+    [self applyColorToSingleCell:colorCell color:color cellsAffected:cellsAffected isAdd:isAdd isHorizontal:true];
 }
 
 -(UIView*)getUIViewForCell:(int)cellType xOffset:(int)xOffset yOffset:(int)yOffset size:(int)size colorCell:(ColorCell*)colorCell
@@ -348,6 +352,9 @@
             break;
         case Shifter:
             colorCell = [self createShifterCell:cellType row:row col:col boardCells:boardCells];
+            break;
+        case Diverter:
+            colorCell = [[DiverterCell alloc] init:cellType];
             break;
         default:
             colorCell = [[ColorCell alloc] init:cellType];
@@ -508,13 +515,15 @@
     ConnectorCell *connectorCell = (ConnectorCell*)colorCell;
     if (isAdd)
     {
-        [connectorCell addInputColor:[NSNumber numberWithInt:connectorCell.inputColor] cellsAffected:cellsAffected];
+        // Direction doesn't matter
+        [connectorCell addInputColor:[NSNumber numberWithInt:connectorCell.inputColor] cellsAffected:cellsAffected isHorizontal:true];
     }
     else
     {
         if (connectorCell.inputColor != 0)
         {
-            [connectorCell removeInputColor:[NSNumber numberWithInt:connectorCell.inputColor] cellsAffected:cellsAffected];
+            // Direction doesn't matter
+            [connectorCell removeInputColor:[NSNumber numberWithInt:connectorCell.inputColor] cellsAffected:cellsAffected isHorizontal:true];
         }
     }
 }
@@ -524,13 +533,15 @@
     ShifterCell *shifterCell = (ShifterCell*)colorCell;
     if (isAdd)
     {
-        [shifterCell addInputColor:[NSNumber numberWithInt:shifterCell.outerColor] cellsAffected:cellsAffected];
+        // Direction doesn't matter
+        [shifterCell addInputColor:[NSNumber numberWithInt:shifterCell.outerColor] cellsAffected:cellsAffected isHorizontal:true];
     }
     else
     {
         if (shifterCell.outerColor != 0)
         {
-            [shifterCell removeInputColor:[NSNumber numberWithInt:shifterCell.outerColor] cellsAffected:cellsAffected];
+            // Direction doesn't matter
+            [shifterCell removeInputColor:[NSNumber numberWithInt:shifterCell.outerColor] cellsAffected:cellsAffected isHorizontal:true];
         }
     }
 }

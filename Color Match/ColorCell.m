@@ -27,6 +27,11 @@
 
 +(bool)doesCellSupportCombineColor:(CellType)cellType
 {
+    return cellType == NormalCell || cellType == Connector || cellType == Shifter || cellType == ReflectorLeftToDown || cellType == ReflectorTopToRight || cellType == Diverter;
+}
+
++(bool)isGoalTargetCell:(CellType)cellType
+{
     return cellType == NormalCell || cellType == Connector || cellType == Shifter;
 }
 
@@ -42,7 +47,7 @@
     }
 }
 
--(void)addInputColor:(NSNumber*)color cellsAffected:(NSMutableArray*)cellsAffected
+-(void)addInputColor:(NSNumber*)color cellsAffected:(NSMutableArray*)cellsAffected isHorizontal:(bool)isHorizontal
 {
     if (![ColorCell doesCellSupportCombineColor:self.cellType])
     {
@@ -59,7 +64,7 @@
     }
 }
 
--(void)removeInputColor:(NSNumber*)color cellsAffected:(NSMutableArray*)cellsAffected
+-(void)removeInputColor:(NSNumber*)color cellsAffected:(NSMutableArray*)cellsAffected isHorizontal:(bool)isHorizontal
 {
     if (![ColorCell doesCellSupportCombineColor:self.cellType])
     {

@@ -18,9 +18,10 @@
 @property int currentColor;
 
 +(bool)doesCellSupportCombineColor:(CellType)cellType;
++(bool)isGoalTargetCell:(CellType)cellType;
 -(id)init:(int)cellType;
--(void)addInputColor: (NSNumber *)color cellsAffected:(NSMutableArray*)cellsAffected;
--(void)removeInputColor: (NSNumber *)color cellsAffected:(NSMutableArray*)cellsAffected;
+-(void)addInputColor: (NSNumber *)color cellsAffected:(NSMutableArray*)cellsAffected isHorizontal:(bool)isHorizontal;
+-(void)removeInputColor: (NSNumber *)color cellsAffected:(NSMutableArray*)cellsAffected isHorizontal:(bool)isHorizontal;
 -(void)removeAllInputColors;
 -(void)recalculateSpecialCellImage;
 -(void)recalculateOutputColor;

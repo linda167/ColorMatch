@@ -100,7 +100,7 @@
     
     // Do any additional setup after loading the view.
     [self renderWorldTitleDisplay];
-    if (self.worldId < 10)
+    if (self.worldId < 11)
     {
         [self renderLevelsDisplay];
     }
@@ -154,7 +154,6 @@
     int size = 60;
     int heightBetweenRows = 95;
     int widthBetweenCols = 75;
-    int levelNameYOffset = 55;
     for (int i=0; i<totalLevelsToRender; i++)
     {
         // Figure out if level is complete
@@ -172,10 +171,11 @@
         [self.levelButtons addObject:levelButton];
         [self.view addSubview:levelButton];
         
-        int textXOffset = levelId < 10 ? 19 : 15;
-        
         // Add level text
-        UILabel *levelName = [[UILabel alloc] initWithFrame:CGRectMake(xOffset+textXOffset, yOffset+levelNameYOffset, size, 25)];
+        UILabel *levelName = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, size, 25)];
+        [levelName setCenter:CGPointMake(xOffset+(size/2.0), yOffset+size+7)];
+        levelName.textAlignment = NSTextAlignmentCenter;
+        
         levelName.font = [UIFont fontWithName:@"Futura-Medium" size:14.0];
         levelName.textColor = [UIColor whiteColor];
         levelName.shadowColor = [UIColor colorWithRed:(64/255.0) green:(64/255.0) blue:(64/255.0) alpha:1];
@@ -214,7 +214,7 @@
 {
     if (starCount == 1)
         return [UIImage imageNamed:@"1stars@2x.png"];
-    else if (starCount == 2 || starCount == 3)
+    else if (starCount == 2)
         return [UIImage imageNamed:@"2stars@2x.png"];
     else 
         return [UIImage imageNamed:@"3stars@2x.png"];

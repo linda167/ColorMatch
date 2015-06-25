@@ -20,6 +20,7 @@
 #import "TransporterGroup.h"
 #import "TransporterCell.h"
 #import "ShifterCell.h"
+#import "DiverterCell.h"
 
 @interface UserColorBoard ()
 @property MainGameViewController *viewController;
@@ -241,8 +242,8 @@
         
         if (!connectionFound)
         {
-            // If no special connection found, then the connection is to the right most cell
-            ColorCell *colorCell = [row objectAtIndex:row.count - 1];
+            // If no special connection found, then the connection is to the right most cell that supports combining color
+            ColorCell *colorCell = [self FindRightmostGoalTargetCell:currentRow];
             [self DrawHorizontalLineToConnection:colorCell lineInfo:lineInfo currentY:currentY drawToCenter:true];
         }
     }
@@ -295,9 +296,8 @@
         
         if (!connectionFound)
         {
-            // If no special connection found, then the connection is to the bottom most cell
-            NSArray *row = [self.colorCellSections objectAtIndex:self.colorCellSections.count - 1];
-            ColorCell *colorCell = [row objectAtIndex:currentCol];
+            // If no special connection found, then the connection is to the right most cell that supports combining color
+            ColorCell *colorCell = [self FindBottommostGoalTargetCell:currentCol];
             [self DrawVerticalLineToConnection:colorCell lineInfo:lineInfo currentX:currentX drawToCenter:true];
         }
     }
@@ -383,6 +383,36 @@
             colorCell.cellType != TransporterInputLeft &&
             colorCell.cellType != TransporterOutputRight &&
             colorCell.cellType != TransporterOutputDown)
+        {
+            return colorCell;
+        }
+    }
+    
+    return NULL;
+}
+
+-(ColorCell*)FindRightmostGoalTargetCell:(int)rowVal
+{
+    NSArray *row = [self.colorCellSections objectAtIndex:rowVal];
+    for (int i = row.count-1; i >=0; i--)
+    {
+        ColorCell *colorCell = [row objectAtIndex:i];
+        if ([ColorCell isGoalTargetCell:colorCell.cellType])
+        {
+            return colorCell;
+        }
+    }
+    
+    return NULL;
+}
+
+-(ColorCell*)FindBottommostGoalTargetCell:(int)colVal
+{
+    for (int i = self.colorCellSections.count - 1; i >= 0; i--)
+    {
+        NSArray *row = [self.colorCellSections objectAtIndex:i];
+        ColorCell *colorCell = [row objectAtIndex:colVal];
+        if ([ColorCell isGoalTargetCell:colorCell.cellType])
         {
             return colorCell;
         }
@@ -871,30 +901,41 @@
     [self.containerView addSubview:specialImageView];
 }
 
--(UIImage*)updateSpecialImageForCellWithColor:(CellType)cellType color:(int)color isHorizontal:(BOOL)isHorizontal
+-(UIImage*)updateSpecialImageForCellWithColor:(ColorCell*)colorCell color:(int)color isHorizontal:(BOOL)isHorizontal
 {
-    if (cellType == ReflectorLeftToDown ||
-        (cellType == Diverter && isHorizontal) ||
-        cellType == TransporterInputTop ||
-        cellType == TransporterOutputDown)
+    CellType cellType = colorCell.cellType;
+    switch (cellType)
     {
-        return [self getArrowLtDWithColor:color];
+        case ReflectorLeftToDown:
+            return [self getArrowLtDWithColor:colorCell.currentColor];
+        case Diverter:
+            if (isHorizontal)
+            {
+                return [self getArrowLtDWithColor:((DiverterCell*)colorCell).leftToDownLine.currentColor];
+            }
+            else
+            {
+                return NULL;
+            }
+        case TransporterInputTop:
+        case TransporterOutputDown:
+            return [self getArrowLtDWithColor:color];
+        case ReflectorTopToRight:
+            return [self getArrowTtRWithColor:colorCell.currentColor];
+        case TransporterInputLeft:
+        case TransporterOutputRight:
+            return [self getArrowTtRWithColor:color];
+        default:
+            return NULL;
     }
-    else if (cellType == ReflectorTopToRight ||
-             cellType == TransporterInputLeft ||
-             cellType == TransporterOutputRight)
-    {
-        return [self getArrowTtRWithColor:color];
-    }
-    
-    return NULL;
 }
 
--(UIImage*)updateSpecialImage2ForCellWithColor:(CellType)cellType color:(int)color isHorizontal:(BOOL)isHorizontal
+-(UIImage*)updateSpecialImage2ForCellWithColor:(ColorCell*)colorCell color:(int)color isHorizontal:(BOOL)isHorizontal
 {
+    CellType cellType = colorCell.cellType;
     if (cellType == Diverter && !isHorizontal)
     {
-        return [self getArrowTtRWithColor:color];
+        return [self getArrowTtRWithColor:((DiverterCell*)colorCell).topToRightLine.currentColor];
     }
     
     return NULL;

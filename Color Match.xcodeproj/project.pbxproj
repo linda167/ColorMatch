@@ -212,6 +212,7 @@
 		BFA3A2CF1944386400C1BB7D /* LevelSelectButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BFA3A2CE1944386400C1BB7D /* LevelSelectButton.m */; };
 		BFA3A2D21944B6B900C1BB7D /* UserData.m in Sources */ = {isa = PBXBuildFile; fileRef = BFA3A2D11944B6B900C1BB7D /* UserData.m */; };
 		BFA76143197B623400AF6723 /* converterGoal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFA76142197B623400AF6723 /* converterGoal@2x.png */; };
+		BFE467DE1B3BC7A700C286F1 /* DiverterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BFE467DD1B3BC7A700C286F1 /* DiverterCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -465,6 +466,8 @@
 		BFA3A2D01944B6B900C1BB7D /* UserData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserData.h; sourceTree = "<group>"; };
 		BFA3A2D11944B6B900C1BB7D /* UserData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserData.m; sourceTree = "<group>"; };
 		BFA76142197B623400AF6723 /* converterGoal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "converterGoal@2x.png"; sourceTree = "<group>"; };
+		BFE467DC1B3BC7A700C286F1 /* DiverterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiverterCell.h; sourceTree = "<group>"; };
+		BFE467DD1B3BC7A700C286F1 /* DiverterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiverterCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -798,6 +801,8 @@
 				BF9807AD1967230600BAF9ED /* TransporterCell.m */,
 				BF85C8371A49484500A494B6 /* ShifterCell.h */,
 				BF85C8381A49484500A494B6 /* ShifterCell.m */,
+				BFE467DC1B3BC7A700C286F1 /* DiverterCell.h */,
+				BFE467DD1B3BC7A700C286F1 /* DiverterCell.m */,
 			);
 			name = "Game Core";
 			sourceTree = "<group>";
@@ -1112,6 +1117,7 @@
 				BF9807AB196721BA00BAF9ED /* TransporterGroup.m in Sources */,
 				BF9807AE1967230600BAF9ED /* TransporterCell.m in Sources */,
 				BF0D4BC5192010BB00AACB5A /* BoardCells.m in Sources */,
+				BFE467DE1B3BC7A700C286F1 /* DiverterCell.m in Sources */,
 				AFB896811881C0C7003FAEF4 /* GoalBoard.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1187,7 +1193,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Linda Chen (GDU7TKF4WJ)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Linda Chen (GDU7TKF4WJ)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -1205,6 +1212,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "9799eaf0-cceb-411a-9d84-51931bec7812";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1227,7 +1235,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Linda Chen (GDU7TKF4WJ)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Linda Chen (GDU7TKF4WJ)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1238,6 +1247,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				PROVISIONING_PROFILE = "9799eaf0-cceb-411a-9d84-51931bec7812";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -1255,7 +1265,7 @@
 				GCC_PREFIX_HEADER = "Color Match/Color Match-Prefix.pch";
 				INFOPLIST_FILE = "Color Match/Color Match-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "CE0BFA6D-BBFE-44A1-B938-47E6503A212E";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1271,7 +1281,7 @@
 				GCC_PREFIX_HEADER = "Color Match/Color Match-Prefix.pch";
 				INFOPLIST_FILE = "Color Match/Color Match-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "CE0BFA6D-BBFE-44A1-B938-47E6503A212E";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
