@@ -2155,12 +2155,14 @@
         {
             boardCells.colorCellSections =
             [NSMutableArray arrayWithObjects:
-             [NSArray arrayWithObjects:@"5", @"0", @"11", @"0", @"1", nil],
-             [NSArray arrayWithObjects:@"0", @"0", @"0", @"0", @"0", nil],
+             [NSArray arrayWithObjects:@"5", @"4", @"11", @"0", @"1", nil],
+             [NSArray arrayWithObjects:@"0", @"0", @"0", @"0", @"4", nil],
              [NSArray arrayWithObjects:@"10", @"0", @"5", @"0", @"0", nil],
-             [NSArray arrayWithObjects:@"0", @"0", @"0", @"0", @"9", nil],
-             [NSArray arrayWithObjects:@"2", @"0", @"0", @"8", @"0", nil],
+             [NSArray arrayWithObjects:@"4", @"0", @"0", @"0", @"9", nil],
+             [NSArray arrayWithObjects:@"2", @"0", @"0", @"8", @"4", nil],
              nil];
+            
+            boardCells.connectorCellInput = 2;
         }
         else if (worldId == 10 && levelId == 13)
         {

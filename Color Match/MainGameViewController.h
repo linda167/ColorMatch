@@ -13,6 +13,7 @@
 - (IBAction)GridButtonPressed:(id)sender;
 - (void)SetParametersForNewGame:(int)size worldId:(int)worldId levelId:(int)levelId;
 -(void)OnUserActionTaken;
+-(void)CloseHelpMenu;
 
 @property (weak, nonatomic) IBOutlet UIView *GridContainerView;
 @property (weak, nonatomic) IBOutlet UIView *GoalContainerView;

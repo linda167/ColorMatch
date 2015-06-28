@@ -262,7 +262,7 @@
                 if (i > currentRow + 1)
                 {
                     // Draw line to closest cell above that would need a line
-                    ColorCell *colorCell = [self FindClosestCellReceivingLinesOnTop:i rowStartVal:currentRow rowEndVal:i];
+                    ColorCell *colorCell = [self FindClosestCellReceivingLinesOnTop:currentCol rowStartVal:currentRow rowEndVal:i];
                     if (colorCell != NULL)
                     {
                         [self DrawVerticalLineToConnection:colorCell lineInfo:lineInfo currentX:currentX drawToCenter:true];
@@ -296,7 +296,7 @@
         
         if (!connectionFound)
         {
-            // If no special connection found, then the connection is to the right most cell that supports combining color
+            // If no special connection found, then the connection is to the bottom most cell that supports combining color
             ColorCell *colorCell = [self FindBottommostGoalTargetCell:currentCol];
             [self DrawVerticalLineToConnection:colorCell lineInfo:lineInfo currentX:currentX drawToCenter:true];
         }
@@ -669,9 +669,9 @@
     for (int i = 0; i < topRow.count; i++)
     {
         ColorCell *colorCell = [topRow objectAtIndex:i];
-        if (colorCell.cellType == ReflectorLeftToDown)
+        if (colorCell.cellType == ReflectorLeftToDown || colorCell.cellType == TransporterOutputDown)
         {
-            // If the first cell under a top button is a LeftToDown cell,
+            // If the first cell under a top button is a cell that blocks input,
             // there's no need for a top button so remove it
             GridColorButton *gridColorButton = [topButtons objectAtIndex:i];
             [gridColorButton.button removeFromSuperview];
@@ -682,9 +682,9 @@
     {
         NSArray *row = [self.colorCellSections objectAtIndex:i];
         ColorCell *colorCell = [row objectAtIndex:0];
-        if (colorCell.cellType == ReflectorTopToRight)
+        if (colorCell.cellType == ReflectorTopToRight || colorCell.cellType == TransporterOutputRight)
         {
-            // If the first cell to the right of a left button is a TopToRight cell,
+            // If the first cell to the right of a left button is a cell that blocks input,
             // there's no need for a left button so remove it
             GridColorButton *gridColorButton = [leftButtons objectAtIndex:i];
             [gridColorButton.button removeFromSuperview];

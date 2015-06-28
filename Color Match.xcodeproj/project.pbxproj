@@ -213,6 +213,10 @@
 		BFA3A2D21944B6B900C1BB7D /* UserData.m in Sources */ = {isa = PBXBuildFile; fileRef = BFA3A2D11944B6B900C1BB7D /* UserData.m */; };
 		BFA76143197B623400AF6723 /* converterGoal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFA76142197B623400AF6723 /* converterGoal@2x.png */; };
 		BFE467DE1B3BC7A700C286F1 /* DiverterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BFE467DD1B3BC7A700C286F1 /* DiverterCell.m */; };
+		BFE467E31B3F85D800C286F1 /* HelpScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFE467E21B3F85D800C286F1 /* HelpScreenViewController.m */; };
+		BFE467E71B3FA15300C286F1 /* 00pauseColorMix@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFE467E61B3FA15300C286F1 /* 00pauseColorMix@2x.png */; };
+		BFE467EB1B40AE4700C286F1 /* helpButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFE467EA1B40AE4700C286F1 /* helpButton@2x.png */; };
+		BFE467ED1B40B36A00C286F1 /* closeButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFE467EC1B40B36A00C286F1 /* closeButton@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -468,6 +472,11 @@
 		BFA76142197B623400AF6723 /* converterGoal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "converterGoal@2x.png"; sourceTree = "<group>"; };
 		BFE467DC1B3BC7A700C286F1 /* DiverterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiverterCell.h; sourceTree = "<group>"; };
 		BFE467DD1B3BC7A700C286F1 /* DiverterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiverterCell.m; sourceTree = "<group>"; };
+		BFE467E11B3F85D800C286F1 /* HelpScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpScreenViewController.h; sourceTree = "<group>"; };
+		BFE467E21B3F85D800C286F1 /* HelpScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpScreenViewController.m; sourceTree = "<group>"; };
+		BFE467E61B3FA15300C286F1 /* 00pauseColorMix@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "00pauseColorMix@2x.png"; sourceTree = "<group>"; };
+		BFE467EA1B40AE4700C286F1 /* helpButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "helpButton@2x.png"; sourceTree = "<group>"; };
+		BFE467EC1B40B36A00C286F1 /* closeButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "closeButton@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -571,6 +580,9 @@
 		AF2C225A1874B95000082561 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				BFE467EC1B40B36A00C286F1 /* closeButton@2x.png */,
+				BFE467EA1B40AE4700C286F1 /* helpButton@2x.png */,
+				BFE467E61B3FA15300C286F1 /* 00pauseColorMix@2x.png */,
 				BF97FFEF1A5913D300ABA450 /* backgroundImage.png */,
 				BF85C8671A57988600A494B6 /* buttonCredits@2x.png */,
 				BF85C8631A578D5C00A494B6 /* buttonPlayGame@2x.png */,
@@ -756,6 +768,8 @@
 				AFADA23418791E4400FADA22 /* GridColorButton.m */,
 				BF85C8541A50DFF200A494B6 /* WelcomeScreenViewController.h */,
 				BF85C8551A50DFF200A494B6 /* WelcomeScreenViewController.m */,
+				BFE467E11B3F85D800C286F1 /* HelpScreenViewController.h */,
+				BFE467E21B3F85D800C286F1 /* HelpScreenViewController.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -937,6 +951,7 @@
 				AF2C223E1874B8B800082561 /* Images.xcassets in Resources */,
 				AFADA22E1877D20D00FADA22 /* RedSelected.png in Resources */,
 				BF85C8621A56071900A494B6 /* divider.png in Resources */,
+				BFE467EB1B40AE4700C286F1 /* helpButton@2x.png in Resources */,
 				BF98088E1974F13D00BAF9ED /* ReflectorArrowTtRGreen@2x.png in Resources */,
 				AFADA2311877D20D00FADA22 /* Yellow.png in Resources */,
 				BF85C84E1A4F5B4A00A494B6 /* shifterInnerOrange@2x.png in Resources */,
@@ -1063,10 +1078,12 @@
 				BF85C83D1A4E9C5300A494B6 /* shifterOuterBlue@2x.png in Resources */,
 				BF9079B3195E073E000E6E58 /* BlockYellow@2x.png in Resources */,
 				BF980869196E664E00BAF9ED /* transporterInputTopBlue@2x.png in Resources */,
+				BFE467ED1B40B36A00C286F1 /* closeButton@2x.png in Resources */,
 				BF9079B0195E073E000E6E58 /* BlockPurple@2x.png in Resources */,
 				AFADA2221877D20D00FADA22 /* BlockWhite.png in Resources */,
 				AFADA21D1877D20D00FADA22 /* BlockBlue.png in Resources */,
 				BF90799C19560FE3000E6E58 /* connectorOuterWhite@2x.png in Resources */,
+				BFE467E71B3FA15300C286F1 /* 00pauseColorMix@2x.png in Resources */,
 				AFADA21E1877D20D00FADA22 /* BlockGreen.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1113,6 +1130,7 @@
 				AF2C222F1874B8B700082561 /* main.m in Sources */,
 				BF9079DE1964F933000E6E58 /* ConverterCell.m in Sources */,
 				AF2C223C1874B8B800082561 /* MainGameViewController.m in Sources */,
+				BFE467E31B3F85D800C286F1 /* HelpScreenViewController.m in Sources */,
 				BF9079A019564F29000E6E58 /* ConnectorCell.m in Sources */,
 				BF9807AB196721BA00BAF9ED /* TransporterGroup.m in Sources */,
 				BF9807AE1967230600BAF9ED /* TransporterCell.m in Sources */,

@@ -13,6 +13,7 @@
 #import "BoardCells.h"
 #import "UserData.h"
 #import "LevelsManager.h"
+#import "HelpScreenViewController.h"
 
 @interface MainGameViewController ()
 
@@ -26,6 +27,8 @@
 @property int worldId;
 @property int levelId;
 @property NSTimeInterval timeInterval;
+@property HelpScreenViewController *helpScreenViewController;
+@property bool timerPaused;
 @end
 
 @implementation MainGameViewController
@@ -230,6 +233,8 @@
 
 - (void)startTimer
 {
+    self.timerPaused = false;
+    self.timeInterval = 0;
     self.startTime = [NSDate date];
     self.stopWatchTimer = [NSTimer
         scheduledTimerWithTimeInterval:1.0
@@ -242,12 +247,13 @@
 
 - (void)updateTimer
 {
+    if (self.timerPaused)
+        return;
+    
     // Max time capped at 59:59
     int MAXTIME = 59*60 + 59;
     
-    // Create elapsed time
-    NSDate *currentTime = [NSDate date];
-    self.timeInterval = [currentTime timeIntervalSinceDate:self.startTime];
+    self.timeInterval += 1;
     
     // Check for max time
     if (self.timeInterval > MAXTIME)
@@ -273,6 +279,16 @@
     }
     
     self.TimerLabel.text = timeString;
+}
+
+- (void)pauseTimer
+{
+    self.timerPaused = true;
+}
+
+- (void)resumeTimer
+{
+    self.timerPaused = false;
 }
 
 - (void)didReceiveMemoryWarning
@@ -529,7 +545,7 @@
         self.worldId++;
         self.levelId=1;
         
-        // TODO: Need to handle last world
+        // TODO:Bug#26 Need to handle last world
     }
     
     int gameSize = [LevelsManager GetGameSizeForWorld:self.worldId levelId:self.levelId];
@@ -549,6 +565,36 @@
     
     // Remove game board state
     [self removeExistingBoard];
+}
+
+- (IBAction)showHelpMenu:(id)sender
+{
+    // Hide navigation bar
+    [self.navigationController setNavigationBarHidden:YES animated:false];
+    
+    self.helpScreenViewController = [[HelpScreenViewController alloc] init];
+    
+    [self addChildViewController:self.helpScreenViewController];
+    self.helpScreenViewController.view.frame = CGRectMake(0,0,self.view.frame.size.width, self.view.frame.size.height);
+    [self.view addSubview:self.helpScreenViewController.view];
+    [self.helpScreenViewController didMoveToParentViewController: self];
+    
+    // Pause game
+    [self pauseTimer];
+}
+
+
+- (void)CloseHelpMenu
+{
+    [self.helpScreenViewController willMoveToParentViewController:nil];
+    [self.helpScreenViewController.view removeFromSuperview];
+    [self.helpScreenViewController removeFromParentViewController];
+    
+    // Show navigation bar
+    [self.navigationController setNavigationBarHidden:NO animated:false];
+    
+    // Resume game
+    [self resumeTimer];
 }
 
 @end
