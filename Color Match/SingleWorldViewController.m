@@ -218,7 +218,6 @@
         return [UIImage imageNamed:@"2stars@2x.png"];
     else 
         return [UIImage imageNamed:@"3stars@2x.png"];
-    
 }
 
 - (void)updateProgression

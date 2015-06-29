@@ -153,7 +153,7 @@
 
 - (IBAction)changePage:(id)sender
 {
-    int page = self.pageControl.currentPage;
+    int page = (int)self.pageControl.currentPage;
     [self loadScrollViewAroundPage:page];
     [self scrollToCurrentPage:true /* animated */ ];
     

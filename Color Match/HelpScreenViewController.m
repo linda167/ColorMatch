@@ -10,7 +10,11 @@
 #import "MainGameViewController.h"
 
 @interface HelpScreenViewController ()
-
+@property int pageCount;
+@property BOOL pageControlUsed;
+@property (nonatomic, retain) NSMutableArray *helpSubViews;
+@property (nonatomic) IBOutlet UIScrollView *scrollView;
+@property (nonatomic) IBOutlet UIPageControl *pageControl;
 @end
 
 @implementation HelpScreenViewController
@@ -19,30 +23,52 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    // Show the help image
     int viewportWidth = self.view.frame.size.width;
     int viewportHeight = self.view.frame.size.height;
+    int topBarHeight = 80;
     
-    // Create logo image and scale it down to fit screen
-    UIImage* image = [UIImage imageNamed:@"00pauseColorMix@2x.png"];
-    int imageHeight = image.size.height;
-    double proportion = image.size.width / viewportWidth;
-    imageHeight = image.size.height / proportion;
-    UIImageView *logoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 80, viewportWidth, imageHeight)];
-    logoImageView.image = image;
+    // Initialize the scrollView
+    self.helpSubViews = [[NSMutableArray alloc] init];
+    self.pageCount = 9;
+    for (int i = 0; i < self.pageCount; i++)
+    {
+        [self.helpSubViews addObject:[NSNull null]];
+    }
+    
+    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0,topBarHeight,viewportWidth, viewportHeight - topBarHeight)];
+    self.scrollView.pagingEnabled = YES;
+    self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width * self.pageCount, self.scrollView.frame.size.height);
+    self.scrollView.showsHorizontalScrollIndicator = NO;
+    self.scrollView.showsVerticalScrollIndicator = NO;
+    self.scrollView.scrollsToTop = NO;
+    self.scrollView.delegate = self;
+    [self.view addSubview:self.scrollView];
+    
+    self.pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0,viewportHeight - 80, viewportWidth, 70)];
+    self.pageControl.userInteractionEnabled = YES;
+    self.pageControl.numberOfPages = self.pageCount;
+    self.pageControl.currentPage = 0;
+    self.pageControl.enabled = TRUE;
+    self.pageControl.pageIndicatorTintColor = [UIColor colorWithRed:(224/255.0) green:(224/255.0) blue:(224/255.0) alpha:1];
+    self.pageControl.currentPageIndicatorTintColor = [UIColor colorWithRed:(135/255.0) green:(135/255.0) blue:(135/255.0) alpha:1];
+    // self.pageControl.backgroundColor = [UIColor redColor];
+    [self.view addSubview:self.pageControl];
+    
+    // Load views around current page
+    [self loadScrollViewAroundPage:(int)self.pageControl.currentPage];
     
     // Add white background to host the image
     UIView* helpScreen = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, viewportWidth, viewportHeight)];
     helpScreen.backgroundColor = [UIColor colorWithRed:(255/255.0) green:(255/255.0) blue:(255/255.0) alpha:1];
     
-    [helpScreen addSubview:logoImageView];
-    
     // Center the logo
     helpScreen.center = self.view.center;
     [self.view addSubview:helpScreen];
+    [self.view bringSubviewToFront:self.scrollView];
+    [self.view bringSubviewToFront:self.pageControl];
     
     // Create top bar
-    UIView* topBar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, viewportWidth, 80)];
+    UIView* topBar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, viewportWidth, topBarHeight)];
     topBar.backgroundColor = [UIColor colorWithRed:(243/255.0) green:(243/255.0) blue:(242/255.0) alpha:1];
     [self.view addSubview:topBar];
     [self.view bringSubviewToFront:topBar];
@@ -64,6 +90,97 @@
     [gamePausedTitle sizeToFit];
     [gamePausedTitle setCenter:CGPointMake(self.view.frame.size.width / 2, 50)];
     [topBar addSubview:gamePausedTitle];
+}
+
+- (void)loadScrollViewWithPage:(int)page
+{
+    if (page < 0) return;
+    if (page >= self.pageCount) return;
+    
+    UIImageView *imageView = [self.helpSubViews objectAtIndex:page];
+    
+    if ((NSNull *) imageView == [NSNull null])
+    {
+        int viewportWidth = self.view.frame.size.width;
+        UIImage* image = [self getImageForPage:page];
+        int imageHeight = image.size.height;
+        double proportion = image.size.width / viewportWidth;
+        imageHeight = image.size.height / proportion;
+        imageView = [[UIImageView alloc] initWithFrame:CGRectMake(self.scrollView.frame.size.width * page, 0, viewportWidth, imageHeight)];
+        imageView.image = image;
+        [self.helpSubViews replaceObjectAtIndex:page withObject:imageView];
+        
+        [self.scrollView addSubview:imageView];
+    }
+}
+
+- (UIImage*)getImageForPage:(int)page
+{
+    switch (page)
+    {
+        case 0:
+            return [UIImage imageNamed:@"00pauseColorMix@2x.png"];
+        case 1:
+            return [UIImage imageNamed:@"01pauseReflector@2x.png"];
+        case 2:
+            return [UIImage imageNamed:@"02pauseSplitter@2x.png"];
+        case 3:
+            return [UIImage imageNamed:@"03pauseConnector@2x.png"];
+        case 4:
+            return [UIImage imageNamed:@"04pauseDiverter@2x.png"];
+        case 5:
+            return [UIImage imageNamed:@"05pauseZoner@2x.png"];
+        case 6:
+            return [UIImage imageNamed:@"06pauseConverter@2x.png"];
+        case 7:
+            return [UIImage imageNamed:@"07pauseTransporter@2x.png"];
+        case 8:
+            return [UIImage imageNamed:@"08pauseShifter@2x.png"];
+        default:
+            return NULL;
+    }
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)sender
+{
+    if (self.pageControlUsed)
+        return;
+    
+    CGFloat pageWidth = self.scrollView.frame.size.width;
+    int page = floor((self.scrollView.contentOffset.x - pageWidth / 3) / pageWidth) + 1;
+    
+    if (self.pageControl.currentPage != page)
+    {
+        self.pageControl.currentPage = page;
+        [self loadScrollViewAroundPage:page];
+    }
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *) scrollView
+{
+    self.pageControlUsed = NO;
+}
+
+- (IBAction)changePage:(id)sender
+{
+    int page = (int)self.pageControl.currentPage;
+    [self loadScrollViewAroundPage:page];
+    [self scrollToCurrentPage:true /* animated */ ];
+}
+
+- (void)loadScrollViewAroundPage:(int)page
+{
+    [self loadScrollViewWithPage:page - 1];
+    [self loadScrollViewWithPage:page];
+    [self loadScrollViewWithPage:page + 1];
+}
+
+- (void)scrollToCurrentPage:(bool)animated
+{
+    CGRect frame = self.scrollView.frame;
+    frame.origin.x = frame.size.width * self.pageControl.currentPage;
+    frame.origin.y = 0;
+    [self.scrollView scrollRectToVisible:frame animated:animated];
 }
 
 - (IBAction)closeButtonPressed:(id)sender

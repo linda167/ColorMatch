@@ -217,6 +217,14 @@
 		BFE467E71B3FA15300C286F1 /* 00pauseColorMix@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFE467E61B3FA15300C286F1 /* 00pauseColorMix@2x.png */; };
 		BFE467EB1B40AE4700C286F1 /* helpButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFE467EA1B40AE4700C286F1 /* helpButton@2x.png */; };
 		BFE467ED1B40B36A00C286F1 /* closeButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFE467EC1B40B36A00C286F1 /* closeButton@2x.png */; };
+		BFE467F61B4100CE00C286F1 /* 01pauseReflector@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFE467EE1B4100CE00C286F1 /* 01pauseReflector@2x.png */; };
+		BFE467F71B4100CE00C286F1 /* 02pauseSplitter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFE467EF1B4100CE00C286F1 /* 02pauseSplitter@2x.png */; };
+		BFE467F81B4100CE00C286F1 /* 03pauseConnector@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFE467F01B4100CE00C286F1 /* 03pauseConnector@2x.png */; };
+		BFE467F91B4100CE00C286F1 /* 04pauseDiverter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFE467F11B4100CE00C286F1 /* 04pauseDiverter@2x.png */; };
+		BFE467FA1B4100CE00C286F1 /* 05pauseZoner@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFE467F21B4100CE00C286F1 /* 05pauseZoner@2x.png */; };
+		BFE467FB1B4100CE00C286F1 /* 06pauseConverter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFE467F31B4100CE00C286F1 /* 06pauseConverter@2x.png */; };
+		BFE467FC1B4100CE00C286F1 /* 07pauseTransporter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFE467F41B4100CE00C286F1 /* 07pauseTransporter@2x.png */; };
+		BFE467FD1B4100CE00C286F1 /* 08pauseShifter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFE467F51B4100CE00C286F1 /* 08pauseShifter@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -477,6 +485,14 @@
 		BFE467E61B3FA15300C286F1 /* 00pauseColorMix@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "00pauseColorMix@2x.png"; sourceTree = "<group>"; };
 		BFE467EA1B40AE4700C286F1 /* helpButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "helpButton@2x.png"; sourceTree = "<group>"; };
 		BFE467EC1B40B36A00C286F1 /* closeButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "closeButton@2x.png"; sourceTree = "<group>"; };
+		BFE467EE1B4100CE00C286F1 /* 01pauseReflector@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "01pauseReflector@2x.png"; sourceTree = "<group>"; };
+		BFE467EF1B4100CE00C286F1 /* 02pauseSplitter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "02pauseSplitter@2x.png"; sourceTree = "<group>"; };
+		BFE467F01B4100CE00C286F1 /* 03pauseConnector@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "03pauseConnector@2x.png"; sourceTree = "<group>"; };
+		BFE467F11B4100CE00C286F1 /* 04pauseDiverter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "04pauseDiverter@2x.png"; sourceTree = "<group>"; };
+		BFE467F21B4100CE00C286F1 /* 05pauseZoner@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "05pauseZoner@2x.png"; sourceTree = "<group>"; };
+		BFE467F31B4100CE00C286F1 /* 06pauseConverter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "06pauseConverter@2x.png"; sourceTree = "<group>"; };
+		BFE467F41B4100CE00C286F1 /* 07pauseTransporter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "07pauseTransporter@2x.png"; sourceTree = "<group>"; };
+		BFE467F51B4100CE00C286F1 /* 08pauseShifter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "08pauseShifter@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -580,6 +596,14 @@
 		AF2C225A1874B95000082561 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				BFE467EE1B4100CE00C286F1 /* 01pauseReflector@2x.png */,
+				BFE467EF1B4100CE00C286F1 /* 02pauseSplitter@2x.png */,
+				BFE467F01B4100CE00C286F1 /* 03pauseConnector@2x.png */,
+				BFE467F11B4100CE00C286F1 /* 04pauseDiverter@2x.png */,
+				BFE467F21B4100CE00C286F1 /* 05pauseZoner@2x.png */,
+				BFE467F31B4100CE00C286F1 /* 06pauseConverter@2x.png */,
+				BFE467F41B4100CE00C286F1 /* 07pauseTransporter@2x.png */,
+				BFE467F51B4100CE00C286F1 /* 08pauseShifter@2x.png */,
 				BFE467EC1B40B36A00C286F1 /* closeButton@2x.png */,
 				BFE467EA1B40AE4700C286F1 /* helpButton@2x.png */,
 				BFE467E61B3FA15300C286F1 /* 00pauseColorMix@2x.png */,
@@ -939,10 +963,13 @@
 				BF9079CA195E1819000E6E58 /* Yellow@2x.png in Resources */,
 				BF98087C196E664E00BAF9ED /* transporterOutputRightOrange@2x.png in Resources */,
 				BF9079781953DF94000E6E58 /* zonerRed@2x.png in Resources */,
+				BFE467F91B4100CE00C286F1 /* 04pauseDiverter@2x.png in Resources */,
 				AFADA2321877D20D00FADA22 /* YellowSelected.png in Resources */,
 				BF9079C7195E1819000E6E58 /* RedSelected@2x.png in Resources */,
 				BF9079BB195E1040000E6E58 /* FilledCircleYellow@2x.png in Resources */,
 				BF85C82C1A47BABE00A494B6 /* converterLeftToRightRed@2x.png in Resources */,
+				BFE467F81B4100CE00C286F1 /* 03pauseConnector@2x.png in Resources */,
+				BFE467FB1B4100CE00C286F1 /* 06pauseConverter@2x.png in Resources */,
 				BF980877196E664E00BAF9ED /* transporterOutputDownWhite@2x.png in Resources */,
 				BF98087F196E664E00BAF9ED /* transporterOutputRightWhite@2x.png in Resources */,
 				AF2C22391874B8B800082561 /* Main_iPad.storyboard in Resources */,
@@ -1009,6 +1036,7 @@
 				BF90796D194D6E42000E6E58 /* 3stars@2x.png in Resources */,
 				BF90799519560FE3000E6E58 /* connectorInnerOrange@2x.png in Resources */,
 				BF90799719560FE3000E6E58 /* connectorInnerRed@2x.png in Resources */,
+				BFE467FC1B4100CE00C286F1 /* 07pauseTransporter@2x.png in Resources */,
 				BF980868196E664E00BAF9ED /* transporterInputLeftYellow@2x.png in Resources */,
 				AFADA22A1877D20D00FADA22 /* FilledCircleRed.png in Resources */,
 				BF97FFF01A5913D300ABA450 /* backgroundImage.png in Resources */,
@@ -1022,6 +1050,7 @@
 				BF85C8601A56029300A494B6 /* Logo3.png in Resources */,
 				AFADA2211877D20D00FADA22 /* BlockRed.png in Resources */,
 				BF90799B19560FE3000E6E58 /* connectorOuterRed@2x.png in Resources */,
+				BFE467FD1B4100CE00C286F1 /* 08pauseShifter@2x.png in Resources */,
 				BF980863196E664E00BAF9ED /* transporterInputLeftGreen@2x.png in Resources */,
 				BF85C84F1A4F5B4A00A494B6 /* shifterInnerPurple@2x.png in Resources */,
 				BF90796B194D6E42000E6E58 /* 1stars@2x.png in Resources */,
@@ -1037,6 +1066,7 @@
 				BF98087E196E664E00BAF9ED /* transporterOutputRightRed@2x.png in Resources */,
 				BF980861196E664E00BAF9ED /* transporterInputLeftBlue@2x.png in Resources */,
 				BF874D15192B2CBB001701A2 /* ReflectorTtRGoal@2x.png in Resources */,
+				BFE467FA1B4100CE00C286F1 /* 05pauseZoner@2x.png in Resources */,
 				BF9808861974EA4C00BAF9ED /* ReflectorArrowLtDGreen@2x.png in Resources */,
 				BF85C8501A4F5B4A00A494B6 /* shifterInnerRed@2x.png in Resources */,
 				BF980872196E664E00BAF9ED /* transporterOutputDownBrown@2x.png in Resources */,
@@ -1061,7 +1091,9 @@
 				BF9079AC195E073E000E6E58 /* BlockBlue@2x.png in Resources */,
 				BF980862196E664E00BAF9ED /* transporterInputLeftBrown@2x.png in Resources */,
 				BF9079AE195E073E000E6E58 /* BlockGreen@2x.png in Resources */,
+				BFE467F71B4100CE00C286F1 /* 02pauseSplitter@2x.png in Resources */,
 				BF9079E919664916000E6E58 /* converterYellow@2x.png in Resources */,
+				BFE467F61B4100CE00C286F1 /* 01pauseReflector@2x.png in Resources */,
 				BF9079821953EE21000E6E58 /* BlockBrown.png in Resources */,
 				BF9079C5195E1819000E6E58 /* BlueSelected@2x.png in Resources */,
 				BF98087D196E664E00BAF9ED /* transporterOutputRightPurple@2x.png in Resources */,
