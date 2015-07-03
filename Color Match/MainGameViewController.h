@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+@class MainGameManager;
+
 @interface MainGameViewController : UIViewController <UIAlertViewDelegate>
 - (IBAction)ColorButtonPressed:(id)sender;
 - (IBAction)GridButtonPressed:(id)sender;
@@ -25,6 +27,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *MovesLabel;
 @property (weak, nonatomic) IBOutlet UILabel *LevelNumberLabel;
 @property (weak, nonatomic) IBOutlet UILabel *LevelLabel;
-@property NSInteger selectedColor;
+@property MainGameManager *mainGameManager;
 
 @end

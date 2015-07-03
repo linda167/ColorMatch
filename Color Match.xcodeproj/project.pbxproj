@@ -225,6 +225,8 @@
 		BFE467FB1B4100CE00C286F1 /* 06pauseConverter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFE467F31B4100CE00C286F1 /* 06pauseConverter@2x.png */; };
 		BFE467FC1B4100CE00C286F1 /* 07pauseTransporter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFE467F41B4100CE00C286F1 /* 07pauseTransporter@2x.png */; };
 		BFE467FD1B4100CE00C286F1 /* 08pauseShifter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFE467F51B4100CE00C286F1 /* 08pauseShifter@2x.png */; };
+		BFE468011B46420500C286F1 /* levelLock@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFE468001B46420500C286F1 /* levelLock@2x.png */; };
+		BFE468071B4716E900C286F1 /* MainGameManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BFE468061B4716E900C286F1 /* MainGameManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -493,6 +495,9 @@
 		BFE467F31B4100CE00C286F1 /* 06pauseConverter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "06pauseConverter@2x.png"; sourceTree = "<group>"; };
 		BFE467F41B4100CE00C286F1 /* 07pauseTransporter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "07pauseTransporter@2x.png"; sourceTree = "<group>"; };
 		BFE467F51B4100CE00C286F1 /* 08pauseShifter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "08pauseShifter@2x.png"; sourceTree = "<group>"; };
+		BFE468001B46420500C286F1 /* levelLock@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "levelLock@2x.png"; sourceTree = "<group>"; };
+		BFE468051B4716E900C286F1 /* MainGameManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainGameManager.h; sourceTree = "<group>"; };
+		BFE468061B4716E900C286F1 /* MainGameManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainGameManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -596,6 +601,7 @@
 		AF2C225A1874B95000082561 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				BFE468001B46420500C286F1 /* levelLock@2x.png */,
 				BFE467EE1B4100CE00C286F1 /* 01pauseReflector@2x.png */,
 				BFE467EF1B4100CE00C286F1 /* 02pauseSplitter@2x.png */,
 				BFE467F01B4100CE00C286F1 /* 03pauseConnector@2x.png */,
@@ -841,6 +847,8 @@
 				BF85C8381A49484500A494B6 /* ShifterCell.m */,
 				BFE467DC1B3BC7A700C286F1 /* DiverterCell.h */,
 				BFE467DD1B3BC7A700C286F1 /* DiverterCell.m */,
+				BFE468051B4716E900C286F1 /* MainGameManager.h */,
+				BFE468061B4716E900C286F1 /* MainGameManager.m */,
 			);
 			name = "Game Core";
 			sourceTree = "<group>";
@@ -1055,6 +1063,7 @@
 				BF85C84F1A4F5B4A00A494B6 /* shifterInnerPurple@2x.png in Resources */,
 				BF90796B194D6E42000E6E58 /* 1stars@2x.png in Resources */,
 				BF85C84C1A4F5B4A00A494B6 /* shifterInnerBrown@2x.png in Resources */,
+				BFE468011B46420500C286F1 /* levelLock@2x.png in Resources */,
 				BF98086E196E664E00BAF9ED /* transporterInputTopRed@2x.png in Resources */,
 				BF9079E619664916000E6E58 /* converterBlue@2x.png in Resources */,
 				BF85C83E1A4E9C5300A494B6 /* shifterOuterRed@2x.png in Resources */,
@@ -1143,6 +1152,7 @@
 				BF9079D51963AD6D000E6E58 /* SplitterCell.m in Sources */,
 				AFB8968B1881EDD0003FAEF4 /* UserColorBoard.m in Sources */,
 				AFB8969118822186003FAEF4 /* ChooseGameSizeViewController.m in Sources */,
+				BFE468071B4716E900C286F1 /* MainGameManager.m in Sources */,
 				BF0D4BD41929429E00AACB5A /* LinePiece.m in Sources */,
 				BFA3A2D21944B6B900C1BB7D /* UserData.m in Sources */,
 				AFB896881881E2E6003FAEF4 /* CommonUtils.m in Sources */,

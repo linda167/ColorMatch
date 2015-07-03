@@ -10,14 +10,25 @@
 #import "MainGameViewController.h"
 
 @interface HelpScreenViewController ()
+@property int worldId;
 @property int pageCount;
 @property BOOL pageControlUsed;
 @property (nonatomic, retain) NSMutableArray *helpSubViews;
 @property (nonatomic) IBOutlet UIScrollView *scrollView;
-@property (nonatomic) IBOutlet UIPageControl *pageControl;
 @end
 
 @implementation HelpScreenViewController
+
+- (id)initWithParameters:(int)worldId
+{
+    self = [super init];
+    if (self)
+    {
+        self.worldId = worldId;
+    }
+    
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -49,13 +60,24 @@
     self.pageControl.numberOfPages = self.pageCount;
     self.pageControl.currentPage = 0;
     self.pageControl.enabled = TRUE;
+    [self.pageControl addTarget:self action:@selector(changePage:) forControlEvents:UIControlEventTouchUpInside];
     self.pageControl.pageIndicatorTintColor = [UIColor colorWithRed:(224/255.0) green:(224/255.0) blue:(224/255.0) alpha:1];
     self.pageControl.currentPageIndicatorTintColor = [UIColor colorWithRed:(135/255.0) green:(135/255.0) blue:(135/255.0) alpha:1];
-    // self.pageControl.backgroundColor = [UIColor redColor];
     [self.view addSubview:self.pageControl];
     
     // Load views around current page
+    if (self.worldId < 10)
+    {
+        self.pageControl.currentPage = self.worldId - 1;
+    }
+    
     [self loadScrollViewAroundPage:(int)self.pageControl.currentPage];
+    
+    // Scroll to page to show
+    if (self.pageControl.currentPage > 0)
+    {
+        [self scrollToCurrentPage:false /* animated */ ];
+    }
     
     // Add white background to host the image
     UIView* helpScreen = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, viewportWidth, viewportHeight)];

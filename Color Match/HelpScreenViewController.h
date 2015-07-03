@@ -10,4 +10,8 @@
 
 @interface HelpScreenViewController : UIViewController
 
+@property (nonatomic) IBOutlet UIPageControl *pageControl;
+
+- (id)initWithParameters:(int)initialPage;
+
 @end

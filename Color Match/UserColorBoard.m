@@ -21,6 +21,7 @@
 #import "TransporterCell.h"
 #import "ShifterCell.h"
 #import "DiverterCell.h"
+#import "MainGameManager.h"
 
 @interface UserColorBoard ()
 @property MainGameViewController *viewController;
@@ -1147,7 +1148,7 @@
 {
     SplitterCellButton* splitterButton = (SplitterCellButton*)sender;
     
-    int currentSelectedColor = (int)self.viewController.selectedColor;
+    int currentSelectedColor = (int)self.viewController.mainGameManager.selectedColor;
     int existingInputColor = splitterButton.splitterCell.inputColor;
     if (existingInputColor == currentSelectedColor)
     {
@@ -1196,7 +1197,7 @@
 {
     ZonerCellButton* zonerCellButton = (ZonerCellButton*)sender;
     
-    int currentSelectedColor = (int)self.viewController.selectedColor;
+    int currentSelectedColor = (int)self.viewController.mainGameManager.selectedColor;
     int existingInputColor = ((ZonerCell*)zonerCellButton.colorCell).inputColor;
     if (existingInputColor == currentSelectedColor)
     {
@@ -1243,7 +1244,7 @@
 
 - (IBAction)connectorCellPressed:(id)sender
 {
-    int currentSelectedColor = (int)self.viewController.selectedColor;
+    int currentSelectedColor = (int)self.viewController.mainGameManager.selectedColor;
     
     // Collect views to animate
     NSMutableArray* viewsToAnimate = [[NSMutableArray alloc] init];
