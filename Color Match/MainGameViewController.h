@@ -14,8 +14,9 @@
 - (IBAction)ColorButtonPressed:(id)sender;
 - (IBAction)GridButtonPressed:(id)sender;
 - (void)SetParametersForNewGame:(int)size worldId:(int)worldId levelId:(int)levelId;
--(void)OnUserActionTaken;
--(void)CloseHelpMenu;
+- (void)OnUserActionTaken;
+- (void)CloseHelpMenu;
+- (void)createGameManagerAndStartNewGame;
 
 @property (weak, nonatomic) IBOutlet UIView *GridContainerView;
 @property (weak, nonatomic) IBOutlet UIView *GoalContainerView;
@@ -28,5 +29,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *LevelNumberLabel;
 @property (weak, nonatomic) IBOutlet UILabel *LevelLabel;
 @property MainGameManager *mainGameManager;
+@property (weak, nonatomic) IBOutlet UILabel *MovesPrefixLabel;
+@property (weak, nonatomic) IBOutlet UILabel *TimePrefixLabel;
+@property (weak, nonatomic) IBOutlet UIButton *HelpButton;
+@property (weak, nonatomic) IBOutlet UIView *topSectionContainer;
+@property (weak, nonatomic) IBOutlet UIImageView *ColorButtonBarContainer;
 
 @end

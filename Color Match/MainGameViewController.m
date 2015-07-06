@@ -15,6 +15,7 @@
 #import "LevelsManager.h"
 #import "HelpScreenViewController.h"
 #import "MainGameManager.h"
+#import "TutorialGameManager.h"
 
 @interface MainGameViewController ()
 @property int worldId;
@@ -29,13 +30,31 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
-    self.mainGameManager = [[MainGameManager alloc] initWithParameters:self size:self.size worldId:self.worldId levelId:self.levelId];
-    
-    // Start new game
-    [self.mainGameManager StartNewGame];
+    [self createGameManagerAndStartNewGame];
     
     // Change navigation bar appearance
     [self.navigationController.navigationBar setTintColor:nil];
+}
+
+- (void)createGameManagerAndStartNewGame
+{
+    if ([self isTutorialLevel:self.worldId levelId:self.levelId])
+    {
+        self.mainGameManager = [[TutorialGameManager alloc] initWithParameters:self size:self.size worldId:self.worldId levelId:self.levelId];
+    }
+    else
+    {
+        self.mainGameManager = [[MainGameManager alloc] initWithParameters:self size:self.size worldId:self.worldId levelId:self.levelId];
+    }
+    
+    // Start new game
+    [self.mainGameManager StartNewGame];
+}
+
+- (bool)isTutorialLevel:(int)worldId levelId:(int)levelId
+{
+    return levelId == 1 &&
+        ![[UserData sharedUserData] getTutorialComplete:self.worldId];
 }
 
 - (void)SetParametersForNewGame:(int)size worldId:(int)worldId levelId:(int)levelId

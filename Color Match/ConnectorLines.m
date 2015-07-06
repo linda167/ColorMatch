@@ -41,6 +41,8 @@
         return;
     }
     
+    
+    
     for (int i = 0; i < self.horizontalLines.count; i++)
     {
         LineInfo *lineInfo = [self.horizontalLines objectAtIndex:i];

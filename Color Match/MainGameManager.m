@@ -8,7 +8,6 @@
 
 #import "MainGameManager.h"
 #import "MainGameViewController.h"
-#import "GridColorButton.h"
 #import "GoalBoard.h"
 #import "UserColorBoard.h"
 #import "BoardCells.h"
@@ -21,16 +20,11 @@
 @property NSTimer *stopWatchTimer;
 @property NSDate *startTime;
 @property NSInteger movesCount;
-@property BoardParameters boardParameters;
-@property BoardCells *boardCells;
 @property GoalBoard *goalBoard;
-@property UserColorBoard *userColorBoard;
-@property int worldId;
 @property int levelId;
 @property NSTimeInterval timeInterval;
 @property HelpScreenViewController *helpScreenViewController;
 @property bool timerPaused;
-@property MainGameViewController *viewController;
 @end
 
 @implementation MainGameManager
@@ -288,9 +282,14 @@
     self.timerPaused = false;
 }
 
+- (NSArray*)getColorButtons
+{
+    return [NSArray arrayWithObjects:self.viewController.whiteButton,self.viewController.blueButton,self.viewController.redButton, self.viewController.yellowButton, nil];
+}
+
 - (void)OnColorButtonPressed:(id)sender
 {
-    NSArray* buttons = [NSArray arrayWithObjects:self.viewController.whiteButton,self.viewController.blueButton,self.viewController.redButton, self.viewController.yellowButton, nil];
+    NSArray* buttons = [self getColorButtons];
     
     for (UIButton* button in buttons)
     {
@@ -459,7 +458,7 @@
 
 -(void)resetActionBar
 {
-    NSArray* buttons = [NSArray arrayWithObjects:self.viewController.whiteButton,self.viewController.blueButton,self.viewController.redButton, self.viewController.yellowButton, nil];
+    NSArray* buttons = [self getColorButtons];
     
     for (UIButton* button in buttons)
     {

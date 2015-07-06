@@ -10,11 +10,14 @@
 #import "ColorBoard.h"
 #import "MainGameViewController.h"
 #import "BoardCells.h"
+#import "ConnectorLines.h"
 
 @interface UserColorBoard : ColorBoard
 
 @property NSMutableArray *topGridColorButtons;
 @property NSMutableArray *leftGridColorButtons;
+@property NSMutableArray *allGridColorButtons;
+@property ConnectorLines *connectorLines;
 
 -(id)initWithParameters:
     (BoardParameters)boardParameters

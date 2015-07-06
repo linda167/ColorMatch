@@ -25,8 +25,6 @@
 
 @interface UserColorBoard ()
 @property MainGameViewController *viewController;
-@property NSMutableArray *allGridColorButtons;
-@property ConnectorLines *connectorLines;
 @property NSMutableArray *allConnectorCells;
 @property NSMutableArray *allSplitterCells;
 @property NSMutableArray *allConverterCells;

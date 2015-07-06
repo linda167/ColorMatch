@@ -7,6 +7,9 @@
 //
 
 #import "WelcomeScreenViewController.h"
+#import "WorldViewController.h"
+#import "MainGameViewController.h"
+#import "UserData.h"
 
 @interface WelcomeScreenViewController ()
 @property UIView *logoView;
@@ -132,6 +135,29 @@
 {
     [self.navigationController setNavigationBarHidden:NO animated:animated];
     [super viewWillDisappear:animated];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString:@"mainMenuToFirstLevelSegue"])
+    {
+        MainGameViewController *destinationController = segue.destinationViewController;
+        [destinationController SetParametersForNewGame:3 worldId:1 levelId:1];
+    }
+}
+
+- (IBAction)OnTapPlayGameButton:(id)sender
+{
+    if (![[UserData sharedUserData] getTutorialComplete:1])
+    {
+        // If tutorial is not complete for world 1, go directly to level 1-1
+        [self performSegueWithIdentifier:@"mainMenuToFirstLevelSegue" sender:self];
+    }
+    else
+    {
+        // Otherwise go to world view
+        [self performSegueWithIdentifier:@"mainMenuToWorldSegue" sender:self];
+    }
 }
 
 @end

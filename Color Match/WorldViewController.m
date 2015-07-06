@@ -186,14 +186,15 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     MainGameViewController *destinationController = segue.destinationViewController;
-    LevelSelectButton *levelSelectButton = (LevelSelectButton*)sender;
     
     if ([[segue identifier] isEqualToString:@"LoadLevel"])
     {
+        LevelSelectButton *levelSelectButton = (LevelSelectButton*)sender;
         int worldId = levelSelectButton.worldId;
         int levelId = levelSelectButton.levelId;
+        
         int gameSize = [LevelsManager GetGameSizeForWorld:worldId levelId:levelId];
-        [destinationController SetParametersForNewGame:gameSize worldId:levelSelectButton.worldId levelId:levelSelectButton.levelId];
+        [destinationController SetParametersForNewGame:gameSize worldId:worldId levelId:levelId];
     }
 }
 

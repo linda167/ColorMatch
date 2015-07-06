@@ -41,6 +41,14 @@ static NSString *const LastLevelCompletedInWorldKey = @"LastLevelCompletedInWorl
     return  levelString;
 }
 
++(NSMutableString*)getTutorialKeyString:(int)worldId
+{
+    NSMutableString *tutorialString = [[NSMutableString alloc] init];
+    [tutorialString appendString:@"tutorial-"];
+    [tutorialString appendString:[NSString stringWithFormat: @"%d", worldId]];
+    return tutorialString;
+}
+
 -(void)storeLevelComplete:(int)worldId levelId:(int)levelId stars:(int)stars
 {
     int currentStarCount = [self getStarCount:worldId levelId:levelId];
@@ -59,7 +67,7 @@ static NSString *const LastLevelCompletedInWorldKey = @"LastLevelCompletedInWorl
 
 -(int)getLastLevelCompletedInWorld
 {
-    return [self.userData integerForKey:LastLevelCompletedInWorldKey];
+    return (int)[self.userData integerForKey:LastLevelCompletedInWorldKey];
 }
 
 -(bool)getLevelCompleteState:(int)worldId levelId:(int)levelId
@@ -67,6 +75,18 @@ static NSString *const LastLevelCompletedInWorldKey = @"LastLevelCompletedInWorl
     NSMutableString *levelString = [UserData getLevelString:worldId levelId:levelId];
     NSInteger isComplete = [self.userData integerForKey:levelString];
     return (int)isComplete >= 1;
+}
+
+-(void)storeTutorialComplete:(int)worldId
+{
+    NSMutableString *tutorialString = [UserData getTutorialKeyString:worldId];
+    [self.userData setInteger:1 forKey:tutorialString];
+}
+
+-(bool)getTutorialComplete:(int)worldId
+{
+    NSMutableString *tutorialString = [UserData getTutorialKeyString:worldId];
+    return [self.userData integerForKey:tutorialString] == 1;
 }
 
 -(int)getStarCount:(int)worldId levelId:(int)levelId

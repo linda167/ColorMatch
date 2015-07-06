@@ -35,7 +35,7 @@
                                 <attributedString key="attributedText">
                                     <fragment content="Choose game board size:">
                                         <attributes>
-                                            <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <font key="NSFont" size="16" name="Futura-Medium"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
                                         </attributes>
@@ -337,14 +337,19 @@
                     <navigationItem key="navigationItem" id="hbe-JK-eIy" colorLabel="IBBuiltInLabel-Gray"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <connections>
+                        <outlet property="ColorButtonBarContainer" destination="mtq-Bf-BNg" id="2gZ-pg-YeP"/>
                         <outlet property="GoalContainerView" destination="rnp-b2-6nP" id="4hg-Io-do3"/>
                         <outlet property="GridContainerView" destination="Gfo-Oa-0De" id="s9g-ZU-59X"/>
+                        <outlet property="HelpButton" destination="xaY-c4-hNz" id="vCO-P5-LFS"/>
                         <outlet property="LevelLabel" destination="ccT-V0-BrD" id="DHP-Au-bQC"/>
                         <outlet property="LevelNumberLabel" destination="0hR-2E-tT3" id="y79-qv-Sqj"/>
                         <outlet property="MovesLabel" destination="ZBE-xq-vrd" id="yms-0j-chq"/>
+                        <outlet property="MovesPrefixLabel" destination="lCF-4K-9cX" id="mz0-Vc-d8k"/>
+                        <outlet property="TimePrefixLabel" destination="O0r-CL-icq" id="vKM-fF-kkq"/>
                         <outlet property="TimerLabel" destination="6M6-Da-3OJ" id="5ZA-81-evJ"/>
                         <outlet property="blueButton" destination="4Uo-bZ-bKf" id="hIn-EU-oiA"/>
                         <outlet property="redButton" destination="9fi-Km-6sM" id="cpf-bq-uqW"/>
+                        <outlet property="topSectionContainer" destination="GUh-Vz-Oba" id="wOl-6c-Zhx"/>
                         <outlet property="whiteButton" destination="zVl-s8-mXL" id="T5x-Xu-Chw"/>
                         <outlet property="yellowButton" destination="1xY-N7-VFk" id="jYG-v4-8fN"/>
                     </connections>
@@ -393,7 +398,7 @@
                                     <attributedString key="attributedTitle"/>
                                 </state>
                                 <connections>
-                                    <segue destination="MmH-K3-vAA" kind="push" id="x2f-0g-08e"/>
+                                    <action selector="OnTapPlayGameButton:" destination="Ype-Mf-Odz" eventType="touchUpInside" id="WLh-fZ-Y5g"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" id="HKW-c3-399">
@@ -437,11 +442,13 @@
                         <outlet property="button3" destination="uMU-ND-x8Q" id="b64-bS-EGJ"/>
                         <outlet property="divider" destination="DfI-xk-VeF" id="gsD-PU-FGe"/>
                         <outlet property="logo" destination="cOw-Vj-hjh" id="0rN-Yn-tLf"/>
+                        <segue destination="MmH-K3-vAA" kind="push" identifier="mainMenuToWorldSegue" id="By0-3l-TgG"/>
+                        <segue destination="vXZ-lx-hvc" kind="push" identifier="mainMenuToFirstLevelSegue" id="gm5-HK-yF9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uKi-xh-kd9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-350" y="-34"/>
+            <point key="canvasLocation" x="-340" y="-40"/>
         </scene>
     </scenes>
     <resources>
@@ -463,6 +470,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="vdY-F1-BTr"/>
+        <segue reference="gm5-HK-yF9"/>
     </inferredMetricsTieBreakers>
 </document>
