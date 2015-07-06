@@ -8,6 +8,7 @@
 
 #import "LevelsManager.h"
 #import "BoardCells.h"
+#import "UserData.h"
 
 @implementation LevelsManager
 
@@ -317,7 +318,17 @@
     }
     else
     {
-        if (worldId == 2 && levelId == 1)
+        if (worldId == 2 && levelId == 1 && ![[UserData sharedUserData] getTutorialComplete:2])
+        {
+            // Tutorial level
+            boardCells.colorCellSections = [NSMutableArray arrayWithObjects:
+                [NSArray arrayWithObjects:@"0", @"0", @"0", nil],
+                [NSArray arrayWithObjects:@"0", @"2", @"0", nil],
+                [NSArray arrayWithObjects:@"0", @"0", @"0", nil],
+                nil];
+
+        }
+        else if (worldId == 2 && levelId == 1)
         {
             boardCells.colorCellSections = [NSMutableArray arrayWithObjects:
                 [NSArray arrayWithObjects:@"0", @"1", @"0", nil],

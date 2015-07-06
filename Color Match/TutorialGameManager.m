@@ -23,7 +23,6 @@
 @property (nonatomic, strong) void (^waitingDelegate)(void);
 @property UIButton* beginButton;
 @property bool tutorialComplete;
-@property bool tutorialPaused;
 @end
 
 @implementation TutorialGameManager
@@ -38,20 +37,6 @@
     // Add skip button
     UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:@"Skip Tutorial" style:UIBarButtonItemStyleDone target:self action:@selector(OnSkipButtonPressed)];
     self.viewController.navigationItem.rightBarButtonItem = rightButton;
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillBecomeInactive:) name:UIApplicationWillResignActiveNotification object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
-}
-
-- (void)appWillBecomeInactive:(UIApplication*)application
-{
-    self.tutorialPaused = true;
-}
-
-- (void)appDidBecomeActive:(UIApplication*)application
-{
-    self.tutorialPaused = false;
 }
 
 - (void)OnSkipButtonPressed
@@ -336,6 +321,11 @@
     }
 }
 
+- (void)centerDialogTextInTopContainer
+{
+    [self.dialogText setCenter:CGPointMake(self.viewController.view.frame.size.width / 2, 90)];
+}
+
 - (void)addTutorialDialogText
 {
     self.dialogText = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 280, 250)];
@@ -344,7 +334,7 @@
     self.dialogText.numberOfLines = 0;
     self.dialogText.textAlignment = NSTextAlignmentCenter;
     self.dialogText.alpha = 0;
-    [self.dialogText setCenter:CGPointMake(self.viewController.view.frame.size.width / 2, 90)];
+    [self centerDialogTextInTopContainer];
     
     [self.viewController.topSectionContainer addSubview:self.dialogText];
 }
@@ -384,6 +374,9 @@
     {
         case 1:
             [self runWorld1Tutorial];
+            break;
+        case 2:
+            [self runWorld2Tutorial];
             break;
     }
 }
@@ -507,8 +500,6 @@
 {
     [[UserData sharedUserData] storeTutorialComplete:self.worldId];
     
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    
     self.tutorialComplete = true;
     
     [self removeExistingBoard];
@@ -542,6 +533,17 @@
     [self completeTutorialAndStartGame];
 }
 
+- (void)createBeginButton
+{
+    UIImage *beginImage = [UIImage imageNamed:@"beginButton@2x.png"];
+    self.beginButton = [[UIButton alloc] initWithFrame:CGRectMake(0,0,beginImage.size.width,beginImage.size.height)];
+    [self.beginButton setImage:beginImage forState:UIControlStateNormal];
+    
+    [self.beginButton addTarget:self action:@selector(beginButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.viewController.view addSubview:self.beginButton];
+}
+
 - (void)runWorld1Tutorial
 {
     void (^showBeginImage)(void) = ^(void)
@@ -552,14 +554,9 @@
         }
         
         // Create the begin button
-        UIImage *beginImage = [UIImage imageNamed:@"beginButton@2x.png"];
-        self.beginButton = [[UIButton alloc] initWithFrame:CGRectMake(0,0,beginImage.size.width,beginImage.size.height)];
-        [self.beginButton setImage:beginImage forState:UIControlStateNormal];
+        [self createBeginButton];
         CGPoint center = CGPointMake(self.viewController.view.frame.size.width / 2, self.dialogText.frame.origin.y + self.dialogText.frame.size.height + 45);
         [self.beginButton setCenter: center];
-        [self.beginButton addTarget:self action:@selector(beginButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-        
-        [self.viewController.view addSubview:self.beginButton];
         
         [self fadeInBeginButton:1];
     };
@@ -938,6 +935,155 @@
     
     [self setTutorialDialogText:@"Wecome to Color Dash!"];
     [self fadeInDialogText:fadeOutText1 delay:1];
+}
+
+- (void)runWorld2Tutorial
+{
+    void (^showBeginButton)(void) = ^(void)
+    {
+        if (self.tutorialComplete)
+        {
+            return;
+        }
+        
+        [self createBeginButton];
+        
+        CGPoint center = CGPointMake(self.viewController.view.frame.size.width / 2, self.dialogText.frame.origin.y + self.dialogText.frame.size.height + self.viewController.topSectionContainer.frame.origin.y + 45);
+        [self.beginButton setCenter: center];
+        
+        [self fadeInBeginButton:0.5];
+    };
+    
+    void (^showText5)(void) = ^(void)
+    {
+        if (self.tutorialComplete)
+        {
+            return;
+        }
+        
+        [self setTutorialDialogText:@"Can you master the Reflector?"];
+        [self.dialogText sizeToFit];
+        [self.dialogText setCenter:CGPointMake(self.viewController.view.frame.size.width / 2, 65)];
+        
+        [self fadeInDialogText:showBeginButton delay:0.8];
+    };
+    
+    void (^fadeOutText4)(void) = ^(void)
+    {
+        if (self.tutorialComplete)
+        {
+            return;
+        }
+        
+        [self fadeOutDialogText:showText5 delay:3];
+    };
+    
+    void (^showText4)(void) = ^(void)
+    {
+        if (self.tutorialComplete)
+        {
+            return;
+        }
+        
+        self.pointerImageViewSmall.alpha = 0;
+        [self setTutorialDialogText:@"Excellent! \n\n Notice that the color bends to the right instead of going down."];
+        [self fadeInDialogText:fadeOutText4 delay:0.5];
+    };
+    
+    void (^showPointerOverCircle)(void) = ^(void)
+    {
+        if (self.tutorialComplete)
+        {
+            return;
+        }
+        
+        self.pointerImageView.alpha = 0;
+        self.allowColorButtonPress = false;
+        
+        GridColorButton* gridColorButton = [self.userColorBoard.topGridColorButtons objectAtIndex:1];
+        
+        self.allowGridButtonPress = true;
+        
+        self.gridColorButtonWaitingPress = gridColorButton.button;
+        self.waitingDelegate = showText4;
+        [self.pointerImageViewSmall setCenter:gridColorButton.button.center];
+        [self fadeInPointerImage:NULL delay:0.5 smallPointer:true];
+    };
+    
+    void (^showPointerOverRedButton)(void) = ^(void)
+    {
+        if (self.tutorialComplete)
+        {
+            return;
+        }
+        
+        [self.pointerImageView setCenter:self.viewController.redButton.center];
+        self.allowColorButtonPress = true;
+        [self fadeInPointerImage:NULL delay:1 smallPointer:false];
+        
+        self.colorButtonWaitingPress = self.viewController.redButton;
+        self.waitingDelegate = showPointerOverCircle;
+    };
+    
+    void (^showText3)(void) = ^(void)
+    {
+        if (self.tutorialComplete)
+        {
+            return;
+        }
+        
+        self.pointerImageViewSmall.alpha = 0;
+        [self setTutorialDialogText:@"Watch what happens when we add red color to the circle above the Reflector."];
+        [self fadeInDialogText:showPointerOverRedButton delay:0.8];
+    };
+    
+    void (^fadeOutText2)(void) = ^(void)
+    {
+        if (self.tutorialComplete)
+        {
+            return;
+        }
+        
+        [self fadeOutDialogText:showText3 delay:2.5];
+    };
+    
+    void (^showText2)(void) = ^(void)
+    {
+        if (self.tutorialComplete)
+        {
+            return;
+        }
+        
+        [self setTutorialDialogText:@"That's called a Reflector. It takes color from one direction and redirects it."];
+        [self fadeInDialogText:fadeOutText2 delay:0.8];
+    };
+    
+    void (^fadeOutText1)(void) = ^(void)
+    {
+        if (self.tutorialComplete)
+        {
+            return;
+        }
+        
+        [self fadeOutDialogText:showText2 delay:1.5];
+    };
+    
+    void (^showPointerOverArrow)(void) = ^(void)
+    {
+        if (self.tutorialComplete)
+        {
+            return;
+        }
+        
+        NSMutableArray *colorRow = [self.userColorBoard.colorCellSections objectAtIndex:1];
+        ColorCell *userColorCell = [colorRow objectAtIndex:1];
+        
+        [self.pointerImageViewSmall setCenter:userColorCell.image.center];
+        [self fadeInPointerImage:fadeOutText1 delay:1.5 smallPointer:true];
+    };
+    
+    [self setTutorialDialogText:@"Not bad so far, but are you ready for a twist? \n\n See that arrow in the middle of the board?"];
+    [self fadeInDialogText:showPointerOverArrow delay:1];
 }
 
 @end
