@@ -439,6 +439,31 @@
     [self OnUserActionTaken];
 }
 
+- (IBAction)splitterButtonPressed:(id)sender
+{
+    [self.userColorBoard splitterButtonPressed:sender];
+}
+
+- (IBAction)connectorCellPressed:(id)sender
+{
+    [self.userColorBoard connectorCellPressed:sender];
+}
+
+- (IBAction)zonerCellPressed:(id)sender
+{
+    [self.userColorBoard zonerCellPressed:sender];
+}
+
+- (IBAction)converterButtonPressed:(id)sender
+{
+    [self.userColorBoard converterButtonPressed:sender];
+}
+
+- (IBAction)shifterCellPressed:(id)sender
+{
+    [self.userColorBoard shifterCellPressed:sender];
+}
+
 -(void)OnUserActionTaken
 {
     // Update moves count and check for victory

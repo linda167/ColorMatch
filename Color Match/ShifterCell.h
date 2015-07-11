@@ -11,4 +11,5 @@
 
 @interface ShifterCell : ColorCell
 @property int outerColor;
+@property UIButton* button;
 @end

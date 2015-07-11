@@ -1020,7 +1020,7 @@
         cellBlock.colorCell = (ZonerCell*)colorCell;
         [cellBlock setImage:[self GetImageForCellType:colorCell] forState:UIControlStateNormal];
         
-        [cellBlock addTarget:self action:@selector(zonerCellPressed:) forControlEvents:UIControlEventTouchUpInside];
+        [cellBlock addTarget:self.viewController.mainGameManager action:@selector(zonerCellPressed:) forControlEvents:UIControlEventTouchUpInside];
         
         return cellBlock;
     }
@@ -1029,8 +1029,9 @@
         UIButton* connectorButton = [[UIButton alloc] initWithFrame:CGRectMake(xOffset, yOffset, size, size)];
         [connectorButton setImage:[self GetImageForCellType:colorCell] forState:UIControlStateNormal];
         
-        [connectorButton addTarget:self action:@selector(connectorCellPressed:) forControlEvents:UIControlEventTouchUpInside];
+        [connectorButton addTarget:self.viewController.mainGameManager action:@selector(connectorCellPressed:) forControlEvents:UIControlEventTouchUpInside];
         
+        ((ConnectorCell*)colorCell).button = connectorButton;
         [self.allConnectorCells addObject:colorCell];
         
         return connectorButton;
@@ -1042,7 +1043,7 @@
         splitterButton.splitterCell = (SplitterCell*)colorCell;
         [self.allSplitterCells addObject:colorCell];
         
-        [splitterButton addTarget:self action:@selector(splitterButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        [splitterButton addTarget:self.viewController.mainGameManager action:@selector(splitterButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         
         return splitterButton;
     }
@@ -1056,7 +1057,7 @@
         converterCell.converterButton = converterButton;
         [self.allConverterCells addObject:converterCell];
         
-        [converterButton addTarget:self action:@selector(converterButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        [converterButton addTarget:self.viewController.mainGameManager action:@selector(converterButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         
         return converterButton;
     }
@@ -1065,8 +1066,9 @@
         UIButton* shifterButton = [[UIButton alloc] initWithFrame:CGRectMake(xOffset, yOffset, size, size)];
         [shifterButton setImage:[self GetImageForCellType:colorCell] forState:UIControlStateNormal];
         
-        [shifterButton addTarget:self action:@selector(shifterCellPressed:) forControlEvents:UIControlEventTouchUpInside];
+        [shifterButton addTarget:self.viewController.mainGameManager action:@selector(shifterCellPressed:) forControlEvents:UIControlEventTouchUpInside];
         
+        ((ShifterCell*)colorCell).button = shifterButton;
         [self.allShifterCells addObject:colorCell];
         
         return shifterButton;

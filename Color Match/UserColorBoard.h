@@ -28,5 +28,10 @@
 -(void)resetCells;
 -(void)pressGridButtonWithColor:(UIButton *)button :(int)selectedColor doAnimate:(bool)doAnimate;
 -(NSNumber*)getCurrentColorForButton:(UIButton *)button;
+- (IBAction)splitterButtonPressed:(id)sender;
+- (IBAction)connectorCellPressed:(id)sender;
+- (IBAction)zonerCellPressed:(id)sender;
+- (IBAction)converterButtonPressed:(id)sender;
+- (IBAction)shifterCellPressed:(id)sender;
 
 @end

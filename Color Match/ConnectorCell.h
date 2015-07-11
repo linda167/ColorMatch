@@ -11,4 +11,5 @@
 
 @interface ConnectorCell : ColorCell
 @property int inputColor;
+@property UIButton* button;
 @end

@@ -1062,6 +1062,17 @@
             [boardCells addZonerValueAt:3 col:1 value:3];
             [boardCells addZonerValueAt:1 col:3 value:3];
         }
+        else if (worldId == 6 && levelId == 1 && ![[UserData sharedUserData] getTutorialComplete:6])
+        {
+            boardCells.colorCellSections =
+            [NSMutableArray arrayWithObjects:
+             [NSArray arrayWithObjects:@"0", @"0", @"0", nil],
+             [NSArray arrayWithObjects:@"0", @"3", @"0", nil],
+             [NSArray arrayWithObjects:@"0", @"0", @"0", nil],
+             nil];
+            
+            [boardCells addZonerValueAt:2 col:2 value:1];
+        }
         else if (worldId == 6 && levelId == 1)
         {
             boardCells.colorCellSections =
@@ -1531,6 +1542,16 @@
             [boardCells setConverterDirectionAt:3 col:3 isDirectionRight:1];
             [boardCells setConverterInitialDirectionAt:3 col:3 isDirectionRight:0];
         }
+        else if (worldId == 8 && levelId == 1 && ![[UserData sharedUserData] getTutorialComplete:8])
+        {
+            // Tutorial level
+            boardCells.colorCellSections =
+            [NSMutableArray arrayWithObjects:
+             [NSArray arrayWithObjects:@"0", @"0", @"11", nil],
+             [NSArray arrayWithObjects:@"0", @"0", @"0", nil],
+             [NSArray arrayWithObjects:@"0", @"9", @"0", nil],
+             nil];
+        }
         else if (worldId == 8 && levelId == 1)
         {
             boardCells.colorCellSections =
@@ -1702,7 +1723,21 @@
             
             boardCells.connectorCellInput = 3;
         }
-        else if (worldId == 9 && levelId == 1)
+        else if (worldId == 9 && levelId == 1 && ![[UserData sharedUserData] getTutorialComplete:9])
+        {
+            boardCells.colorCellSections =
+            [NSMutableArray arrayWithObjects:
+             [NSArray arrayWithObjects:@"0", @"0", @"12", nil],
+             [NSArray arrayWithObjects:@"12", @"0", @"0", nil],
+             [NSArray arrayWithObjects:@"0", @"12", @"0", nil],
+             nil];
+            
+            [boardCells addShifterValueAt:0 col:2 value:2];
+            [boardCells addShifterValueAt:1 col:0 value:1];
+            [boardCells addShifterValueAt:2 col:1 value:3];
+            boardCells.shiftCount = 2;
+        }
+        else if (worldId == 9 && levelId == 1 )
         {
             boardCells.colorCellSections =
             [NSMutableArray arrayWithObjects:

@@ -32,5 +32,10 @@
 - (NSArray*)getColorButtons;
 - (void)removeExistingBoard;
 -(void)resetActionBar;
+- (IBAction)splitterButtonPressed:(id)sender;
+- (IBAction)connectorCellPressed:(id)sender;
+- (IBAction)zonerCellPressed:(id)sender;
+- (IBAction)converterButtonPressed:(id)sender;
+- (IBAction)shifterCellPressed:(id)sender;
 
 @end
