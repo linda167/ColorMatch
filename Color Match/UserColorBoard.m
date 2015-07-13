@@ -22,6 +22,7 @@
 #import "ShifterCell.h"
 #import "DiverterCell.h"
 #import "MainGameManager.h"
+#import "SoundManager.h"
 
 @interface UserColorBoard ()
 @property MainGameViewController *viewController;
@@ -1081,6 +1082,9 @@
 
 - (IBAction)shifterCellPressed:(id)sender
 {
+    // Play sound:
+    [[SoundManager sharedManager] playSound:@"shifterSFX.mp3" looping:NO];
+    
     // Collect views to animate
     NSMutableArray* viewsToAnimate = [[NSMutableArray alloc] init];
     for (ShifterCell* colorCell in self.allShifterCells)
@@ -1106,6 +1110,9 @@
 
 - (IBAction)converterButtonPressed:(id)sender
 {
+    // Play sound:
+    [[SoundManager sharedManager] playSound:@"converterSFX.mp3" looping:NO];
+    
     ConverterCellButton* converterButton = (ConverterCellButton*)sender;
     ConverterCell* converterCell = converterButton.converterCell;
     
@@ -1156,6 +1163,9 @@
         return;
     }
     
+    // Play sound:
+    [[SoundManager sharedManager] playSound:@"splitterSFX.mp3" looping:NO];
+    
     // Collect views to animate
     NSMutableArray* viewsToAnimate = [[NSMutableArray alloc] init];
     [viewsToAnimate addObject:splitterButton];
@@ -1204,6 +1214,9 @@
         // Do nothing if color didn't change
         return;
     }
+    
+    // Play sound:
+    [[SoundManager sharedManager] playSound:@"zonerSFX.mp3" looping:NO];
     
     // Collect views to animate
     NSMutableArray* viewsToAnimate = [[NSMutableArray alloc] init];
@@ -1269,6 +1282,9 @@
         UIButton* connectorButton = (UIButton*)colorCell.image;
         [connectorButton setImage:newConnectorImage forState:UIControlStateNormal];
     }
+    
+    // Play sound:
+    [[SoundManager sharedManager] playSound:@"connectorSFX.mp3" looping:NO];
     
     // Do animation
     [CommonUtils AnimateViewsAffected:viewsToAnimate];

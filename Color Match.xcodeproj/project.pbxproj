@@ -57,6 +57,23 @@
 		BF0D4BCF1929379100AACB5A /* LineInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = BF0D4BCE1929379100AACB5A /* LineInfo.m */; };
 		BF0D4BD119293E5500AACB5A /* BlockClear.png in Resources */ = {isa = PBXBuildFile; fileRef = BF0D4BD019293E5500AACB5A /* BlockClear.png */; };
 		BF0D4BD41929429E00AACB5A /* LinePiece.m in Sources */ = {isa = PBXBuildFile; fileRef = BF0D4BD31929429E00AACB5A /* LinePiece.m */; };
+		BF43A9431B51F5E00054A6D0 /* SoundManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BF43A9421B51F5E00054A6D0 /* SoundManager.m */; };
+		BF43A9491B51F9720054A6D0 /* blueSelect.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BF43A9451B51F9720054A6D0 /* blueSelect.mp3 */; };
+		BF43A94A1B51F9720054A6D0 /* redSelect.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BF43A9461B51F9720054A6D0 /* redSelect.mp3 */; };
+		BF43A94B1B51F9720054A6D0 /* whiteSelect.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BF43A9471B51F9720054A6D0 /* whiteSelect.mp3 */; };
+		BF43A94C1B51F9720054A6D0 /* yellowSelect.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BF43A9481B51F9720054A6D0 /* yellowSelect.mp3 */; };
+		BF43A95A1B5320FA0054A6D0 /* connectorSFX.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BF43A9551B5320FA0054A6D0 /* connectorSFX.mp3 */; };
+		BF43A95B1B5320FA0054A6D0 /* converterSFX.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BF43A9561B5320FA0054A6D0 /* converterSFX.mp3 */; };
+		BF43A95C1B5320FA0054A6D0 /* shifterSFX.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BF43A9571B5320FA0054A6D0 /* shifterSFX.mp3 */; };
+		BF43A95D1B5320FA0054A6D0 /* splitterSFX.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BF43A9581B5320FA0054A6D0 /* splitterSFX.mp3 */; };
+		BF43A95E1B5320FA0054A6D0 /* zonerSFX.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BF43A9591B5320FA0054A6D0 /* zonerSFX.mp3 */; };
+		BF43A9631B5353AC0054A6D0 /* backSelect.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BF43A95F1B5353AC0054A6D0 /* backSelect.mp3 */; };
+		BF43A9641B5353AC0054A6D0 /* helpButtonSFX.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BF43A9601B5353AC0054A6D0 /* helpButtonSFX.mp3 */; };
+		BF43A9651B5353AC0054A6D0 /* levelFinish.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BF43A9611B5353AC0054A6D0 /* levelFinish.mp3 */; };
+		BF43A9661B5353AC0054A6D0 /* menuSelect.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BF43A9621B5353AC0054A6D0 /* menuSelect.mp3 */; };
+		BF43A96B1B537EF30054A6D0 /* Crazy Candy Highway.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BF43A9681B537EF30054A6D0 /* Crazy Candy Highway.mp3 */; };
+		BF43A96C1B537EF30054A6D0 /* Curious.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BF43A9691B537EF30054A6D0 /* Curious.mp3 */; };
+		BF43A96D1B537EF30054A6D0 /* Happy Tune.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BF43A96A1B537EF30054A6D0 /* Happy Tune.mp3 */; };
 		BF6304391895F231002F3C9E /* ColorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BF6304381895F231002F3C9E /* ColorCell.m */; };
 		BF85C82B1A47BABE00A494B6 /* converterLeftToRightBlue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF85C8251A47BABE00A494B6 /* converterLeftToRightBlue@2x.png */; };
 		BF85C82C1A47BABE00A494B6 /* converterLeftToRightRed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF85C8261A47BABE00A494B6 /* converterLeftToRightRed@2x.png */; };
@@ -312,6 +329,24 @@
 		BF0D4BD019293E5500AACB5A /* BlockClear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlockClear.png; sourceTree = "<group>"; };
 		BF0D4BD21929429E00AACB5A /* LinePiece.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LinePiece.h; sourceTree = "<group>"; };
 		BF0D4BD31929429E00AACB5A /* LinePiece.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LinePiece.m; sourceTree = "<group>"; };
+		BF43A9411B51F5E00054A6D0 /* SoundManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundManager.h; sourceTree = "<group>"; };
+		BF43A9421B51F5E00054A6D0 /* SoundManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoundManager.m; sourceTree = "<group>"; };
+		BF43A9451B51F9720054A6D0 /* blueSelect.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = blueSelect.mp3; path = Sounds/Colors/blueSelect.mp3; sourceTree = SOURCE_ROOT; };
+		BF43A9461B51F9720054A6D0 /* redSelect.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = redSelect.mp3; path = Sounds/Colors/redSelect.mp3; sourceTree = SOURCE_ROOT; };
+		BF43A9471B51F9720054A6D0 /* whiteSelect.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = whiteSelect.mp3; path = Sounds/Colors/whiteSelect.mp3; sourceTree = SOURCE_ROOT; };
+		BF43A9481B51F9720054A6D0 /* yellowSelect.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = yellowSelect.mp3; path = Sounds/Colors/yellowSelect.mp3; sourceTree = SOURCE_ROOT; };
+		BF43A9551B5320FA0054A6D0 /* connectorSFX.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = connectorSFX.mp3; path = Sounds/Mechanics/connectorSFX.mp3; sourceTree = SOURCE_ROOT; };
+		BF43A9561B5320FA0054A6D0 /* converterSFX.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = converterSFX.mp3; path = Sounds/Mechanics/converterSFX.mp3; sourceTree = SOURCE_ROOT; };
+		BF43A9571B5320FA0054A6D0 /* shifterSFX.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = shifterSFX.mp3; path = Sounds/Mechanics/shifterSFX.mp3; sourceTree = SOURCE_ROOT; };
+		BF43A9581B5320FA0054A6D0 /* splitterSFX.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = splitterSFX.mp3; path = Sounds/Mechanics/splitterSFX.mp3; sourceTree = SOURCE_ROOT; };
+		BF43A9591B5320FA0054A6D0 /* zonerSFX.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = zonerSFX.mp3; path = Sounds/Mechanics/zonerSFX.mp3; sourceTree = SOURCE_ROOT; };
+		BF43A95F1B5353AC0054A6D0 /* backSelect.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = backSelect.mp3; path = Sounds/Misc/backSelect.mp3; sourceTree = SOURCE_ROOT; };
+		BF43A9601B5353AC0054A6D0 /* helpButtonSFX.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = helpButtonSFX.mp3; path = Sounds/Misc/helpButtonSFX.mp3; sourceTree = SOURCE_ROOT; };
+		BF43A9611B5353AC0054A6D0 /* levelFinish.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = levelFinish.mp3; path = Sounds/Misc/levelFinish.mp3; sourceTree = SOURCE_ROOT; };
+		BF43A9621B5353AC0054A6D0 /* menuSelect.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = menuSelect.mp3; path = Sounds/Misc/menuSelect.mp3; sourceTree = SOURCE_ROOT; };
+		BF43A9681B537EF30054A6D0 /* Crazy Candy Highway.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Crazy Candy Highway.mp3"; path = "Music/Crazy Candy Highway.mp3"; sourceTree = SOURCE_ROOT; };
+		BF43A9691B537EF30054A6D0 /* Curious.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Curious.mp3; path = Music/Curious.mp3; sourceTree = SOURCE_ROOT; };
+		BF43A96A1B537EF30054A6D0 /* Happy Tune.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Happy Tune.mp3"; path = "Music/Happy Tune.mp3"; sourceTree = SOURCE_ROOT; };
 		BF6304371895F231002F3C9E /* ColorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorCell.h; sourceTree = "<group>"; };
 		BF6304381895F231002F3C9E /* ColorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorCell.m; sourceTree = "<group>"; };
 		BF85C8251A47BABE00A494B6 /* converterLeftToRightBlue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "converterLeftToRightBlue@2x.png"; sourceTree = "<group>"; };
@@ -568,6 +603,8 @@
 		AF2C22281874B8B700082561 /* Color Match */ = {
 			isa = PBXGroup;
 			children = (
+				BF43A9671B537E670054A6D0 /* Music */,
+				BF43A9441B51F94B0054A6D0 /* Sounds */,
 				AF2C225A1874B95000082561 /* Images */,
 				BF90797D1953E662000E6E58 /* Common */,
 				BF90797C1953E61C000E6E58 /* Game Core */,
@@ -794,6 +831,36 @@
 			path = ../Images;
 			sourceTree = "<group>";
 		};
+		BF43A9441B51F94B0054A6D0 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				BF43A95F1B5353AC0054A6D0 /* backSelect.mp3 */,
+				BF43A9601B5353AC0054A6D0 /* helpButtonSFX.mp3 */,
+				BF43A9611B5353AC0054A6D0 /* levelFinish.mp3 */,
+				BF43A9621B5353AC0054A6D0 /* menuSelect.mp3 */,
+				BF43A9551B5320FA0054A6D0 /* connectorSFX.mp3 */,
+				BF43A9561B5320FA0054A6D0 /* converterSFX.mp3 */,
+				BF43A9571B5320FA0054A6D0 /* shifterSFX.mp3 */,
+				BF43A9581B5320FA0054A6D0 /* splitterSFX.mp3 */,
+				BF43A9591B5320FA0054A6D0 /* zonerSFX.mp3 */,
+				BF43A9451B51F9720054A6D0 /* blueSelect.mp3 */,
+				BF43A9461B51F9720054A6D0 /* redSelect.mp3 */,
+				BF43A9471B51F9720054A6D0 /* whiteSelect.mp3 */,
+				BF43A9481B51F9720054A6D0 /* yellowSelect.mp3 */,
+			);
+			name = Sounds;
+			sourceTree = "<group>";
+		};
+		BF43A9671B537E670054A6D0 /* Music */ = {
+			isa = PBXGroup;
+			children = (
+				BF43A9681B537EF30054A6D0 /* Crazy Candy Highway.mp3 */,
+				BF43A9691B537EF30054A6D0 /* Curious.mp3 */,
+				BF43A96A1B537EF30054A6D0 /* Happy Tune.mp3 */,
+			);
+			name = Music;
+			sourceTree = "<group>";
+		};
 		BF90797B1953E587000E6E58 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -873,6 +940,8 @@
 		BF90797D1953E662000E6E58 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				BF43A9411B51F5E00054A6D0 /* SoundManager.h */,
+				BF43A9421B51F5E00054A6D0 /* SoundManager.m */,
 				AF2C22311874B8B700082561 /* CMAppDelegate.h */,
 				AF2C22321874B8B800082561 /* CMAppDelegate.m */,
 				AFB896821881C288003FAEF4 /* CommonTypes.h */,
@@ -967,6 +1036,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				BF85C8591A51068200A494B6 /* transporterGoalOutputDown@2x.png in Resources */,
+				BF43A94A1B51F9720054A6D0 /* redSelect.mp3 in Resources */,
+				BF43A95C1B5320FA0054A6D0 /* shifterSFX.mp3 in Resources */,
 				BF980876196E664E00BAF9ED /* transporterOutputDownRed@2x.png in Resources */,
 				AFADA21F1877D20D00FADA22 /* BlockOrange.png in Resources */,
 				BF9079C4195E1819000E6E58 /* Blue@2x.png in Resources */,
@@ -991,9 +1062,11 @@
 				BFE467F91B4100CE00C286F1 /* 04pauseDiverter@2x.png in Resources */,
 				AFADA2321877D20D00FADA22 /* YellowSelected.png in Resources */,
 				BF9079C7195E1819000E6E58 /* RedSelected@2x.png in Resources */,
+				BF43A95A1B5320FA0054A6D0 /* connectorSFX.mp3 in Resources */,
 				BF9079BB195E1040000E6E58 /* FilledCircleYellow@2x.png in Resources */,
 				BF85C82C1A47BABE00A494B6 /* converterLeftToRightRed@2x.png in Resources */,
 				BFE467F81B4100CE00C286F1 /* 03pauseConnector@2x.png in Resources */,
+				BF43A9651B5353AC0054A6D0 /* levelFinish.mp3 in Resources */,
 				BFE467FB1B4100CE00C286F1 /* 06pauseConverter@2x.png in Resources */,
 				BF980877196E664E00BAF9ED /* transporterOutputDownWhite@2x.png in Resources */,
 				BF98087F196E664E00BAF9ED /* transporterOutputRightWhite@2x.png in Resources */,
@@ -1003,6 +1076,7 @@
 				AF2C223E1874B8B800082561 /* Images.xcassets in Resources */,
 				AFADA22E1877D20D00FADA22 /* RedSelected.png in Resources */,
 				BF85C8621A56071900A494B6 /* divider.png in Resources */,
+				BF43A94B1B51F9720054A6D0 /* whiteSelect.mp3 in Resources */,
 				BFE467EB1B40AE4700C286F1 /* helpButton@2x.png in Resources */,
 				BF98088E1974F13D00BAF9ED /* ReflectorArrowTtRGreen@2x.png in Resources */,
 				AFADA2311877D20D00FADA22 /* Yellow.png in Resources */,
@@ -1017,8 +1091,10 @@
 				BF980867196E664E00BAF9ED /* transporterInputLeftWhite@2x.png in Resources */,
 				BF85C83F1A4E9C5300A494B6 /* shifterOuterYellow@2x.png in Resources */,
 				BF9079CD195FD660000E6E58 /* diverterGoal@2x.png in Resources */,
+				BF43A96B1B537EF30054A6D0 /* Crazy Candy Highway.mp3 in Resources */,
 				BF85C8421A4F5A0C00A494B6 /* shifterGoal@2x.png in Resources */,
 				BFA3A2B5192D899D00C1BB7D /* ReflectorArrowTtR@2x.png in Resources */,
+				BF43A96D1B537EF30054A6D0 /* Happy Tune.mp3 in Resources */,
 				BFA3A2CB193AF4D900C1BB7D /* completeLevel@2x.png in Resources */,
 				BF980880196E664E00BAF9ED /* transporterOutputRightYellow@2x.png in Resources */,
 				BF9808871974EA4C00BAF9ED /* ReflectorArrowLtDOrange@2x.png in Resources */,
@@ -1043,6 +1119,7 @@
 				BF9079DB1963B954000E6E58 /* splitterYellow@2x.png in Resources */,
 				BF9808851974EA4C00BAF9ED /* ReflectorArrowLtDBrown@2x.png in Resources */,
 				AFADA2231877D20D00FADA22 /* BlockYellow.png in Resources */,
+				BF43A94C1B51F9720054A6D0 /* yellowSelect.mp3 in Resources */,
 				BF90799419560FE3000E6E58 /* connectorInnerGreen@2x.png in Resources */,
 				BF9079CF19626C0D000E6E58 /* splitterWhite@2x.png in Resources */,
 				BF9079BA195E1040000E6E58 /* FilledCircleRed@2x.png in Resources */,
@@ -1060,7 +1137,9 @@
 				BF98088D1974F13D00BAF9ED /* ReflectorArrowTtRBrown@2x.png in Resources */,
 				BF90796D194D6E42000E6E58 /* 3stars@2x.png in Resources */,
 				BFE4680E1B4852E900C286F1 /* TutorialPointerSmall@2x.png in Resources */,
+				BF43A95E1B5320FA0054A6D0 /* zonerSFX.mp3 in Resources */,
 				BF90799519560FE3000E6E58 /* connectorInnerOrange@2x.png in Resources */,
+				BF43A9641B5353AC0054A6D0 /* helpButtonSFX.mp3 in Resources */,
 				BF90799719560FE3000E6E58 /* connectorInnerRed@2x.png in Resources */,
 				BFE467FC1B4100CE00C286F1 /* 07pauseTransporter@2x.png in Resources */,
 				BF980868196E664E00BAF9ED /* transporterInputLeftYellow@2x.png in Resources */,
@@ -1068,6 +1147,7 @@
 				BF97FFF01A5913D300ABA450 /* backgroundImage.png in Resources */,
 				BF980875196E664E00BAF9ED /* transporterOutputDownPurple@2x.png in Resources */,
 				AFADA2271877D20D00FADA22 /* EmptyCircle.png in Resources */,
+				BF43A96C1B537EF30054A6D0 /* Curious.mp3 in Resources */,
 				BF9079DA1963B954000E6E58 /* splitterRed@2x.png in Resources */,
 				BF85C8651A578D5C00A494B6 /* buttonPlayGame@2x.png in Resources */,
 				BF9079B1195E073E000E6E58 /* BlockRed@2x.png in Resources */,
@@ -1081,6 +1161,7 @@
 				BF85C84F1A4F5B4A00A494B6 /* shifterInnerPurple@2x.png in Resources */,
 				BF90796B194D6E42000E6E58 /* 1stars@2x.png in Resources */,
 				BF85C84C1A4F5B4A00A494B6 /* shifterInnerBrown@2x.png in Resources */,
+				BF43A9661B5353AC0054A6D0 /* menuSelect.mp3 in Resources */,
 				BFE468011B46420500C286F1 /* levelLock@2x.png in Resources */,
 				BF98086E196E664E00BAF9ED /* transporterInputTopRed@2x.png in Resources */,
 				BF9079E619664916000E6E58 /* converterBlue@2x.png in Resources */,
@@ -1104,6 +1185,7 @@
 				BF85C8431A4F5A0C00A494B6 /* shifterInnerWhite@2x.png in Resources */,
 				BF907965194D6284000E6E58 /* rainbow@2x.png in Resources */,
 				BFA3A2BD1931401700C1BB7D /* ReflectorArrowLtDRed@2x.png in Resources */,
+				BF43A9491B51F9720054A6D0 /* blueSelect.mp3 in Resources */,
 				BF98086F196E664E00BAF9ED /* transporterInputTopWhite@2x.png in Resources */,
 				BF90799819560FE3000E6E58 /* connectorInnerWhite@2x.png in Resources */,
 				BF98087A196E664E00BAF9ED /* transporterOutputRightBrown@2x.png in Resources */,
@@ -1114,6 +1196,7 @@
 				BF85C84D1A4F5B4A00A494B6 /* shifterInnerGreen@2x.png in Resources */,
 				BF9079B8195E1040000E6E58 /* EmptyCircle@2x.png in Resources */,
 				AFB75A9B188339C900CAB736 /* GameLogo.png in Resources */,
+				BF43A95D1B5320FA0054A6D0 /* splitterSFX.mp3 in Resources */,
 				BF9079AD195E073E000E6E58 /* BlockBrown@2x.png in Resources */,
 				BF98087B196E664E00BAF9ED /* transporterOutputRightGreen@2x.png in Resources */,
 				BF980866196E664E00BAF9ED /* transporterInputLeftRed@2x.png in Resources */,
@@ -1131,6 +1214,7 @@
 				BF90796A194D6E42000E6E58 /* 0stars@2x.png in Resources */,
 				BF90799219560FE3000E6E58 /* connectorInnerBlue@2x.png in Resources */,
 				BFA3A2B4192D899D00C1BB7D /* ReflectorArrowLtD@2x.png in Resources */,
+				BF43A95B1B5320FA0054A6D0 /* converterSFX.mp3 in Resources */,
 				BF980870196E664E00BAF9ED /* transporterInputTopYellow@2x.png in Resources */,
 				AFADA2201877D20D00FADA22 /* BlockPurple.png in Resources */,
 				BF85C8331A47BFD500A494B6 /* converterLeftToRightWhite@2x.png in Resources */,
@@ -1138,6 +1222,7 @@
 				BF9079B2195E073E000E6E58 /* BlockWhite@2x.png in Resources */,
 				BFA3A2C01931401700C1BB7D /* ReflectorArrowTtRRed@2x.png in Resources */,
 				BF85C83D1A4E9C5300A494B6 /* shifterOuterBlue@2x.png in Resources */,
+				BF43A9631B5353AC0054A6D0 /* backSelect.mp3 in Resources */,
 				BF9079B3195E073E000E6E58 /* BlockYellow@2x.png in Resources */,
 				BF980869196E664E00BAF9ED /* transporterInputTopBlue@2x.png in Resources */,
 				BFE467ED1B40B36A00C286F1 /* closeButton@2x.png in Resources */,
@@ -1199,6 +1284,7 @@
 				BF9807AB196721BA00BAF9ED /* TransporterGroup.m in Sources */,
 				BF9807AE1967230600BAF9ED /* TransporterCell.m in Sources */,
 				BF0D4BC5192010BB00AACB5A /* BoardCells.m in Sources */,
+				BF43A9431B51F5E00054A6D0 /* SoundManager.m in Sources */,
 				BFE467DE1B3BC7A700C286F1 /* DiverterCell.m in Sources */,
 				AFB896811881C0C7003FAEF4 /* GoalBoard.m in Sources */,
 			);

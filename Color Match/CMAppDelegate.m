@@ -7,6 +7,7 @@
 //
 
 #import "CMAppDelegate.h"
+#import "SoundManager.h"
 
 @implementation CMAppDelegate
 
@@ -36,6 +37,8 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    
+    [[SoundManager sharedManager] prepareToPlayWithSound:@"blueSelect.mp3"];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

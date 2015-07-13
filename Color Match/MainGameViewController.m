@@ -16,6 +16,7 @@
 #import "HelpScreenViewController.h"
 #import "MainGameManager.h"
 #import "TutorialGameManager.h"
+#import "SoundManager.h"
 
 @interface MainGameViewController ()
 @property int worldId;
@@ -34,6 +35,16 @@
     
     // Change navigation bar appearance
     [self.navigationController.navigationBar setTintColor:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    if (self.isMovingFromParentViewController)
+    {
+        [[SoundManager sharedManager] playSound:@"backSelect.mp3" looping:NO];
+    }
 }
 
 - (void)createGameManagerAndStartNewGame

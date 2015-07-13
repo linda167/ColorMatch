@@ -10,6 +10,7 @@
 #import "WorldViewController.h"
 #import "MainGameViewController.h"
 #import "UserData.h"
+#import "SoundManager.h"
 
 @interface WelcomeScreenViewController ()
 @property UIView *logoView;
@@ -148,6 +149,8 @@
 
 - (IBAction)OnTapPlayGameButton:(id)sender
 {
+    [[SoundManager sharedManager] playSound:@"menuSelect.mp3" looping:NO];
+    
     if (![[UserData sharedUserData] getTutorialComplete:1])
     {
         // If tutorial is not complete for world 1, go directly to level 1-1

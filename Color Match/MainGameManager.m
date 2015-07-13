@@ -14,6 +14,7 @@
 #import "UserData.h"
 #import "LevelsManager.h"
 #import "HelpScreenViewController.h"
+#import "SoundManager.h"
 
 @interface MainGameManager ()
 
@@ -298,27 +299,51 @@
             
             if (button == self.viewController.whiteButton)
             {
-                self.selectedColor = 0;
-                UIImage *btnImage = [UIImage imageNamed:@"WhiteSelected.png"];
-                [button setImage:btnImage forState:UIControlStateNormal];
+                if (self.selectedColor != 0)
+                {
+                    self.selectedColor = 0;
+                    UIImage *btnImage = [UIImage imageNamed:@"WhiteSelected.png"];
+                    [button setImage:btnImage forState:UIControlStateNormal];
+                    
+                    // Play sound:
+                    [[SoundManager sharedManager] playSound:@"whiteSelect.mp3" looping:NO];
+                }
             }
-            if (button == self.viewController.blueButton)
+            else if (button == self.viewController.blueButton)
             {
-                self.selectedColor = 1;
-                UIImage *btnImage = [UIImage imageNamed:@"BlueSelected.png"];
-                [button setImage:btnImage forState:UIControlStateNormal];
+                if (self.selectedColor != 1)
+                {
+                    self.selectedColor = 1;
+                    UIImage *btnImage = [UIImage imageNamed:@"BlueSelected.png"];
+                    [button setImage:btnImage forState:UIControlStateNormal];
+                    
+                    // Play sound:
+                    [[SoundManager sharedManager] playSound:@"blueSelect.mp3" looping:NO];
+                }
             }
             else if (button == self.viewController.redButton)
             {
-                self.selectedColor = 2;
-                UIImage *btnImage = [UIImage imageNamed:@"RedSelected.png"];
-                [button setImage:btnImage forState:UIControlStateNormal];
+                if (self.selectedColor != 2)
+                {
+                    self.selectedColor = 2;
+                    UIImage *btnImage = [UIImage imageNamed:@"RedSelected.png"];
+                    [button setImage:btnImage forState:UIControlStateNormal];
+                    
+                    // Play sound:
+                    [[SoundManager sharedManager] playSound:@"redSelect.mp3" looping:NO];
+                }
             }
             else if (button == self.viewController.yellowButton)
             {
-                self.selectedColor = 3;
-                UIImage *btnImage = [UIImage imageNamed:@"YellowSelected.png"];
-                [button setImage:btnImage forState:UIControlStateNormal];
+                if (self.selectedColor != 3)
+                {
+                    self.selectedColor = 3;
+                    UIImage *btnImage = [UIImage imageNamed:@"YellowSelected.png"];
+                    [button setImage:btnImage forState:UIControlStateNormal];
+                    
+                    // Play sound:
+                    [[SoundManager sharedManager] playSound:@"yellowSelect.mp3" looping:NO];
+                }
             }
         }
         else
@@ -356,6 +381,9 @@
 
 -(void)DoVictory
 {
+    // Play sound
+    [[SoundManager sharedManager] playSound:@"levelFinish.mp3" looping:NO];
+    
     // Stop the timer
     [self.stopWatchTimer invalidate];
     
@@ -584,6 +612,8 @@
 
 - (void)OnShowHelpMenu:(id)sender
 {
+    [[SoundManager sharedManager] playSound:@"helpButtonSFX.mp3" looping:NO];
+    
     // Hide navigation bar
     [self.viewController.navigationController setNavigationBarHidden:YES animated:false];
     
@@ -601,6 +631,8 @@
 
 - (void)CloseHelpMenu
 {
+    [[SoundManager sharedManager] playSound:@"helpButtonSFX.mp3" looping:NO];
+    
     [self.helpScreenViewController willMoveToParentViewController:nil];
     [self.helpScreenViewController.view removeFromSuperview];
     [self.helpScreenViewController removeFromParentViewController];

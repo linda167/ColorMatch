@@ -12,6 +12,7 @@
 #import "MainGameViewController.h"
 #import "LevelSelectButton.h"
 #import "UserData.h"
+#import "SoundManager.h"
 
 @interface WorldViewController ()
 @property int pageCount;
@@ -32,6 +33,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    // Start music if not already playing
+    if (![SoundManager sharedManager].playingMusic)
+    {
+        [[SoundManager sharedManager] playMusic:@"Crazy Candy Highway.mp3" looping:YES];
+    }
     
     self.viewControllers = [[NSMutableArray alloc] init];
     self.pageCount = [LevelsManager GetTotalWorldCount];
@@ -96,6 +103,12 @@
 {
     // Change navigation bar appearance
     [self.navigationController.navigationBar setTintColor:nil];
+    
+    // Play back button sound
+    if (self.isMovingFromParentViewController)
+    {
+        [[SoundManager sharedManager] playSound:@"backSelect.mp3" looping:NO];
+    }
     
     [super viewDidDisappear:animated];
 }

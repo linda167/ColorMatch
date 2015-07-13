@@ -12,6 +12,7 @@
 #import "LevelsManager.h"
 #import "MainGameViewController.h"
 #import "WorldViewController.h"
+#import "SoundManager.h"
 
 @interface SingleWorldViewController ()
 @property int worldId;
@@ -248,6 +249,8 @@
 
 - (IBAction)levelButtonPressed:(id)sender
 {
+    [[SoundManager sharedManager] playSound:@"menuSelect.mp3" looping:NO];
+    
     [self.parentWorldController performSegueWithIdentifier:@"LoadLevel" sender:sender];
 }
 
