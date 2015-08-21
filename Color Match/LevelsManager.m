@@ -517,7 +517,7 @@
                 nil];
             
             [boardCells addSplitterValueAt:0 col:0 value:1];
-            [boardCells addSplitterValueAt:2 col:2 value:1];
+            [boardCells addSplitterValueAt:2 col:2 value:3];
         }
         else if (worldId == 3 && levelId == 5)
         {
@@ -1492,17 +1492,18 @@
             boardCells.colorCellSections =
             [NSMutableArray arrayWithObjects:
              [NSArray arrayWithObjects:@"7", @"0", @"0", @"0", @"0", nil],
-             [NSArray arrayWithObjects:@"0", @"0", @"9", @"11", @"6", nil],
+             [NSArray arrayWithObjects:@"0", @"0", @"5", @"4", @"6", nil],
              [NSArray arrayWithObjects:@"0", @"7", @"0", @"0", @"0", nil],
              [NSArray arrayWithObjects:@"0", @"0", @"0", @"0", @"0", nil],
-             [NSArray arrayWithObjects:@"8", @"10", @"0", @"0", @"0", nil],
+             [NSArray arrayWithObjects:@"4", @"4", @"0", @"0", @"0", nil],
              nil];
             
-            [boardCells addSplitterValueAt:1 col:4 value:2];
-            [boardCells setConverterDirectionAt:0 col:0 isDirectionRight:0];
-            [boardCells setConverterInitialDirectionAt:0 col:0 isDirectionRight:1];
-            [boardCells setConverterDirectionAt:2 col:1 isDirectionRight:1];
+            [boardCells addSplitterValueAt:1 col:4 value:3];
+            [boardCells setConverterDirectionAt:0 col:0 isDirectionRight:1];
+            [boardCells setConverterInitialDirectionAt:0 col:0 isDirectionRight:0];
+            [boardCells setConverterDirectionAt:2 col:1 isDirectionRight:0];
             [boardCells setConverterInitialDirectionAt:2 col:1 isDirectionRight:1];
+            boardCells.connectorCellInput = 2;
         }
         else if (worldId == 7 && levelId == 15)
         {
@@ -2812,8 +2813,8 @@
     }
     else if (worldId == 7 && levelId == 14)
     {
-        [topColorsState addObjectsFromArray:[NSArray arrayWithObjects:@"1", @"2", @"1", @"3", @"2", nil]];
-        [leftColorsState addObjectsFromArray:[NSArray arrayWithObjects:@"0", @"1", @"3", @"2", @"3", nil]];
+        [topColorsState addObjectsFromArray:[NSArray arrayWithObjects:@"0", @"3", @"3", @"2", @"3", nil]];
+        [leftColorsState addObjectsFromArray:[NSArray arrayWithObjects:@"1", @"2", @"2", @"1", @"1", nil]];
     }
     else if (worldId == 7 && levelId == 15)
     {

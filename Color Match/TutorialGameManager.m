@@ -1593,11 +1593,11 @@
     // Preset colors from left and top
     GridColorButton *gridColorButton = [self.userColorBoard.topGridColorButtons objectAtIndex:1];
     UIButton *button = gridColorButton.button;
-    [self.userColorBoard pressGridButtonWithColor:button :2 doAnimate:false];
+    [self.userColorBoard pressGridButtonWithColor:button :2 doAnimate:false doSound:false];
     
     gridColorButton = [self.userColorBoard.leftGridColorButtons objectAtIndex:1];
     button = gridColorButton.button;
-    [self.userColorBoard pressGridButtonWithColor:button :1 doAnimate:false];
+    [self.userColorBoard pressGridButtonWithColor:button :1 doAnimate:false doSound:false];
 }
 
 - (void)runWorld6Tutorial
@@ -1831,11 +1831,11 @@
     // Preset colors from left and top
     GridColorButton *gridColorButton = [self.userColorBoard.topGridColorButtons objectAtIndex:1];
     UIButton *button = gridColorButton.button;
-    [self.userColorBoard pressGridButtonWithColor:button :3 doAnimate:false];
+    [self.userColorBoard pressGridButtonWithColor:button :3 doAnimate:false doSound:false];
     
     gridColorButton = [self.userColorBoard.leftGridColorButtons objectAtIndex:1];
     button = gridColorButton.button;
-    [self.userColorBoard pressGridButtonWithColor:button :2 doAnimate:false];
+    [self.userColorBoard pressGridButtonWithColor:button :2 doAnimate:false doSound:false];
 }
 
 - (void)runWorld8Tutorial

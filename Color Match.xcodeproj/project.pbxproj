@@ -57,6 +57,9 @@
 		BF0D4BCF1929379100AACB5A /* LineInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = BF0D4BCE1929379100AACB5A /* LineInfo.m */; };
 		BF0D4BD119293E5500AACB5A /* BlockClear.png in Resources */ = {isa = PBXBuildFile; fileRef = BF0D4BD019293E5500AACB5A /* BlockClear.png */; };
 		BF0D4BD41929429E00AACB5A /* LinePiece.m in Sources */ = {isa = PBXBuildFile; fileRef = BF0D4BD31929429E00AACB5A /* LinePiece.m */; };
+		BF2DF3921B64678100AFD920 /* circleFill.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BF2DF3901B64678100AFD920 /* circleFill.mp3 */; };
+		BF2DF3931B64678100AFD920 /* intro.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BF2DF3911B64678100AFD920 /* intro.mp3 */; };
+		BF2DF3951B65D56700AFD920 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF2DF3941B65D56700AFD920 /* StoreKit.framework */; };
 		BF43A9431B51F5E00054A6D0 /* SoundManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BF43A9421B51F5E00054A6D0 /* SoundManager.m */; };
 		BF43A9491B51F9720054A6D0 /* blueSelect.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BF43A9451B51F9720054A6D0 /* blueSelect.mp3 */; };
 		BF43A94A1B51F9720054A6D0 /* redSelect.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BF43A9461B51F9720054A6D0 /* redSelect.mp3 */; };
@@ -75,6 +78,8 @@
 		BF43A96C1B537EF30054A6D0 /* Curious.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BF43A9691B537EF30054A6D0 /* Curious.mp3 */; };
 		BF43A96D1B537EF30054A6D0 /* Happy Tune.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BF43A96A1B537EF30054A6D0 /* Happy Tune.mp3 */; };
 		BF6304391895F231002F3C9E /* ColorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BF6304381895F231002F3C9E /* ColorCell.m */; };
+		BF85B7601B6E8DE300018E25 /* buttonBuyFullGame@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF85B75F1B6E8DE300018E25 /* buttonBuyFullGame@2x.png */; };
+		BF85B7631B8557DB00018E25 /* FullLevelId.m in Sources */ = {isa = PBXBuildFile; fileRef = BF85B7621B8557DB00018E25 /* FullLevelId.m */; };
 		BF85C82B1A47BABE00A494B6 /* converterLeftToRightBlue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF85C8251A47BABE00A494B6 /* converterLeftToRightBlue@2x.png */; };
 		BF85C82C1A47BABE00A494B6 /* converterLeftToRightRed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF85C8261A47BABE00A494B6 /* converterLeftToRightRed@2x.png */; };
 		BF85C82D1A47BABE00A494B6 /* converterLeftToRightYellow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF85C8271A47BABE00A494B6 /* converterLeftToRightYellow@2x.png */; };
@@ -262,7 +267,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		AF2C221F1874B8B700082561 /* Color Match.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Color Match.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AF2C221F1874B8B700082561 /* Color Dash.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Color Dash.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF2C22221874B8B700082561 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AF2C22241874B8B700082561 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		AF2C22261874B8B700082561 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -329,6 +334,9 @@
 		BF0D4BD019293E5500AACB5A /* BlockClear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlockClear.png; sourceTree = "<group>"; };
 		BF0D4BD21929429E00AACB5A /* LinePiece.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LinePiece.h; sourceTree = "<group>"; };
 		BF0D4BD31929429E00AACB5A /* LinePiece.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LinePiece.m; sourceTree = "<group>"; };
+		BF2DF3901B64678100AFD920 /* circleFill.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = circleFill.mp3; path = Sounds/Misc/circleFill.mp3; sourceTree = SOURCE_ROOT; };
+		BF2DF3911B64678100AFD920 /* intro.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = intro.mp3; path = Sounds/Misc/intro.mp3; sourceTree = SOURCE_ROOT; };
+		BF2DF3941B65D56700AFD920 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		BF43A9411B51F5E00054A6D0 /* SoundManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundManager.h; sourceTree = "<group>"; };
 		BF43A9421B51F5E00054A6D0 /* SoundManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoundManager.m; sourceTree = "<group>"; };
 		BF43A9451B51F9720054A6D0 /* blueSelect.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = blueSelect.mp3; path = Sounds/Colors/blueSelect.mp3; sourceTree = SOURCE_ROOT; };
@@ -349,6 +357,9 @@
 		BF43A96A1B537EF30054A6D0 /* Happy Tune.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Happy Tune.mp3"; path = "Music/Happy Tune.mp3"; sourceTree = SOURCE_ROOT; };
 		BF6304371895F231002F3C9E /* ColorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorCell.h; sourceTree = "<group>"; };
 		BF6304381895F231002F3C9E /* ColorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorCell.m; sourceTree = "<group>"; };
+		BF85B75F1B6E8DE300018E25 /* buttonBuyFullGame@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "buttonBuyFullGame@2x.png"; sourceTree = "<group>"; };
+		BF85B7611B8557DB00018E25 /* FullLevelId.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FullLevelId.h; sourceTree = "<group>"; };
+		BF85B7621B8557DB00018E25 /* FullLevelId.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FullLevelId.m; sourceTree = "<group>"; };
 		BF85C8251A47BABE00A494B6 /* converterLeftToRightBlue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "converterLeftToRightBlue@2x.png"; sourceTree = "<group>"; };
 		BF85C8261A47BABE00A494B6 /* converterLeftToRightRed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "converterLeftToRightRed@2x.png"; sourceTree = "<group>"; };
 		BF85C8271A47BABE00A494B6 /* converterLeftToRightYellow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "converterLeftToRightYellow@2x.png"; sourceTree = "<group>"; };
@@ -551,6 +562,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF2DF3951B65D56700AFD920 /* StoreKit.framework in Frameworks */,
 				AF2C22251874B8B700082561 /* CoreGraphics.framework in Frameworks */,
 				AF2C22271874B8B700082561 /* UIKit.framework in Frameworks */,
 				AF2C22231874B8B700082561 /* Foundation.framework in Frameworks */,
@@ -583,7 +595,7 @@
 		AF2C22201874B8B700082561 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				AF2C221F1874B8B700082561 /* Color Match.app */,
+				AF2C221F1874B8B700082561 /* Color Dash.app */,
 				AF2C22431874B8B800082561 /* Color MatchTests.xctest */,
 			);
 			name = Products;
@@ -592,6 +604,7 @@
 		AF2C22211874B8B700082561 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BF2DF3941B65D56700AFD920 /* StoreKit.framework */,
 				AF2C22221874B8B700082561 /* Foundation.framework */,
 				AF2C22241874B8B700082561 /* CoreGraphics.framework */,
 				AF2C22261874B8B700082561 /* UIKit.framework */,
@@ -649,6 +662,7 @@
 		AF2C225A1874B95000082561 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				BF85B75F1B6E8DE300018E25 /* buttonBuyFullGame@2x.png */,
 				BFE468131B4872B600C286F1 /* beginButton@2x.png */,
 				BFE468111B48679F00C286F1 /* TutorialPointerBig@2x.png */,
 				BFE4680D1B4852E900C286F1 /* TutorialPointerSmall@2x.png */,
@@ -834,6 +848,8 @@
 		BF43A9441B51F94B0054A6D0 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				BF2DF3901B64678100AFD920 /* circleFill.mp3 */,
+				BF2DF3911B64678100AFD920 /* intro.mp3 */,
 				BF43A95F1B5353AC0054A6D0 /* backSelect.mp3 */,
 				BF43A9601B5353AC0054A6D0 /* helpButtonSFX.mp3 */,
 				BF43A9611B5353AC0054A6D0 /* levelFinish.mp3 */,
@@ -933,6 +949,8 @@
 				BFE468061B4716E900C286F1 /* MainGameManager.m */,
 				BFE468081B47645600C286F1 /* TutorialGameManager.h */,
 				BFE468091B47645600C286F1 /* TutorialGameManager.m */,
+				BF85B7611B8557DB00018E25 /* FullLevelId.h */,
+				BF85B7621B8557DB00018E25 /* FullLevelId.m */,
 			);
 			name = "Game Core";
 			sourceTree = "<group>";
@@ -972,7 +990,7 @@
 			);
 			name = "Color Match";
 			productName = "Color Match";
-			productReference = AF2C221F1874B8B700082561 /* Color Match.app */;
+			productReference = AF2C221F1874B8B700082561 /* Color Dash.app */;
 			productType = "com.apple.product-type.application";
 		};
 		AF2C22421874B8B800082561 /* Color MatchTests */ = {
@@ -1090,6 +1108,7 @@
 				AFADA2241877D20D00FADA22 /* Blue.png in Resources */,
 				BF980867196E664E00BAF9ED /* transporterInputLeftWhite@2x.png in Resources */,
 				BF85C83F1A4E9C5300A494B6 /* shifterOuterYellow@2x.png in Resources */,
+				BF2DF3931B64678100AFD920 /* intro.mp3 in Resources */,
 				BF9079CD195FD660000E6E58 /* diverterGoal@2x.png in Resources */,
 				BF43A96B1B537EF30054A6D0 /* Crazy Candy Highway.mp3 in Resources */,
 				BF85C8421A4F5A0C00A494B6 /* shifterGoal@2x.png in Resources */,
@@ -1164,6 +1183,7 @@
 				BF43A9661B5353AC0054A6D0 /* menuSelect.mp3 in Resources */,
 				BFE468011B46420500C286F1 /* levelLock@2x.png in Resources */,
 				BF98086E196E664E00BAF9ED /* transporterInputTopRed@2x.png in Resources */,
+				BF2DF3921B64678100AFD920 /* circleFill.mp3 in Resources */,
 				BF9079E619664916000E6E58 /* converterBlue@2x.png in Resources */,
 				BF85C83E1A4E9C5300A494B6 /* shifterOuterRed@2x.png in Resources */,
 				BF85C82E1A47BABE00A494B6 /* converterTopToDownBlue@2x.png in Resources */,
@@ -1231,6 +1251,7 @@
 				AFADA21D1877D20D00FADA22 /* BlockBlue.png in Resources */,
 				BF90799C19560FE3000E6E58 /* connectorOuterWhite@2x.png in Resources */,
 				BFE467E71B3FA15300C286F1 /* 00pauseColorMix@2x.png in Resources */,
+				BF85B7601B6E8DE300018E25 /* buttonBuyFullGame@2x.png in Resources */,
 				AFADA21E1877D20D00FADA22 /* BlockGreen.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1281,6 +1302,7 @@
 				AF2C223C1874B8B800082561 /* MainGameViewController.m in Sources */,
 				BFE467E31B3F85D800C286F1 /* HelpScreenViewController.m in Sources */,
 				BF9079A019564F29000E6E58 /* ConnectorCell.m in Sources */,
+				BF85B7631B8557DB00018E25 /* FullLevelId.m in Sources */,
 				BF9807AB196721BA00BAF9ED /* TransporterGroup.m in Sources */,
 				BF9807AE1967230600BAF9ED /* TransporterCell.m in Sources */,
 				BF0D4BC5192010BB00AACB5A /* BoardCells.m in Sources */,
@@ -1427,13 +1449,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Linda Chen (GDU7TKF4WJ)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Linda Chen (GDU7TKF4WJ)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Color Match/Color Match-Prefix.pch";
 				INFOPLIST_FILE = "Color Match/Color Match-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PRODUCT_NAME = "Color Dash";
+				PROVISIONING_PROFILE = "f497611b-0287-4c7b-be33-771a5f95e439";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1443,13 +1465,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Linda Chen (GDU7TKF4WJ)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Linda Chen (GDU7TKF4WJ)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Color Match/Color Match-Prefix.pch";
 				INFOPLIST_FILE = "Color Match/Color Match-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PRODUCT_NAME = "Color Dash";
+				PROVISIONING_PROFILE = "f497611b-0287-4c7b-be33-771a5f95e439";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

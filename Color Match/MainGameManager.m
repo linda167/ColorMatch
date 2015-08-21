@@ -15,6 +15,8 @@
 #import "LevelsManager.h"
 #import "HelpScreenViewController.h"
 #import "SoundManager.h"
+#import "FullLevelId.h"
+#import "CommonUtils.h"
 
 @interface MainGameManager ()
 
@@ -294,12 +296,11 @@
     
     for (UIButton* button in buttons)
     {
-        if (button == sender){
-            button.selected = YES;
-            
+        if (button == sender)
+        {
             if (button == self.viewController.whiteButton)
             {
-                if (self.selectedColor != 0)
+                if (!button.selected)
                 {
                     self.selectedColor = 0;
                     UIImage *btnImage = [UIImage imageNamed:@"WhiteSelected.png"];
@@ -311,7 +312,7 @@
             }
             else if (button == self.viewController.blueButton)
             {
-                if (self.selectedColor != 1)
+                if (!button.selected)
                 {
                     self.selectedColor = 1;
                     UIImage *btnImage = [UIImage imageNamed:@"BlueSelected.png"];
@@ -323,7 +324,7 @@
             }
             else if (button == self.viewController.redButton)
             {
-                if (self.selectedColor != 2)
+                if (!button.selected)
                 {
                     self.selectedColor = 2;
                     UIImage *btnImage = [UIImage imageNamed:@"RedSelected.png"];
@@ -335,7 +336,7 @@
             }
             else if (button == self.viewController.yellowButton)
             {
-                if (self.selectedColor != 3)
+                if (!button.selected)
                 {
                     self.selectedColor = 3;
                     UIImage *btnImage = [UIImage imageNamed:@"YellowSelected.png"];
@@ -345,6 +346,8 @@
                     [[SoundManager sharedManager] playSound:@"yellowSelect.mp3" looping:NO];
                 }
             }
+            
+            button.selected = YES;
         }
         else
         {
@@ -462,7 +465,7 @@
     
     // Handle selecting color
     int selectedColor = (int)self.selectedColor;
-    [_userColorBoard pressGridButtonWithColor:sender :selectedColor doAnimate:true];
+    [_userColorBoard pressGridButtonWithColor:sender :selectedColor doAnimate:true doSound:true];
     
     [self OnUserActionTaken];
 }
@@ -517,6 +520,8 @@
     {
         [self deselectColorButton:button];
     }
+    
+    self.selectedColor = 0;
 }
 
 -(void)checkAndDoVictory
@@ -539,7 +544,7 @@
             ColorCell *goalColorCell = [goalRow objectAtIndex:j];
             ColorCell *userColorCell = [userBoardRow objectAtIndex:j];
             
-            if (goalColorCell.currentColor != userColorCell.currentColor)
+            if ([ColorCell isGoalTargetCell:goalColorCell.cellType] && goalColorCell.currentColor != userColorCell.currentColor)
             {
                 return false;
             }
@@ -559,39 +564,57 @@
 
 - (void)NextLevel
 {
-    [self removeExistingBoard];
-    [self resetActionBar];
+    FullLevelId *nextLevelId = [self getNextLevelId];
     
-    // Re-generate board cells
-    [self loadBoardCellTypes];
+    bool isLevelLocked = [[UserData sharedUserData] getIsLevelLocked:nextLevelId.worldId levelId:nextLevelId.levelId];
     
-    [self getNextLevelParameters];
-    
-    [self StartNewGame];
+    if (!isLevelLocked)
+    {
+        // Level not locked
+        self.worldId = nextLevelId.worldId;
+        self.levelId = nextLevelId.levelId;
+        
+        [self removeExistingBoard];
+        [self resetActionBar];
+        
+        // Re-generate board cells
+        [self loadBoardCellTypes];
+        
+        [self getNextLevelParameters:nextLevelId.worldId levelId:nextLevelId.levelId];
+        
+        [self StartNewGame];
+    }
+    else
+    {
+        // Level is locked
+        [CommonUtils ShowLockedLevelMessage:nextLevelId.worldId levelId:nextLevelId.levelId isFromPreviousLevel:true];
+    }
 }
 
-- (void)getNextLevelParameters
+- (FullLevelId*)getNextLevelId
 {
     if (self.worldId == 0 && self.levelId == 0)
     {
         // This is a randomly generated board, no need to change levelId
-        return;
+        return [[FullLevelId alloc] init:self.worldId levelId:self.levelId];
     }
     
     if (self.levelId < [LevelsManager GetLevelCountForWorld:self.worldId])
     {
-        self.levelId++;
+        return [[FullLevelId alloc] init:self.worldId levelId:self.levelId+1];
     }
     else
     {
         // Transition to next world
-        self.worldId++;
-        self.levelId=1;
+        return [[FullLevelId alloc] init:self.worldId+1 levelId:1];
         
         // TODO:Bug#26 Need to handle last world
     }
-    
-    int gameSize = [LevelsManager GetGameSizeForWorld:self.worldId levelId:self.levelId];
+}
+
+- (void)getNextLevelParameters:(int)worldId levelId:(int)levelId
+{
+    int gameSize = [LevelsManager GetGameSizeForWorld:worldId levelId:levelId];
     _boardParameters = [self getBoardParametersForSize:gameSize];
 }
 

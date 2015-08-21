@@ -89,6 +89,139 @@ static NSString *const LastLevelCompletedInWorldKey = @"LastLevelCompletedInWorl
     return [self.userData integerForKey:tutorialString] == 1;
 }
 
+-(void)storeGamePurchased:(bool)purchased
+{
+    int val = purchased ? 1 : 0;
+    [self.userData setInteger:val forKey:@"GamePurchased"];
+}
+
+-(bool)getGamePurchased
+{
+    return [self.userData integerForKey:@"GamePurchased"] == 1;
+}
+
+-(bool)isFirstFourLevelsOfWorldCompleted:(int)worldId
+{
+    return [self getLevelCompleteState:worldId levelId:1] &&
+        [self getLevelCompleteState:worldId levelId:2] &&
+        [self getLevelCompleteState:worldId levelId:3] &&
+        [self getLevelCompleteState:worldId levelId:4];
+}
+
+-(bool)getIsWorldLocked:(int)worldId
+{
+    bool gamePurchased = [self getGamePurchased];
+    
+    int previousWorldId = worldId - 1;
+    if (worldId == 1)
+    {
+        return false;
+    }
+    else if (worldId > 1 && worldId < 10)
+    {
+        // The world is unlocked if first four levels of previous world are complete
+        return ![self isFirstFourLevelsOfWorldCompleted:previousWorldId];
+    }
+    else if (worldId == 10)
+    {
+        if (!gamePurchased)
+        {
+            // World 10 is locked if game not purchased
+            return true;
+        }
+        else
+        {
+            return ![self isFirstFourLevelsOfWorldCompleted:previousWorldId];
+        }
+    }
+    
+    return false;
+}
+
+-(bool)getIsLevelLocked:(int)worldId levelId:(int)levelId
+{
+    if ([self getIsWorldLocked:worldId])
+    {
+        return true;
+    }
+    
+    bool gamePurchased = [self getGamePurchased];
+    int previousLevelId = levelId - 1;
+    
+    if (levelId == 1)
+    {
+        return false;
+    }
+    else if (levelId > 1 && levelId <= 4)
+    {
+        return ![self getLevelCompleteState:worldId levelId:previousLevelId];
+    }
+    else // Level greater than 4
+    {
+        if (!gamePurchased && worldId > 2)
+        {
+            // Demo version only first 2 worlds can be fully unlocked
+            return true;
+        }
+        else
+        {
+            // Otherwise all levels are unlocked if first 4 levels are complete
+            return ![self getLevelCompleteState:worldId levelId:4];
+        }
+    }
+}
+
+-(NSString*)getLevelLockedMessage:(int)worldId levelId:(int)levelId isFromPreviousLevel:(bool)isFromPreviousLevel
+{
+    assert([self getIsLevelLocked:worldId levelId:levelId]);
+    
+    NSString* mustCompletePreviousWorld = @"You must complete the first four levels of the previous world to unlock levels in this world.";
+    
+    NSString* mustCompletePreviousLevel = @"You must complete the previous level to unlock this level.";
+    
+    NSString* mustCompleteFirstFourLevel = @"You must complete the first four levels of this world to unlock this level.";
+    
+    NSString* mustPurchaseFullGame = isFromPreviousLevel ?
+        @"You must purchase the full game to unlock the next level." :
+        @"You must purchase the full game to unlock this level.";
+    
+    bool gamePurchased = [self getGamePurchased];
+    if (gamePurchased)
+    {
+        if ([self getIsWorldLocked:worldId])
+        {
+            return mustCompletePreviousWorld;
+        }
+        else if (levelId > 1 && levelId <= 4)
+        {
+            return mustCompletePreviousLevel;
+        }
+        else
+        {
+            return mustCompleteFirstFourLevel;
+        }
+    }
+    else
+    {
+        if (worldId == 10)
+        {
+            return mustPurchaseFullGame;
+        }
+        else if (levelId >= 1 && levelId <= 4)
+        {
+            // First 4 levels, must complete previous world's first four levels
+            return [self getIsWorldLocked:worldId] ?mustCompletePreviousWorld :
+                mustCompletePreviousLevel;
+        }
+        else
+        {
+            return worldId <= 2 ?
+                mustCompleteFirstFourLevel :
+                mustPurchaseFullGame;
+        }
+    }
+}
+
 -(int)getStarCount:(int)worldId levelId:(int)levelId
 {
     NSMutableString *levelString = [UserData getLevelString:worldId levelId:levelId];

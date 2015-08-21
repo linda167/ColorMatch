@@ -385,20 +385,13 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" id="drx-Vc-dci">
-                                <rect key="frame" x="85" y="382" width="150" height="56"/>
+                                <rect key="frame" x="85" y="407" width="150" height="56"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="buttonSettings.png">
                                     <attributedString key="attributedTitle"/>
                                 </state>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" id="pHQ-bR-4XX">
-                                <rect key="frame" x="85" y="332" width="150" height="56"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="buttonPlayGame.png">
-                                    <attributedString key="attributedTitle"/>
-                                </state>
                                 <connections>
-                                    <action selector="OnTapPlayGameButton:" destination="Ype-Mf-Odz" eventType="touchUpInside" id="WLh-fZ-Y5g"/>
+                                    <action selector="OnTapSettingsButton:" destination="Ype-Mf-Odz" eventType="touchUpInside" id="CgP-s6-cJj"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" id="HKW-c3-399">
@@ -426,11 +419,31 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" id="uMU-ND-x8Q">
-                                <rect key="frame" x="85" y="432" width="150" height="56"/>
+                                <rect key="frame" x="85" y="459" width="150" height="56"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="buttonCredits.png">
                                     <attributedString key="attributedTitle"/>
                                 </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" id="7sb-D3-jP7">
+                                <rect key="frame" x="85" y="355" width="150" height="56"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="buttonBuyFullGame.png">
+                                    <attributedString key="attributedTitle"/>
+                                </state>
+                                <connections>
+                                    <action selector="OnTapBuyGameButton:" destination="Ype-Mf-Odz" eventType="touchUpInside" id="cwJ-0e-jbx"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" id="pHQ-bR-4XX">
+                                <rect key="frame" x="85" y="303" width="150" height="56"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="buttonPlayGame.png">
+                                    <attributedString key="attributedTitle"/>
+                                </state>
+                                <connections>
+                                    <action selector="OnTapPlayGameButton:" destination="Ype-Mf-Odz" eventType="touchUpInside" id="WLh-fZ-Y5g"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -438,8 +451,9 @@
                     <navigationItem key="navigationItem" id="CEC-Zd-8xO"/>
                     <connections>
                         <outlet property="button1" destination="pHQ-bR-4XX" id="5ZE-h8-7za"/>
-                        <outlet property="button2" destination="drx-Vc-dci" id="qaB-43-QZj"/>
-                        <outlet property="button3" destination="uMU-ND-x8Q" id="b64-bS-EGJ"/>
+                        <outlet property="button2" destination="7sb-D3-jP7" id="a4b-uP-d8a"/>
+                        <outlet property="button3" destination="drx-Vc-dci" id="pSa-ya-S0l"/>
+                        <outlet property="button4" destination="uMU-ND-x8Q" id="4B1-kz-tWn"/>
                         <outlet property="divider" destination="DfI-xk-VeF" id="gsD-PU-FGe"/>
                         <outlet property="logo" destination="cOw-Vj-hjh" id="0rN-Yn-tLf"/>
                         <segue destination="MmH-K3-vAA" kind="push" identifier="mainMenuToWorldSegue" id="By0-3l-TgG"/>
@@ -458,6 +472,7 @@
         <image name="Red.png" width="60" height="60"/>
         <image name="White.png" width="60" height="60"/>
         <image name="Yellow.png" width="60" height="60"/>
+        <image name="buttonBuyFullGame.png" width="200" height="75"/>
         <image name="buttonCredits.png" width="200" height="75"/>
         <image name="buttonPlayGame.png" width="200" height="75"/>
         <image name="buttonSettings.png" width="200" height="75"/>

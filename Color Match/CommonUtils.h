@@ -26,5 +26,6 @@
 +(bool) IsTransporterInput:(CellType)cellType;
 +(bool) IsTransporterCell:(CellType)cellType;
 +(UIImage *) GetShifterInnerImageForColor:(int)color;
++(void) ShowLockedLevelMessage:(int)worldId levelId:(int)levelId isFromPreviousLevel:(bool)isFromPreviousLevel;
 
 @end

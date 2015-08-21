@@ -26,7 +26,7 @@
     boardCells:(BoardCells*) boardCells;
 -(void)removeExistingBoard;
 -(void)resetCells;
--(void)pressGridButtonWithColor:(UIButton *)button :(int)selectedColor doAnimate:(bool)doAnimate;
+-(void)pressGridButtonWithColor:(UIButton *)button :(int)selectedColor doAnimate:(bool)doAnimate doSound:(bool)doSound;
 -(NSNumber*)getCurrentColorForButton:(UIButton *)button;
 - (IBAction)splitterButtonPressed:(id)sender;
 - (IBAction)connectorCellPressed:(id)sender;

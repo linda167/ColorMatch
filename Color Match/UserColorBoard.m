@@ -526,8 +526,14 @@
     }
 }
 
--(void)pressGridButtonWithColor:(UIButton *)button :(int)selectedColor doAnimate:(bool)doAnimate;
+-(void)pressGridButtonWithColor:(UIButton *)button :(int)selectedColor doAnimate:(bool)doAnimate doSound:(bool)doSound;
 {
+    if (doSound)
+    {
+        // Play sound:
+        [[SoundManager sharedManager] playSound:@"circleFill.mp3" looping:NO];
+    }
+    
     NSNumber* wrappedSelectedColor = [NSNumber numberWithInt:selectedColor];
     
     // Update grid color button state
@@ -699,7 +705,7 @@
     {
         GridColorButton *gridColorButton = [_topGridColorButtons objectAtIndex:i];
         UIButton *button = gridColorButton.button;
-        [self pressGridButtonWithColor:button :0 doAnimate:false];
+        [self pressGridButtonWithColor:button :0 doAnimate:false doSound:false];
     }
     
     // Clear left color buttons
@@ -707,7 +713,7 @@
     {
         GridColorButton *gridColorButton = [_leftGridColorButtons objectAtIndex:i];
         UIButton *button = gridColorButton.button;
-        [self pressGridButtonWithColor:button :0 doAnimate:false];
+        [self pressGridButtonWithColor:button :0 doAnimate:false doSound:false];
     }
 }
 

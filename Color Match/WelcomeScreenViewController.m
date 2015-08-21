@@ -11,12 +11,15 @@
 #import "MainGameViewController.h"
 #import "UserData.h"
 #import "SoundManager.h"
+#import <StoreKit/StoreKit.h>
 
-@interface WelcomeScreenViewController ()
+@interface WelcomeScreenViewController() <SKProductsRequestDelegate, SKPaymentTransactionObserver>
 @property UIView *logoView;
 @end
 
 @implementation WelcomeScreenViewController
+
+#define purchaseFullGameProductIdentifier @"ColorDashFullGame"
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -26,6 +29,12 @@
     _button1.alpha = 0;
     _button2.alpha = 0;
     _button3.alpha = 0;
+    _button4.alpha = 0;
+    
+    if ([[UserData sharedUserData] getGamePurchased])
+    {
+        [self OnGamePurchased];
+    }
     
     [self showLogo];
 }
@@ -73,6 +82,9 @@
 
 - (void)dropDownLogo {
     
+    // Play sound:
+    [[SoundManager sharedManager] playSound:@"intro.mp3" looping:NO];
+    
     // Drop down logo
     [UIView
      animateWithDuration:.80
@@ -109,6 +121,8 @@
 
 - (void)fadeInButtons {
     
+    [self startMusic];
+    
     // Fade in divider
     [UIView
      animateWithDuration:.5
@@ -119,10 +133,20 @@
          _button1.alpha = 1.0;
          _button2.alpha = 1.0;
          _button3.alpha = 1.0;
+         _button4.alpha = 1.0;
      }
      completion:^(BOOL finished)
      {
      }];
+}
+
+- (void)startMusic
+{
+    // Start music if not already playing
+    if (![SoundManager sharedManager].playingMusic)
+    {
+        [[SoundManager sharedManager] playMusic:@"Crazy Candy Highway.mp3" looping:YES];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -161,6 +185,112 @@
         // Otherwise go to world view
         [self performSegueWithIdentifier:@"mainMenuToWorldSegue" sender:self];
     }
+}
+
+- (IBAction)OnTapBuyGameButton:(id)sender
+{
+    if ([SKPaymentQueue canMakePayments])
+    {
+        SKProductsRequest *productsRequest = [[SKProductsRequest alloc] initWithProductIdentifiers:[NSSet setWithObject:purchaseFullGameProductIdentifier]];
+        productsRequest.delegate = self;
+        [productsRequest start];
+    }
+    else
+    {
+        NSLog(@"User cannot make payments due to parental control");
+    }
+}
+
+- (IBAction)OnTapSettingsButton:(id)sender
+{
+    // TODO: add settings page
+    // TODO: for now, acts as test button for purchase full game
+    bool isPurchased = [[UserData sharedUserData] getGamePurchased];
+    
+    if (!isPurchased)
+    {
+        [[UserData sharedUserData] storeGamePurchased:true];
+        [self OnGamePurchased];
+    }
+}
+
+- (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response
+{
+    SKProduct *validProduct = nil;
+    int count = (int)[response.products count];
+    if (count > 0)
+    {
+        validProduct = [response.products objectAtIndex:0];
+        NSLog(@"Products Available!");
+        [self purchase:validProduct];
+    }
+    else
+    {
+        // Called if product id is not valid, should not be called otherwise
+        NSLog(@"No products available!");
+    }
+}
+
+- (IBAction)purchase:(SKProduct*)product
+{
+    SKPayment *payment = [SKPayment paymentWithProduct:product];
+    
+    [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
+    [[SKPaymentQueue defaultQueue] addPayment:payment];
+}
+
+- (IBAction)restore
+{
+    [[SKPaymentQueue defaultQueue] restoreCompletedTransactions];
+}
+
+- (void)paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue
+{
+    // TODO: lindach: Implement for restore
+}
+
+- (void)paymentQueue:(SKPaymentQueue*)queue updatedTransactions:(NSArray*)transactions
+{
+    for (SKPaymentTransaction *transaction in transactions)
+    {
+        switch (transaction.transactionState)
+        {
+            case SKPaymentTransactionStatePurchasing:
+                // Called when user is in the process of purchasing. Do not add code here
+                break;
+            case SKPaymentTransactionStatePurchased:
+            case SKPaymentTransactionStateRestored:
+                [self handlePurchaseFullGameComplete];
+                [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+                break;
+            case SKPaymentTransactionStateFailed:
+                // Called when transaction does not finish
+                [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+                break;
+        }
+    }
+}
+
+- (void)handlePurchaseFullGameComplete
+{
+    // TODO: lindach: Replace with logic to handle unlocking
+    UIAlertView *alert = [[UIAlertView alloc]
+                          initWithTitle:@"Purchase Successful"
+                          message:@"You have successfully purchased the full game. Thank you"
+                          delegate:self
+                          cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil];
+    [alert show];
+    
+    [self OnGamePurchased];
+}
+
+- (void)OnGamePurchased
+{
+    // If game is purchased, hide Buy Full Game button and move other buttons up
+    _button4.frame = _button3.frame;
+    _button3.frame = _button2.frame;
+    _button2.hidden = true;
 }
 
 @end

@@ -21,5 +21,9 @@
 -(int)getLastLevelCompletedInWorld;
 -(void)storeTutorialComplete:(int)worldId;
 -(bool)getTutorialComplete:(int)worldId;
+-(void)storeGamePurchased:(bool)purchased;
+-(bool)getGamePurchased;
+-(bool)getIsLevelLocked:(int)worldId levelId:(int)levelId;
+-(NSString*)getLevelLockedMessage:(int)worldId levelId:(int)levelId isFromPreviousLevel:(bool)isFromPreviousLevel;
 
 @end

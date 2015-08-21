@@ -86,6 +86,17 @@
         for (int i = currentCol+1; i < row.count; i++)
         {
             ColorCell *colorCell = [row objectAtIndex:i];
+            if (colorCell.cellType == ReflectorTopToRight)
+            {
+                // NOOP since we're coming from the left
+                break;
+            }
+            else if (colorCell.cellType == TransporterOutputRight)
+            {
+                // Stop color flow when hitting a transporter output right
+                break;
+            }
+            
             if ([ColorCell doesCellSupportCombineColor:colorCell.cellType])
             {
                 [self applyColorToSingleCell:colorCell color:color cellsAffected:cellsAffected isAdd:isAdd isHorizontal:isHorizontal];
@@ -107,11 +118,6 @@
                 
                 break;
             }
-            else if (colorCell.cellType == ReflectorTopToRight)
-            {
-                // NOOP since we're coming from the left
-                break;
-            }
             else if (colorCell.cellType == Converter)
             {
                 [self OnApplyColorOnConverterCell:(ConverterCell*)colorCell color:color isHorizontal:isHorizontal];
@@ -127,11 +133,6 @@
                 [self applyColorForTransporterInput:colorCell color:color isAdd:isAdd cellsAffected:cellsAffected];
                 break;
             }
-            else if (colorCell.cellType == TransporterOutputRight)
-            {
-                // Stop color flow when hitting a transporter output right
-                break;
-            }
         }
     }
     else    // if vertical
@@ -140,6 +141,17 @@
         {
             NSArray *row = [self.colorCellSections objectAtIndex:i];
             ColorCell *colorCell = [row objectAtIndex:currentCol];
+            
+            if (colorCell.cellType == ReflectorLeftToDown)
+            {
+                // NOOP since we're coming from top
+                break;
+            }
+            else if (colorCell.cellType == TransporterOutputDown)
+            {
+                // Stop color flow when hitting a transporter output down
+                break;
+            }
             
             if ([ColorCell doesCellSupportCombineColor:colorCell.cellType])
             {
@@ -152,12 +164,7 @@
                 }
             }
             
-            if (colorCell.cellType == ReflectorLeftToDown)
-            {
-                // NOOP since we're coming from top
-                break;
-            }
-            else if (colorCell.cellType == ReflectorTopToRight || colorCell.cellType == Diverter)
+            if (colorCell.cellType == ReflectorTopToRight || colorCell.cellType == Diverter)
             {
                 // Trigger apply color horizontal to the right
                 [self applyColor:i currentCol:currentCol isHorizontal:true color:color isAdd:isAdd cellsAffected:cellsAffected];
@@ -180,11 +187,6 @@
             else if (colorCell.cellType == TransporterInputTop)
             {
                 [self applyColorForTransporterInput:colorCell color:color isAdd:isAdd cellsAffected:cellsAffected];
-                break;
-            }
-            else if (colorCell.cellType == TransporterOutputDown)
-            {
-                // Stop color flow when hitting a transporter output down
                 break;
             }
         }

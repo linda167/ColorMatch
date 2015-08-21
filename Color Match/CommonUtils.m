@@ -7,6 +7,7 @@
 //
 
 #import "CommonUtils.h"
+#import "UserData.h"
 
 @implementation CommonUtils
 
@@ -379,6 +380,19 @@
     }
     
     return false;
+}
+
++(void) ShowLockedLevelMessage:(int)worldId levelId:(int)levelId isFromPreviousLevel:(bool)isFromPreviousLevel
+{
+    // TODO: Replace with better UI in the future
+    NSString* lockString = [[UserData sharedUserData] getLevelLockedMessage:worldId levelId:levelId isFromPreviousLevel:isFromPreviousLevel];
+    UIAlertView *alert = [[UIAlertView alloc]
+                          initWithTitle:@"Level Locked"
+                          message:lockString
+                          delegate:self
+                          cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil];
+    [alert show];
 }
 
 @end

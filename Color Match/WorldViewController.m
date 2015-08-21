@@ -34,12 +34,6 @@
 {
     [super viewDidLoad];
     
-    // Start music if not already playing
-    if (![SoundManager sharedManager].playingMusic)
-    {
-        [[SoundManager sharedManager] playMusic:@"Crazy Candy Highway.mp3" looping:YES];
-    }
-    
     self.viewControllers = [[NSMutableArray alloc] init];
     self.pageCount = [LevelsManager GetTotalWorldCount];
     for (int i = 0; i < self.pageCount; i++)

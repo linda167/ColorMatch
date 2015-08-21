@@ -16,7 +16,6 @@
 
 @interface SingleWorldViewController ()
 @property int worldId;
-@property bool isFirstTimeViewCreation;
 @property NSMutableArray *levelButtons;
 @property WorldViewController* parentWorldController;
 @end
@@ -97,7 +96,6 @@
     // Do any additional setup after loading the view.
     
     self.levelButtons = [[NSMutableArray alloc] init];
-    self.isFirstTimeViewCreation = true;
     
     // Do any additional setup after loading the view.
     [self renderWorldTitleDisplay];
@@ -109,12 +107,7 @@
 
 -(void)onViewShown
 {
-    if (!self.isFirstTimeViewCreation)
-    {
-        [self updateProgression];
-    }
-    
-    self.isFirstTimeViewCreation = false;
+    [self updateProgression];
 }
 
 - (void)didReceiveMemoryWarning
@@ -160,7 +153,8 @@
         // Figure out if level is complete
         int levelId = i+1;
         bool isLevelComplete = [[UserData sharedUserData] getLevelCompleteState:self.worldId levelId:levelId];
-        UIImage *buttonImage = [self getImageForLevel:isLevelComplete levelId:levelId];
+        bool isLevelLocked = [[UserData sharedUserData] getIsLevelLocked:self.worldId levelId:levelId];
+        UIImage *buttonImage = [self getImageForLevel:isLevelComplete isLevelLocked:isLevelLocked levelId:levelId];
         
         // Add level button
         LevelSelectButton *levelButton = [[LevelSelectButton alloc] initWithFrame:CGRectMake(xOffset, yOffset, size, size)];
@@ -169,6 +163,7 @@
         levelButton.worldId = self.worldId;
         levelButton.levelId = levelId;
         levelButton.isComplete = isLevelComplete;
+        levelButton.isLocked = isLevelLocked;
         [self.levelButtons addObject:levelButton];
         [self.view addSubview:levelButton];
         
@@ -198,9 +193,13 @@
     }
 }
 
-- (UIImage*)getImageForLevel:(bool)isComplete levelId:(int)levelId
+- (UIImage*)getImageForLevel:(bool)isComplete isLevelLocked:(bool)isLevelLocked levelId:(int)levelId
 {
-    if (!isComplete)
+    if (isLevelLocked)
+    {
+        return [UIImage imageNamed:@"levelLock@2x.png"];
+    }
+    else if (!isComplete)
     {
         return [UIImage imageNamed:@"incompleteLevel@2x.png"];
     }
@@ -230,11 +229,13 @@
         
         // Update checkmark
         bool isLevelComplete = [[UserData sharedUserData] getLevelCompleteState:self.worldId levelId:levelId];
-        if (isLevelComplete != levelButton.isComplete)
+        bool isLevelLocked = [[UserData sharedUserData] getIsLevelLocked:self.worldId levelId:levelId];
+        if (isLevelComplete != levelButton.isComplete || isLevelLocked != levelButton.isLocked)
         {
-            UIImage *buttonImage = [self getImageForLevel:isLevelComplete levelId:levelId];
+            UIImage *buttonImage = [self getImageForLevel:isLevelComplete isLevelLocked:isLevelLocked levelId:levelId];
             [levelButton setImage:buttonImage forState:UIControlStateNormal];
             levelButton.isComplete = isLevelComplete;
+            levelButton.isLocked = isLevelLocked;
         }
         
         // Update stars
@@ -251,7 +252,14 @@
 {
     [[SoundManager sharedManager] playSound:@"menuSelect.mp3" looping:NO];
     
-    [self.parentWorldController performSegueWithIdentifier:@"LoadLevel" sender:sender];
+    if (((LevelSelectButton*)sender).isLocked)
+    {
+        [CommonUtils ShowLockedLevelMessage:self.worldId levelId:((LevelSelectButton*)sender).levelId isFromPreviousLevel:false];
+    }
+    else
+    {
+        [self.parentWorldController performSegueWithIdentifier:@"LoadLevel" sender:sender];
+    }
 }
 
 

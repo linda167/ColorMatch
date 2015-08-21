@@ -12,5 +12,6 @@
 @property (nonatomic, assign) int worldId;
 @property (nonatomic, assign) int levelId;
 @property (nonatomic, assign) bool isComplete;
+@property (nonatomic, assign) bool isLocked;
 @property int starCount;
 @end
