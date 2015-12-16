@@ -7,13 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PaymentManager.h"
 
-@interface WelcomeScreenViewController : UIViewController
+@interface WelcomeScreenViewController : UIViewController <PurchaseOrRestoreDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *logo;
 @property (weak, nonatomic) IBOutlet UIImageView *divider;
 @property (weak, nonatomic) IBOutlet UIButton *button1;
 @property (weak, nonatomic) IBOutlet UIButton *button2;
 @property (weak, nonatomic) IBOutlet UIButton *button3;
 @property (weak, nonatomic) IBOutlet UIButton *button4;
+
+- (void)transactionCompleted;
 
 @end

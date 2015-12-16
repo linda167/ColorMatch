@@ -100,6 +100,48 @@ static NSString *const LastLevelCompletedInWorldKey = @"LastLevelCompletedInWorl
     return [self.userData integerForKey:@"GamePurchased"] == 1;
 }
 
+-(void)storeIsSoundEnabled:(bool)enabled
+{
+    int val = enabled ? 1 : 0;
+    [self.userData setInteger:val forKey:@"SoundEnabled"];
+}
+
+-(bool)getIsSoundEnabled
+{
+    NSDictionary *dictionary = [self.userData dictionaryRepresentation];
+    
+    if ([dictionary objectForKey:@"SoundEnabled"])
+    {
+        return [self.userData integerForKey:@"SoundEnabled"] == 1;
+    }
+    else
+    {
+        // Key is not set, return default initial value
+        return true;
+    }
+}
+
+-(void)storeIsMusicEnabled:(bool)enabled
+{
+    int val = enabled ? 1 : 0;
+    [self.userData setInteger:val forKey:@"MusicEnabled"];
+}
+
+-(bool)getIsMusicEnabled
+{
+    NSDictionary *dictionary = [self.userData dictionaryRepresentation];
+    
+    if ([dictionary objectForKey:@"MusicEnabled"])
+    {
+        return [self.userData integerForKey:@"MusicEnabled"] == 1;
+    }
+    else
+    {
+        // Key is not set, return default initial value
+        return true;
+    }
+}
+
 -(bool)isFirstFourLevelsOfWorldCompleted:(int)worldId
 {
     return [self getLevelCompleteState:worldId levelId:1] &&

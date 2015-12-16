@@ -123,11 +123,36 @@
                                     <action selector="ResetProgress:" destination="qE1-aF-Kwa" eventType="touchUpInside" id="rd5-9J-6TC"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Complete levels in World " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="iaX-w0-TKp">
+                                <rect key="frame" x="25" y="147" width="195" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="HWl-BQ-C7j">
+                                <rect key="frame" x="221" y="143" width="32" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="SBM-FB-5QH">
+                                <rect key="frame" x="261" y="144" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Go">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="CompleteLevelsInWorld:" destination="qE1-aF-Kwa" eventType="touchUpInside" id="o44-uw-NSX"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="FkL-F7-qsW"/>
                     <connections>
+                        <outlet property="completeLevelInWorldInput" destination="HWl-BQ-C7j" id="u5f-fa-3ed"/>
+                        <outlet property="completeLevelsButton" destination="SBM-FB-5QH" id="79z-0Y-Jt2"/>
                         <outlet property="resetProgressButton" destination="gct-yr-qAj" id="rn0-Ji-88k"/>
                     </connections>
                 </viewController>
@@ -171,6 +196,21 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bP5-hH-BE3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-257" y="637"/>
+        </scene>
+        <!--Options View Controller-->
+        <scene sceneID="9UG-YA-X2F">
+            <objects>
+                <viewController id="Iil-6k-ozL" customClass="OptionsViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Xj0-8x-1p5">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="uVk-c6-4nD"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8Kp-6V-33k" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="135" y="637"/>
         </scene>
         <!--Main Game View Controller-->
         <scene sceneID="ufC-wZ-h7g">
@@ -391,7 +431,8 @@
                                     <attributedString key="attributedTitle"/>
                                 </state>
                                 <connections>
-                                    <action selector="OnTapSettingsButton:" destination="Ype-Mf-Odz" eventType="touchUpInside" id="CgP-s6-cJj"/>
+                                    <action selector="OnTapSettingsButton:" destination="Ype-Mf-Odz" eventType="touchUpInside" id="AbP-Tg-Zql"/>
+                                    <segue destination="Iil-6k-ozL" kind="push" id="viU-Gg-s5X"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" id="HKW-c3-399">

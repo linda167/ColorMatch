@@ -16,7 +16,6 @@
 		AF2C22361874B8B800082561 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF2C22341874B8B800082561 /* Main_iPhone.storyboard */; };
 		AF2C22391874B8B800082561 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF2C22371874B8B800082561 /* Main_iPad.storyboard */; };
 		AF2C223C1874B8B800082561 /* MainGameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2C223B1874B8B800082561 /* MainGameViewController.m */; };
-		AF2C223E1874B8B800082561 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF2C223D1874B8B800082561 /* Images.xcassets */; };
 		AF2C22451874B8B800082561 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF2C22441874B8B800082561 /* XCTest.framework */; };
 		AF2C22461874B8B800082561 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF2C22221874B8B700082561 /* Foundation.framework */; };
 		AF2C22471874B8B800082561 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF2C22261874B8B700082561 /* UIKit.framework */; };
@@ -78,8 +77,14 @@
 		BF43A96C1B537EF30054A6D0 /* Curious.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BF43A9691B537EF30054A6D0 /* Curious.mp3 */; };
 		BF43A96D1B537EF30054A6D0 /* Happy Tune.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BF43A96A1B537EF30054A6D0 /* Happy Tune.mp3 */; };
 		BF6304391895F231002F3C9E /* ColorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BF6304381895F231002F3C9E /* ColorCell.m */; };
+		BF74F8A21C21416100759CB6 /* PaymentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BF74F8A11C21416100759CB6 /* PaymentManager.m */; };
+		BF7E0ECC1C20F46F00EEB567 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF7E0ECB1C20F46F00EEB567 /* Images.xcassets */; };
 		BF85B7601B6E8DE300018E25 /* buttonBuyFullGame@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF85B75F1B6E8DE300018E25 /* buttonBuyFullGame@2x.png */; };
 		BF85B7631B8557DB00018E25 /* FullLevelId.m in Sources */ = {isa = PBXBuildFile; fileRef = BF85B7621B8557DB00018E25 /* FullLevelId.m */; };
+		BF85B7661B89AD6E00018E25 /* checkedBox@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF85B7641B89AD6E00018E25 /* checkedBox@2x.png */; };
+		BF85B7671B89AD6E00018E25 /* uncheckedBox@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF85B7651B89AD6E00018E25 /* uncheckedBox@2x.png */; };
+		BF85B76A1B8AB7CE00018E25 /* OptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF85B7691B8AB7CE00018E25 /* OptionsViewController.m */; };
+		BF85B76D1B8AB94300018E25 /* ViewControllerUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = BF85B76C1B8AB94300018E25 /* ViewControllerUtils.m */; };
 		BF85C82B1A47BABE00A494B6 /* converterLeftToRightBlue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF85C8251A47BABE00A494B6 /* converterLeftToRightBlue@2x.png */; };
 		BF85C82C1A47BABE00A494B6 /* converterLeftToRightRed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF85C8261A47BABE00A494B6 /* converterLeftToRightRed@2x.png */; };
 		BF85C82D1A47BABE00A494B6 /* converterLeftToRightYellow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF85C8271A47BABE00A494B6 /* converterLeftToRightYellow@2x.png */; };
@@ -281,7 +286,6 @@
 		AF2C22381874B8B800082561 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
 		AF2C223A1874B8B800082561 /* MainGameViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainGameViewController.h; sourceTree = "<group>"; };
 		AF2C223B1874B8B800082561 /* MainGameViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainGameViewController.m; sourceTree = "<group>"; };
-		AF2C223D1874B8B800082561 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		AF2C22431874B8B800082561 /* Color MatchTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Color MatchTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF2C22441874B8B800082561 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		AF2C224C1874B8B800082561 /* Color MatchTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Color MatchTests-Info.plist"; sourceTree = "<group>"; };
@@ -357,9 +361,18 @@
 		BF43A96A1B537EF30054A6D0 /* Happy Tune.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Happy Tune.mp3"; path = "Music/Happy Tune.mp3"; sourceTree = SOURCE_ROOT; };
 		BF6304371895F231002F3C9E /* ColorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorCell.h; sourceTree = "<group>"; };
 		BF6304381895F231002F3C9E /* ColorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorCell.m; sourceTree = "<group>"; };
+		BF74F8A01C21416100759CB6 /* PaymentManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentManager.h; sourceTree = "<group>"; };
+		BF74F8A11C21416100759CB6 /* PaymentManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentManager.m; sourceTree = "<group>"; };
+		BF7E0ECB1C20F46F00EEB567 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		BF85B75F1B6E8DE300018E25 /* buttonBuyFullGame@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "buttonBuyFullGame@2x.png"; sourceTree = "<group>"; };
 		BF85B7611B8557DB00018E25 /* FullLevelId.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FullLevelId.h; sourceTree = "<group>"; };
 		BF85B7621B8557DB00018E25 /* FullLevelId.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FullLevelId.m; sourceTree = "<group>"; };
+		BF85B7641B89AD6E00018E25 /* checkedBox@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkedBox@2x.png"; sourceTree = "<group>"; };
+		BF85B7651B89AD6E00018E25 /* uncheckedBox@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "uncheckedBox@2x.png"; sourceTree = "<group>"; };
+		BF85B7681B8AB7CE00018E25 /* OptionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionsViewController.h; sourceTree = "<group>"; };
+		BF85B7691B8AB7CE00018E25 /* OptionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionsViewController.m; sourceTree = "<group>"; };
+		BF85B76B1B8AB94300018E25 /* ViewControllerUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewControllerUtils.h; sourceTree = "<group>"; };
+		BF85B76C1B8AB94300018E25 /* ViewControllerUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewControllerUtils.m; sourceTree = "<group>"; };
 		BF85C8251A47BABE00A494B6 /* converterLeftToRightBlue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "converterLeftToRightBlue@2x.png"; sourceTree = "<group>"; };
 		BF85C8261A47BABE00A494B6 /* converterLeftToRightRed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "converterLeftToRightRed@2x.png"; sourceTree = "<group>"; };
 		BF85C8271A47BABE00A494B6 /* converterLeftToRightYellow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "converterLeftToRightYellow@2x.png"; sourceTree = "<group>"; };
@@ -625,7 +638,6 @@
 				AF2C22291874B8B700082561 /* Supporting Files */,
 				AF2C22341874B8B800082561 /* Main_iPhone.storyboard */,
 				AF2C22371874B8B800082561 /* Main_iPad.storyboard */,
-				AF2C223D1874B8B800082561 /* Images.xcassets */,
 			);
 			path = "Color Match";
 			sourceTree = "<group>";
@@ -633,6 +645,7 @@
 		AF2C22291874B8B700082561 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				BF7E0ECB1C20F46F00EEB567 /* Images.xcassets */,
 				AF2C222A1874B8B700082561 /* Color Match-Info.plist */,
 				AF2C222B1874B8B700082561 /* InfoPlist.strings */,
 				AF2C222E1874B8B700082561 /* main.m */,
@@ -662,6 +675,8 @@
 		AF2C225A1874B95000082561 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				BF85B7641B89AD6E00018E25 /* checkedBox@2x.png */,
+				BF85B7651B89AD6E00018E25 /* uncheckedBox@2x.png */,
 				BF85B75F1B6E8DE300018E25 /* buttonBuyFullGame@2x.png */,
 				BFE468131B4872B600C286F1 /* beginButton@2x.png */,
 				BFE468111B48679F00C286F1 /* TutorialPointerBig@2x.png */,
@@ -898,6 +913,10 @@
 				BF85C8551A50DFF200A494B6 /* WelcomeScreenViewController.m */,
 				BFE467E11B3F85D800C286F1 /* HelpScreenViewController.h */,
 				BFE467E21B3F85D800C286F1 /* HelpScreenViewController.m */,
+				BF85B7681B8AB7CE00018E25 /* OptionsViewController.h */,
+				BF85B7691B8AB7CE00018E25 /* OptionsViewController.m */,
+				BF85B76B1B8AB94300018E25 /* ViewControllerUtils.h */,
+				BF85B76C1B8AB94300018E25 /* ViewControllerUtils.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -969,6 +988,8 @@
 				BFA3A2D11944B6B900C1BB7D /* UserData.m */,
 				BF90795A194CE618000E6E58 /* LevelsManager.h */,
 				BF90795B194CE618000E6E58 /* LevelsManager.m */,
+				BF74F8A01C21416100759CB6 /* PaymentManager.h */,
+				BF74F8A11C21416100759CB6 /* PaymentManager.m */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -1018,7 +1039,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = CM;
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "SunSpark Entertainment";
 				TargetAttributes = {
 					AF2C221E1874B8B700082561 = {
@@ -1091,8 +1112,8 @@
 				AF2C22391874B8B800082561 /* Main_iPad.storyboard in Resources */,
 				BF9079C6195E1819000E6E58 /* Red@2x.png in Resources */,
 				AFADA22F1877D20D00FADA22 /* White.png in Resources */,
-				AF2C223E1874B8B800082561 /* Images.xcassets in Resources */,
 				AFADA22E1877D20D00FADA22 /* RedSelected.png in Resources */,
+				BF85B7661B89AD6E00018E25 /* checkedBox@2x.png in Resources */,
 				BF85C8621A56071900A494B6 /* divider.png in Resources */,
 				BF43A94B1B51F9720054A6D0 /* whiteSelect.mp3 in Resources */,
 				BFE467EB1B40AE4700C286F1 /* helpButton@2x.png in Resources */,
@@ -1103,6 +1124,7 @@
 				BF980879196E664E00BAF9ED /* transporterOutputRightBlue@2x.png in Resources */,
 				BF85C8341A47BFD500A494B6 /* converterTopToDownWhite@2x.png in Resources */,
 				BF9079AF195E073E000E6E58 /* BlockOrange@2x.png in Resources */,
+				BF85B7671B89AD6E00018E25 /* uncheckedBox@2x.png in Resources */,
 				BFA3A2CC193AF4D900C1BB7D /* incompleteLevel@2x.png in Resources */,
 				BF9079C9195E1819000E6E58 /* WhiteSelected@2x.png in Resources */,
 				AFADA2241877D20D00FADA22 /* Blue.png in Resources */,
@@ -1193,6 +1215,7 @@
 				AF2C222D1874B8B700082561 /* InfoPlist.strings in Resources */,
 				BF85C8301A47BABE00A494B6 /* converterTopToDownYellow@2x.png in Resources */,
 				BF9079791953DF94000E6E58 /* zonerWhite@2x.png in Resources */,
+				BF7E0ECC1C20F46F00EEB567 /* Images.xcassets in Resources */,
 				BF98087E196E664E00BAF9ED /* transporterOutputRightRed@2x.png in Resources */,
 				BF980861196E664E00BAF9ED /* transporterInputLeftBlue@2x.png in Resources */,
 				BF874D15192B2CBB001701A2 /* ReflectorTtRGoal@2x.png in Resources */,
@@ -1281,6 +1304,7 @@
 				AFB8968B1881EDD0003FAEF4 /* UserColorBoard.m in Sources */,
 				AFB8969118822186003FAEF4 /* ChooseGameSizeViewController.m in Sources */,
 				BFE468071B4716E900C286F1 /* MainGameManager.m in Sources */,
+				BF74F8A21C21416100759CB6 /* PaymentManager.m in Sources */,
 				BF0D4BD41929429E00AACB5A /* LinePiece.m in Sources */,
 				BFA3A2D21944B6B900C1BB7D /* UserData.m in Sources */,
 				AFB896881881E2E6003FAEF4 /* CommonUtils.m in Sources */,
@@ -1303,9 +1327,11 @@
 				BFE467E31B3F85D800C286F1 /* HelpScreenViewController.m in Sources */,
 				BF9079A019564F29000E6E58 /* ConnectorCell.m in Sources */,
 				BF85B7631B8557DB00018E25 /* FullLevelId.m in Sources */,
+				BF85B76D1B8AB94300018E25 /* ViewControllerUtils.m in Sources */,
 				BF9807AB196721BA00BAF9ED /* TransporterGroup.m in Sources */,
 				BF9807AE1967230600BAF9ED /* TransporterCell.m in Sources */,
 				BF0D4BC5192010BB00AACB5A /* BoardCells.m in Sources */,
+				BF85B76A1B8AB7CE00018E25 /* OptionsViewController.m in Sources */,
 				BF43A9431B51F5E00054A6D0 /* SoundManager.m in Sources */,
 				BFE467DE1B3BC7A700C286F1 /* DiverterCell.m in Sources */,
 				AFB896811881C0C7003FAEF4 /* GoalBoard.m in Sources */,
@@ -1370,7 +1396,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = Appicon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -1386,6 +1413,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Linda Chen (GDU7TKF4WJ)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Linda Chen (GDU7TKF4WJ)";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1400,10 +1428,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "9799eaf0-cceb-411a-9d84-51931bec7812";
-				SDKROOT = iphoneos;
+				SDKROOT = iphoneos9.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1412,7 +1440,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = Appicon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -1436,9 +1465,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				PROVISIONING_PROFILE = "9799eaf0-cceb-411a-9d84-51931bec7812";
-				SDKROOT = iphoneos;
+				SDKROOT = iphoneos9.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1454,6 +1483,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Color Match/Color Match-Prefix.pch";
 				INFOPLIST_FILE = "Color Match/Color Match-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = com.sunspark.colordash;
 				PRODUCT_NAME = "Color Dash";
 				PROVISIONING_PROFILE = "f497611b-0287-4c7b-be33-771a5f95e439";
 				WRAPPER_EXTENSION = app;
@@ -1470,6 +1500,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Color Match/Color Match-Prefix.pch";
 				INFOPLIST_FILE = "Color Match/Color Match-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = com.sunspark.colordash;
 				PRODUCT_NAME = "Color Dash";
 				PROVISIONING_PROFILE = "f497611b-0287-4c7b-be33-771a5f95e439";
 				WRAPPER_EXTENSION = app;
@@ -1479,7 +1510,6 @@
 		AF2C22581874B8B800082561 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Color Match.app/Color Match";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -1493,6 +1523,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "Color MatchTests/Color MatchTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "SunSpark.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
@@ -1502,7 +1533,6 @@
 		AF2C22591874B8B800082561 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Color Match.app/Color Match";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -1512,6 +1542,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Color Match/Color Match-Prefix.pch";
 				INFOPLIST_FILE = "Color MatchTests/Color MatchTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "SunSpark.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;

@@ -18,5 +18,6 @@
 +(BoardCells*)LoadBoardCellTypes:(int)worldId levelId:(int)levelId boardParameters:(BoardParameters)boardParameters;
 +(int)CalculateStarsEarned:(int)boardSize time:(int)time worldId:(int)worldId levelId:(int)levelId;
 +(int)GetTotalWorldCount;
++(int)GetLevelsAbleToBeCompleted:(int)worldId;
 
 @end

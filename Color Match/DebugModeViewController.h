@@ -10,7 +10,10 @@
 
 @interface DebugModeViewController : UIViewController
 
-- (IBAction)ResetProgress:(id)sender;
 @property (weak, nonatomic) IBOutlet UIButton *resetProgressButton;
+@property (weak, nonatomic) IBOutlet UITextField *completeLevelInWorldInput;
+@property (weak, nonatomic) IBOutlet UIButton *completeLevelsButton;
+
+- (IBAction)ResetProgress:(id)sender;
 
 @end

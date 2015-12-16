@@ -8,6 +8,7 @@
 
 #import "DebugModeViewController.h"
 #import "UserData.h"
+#import "LevelsManager.h"
 
 @interface DebugModeViewController ()
 
@@ -40,6 +41,18 @@
 - (IBAction)ResetProgress:(id)sender
 {
     [[UserData sharedUserData] wipeData];
+}
+
+- (IBAction)CompleteLevelsInWorld:(id)sender
+{
+    int worldId = [self.completeLevelInWorldInput.text intValue];
+    int levelsAbleToBeCompleted = [LevelsManager GetLevelsAbleToBeCompleted:worldId];
+    
+    for (int i=0; i<levelsAbleToBeCompleted; i++)
+    {
+        int levelId = i+1;
+        [[UserData sharedUserData] storeLevelComplete:worldId levelId:levelId stars:2];
+    }
 }
 
 /*

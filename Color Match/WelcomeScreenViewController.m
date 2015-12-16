@@ -13,13 +13,11 @@
 #import "SoundManager.h"
 #import <StoreKit/StoreKit.h>
 
-@interface WelcomeScreenViewController() <SKProductsRequestDelegate, SKPaymentTransactionObserver>
+@interface WelcomeScreenViewController()
 @property UIView *logoView;
 @end
 
 @implementation WelcomeScreenViewController
-
-#define purchaseFullGameProductIdentifier @"ColorDashFullGame"
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -30,6 +28,9 @@
     _button2.alpha = 0;
     _button3.alpha = 0;
     _button4.alpha = 0;
+    
+    PaymentManager *paymentManager = [PaymentManager instance];
+    paymentManager.transactionCompleteCallback = self;
     
     if ([[UserData sharedUserData] getGamePurchased])
     {
@@ -145,6 +146,7 @@
     // Start music if not already playing
     if (![SoundManager sharedManager].playingMusic)
     {
+        // TODO: lindach
         [[SoundManager sharedManager] playMusic:@"Crazy Candy Highway.mp3" looping:YES];
     }
 }
@@ -189,100 +191,24 @@
 
 - (IBAction)OnTapBuyGameButton:(id)sender
 {
-    if ([SKPaymentQueue canMakePayments])
-    {
-        SKProductsRequest *productsRequest = [[SKProductsRequest alloc] initWithProductIdentifiers:[NSSet setWithObject:purchaseFullGameProductIdentifier]];
-        productsRequest.delegate = self;
-        [productsRequest start];
-    }
-    else
-    {
-        NSLog(@"User cannot make payments due to parental control");
-    }
+    [[SoundManager sharedManager] playSound:@"menuSelect.mp3" looping:NO];
+    [[PaymentManager instance] BuyGame];
 }
 
 - (IBAction)OnTapSettingsButton:(id)sender
 {
-    // TODO: add settings page
-    // TODO: for now, acts as test button for purchase full game
+    [[SoundManager sharedManager] playSound:@"menuSelect.mp3" looping:NO];
+}
+
+- (void)transactionCompleted
+{
+    // Called when purchase or restore is completed
     bool isPurchased = [[UserData sharedUserData] getGamePurchased];
-    
     if (!isPurchased)
     {
         [[UserData sharedUserData] storeGamePurchased:true];
         [self OnGamePurchased];
     }
-}
-
-- (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response
-{
-    SKProduct *validProduct = nil;
-    int count = (int)[response.products count];
-    if (count > 0)
-    {
-        validProduct = [response.products objectAtIndex:0];
-        NSLog(@"Products Available!");
-        [self purchase:validProduct];
-    }
-    else
-    {
-        // Called if product id is not valid, should not be called otherwise
-        NSLog(@"No products available!");
-    }
-}
-
-- (IBAction)purchase:(SKProduct*)product
-{
-    SKPayment *payment = [SKPayment paymentWithProduct:product];
-    
-    [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
-    [[SKPaymentQueue defaultQueue] addPayment:payment];
-}
-
-- (IBAction)restore
-{
-    [[SKPaymentQueue defaultQueue] restoreCompletedTransactions];
-}
-
-- (void)paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue
-{
-    // TODO: lindach: Implement for restore
-}
-
-- (void)paymentQueue:(SKPaymentQueue*)queue updatedTransactions:(NSArray*)transactions
-{
-    for (SKPaymentTransaction *transaction in transactions)
-    {
-        switch (transaction.transactionState)
-        {
-            case SKPaymentTransactionStatePurchasing:
-                // Called when user is in the process of purchasing. Do not add code here
-                break;
-            case SKPaymentTransactionStatePurchased:
-            case SKPaymentTransactionStateRestored:
-                [self handlePurchaseFullGameComplete];
-                [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
-                break;
-            case SKPaymentTransactionStateFailed:
-                // Called when transaction does not finish
-                [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
-                break;
-        }
-    }
-}
-
-- (void)handlePurchaseFullGameComplete
-{
-    // TODO: lindach: Replace with logic to handle unlocking
-    UIAlertView *alert = [[UIAlertView alloc]
-                          initWithTitle:@"Purchase Successful"
-                          message:@"You have successfully purchased the full game. Thank you"
-                          delegate:self
-                          cancelButtonTitle:@"OK"
-                          otherButtonTitles:nil];
-    [alert show];
-    
-    [self OnGamePurchased];
 }
 
 - (void)OnGamePurchased

@@ -8,6 +8,7 @@
 
 #import "HelpScreenViewController.h"
 #import "MainGameViewController.h"
+#import "ViewControllerUtils.h"
 
 @interface HelpScreenViewController ()
 @property int worldId;
@@ -36,7 +37,7 @@
     
     int viewportWidth = self.view.frame.size.width;
     int viewportHeight = self.view.frame.size.height;
-    int topBarHeight = 80;
+    int topBarHeight = [ViewControllerUtils GetTopHeaderSectionHeight];
     
     // Initialize the scrollView
     self.helpSubViews = [[NSMutableArray alloc] init];
@@ -90,10 +91,7 @@
     [self.view bringSubviewToFront:self.pageControl];
     
     // Create top bar
-    UIView* topBar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, viewportWidth, topBarHeight)];
-    topBar.backgroundColor = [UIColor colorWithRed:(243/255.0) green:(243/255.0) blue:(242/255.0) alpha:1];
-    [self.view addSubview:topBar];
-    [self.view bringSubviewToFront:topBar];
+    UIView *topBar = [ViewControllerUtils RenderTopHeaderSection:self.view];
     
     // Create the close button
     UIImage *closeImage = [UIImage imageNamed:@"closeButton@2x.png"];

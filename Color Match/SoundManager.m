@@ -32,6 +32,7 @@
 
 
 #import "SoundManager.h"
+#import "UserData.h"
 
 
 #pragma GCC diagnostic ignored "-Wobjc-missing-property-synthesis"
@@ -446,6 +447,11 @@ NSString *const SoundDidFinishPlayingNotification = @"SoundDidFinishPlayingNotif
 
 - (void)playMusic:(id)soundOrName looping:(BOOL)looping fadeIn:(BOOL)fadeIn
 {
+    if (![[UserData sharedUserData] getIsMusicEnabled])
+    {
+        return;
+    }
+    
     Sound *music = [soundOrName isKindOfClass:[Sound class]]? soundOrName: [Sound soundNamed:soundOrName];
     if (![music.URL isEqual:_currentMusic.URL])
     {
@@ -518,7 +524,15 @@ NSString *const SoundDidFinishPlayingNotification = @"SoundDidFinishPlayingNotif
 
 - (void)playSound:(id)soundOrName looping:(BOOL)looping
 {
-    [self playSound:soundOrName looping:looping fadeIn:NO];
+    [self playSound:soundOrName looping:looping forcePlay:false];
+}
+
+- (void)playSound:(id)soundOrName looping:(BOOL)looping forcePlay:(BOOL)forcePlay
+{
+    if ([[UserData sharedUserData] getIsSoundEnabled] || forcePlay)
+    {
+        [self playSound:soundOrName looping:looping fadeIn:NO];
+    }
 }
 
 - (void)playSound:(id)soundOrName
