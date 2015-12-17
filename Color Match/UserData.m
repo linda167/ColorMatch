@@ -142,6 +142,27 @@ static NSString *const LastLevelCompletedInWorldKey = @"LastLevelCompletedInWorl
     }
 }
 
+-(void)storeMusicSelection:(NSString*)musicSelection
+{
+    [self.userData setObject:musicSelection forKey:@"MusicSelection"];
+}
+
+-(NSString*)getMusicSelection
+{
+    NSDictionary *dictionary = [self.userData dictionaryRepresentation];
+    
+    if ([dictionary objectForKey:@"MusicSelection"])
+    {
+        return [self.userData valueForKey:@"MusicSelection"];
+    }
+    else
+    {
+        // Key is not set, return default initial value
+        return @"Crazy Candy Highway.mp3";
+    }
+}
+
+
 -(bool)isFirstFourLevelsOfWorldCompleted:(int)worldId
 {
     return [self getLevelCompleteState:worldId levelId:1] &&

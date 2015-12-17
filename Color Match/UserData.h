@@ -30,5 +30,7 @@
 -(bool)getIsSoundEnabled;
 -(void)storeIsMusicEnabled:(bool)enabled;
 -(bool)getIsMusicEnabled;
+-(void)storeMusicSelection:(NSString*)musicSelection;
+-(NSString*)getMusicSelection;
 
 @end

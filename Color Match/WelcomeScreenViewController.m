@@ -146,8 +146,7 @@
     // Start music if not already playing
     if (![SoundManager sharedManager].playingMusic)
     {
-        // TODO: lindach
-        [[SoundManager sharedManager] playMusic:@"Crazy Candy Highway.mp3" looping:YES];
+        [[SoundManager sharedManager] playMusic:[[UserData sharedUserData] getMusicSelection] looping:YES];
     }
 }
 
