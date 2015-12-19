@@ -7,6 +7,7 @@
 //
 
 #import "UserData.h"
+#import "SoundManager.h"
 
 static NSString *const LastLevelCompletedInWorldKey = @"LastLevelCompletedInWorld";
 
@@ -18,6 +19,15 @@ static NSString *const LastLevelCompletedInWorldKey = @"LastLevelCompletedInWorl
     if (self)
     {
         self.userData = [NSUserDefaults standardUserDefaults];
+        self.musicTracks = [[NSArray alloc] initWithObjects:
+            @"Random",
+            @"Crazy Candy Highway",
+            @"Curious",
+            @"Happy Tune",
+            nil];
+        
+        // Listen for sound finish playing
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(soundDidFinishPlaying:) name:@"SoundDidFinishPlayingNotification" object:nil];
     }
     
     return self;
@@ -158,7 +168,7 @@ static NSString *const LastLevelCompletedInWorldKey = @"LastLevelCompletedInWorl
     else
     {
         // Key is not set, return default initial value
-        return @"Crazy Candy Highway.mp3";
+        return [[self musicTracks] objectAtIndex:0];
     }
 }
 
@@ -302,6 +312,47 @@ static NSString *const LastLevelCompletedInWorldKey = @"LastLevelCompletedInWorl
     }
     
     [self.userData synchronize];
+}
+
+- (void)startMusic
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    if (!([@"Random" isEqualToString:[self getMusicSelection]]))
+    {
+        [[SoundManager sharedManager] stopMusic:false];
+        [[SoundManager sharedManager] playMusic:[[self getMusicSelection] stringByAppendingString:@".mp3"]looping:YES];
+    }
+    else
+    {
+        // Random music
+        int musicIndex = arc4random()%(self.musicTracks.count-1) + 1;
+        NSString *music = [[self.musicTracks objectAtIndex:musicIndex] stringByAppendingString:@".mp3"];
+        NSLog(@"Start playing random music: %@", music);
+        [[SoundManager sharedManager] stopMusic:false];
+        [[SoundManager sharedManager] playMusic:music looping:NO];
+    }
+    
+    // Listen for sound finish playing
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(soundDidFinishPlaying:) name:@"SoundDidFinishPlayingNotification" object:nil];
+}
+
+-(void)soundDidFinishPlaying:(id)sender
+{
+    NSNotification *notification = (NSNotification*)sender;
+    Sound *sound = (Sound*)notification.object;
+    NSString *soundName = [sound.name substringToIndex:sound.name.length - 4];
+    
+    NSLog(@"Received sound finished playing notification: %@",
+           soundName);
+    
+    // If we're playing random tracks and this is a music track that just finished playing
+    if ([@"Random" isEqualToString:[self getMusicSelection]] &&
+        [[[UserData sharedUserData] musicTracks] containsObject:soundName])
+    {
+        // Start playing another random track
+        [self startMusic];
+    }
 }
 
 @end

@@ -56,6 +56,7 @@
 		BF0D4BCF1929379100AACB5A /* LineInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = BF0D4BCE1929379100AACB5A /* LineInfo.m */; };
 		BF0D4BD119293E5500AACB5A /* BlockClear.png in Resources */ = {isa = PBXBuildFile; fileRef = BF0D4BD019293E5500AACB5A /* BlockClear.png */; };
 		BF0D4BD41929429E00AACB5A /* LinePiece.m in Sources */ = {isa = PBXBuildFile; fileRef = BF0D4BD31929429E00AACB5A /* LinePiece.m */; };
+		BF1188B31C23D0490001D485 /* CreditsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF1188B21C23D0490001D485 /* CreditsViewController.m */; };
 		BF2DF3921B64678100AFD920 /* circleFill.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BF2DF3901B64678100AFD920 /* circleFill.mp3 */; };
 		BF2DF3931B64678100AFD920 /* intro.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BF2DF3911B64678100AFD920 /* intro.mp3 */; };
 		BF2DF3951B65D56700AFD920 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF2DF3941B65D56700AFD920 /* StoreKit.framework */; };
@@ -338,6 +339,8 @@
 		BF0D4BD019293E5500AACB5A /* BlockClear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlockClear.png; sourceTree = "<group>"; };
 		BF0D4BD21929429E00AACB5A /* LinePiece.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LinePiece.h; sourceTree = "<group>"; };
 		BF0D4BD31929429E00AACB5A /* LinePiece.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LinePiece.m; sourceTree = "<group>"; };
+		BF1188B11C23D0490001D485 /* CreditsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreditsViewController.h; sourceTree = "<group>"; };
+		BF1188B21C23D0490001D485 /* CreditsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreditsViewController.m; sourceTree = "<group>"; };
 		BF2DF3901B64678100AFD920 /* circleFill.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = circleFill.mp3; path = Sounds/Misc/circleFill.mp3; sourceTree = SOURCE_ROOT; };
 		BF2DF3911B64678100AFD920 /* intro.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = intro.mp3; path = Sounds/Misc/intro.mp3; sourceTree = SOURCE_ROOT; };
 		BF2DF3941B65D56700AFD920 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
@@ -917,6 +920,8 @@
 				BF85B7691B8AB7CE00018E25 /* OptionsViewController.m */,
 				BF85B76B1B8AB94300018E25 /* ViewControllerUtils.h */,
 				BF85B76C1B8AB94300018E25 /* ViewControllerUtils.m */,
+				BF1188B11C23D0490001D485 /* CreditsViewController.h */,
+				BF1188B21C23D0490001D485 /* CreditsViewController.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -1327,6 +1332,7 @@
 				BFE467E31B3F85D800C286F1 /* HelpScreenViewController.m in Sources */,
 				BF9079A019564F29000E6E58 /* ConnectorCell.m in Sources */,
 				BF85B7631B8557DB00018E25 /* FullLevelId.m in Sources */,
+				BF1188B31C23D0490001D485 /* CreditsViewController.m in Sources */,
 				BF85B76D1B8AB94300018E25 /* ViewControllerUtils.m in Sources */,
 				BF9807AB196721BA00BAF9ED /* TransporterGroup.m in Sources */,
 				BF9807AE1967230600BAF9ED /* TransporterCell.m in Sources */,

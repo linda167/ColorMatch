@@ -16,7 +16,6 @@
 @interface OptionsViewController ()
 @property UIButton *soundCheckButton;
 @property UIButton *musicCheckButton;
-@property NSMutableArray *musicData;
 @property UITableView *tableView;
 @end
 
@@ -55,21 +54,6 @@
         checked:[[UserData sharedUserData] getIsMusicEnabled]];
     [self.musicCheckButton addTarget:self action:@selector(musicCheckBoxPressed:) forControlEvents:UIControlEventTouchUpInside];
     
-    // Add music data
-    self.musicData = [[NSMutableArray alloc] init];
-    
-    NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] init];
-    [dictionary setObject:@"Crazy Candy Highway" forKey:@"data"];
-    [self.musicData addObject:dictionary];
-    
-    dictionary = [[NSMutableDictionary alloc] init];
-    [dictionary setObject:@"Curious" forKey:@"data"];
-    [self.musicData addObject:dictionary];
-    
-    dictionary = [[NSMutableDictionary alloc] init];
-    [dictionary setObject:@"Happy Tune" forKey:@"data"];
-    [self.musicData addObject:dictionary];
-    
     // Add music selection
     yOffset = yOffset+42;
     CGRect tableFrame = CGRectMake(xOffset+44, yOffset, 240, 130);
@@ -85,7 +69,7 @@
     bool isPurchased = [[UserData sharedUserData] getGamePurchased];
     if (!isPurchased)
     {
-        yOffset = yOffset+120;
+        yOffset = yOffset+145;
         UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         [button setFrame:CGRectMake(26, yOffset, 160, 40)];
         [button addTarget:self action:@selector(restorePurchase:) forControlEvents:UIControlEventTouchUpInside];
@@ -102,7 +86,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.musicData.count;
+    return [[UserData sharedUserData] musicTracks].count;
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -115,12 +99,12 @@
     }
     
     // Set music option text
-    NSString *musicText = [[self.musicData objectAtIndex:indexPath.row] objectForKey:@"data"];
+    NSString *musicText = [[[UserData sharedUserData] musicTracks] objectAtIndex:indexPath.row];
     cell.textLabel.font = [UIFont fontWithName:@"Futura-Medium" size:16.0];
     cell.textLabel.text = musicText;
     
     // Show checkmark on checked option
-    if ([[musicText stringByAppendingString:@".mp3"] isEqualToString:[[UserData sharedUserData] getMusicSelection]])
+    if ([musicText isEqualToString:[[UserData sharedUserData] getMusicSelection]])
     {
         cell.textLabel.text = [@"\u2713  " stringByAppendingString:cell.textLabel.text];
     }
@@ -140,9 +124,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *songName =[[[self.musicData objectAtIndex:indexPath.row] objectForKey:@"data"]
-                         stringByAppendingString:@".mp3"];
-    
+    NSString *songName =[[[UserData sharedUserData] musicTracks] objectAtIndex:indexPath.row];
     if ([songName isEqualToString:[[UserData sharedUserData] getMusicSelection]])
     {
         [self.tableView reloadData];
@@ -157,7 +139,7 @@
     [self.tableView reloadData];
     
     // Play new music
-    [[SoundManager sharedManager] playMusic:songName looping:YES];
+    [[UserData sharedUserData] startMusic];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -226,7 +208,7 @@
     
     if (isMusicEnabled)
     {
-        [[SoundManager sharedManager] playMusic:[[UserData sharedUserData] getMusicSelection] looping:YES];
+        [[UserData sharedUserData] startMusic];
     }
     else
     {

@@ -11,6 +11,7 @@
 @interface UserData : NSObject
 
 @property (nonatomic, retain) NSUserDefaults *userData;
+@property NSArray *musicTracks;
 
 +(id)sharedUserData;
 +(NSMutableString*)getLevelString:(int)worldId levelId:(int)levelId;
@@ -32,5 +33,6 @@
 -(bool)getIsMusicEnabled;
 -(void)storeMusicSelection:(NSString*)musicSelection;
 -(NSString*)getMusicSelection;
+-(void)startMusic;
 
 @end

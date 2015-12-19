@@ -122,7 +122,11 @@
 
 - (void)fadeInButtons {
     
-    [self startMusic];
+    // Start music if not already playing
+    if (![SoundManager sharedManager].playingMusic)
+    {
+        [[UserData sharedUserData] startMusic];
+    }
     
     // Fade in divider
     [UIView
@@ -139,15 +143,6 @@
      completion:^(BOOL finished)
      {
      }];
-}
-
-- (void)startMusic
-{
-    // Start music if not already playing
-    if (![SoundManager sharedManager].playingMusic)
-    {
-        [[SoundManager sharedManager] playMusic:[[UserData sharedUserData] getMusicSelection] looping:YES];
-    }
 }
 
 - (void)viewWillAppear:(BOOL)animated

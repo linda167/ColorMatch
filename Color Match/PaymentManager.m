@@ -141,7 +141,7 @@
     {
         UIAlertView *alert = [[UIAlertView alloc]
                               initWithTitle:@"Purchase Successful"
-                              message:@"Your purchase was restored successfully."
+                              message:@"Your purchases were restored successfully."
                               delegate:self
                               cancelButtonTitle:@"OK"
                               otherButtonTitles:nil];
