@@ -152,7 +152,7 @@
     [self addTextRow:@"freesound.org/people/robni7" bold:false size:16 yOffset:22];
     self.yOffset += sectionOffset;
     [self addTextRow:@"Univ_lyon3" bold:true size:16 yOffset:22];
-    [self addTextRow:@"freesound.org/people/univ_lyon3.com" bold:false size:16 yOffset:22];
+    [self addTextRow:@"freesound.org/people/univ_lyon3" bold:false size:16 yOffset:22];
     self.yOffset += bigSectionOffset;
     
     [self addTextRow:@"PRODUCTION BABY" bold:false size:17 yOffset:26];

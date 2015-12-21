@@ -46,11 +46,12 @@
     int viewportHeight = self.view.frame.size.height;
     
     // Create logo image and scale it down to fit screen
+    int logoWidth = viewportWidth - 34;
     UIImage* image = [UIImage imageNamed:@"logo@2x.png"];
     int imageHeight = image.size.height;
-    double proportion = image.size.width / viewportWidth;
+    double proportion = image.size.width / logoWidth;
     imageHeight = image.size.height / proportion;
-    UIImageView *logoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, viewportWidth, imageHeight)];
+    UIImageView *logoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, logoWidth, imageHeight)];
     logoImageView.image = image;
     
     // Add white background to host the image

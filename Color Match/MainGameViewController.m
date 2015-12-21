@@ -22,6 +22,7 @@
 @property int worldId;
 @property int levelId;
 @property int size;
+@property bool isAdPresenting;
 @end
 
 @implementation MainGameViewController
@@ -44,6 +45,15 @@
     if (self.isMovingFromParentViewController)
     {
         [[SoundManager sharedManager] playSound:@"backSelect.mp3" looping:NO];
+    }
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    if (self.isAdPresenting)
+    {
+        self.isAdPresenting = false;
+        [self.mainGameManager resumeGameAfterAd];
     }
 }
 
@@ -104,6 +114,17 @@
 - (void)CloseHelpMenu
 {
     [self.mainGameManager CloseHelpMenu];
+}
+
+- (void)PresentAd
+{
+    self.interstitialPresentationPolicy = ADInterstitialPresentationPolicyManual;
+    self.isAdPresenting = [self requestInterstitialAdPresentation];
+    
+    if (!self.isAdPresenting)
+    {
+        [self.mainGameManager resumeGameAfterAd];
+    }
 }
 
 @end

@@ -28,6 +28,8 @@
 @property NSTimeInterval timeInterval;
 @property HelpScreenViewController *helpScreenViewController;
 @property bool timerPaused;
+@property ADInterstitialAd *interstitial;
+@property AdPendingState adPendingState;
 @end
 
 @implementation MainGameManager
@@ -41,6 +43,10 @@
         self.boardParameters = [self getBoardParametersForSize:size];
         self.worldId = worldId;
         self.levelId = levelId;
+        
+        // Ad initialization
+        [self cycleInterstitial];
+
     }
     
     return self;
@@ -59,6 +65,9 @@
     
     // Init moves count
     [self initMovesCount];
+    
+    // Reset ad state
+    self.adPendingState = None;
 }
 
 // Render new board to view given current parameters
@@ -556,7 +565,23 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if (buttonIndex == 1)
+    bool gamePurchased = [[UserData sharedUserData] getGamePurchased];
+    
+    if (!gamePurchased)
+    {
+        if (buttonIndex == 0)
+        {
+            self.adPendingState = PendingCancel;
+        }
+        else
+        {
+            self.adPendingState = PendingNextGame;
+        }
+        
+        // Present Ad
+        [self presentInterlude];
+    }
+    else if (buttonIndex == 1)
     {
         [self NextLevel];
     }
@@ -666,5 +691,36 @@
     // Resume game
     [self resumeTimer];
 }
+
+#pragma mark - Ads
+
+
+- (void)cycleInterstitial
+{
+    self.interstitial = [[ADInterstitialAd alloc] init];
+}
+
+- (void)presentInterlude
+{
+    if (self.interstitial.loaded)
+    {
+        [self.viewController PresentAd];
+    }
+    else
+    {
+        [self resumeGameAfterAd];
+    }
+}
+
+- (void)resumeGameAfterAd
+{
+    [self cycleInterstitial];
+    if (self.adPendingState == PendingNextGame)
+    {
+        [self NextLevel];
+    }
+}
+
+#pragma mark -
 
 @end

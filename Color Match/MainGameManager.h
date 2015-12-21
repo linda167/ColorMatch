@@ -9,10 +9,18 @@
 #import <Foundation/Foundation.h>
 #import "UserColorBoard.h"
 #import "BoardCells.h"
+@import iAd;
 
 @class MainGameViewController;
 
 @interface MainGameManager : NSObject
+
+typedef NS_ENUM(NSUInteger, AdPendingState)
+{
+    None = 0,
+    PendingNextGame = 1,
+    PendingCancel = 2
+};
 
 @property NSInteger selectedColor;
 @property UserColorBoard *userColorBoard;
@@ -37,5 +45,6 @@
 - (IBAction)zonerCellPressed:(id)sender;
 - (IBAction)converterButtonPressed:(id)sender;
 - (IBAction)shifterCellPressed:(id)sender;
+- (void)resumeGameAfterAd;
 
 @end
