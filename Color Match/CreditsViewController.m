@@ -22,6 +22,12 @@
     
     self.title = @"Credits";
     
+    // Adjust scroll view size
+    CGRect frame = self.scrollView.frame;
+    frame.size.height = self.view.frame.size.height - self.navigationController.navigationBar.frame.size.height;
+    frame.size.width = self.view.frame.size.width;
+    self.scrollView.frame = frame;
+    
     // Hide scroll view
     self.scrollView.alpha = 0;
     
@@ -99,7 +105,7 @@
 {
     self.scrollView.alpha = 1;
     self.scrollView.userInteractionEnabled = false;
-    self.yOffset = 440;
+    self.yOffset = self.scrollView.frame.size.height - 45;
     int sectionOffset = 40;
     int smallSectionOffset = 25;
     int bigSectionOffset = 120;

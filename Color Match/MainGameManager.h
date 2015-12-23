@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "UserColorBoard.h"
 #import "BoardCells.h"
-@import iAd;
 
 @class MainGameViewController;
 

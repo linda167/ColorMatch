@@ -141,13 +141,18 @@
     rowsToRender = levelCount % colsToRender;
     
     int totalLevelsToRender = [LevelsManager GetLevelCountForWorld:self.worldId];
-    int xOffsetInitial = 15;
-    int yOffsetInitial = 75;
-    int xOffset = xOffsetInitial;
-    int yOffset = yOffsetInitial;
-    int size = 60;
     int heightBetweenRows = 95;
     int widthBetweenCols = 75;
+    int yOffsetInitial = 75;
+    int size = 60;
+    
+    // Calculate initial xOffset based on screen size
+    int rowTotalWidth = size * colsToRender + (widthBetweenCols - size) * (colsToRender - 1);
+    int xOffsetInitial = (self.view.frame.size.width - rowTotalWidth) / 2;
+    
+    int xOffset = xOffsetInitial;
+    int yOffset = yOffsetInitial;
+    
     for (int i=0; i<totalLevelsToRender; i++)
     {
         // Figure out if level is complete

@@ -34,6 +34,14 @@
 {
     [super viewDidLoad];
     
+    // Adjust scroll view size
+    CGRect frame = self.scrollView.frame;
+    int topOffset = self.navigationController.navigationBar.frame.size.height + 19;
+    frame.size.height = self.view.frame.size.height - topOffset;
+    frame.size.width = self.view.frame.size.width;
+    frame.origin.y = topOffset;
+    self.scrollView.frame = frame;
+    
     self.viewControllers = [[NSMutableArray alloc] init];
     self.pageCount = [LevelsManager GetTotalWorldCount];
     for (int i = 0; i < self.pageCount; i++)

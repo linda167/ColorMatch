@@ -32,6 +32,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
+    [self initUIElements];
     [self createGameManagerAndStartNewGame];
     
     // Change navigation bar appearance
@@ -55,6 +56,34 @@
         self.isAdPresenting = false;
         [self.mainGameManager resumeGameAfterAd];
     }
+}
+
+- (void)initUIElements
+{
+    // Adjust UI element sizes to be proportional to phone size
+    CGRect frame = self.topSectionContainer.frame;
+    frame.size.width = self.view.frame.size.width;
+    self.topSectionContainer.frame = frame;
+    
+    frame = self.GoalContainerView.frame;
+    frame.origin.x = self.view.frame.size.width - frame.size.width;
+    self.GoalContainerView.frame = frame;
+    
+    frame = self.ColorButtonBarContainer.frame;
+    frame.size.width = self.view.frame.size.width;
+    self.ColorButtonBarContainer.frame = frame;
+    
+    frame = self.GridContainerView.frame;
+    frame.size.width = self.view.frame.size.width;
+    frame.size.height = self.view.frame.size.height - self.topSectionContainer.frame.origin.y - self.topSectionContainer.frame.size.height - self.ColorButtonBarContainer.frame.size.height;
+    self.GridContainerView.frame = frame;
+    
+    int colorButtonsCenter = (self.blueButton.frame.origin.x + self.blueButton.frame.size.width + self.redButton.frame.origin.x) / 2;
+    int buttonOffset = self.view.frame.size.width / 2 - colorButtonsCenter;
+    self.whiteButton.frame = CGRectOffset(self.whiteButton.frame, buttonOffset, 0);
+    self.blueButton.frame = CGRectOffset(self.blueButton.frame, buttonOffset, 0);
+    self.redButton.frame = CGRectOffset(self.redButton.frame, buttonOffset, 0);
+    self.yellowButton.frame = CGRectOffset(self.yellowButton.frame, buttonOffset, 0);
 }
 
 - (void)createGameManagerAndStartNewGame

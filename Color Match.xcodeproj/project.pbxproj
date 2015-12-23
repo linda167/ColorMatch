@@ -57,6 +57,11 @@
 		BF0D4BD119293E5500AACB5A /* BlockClear.png in Resources */ = {isa = PBXBuildFile; fileRef = BF0D4BD019293E5500AACB5A /* BlockClear.png */; };
 		BF0D4BD41929429E00AACB5A /* LinePiece.m in Sources */ = {isa = PBXBuildFile; fileRef = BF0D4BD31929429E00AACB5A /* LinePiece.m */; };
 		BF1188B31C23D0490001D485 /* CreditsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF1188B21C23D0490001D485 /* CreditsViewController.m */; };
+		BF18EAEC1C2A6D7D00BA3492 /* PurchaseGameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF18EAEB1C2A6D7D00BA3492 /* PurchaseGameViewController.m */; };
+		BF18EAEE1C2A792D00BA3492 /* buttonBuyGamePrice@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF18EAED1C2A792D00BA3492 /* buttonBuyGamePrice@2x.png */; };
+		BF18EAF51C2B576200BA3492 /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = BF18EAF11C2B576200BA3492 /* Appirater.m */; };
+		BF18EAF61C2B576200BA3492 /* Appirater.podspec.json in Resources */ = {isa = PBXBuildFile; fileRef = BF18EAF21C2B576200BA3492 /* Appirater.podspec.json */; };
+		BF18EAF71C2B576200BA3492 /* en.lproj in Resources */ = {isa = PBXBuildFile; fileRef = BF18EAF41C2B576200BA3492 /* en.lproj */; };
 		BF2DF3921B64678100AFD920 /* circleFill.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BF2DF3901B64678100AFD920 /* circleFill.mp3 */; };
 		BF2DF3931B64678100AFD920 /* intro.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BF2DF3911B64678100AFD920 /* intro.mp3 */; };
 		BF2DF3951B65D56700AFD920 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF2DF3941B65D56700AFD920 /* StoreKit.framework */; };
@@ -341,6 +346,14 @@
 		BF0D4BD31929429E00AACB5A /* LinePiece.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LinePiece.m; sourceTree = "<group>"; };
 		BF1188B11C23D0490001D485 /* CreditsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreditsViewController.h; sourceTree = "<group>"; };
 		BF1188B21C23D0490001D485 /* CreditsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreditsViewController.m; sourceTree = "<group>"; };
+		BF18EAEA1C2A6D7D00BA3492 /* PurchaseGameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PurchaseGameViewController.h; sourceTree = "<group>"; };
+		BF18EAEB1C2A6D7D00BA3492 /* PurchaseGameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PurchaseGameViewController.m; sourceTree = "<group>"; };
+		BF18EAED1C2A792D00BA3492 /* buttonBuyGamePrice@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "buttonBuyGamePrice@2x.png"; sourceTree = "<group>"; };
+		BF18EAF01C2B576200BA3492 /* Appirater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Appirater.h; path = Appirater/Appirater.h; sourceTree = "<group>"; };
+		BF18EAF11C2B576200BA3492 /* Appirater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Appirater.m; path = Appirater/Appirater.m; sourceTree = "<group>"; };
+		BF18EAF21C2B576200BA3492 /* Appirater.podspec.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = Appirater.podspec.json; path = Appirater/Appirater.podspec.json; sourceTree = "<group>"; };
+		BF18EAF31C2B576200BA3492 /* AppiraterDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppiraterDelegate.h; path = Appirater/AppiraterDelegate.h; sourceTree = "<group>"; };
+		BF18EAF41C2B576200BA3492 /* en.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; name = en.lproj; path = Appirater/en.lproj; sourceTree = "<group>"; };
 		BF2DF3901B64678100AFD920 /* circleFill.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = circleFill.mp3; path = Sounds/Misc/circleFill.mp3; sourceTree = SOURCE_ROOT; };
 		BF2DF3911B64678100AFD920 /* intro.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = intro.mp3; path = Sounds/Misc/intro.mp3; sourceTree = SOURCE_ROOT; };
 		BF2DF3941B65D56700AFD920 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
@@ -632,6 +645,7 @@
 		AF2C22281874B8B700082561 /* Color Match */ = {
 			isa = PBXGroup;
 			children = (
+				BF18EAEF1C2B573C00BA3492 /* Appirater */,
 				BF43A9671B537E670054A6D0 /* Music */,
 				BF43A9441B51F94B0054A6D0 /* Sounds */,
 				AF2C225A1874B95000082561 /* Images */,
@@ -678,6 +692,7 @@
 		AF2C225A1874B95000082561 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				BF18EAED1C2A792D00BA3492 /* buttonBuyGamePrice@2x.png */,
 				BF85B7641B89AD6E00018E25 /* checkedBox@2x.png */,
 				BF85B7651B89AD6E00018E25 /* uncheckedBox@2x.png */,
 				BF85B75F1B6E8DE300018E25 /* buttonBuyFullGame@2x.png */,
@@ -863,6 +878,18 @@
 			path = ../Images;
 			sourceTree = "<group>";
 		};
+		BF18EAEF1C2B573C00BA3492 /* Appirater */ = {
+			isa = PBXGroup;
+			children = (
+				BF18EAF01C2B576200BA3492 /* Appirater.h */,
+				BF18EAF11C2B576200BA3492 /* Appirater.m */,
+				BF18EAF21C2B576200BA3492 /* Appirater.podspec.json */,
+				BF18EAF31C2B576200BA3492 /* AppiraterDelegate.h */,
+				BF18EAF41C2B576200BA3492 /* en.lproj */,
+			);
+			name = Appirater;
+			sourceTree = "<group>";
+		};
 		BF43A9441B51F94B0054A6D0 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
@@ -922,6 +949,8 @@
 				BF85B76C1B8AB94300018E25 /* ViewControllerUtils.m */,
 				BF1188B11C23D0490001D485 /* CreditsViewController.h */,
 				BF1188B21C23D0490001D485 /* CreditsViewController.m */,
+				BF18EAEA1C2A6D7D00BA3492 /* PurchaseGameViewController.h */,
+				BF18EAEB1C2A6D7D00BA3492 /* PurchaseGameViewController.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -1157,6 +1186,7 @@
 				BF98086D196E664E00BAF9ED /* transporterInputTopPurple@2x.png in Resources */,
 				AFADA22C1877D20D00FADA22 /* Green.png in Resources */,
 				BFA3A2BC1931401700C1BB7D /* ReflectorArrowLtDBlue@2x.png in Resources */,
+				BF18EAEE1C2A792D00BA3492 /* buttonBuyGamePrice@2x.png in Resources */,
 				BF85C84B1A4F5B4A00A494B6 /* shifterInnerBlue@2x.png in Resources */,
 				BF85C8511A4F5B4A00A494B6 /* shifterInnerYellow@2x.png in Resources */,
 				BF90799919560FE3000E6E58 /* connectorInnerYellow@2x.png in Resources */,
@@ -1208,6 +1238,7 @@
 				BF90796B194D6E42000E6E58 /* 1stars@2x.png in Resources */,
 				BF85C84C1A4F5B4A00A494B6 /* shifterInnerBrown@2x.png in Resources */,
 				BF43A9661B5353AC0054A6D0 /* menuSelect.mp3 in Resources */,
+				BF18EAF61C2B576200BA3492 /* Appirater.podspec.json in Resources */,
 				BFE468011B46420500C286F1 /* levelLock@2x.png in Resources */,
 				BF98086E196E664E00BAF9ED /* transporterInputTopRed@2x.png in Resources */,
 				BF2DF3921B64678100AFD920 /* circleFill.mp3 in Resources */,
@@ -1235,6 +1266,7 @@
 				BFA3A2BD1931401700C1BB7D /* ReflectorArrowLtDRed@2x.png in Resources */,
 				BF43A9491B51F9720054A6D0 /* blueSelect.mp3 in Resources */,
 				BF98086F196E664E00BAF9ED /* transporterInputTopWhite@2x.png in Resources */,
+				BF18EAF71C2B576200BA3492 /* en.lproj in Resources */,
 				BF90799819560FE3000E6E58 /* connectorInnerWhite@2x.png in Resources */,
 				BF98087A196E664E00BAF9ED /* transporterOutputRightBrown@2x.png in Resources */,
 				BF9079B9195E1040000E6E58 /* FilledCircleBlue@2x.png in Resources */,
@@ -1328,10 +1360,12 @@
 				BF90795F194D22B0000E6E58 /* DebugModeViewController.m in Sources */,
 				AF2C222F1874B8B700082561 /* main.m in Sources */,
 				BF9079DE1964F933000E6E58 /* ConverterCell.m in Sources */,
+				BF18EAEC1C2A6D7D00BA3492 /* PurchaseGameViewController.m in Sources */,
 				AF2C223C1874B8B800082561 /* MainGameViewController.m in Sources */,
 				BFE467E31B3F85D800C286F1 /* HelpScreenViewController.m in Sources */,
 				BF9079A019564F29000E6E58 /* ConnectorCell.m in Sources */,
 				BF85B7631B8557DB00018E25 /* FullLevelId.m in Sources */,
+				BF18EAF51C2B576200BA3492 /* Appirater.m in Sources */,
 				BF1188B31C23D0490001D485 /* CreditsViewController.m in Sources */,
 				BF85B76D1B8AB94300018E25 /* ViewControllerUtils.m in Sources */,
 				BF9807AB196721BA00BAF9ED /* TransporterGroup.m in Sources */,

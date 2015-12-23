@@ -8,6 +8,10 @@
 
 #import "CMAppDelegate.h"
 #import "SoundManager.h"
+@import iAd;
+@import CFNetwork;
+@import SystemConfiguration;
+@import StoreKit;
 
 @implementation CMAppDelegate
 

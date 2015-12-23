@@ -84,7 +84,7 @@
     int xOffset = xOffsetInitial;
     
     // Color cells starts 1 cell away from the top due to grid buttons
-    int yOffset = cellSizePlusSpace;
+    int yOffset = cellSizePlusSpace + self.boardParameters.yOffsetForFirstTopGridButton;
     
     self.colorCellSections = [[NSMutableArray alloc] init];
     
@@ -129,7 +129,7 @@
 -(void)CreateConnectorLinesFrame
 {
     // CGRect for dimensions of container frame
-    CGRect containerFrame = CGRectMake(0,0,self.containerView.frame.size.height,self.containerView.frame.size.height);
+    CGRect containerFrame = CGRectMake(0,0,self.containerView.frame.size.width,self.containerView.frame.size.height);
     self.connectorLines = [[ConnectorLines alloc] initWithFrame:containerFrame];
     [self.containerView addSubview:self.connectorLines];
     [self.containerView sendSubviewToBack:self.connectorLines];
@@ -651,7 +651,7 @@
     
     // Create left buttons
     xOffset = self.boardParameters.xOffsetForFirstLeftGridButton;
-    yOffset = cellSizePlusSpace;
+    yOffset += cellSizePlusSpace;
     for (int i=0; i<self.boardParameters.gridSize; i++)
     {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];

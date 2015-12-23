@@ -23,21 +23,57 @@
     [super viewDidLoad];
     // Do view setup here.
     
+    [self initUIElements];
+    [self initPaymentManager];
+    [self showLogo];
+}
+
+- (void)initUIElements
+{
+    // Hide elements to be animated in
     _divider.alpha = 0;
     _button1.alpha = 0;
     _button2.alpha = 0;
     _button3.alpha = 0;
     _button4.alpha = 0;
     
-    PaymentManager *paymentManager = [PaymentManager instance];
-    paymentManager.transactionCompleteCallback = self;
+    // Center UI elements
+    int centerWidth = self.view.frame.size.width / 2;
+    _logo.center = CGPointMake(centerWidth, _logo.center.y);
+    _divider.center = CGPointMake(centerWidth, _divider.center.y);
+    _button1.center = CGPointMake(centerWidth, _button1.center.y);
+    _button2.center = CGPointMake(centerWidth, _button2.center.y);
+    _button3.center = CGPointMake(centerWidth, _button3.center.y);
+    _button4.center = CGPointMake(centerWidth, _button4.center.y);
     
+    // Adjust button Y location
+    int dividerBottom = _divider.frame.origin.y + _divider.frame.size.height;
+    int remainderSpace = self.view.frame.size.height - dividerBottom;
+    int remainderSpaceMiddle = remainderSpace / 2 + dividerBottom;
+    int button1Location = remainderSpaceMiddle - 120;
+    int buttonAdjustment = button1Location - _button1.frame.origin.y;
+    _button1.frame = CGRectOffset(_button1.frame, 0, buttonAdjustment);
+    _button2.frame = CGRectOffset(_button2.frame, 0, buttonAdjustment);
+    _button3.frame = CGRectOffset(_button3.frame, 0, buttonAdjustment);
+    _button4.frame = CGRectOffset(_button4.frame, 0, buttonAdjustment);
+    
+    // Adjust debug button location
+    CGRect frame = _debugButton.frame;
+    frame.origin.x = self.view.frame.size.width - frame.size.width;
+    frame.origin.y = self.view.frame.size.height - frame.size.height;
+    _debugButton.frame = frame;
+    
+    // Update UI based on purchase state
     if ([[UserData sharedUserData] getGamePurchased])
     {
         [self OnGamePurchased];
     }
-    
-    [self showLogo];
+}
+
+- (void)initPaymentManager
+{
+    PaymentManager *paymentManager = [PaymentManager instance];
+    paymentManager.transactionCompleteCallback = self;
 }
 
 - (void)showLogo
@@ -182,12 +218,6 @@
         // Otherwise go to world view
         [self performSegueWithIdentifier:@"mainMenuToWorldSegue" sender:self];
     }
-}
-
-- (IBAction)OnTapBuyGameButton:(id)sender
-{
-    [[SoundManager sharedManager] playSound:@"menuSelect.mp3" looping:NO];
-    [[PaymentManager instance] BuyGame];
 }
 
 - (IBAction)OnTapSettingsButton:(id)sender

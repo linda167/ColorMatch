@@ -220,6 +220,22 @@
             break;
     }
     
+    // Adjust initial x and y for the board
+    int cellSizePlusSpace = boardParameters.colorCellSize + boardParameters.colorCellSpacing;
+    int gridTotalWidth = cellSizePlusSpace * (boardParameters.gridSize + 1) + boardParameters.xAdjustmentForColorCells;
+    int currentGridMiddlePoint =
+        boardParameters.xOffsetForFirstLeftGridButton +
+        (gridTotalWidth / 2);
+    int targetGridMiddlePoint = self.viewController.view.frame.size.width / 2;
+    int xOffset = targetGridMiddlePoint - currentGridMiddlePoint;
+    boardParameters.xOffsetForFirstLeftGridButton += xOffset;
+    
+    int gridTotalHeight = cellSizePlusSpace * (boardParameters.gridSize + 1);
+    currentGridMiddlePoint = gridTotalHeight / 2;
+    targetGridMiddlePoint = (self.viewController.GridContainerView.frame.size.height - 12) / 2;
+    int yOffset = targetGridMiddlePoint - currentGridMiddlePoint;
+    boardParameters.yOffsetForFirstTopGridButton += yOffset;
+    
     return boardParameters;
 }
 

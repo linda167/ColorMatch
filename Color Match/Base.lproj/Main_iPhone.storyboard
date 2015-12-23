@@ -108,7 +108,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" id="gct-yr-qAj">
-                                <rect key="frame" x="0.0" y="92" width="165" height="39"/>
+                                <rect key="frame" x="0.0" y="93" width="165" height="39"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal">
                                     <attributedString key="attributedTitle">
@@ -123,13 +123,6 @@
                                     <action selector="ResetProgress:" destination="qE1-aF-Kwa" eventType="touchUpInside" id="rd5-9J-6TC"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Complete levels in World " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="iaX-w0-TKp">
-                                <rect key="frame" x="25" y="147" width="195" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="HWl-BQ-C7j">
                                 <rect key="frame" x="221" y="143" width="32" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -146,6 +139,13 @@
                                     <action selector="CompleteLevelsInWorld:" destination="qE1-aF-Kwa" eventType="touchUpInside" id="o44-uw-NSX"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Complete levels in World " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="iaX-w0-TKp">
+                                <rect key="frame" x="24" y="148" width="195" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -235,6 +235,121 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CuT-AQ-AuA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="486" y="637"/>
+        </scene>
+        <!--Purchase Game View Controller-->
+        <scene sceneID="S5X-b1-Yea">
+            <objects>
+                <viewController id="oFw-ny-mNX" customClass="PurchaseGameViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Idl-xT-chP">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="rSv-ch-OOu">
+                                <rect key="frame" x="68" y="96" width="183" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="Purchase Full Game">
+                                        <attributes>
+                                            <color key="NSColor" red="0.18136463994565222" green="0.18136463994565222" blue="0.18136463994565222" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="20" name="Futura-Medium"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fGW-kA-MqR">
+                                <rect key="frame" x="29" y="159" width="212" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="Purchasing the full game will:">
+                                        <attributes>
+                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="16" name="Futura-Medium"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="wD7-cQ-R3R">
+                                <rect key="frame" x="29" y="192" width="196" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="•">
+                                        <attributes>
+                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="16" name="LucidaGrande"/>
+                                            <font key="NSOriginalFont" size="16" name="Futura-Medium"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" Remove all ads">
+                                        <attributes>
+                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="16" name="Futura-Medium"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Hfs-xU-dfW">
+                                <rect key="frame" x="29" y="222" width="220" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="•">
+                                        <attributes>
+                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="16" name="LucidaGrande"/>
+                                            <font key="NSOriginalFont" size="16" name="Futura-Medium"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" Unlock all levels in the game">
+                                        <attributes>
+                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="16" name="Futura-Medium"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="WUF-O5-gDZ">
+                                <rect key="frame" x="86" y="308" width="148" height="60"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="buttonBuyGamePrice.png"/>
+                                <connections>
+                                    <action selector="OnTapBuyGameButton:" destination="oFw-ny-mNX" eventType="touchUpInside" id="GMA-FQ-kNf"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4ag-7t-bGw">
+                                <rect key="frame" x="29" y="259" width="211" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="We appreciate your support!">
+                                        <attributes>
+                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="16" name="Futura-Medium"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="TUP-L8-UV3"/>
+                    <connections>
+                        <outlet property="buyButton" destination="WUF-O5-gDZ" id="Fq0-EC-3dK"/>
+                        <outlet property="titleLabel" destination="rSv-ch-OOu" id="XRH-xt-Y6g"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EOV-kM-Zca" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="868" y="637"/>
         </scene>
         <!--Main Game View Controller-->
         <scene sceneID="ufC-wZ-h7g">
@@ -500,7 +615,7 @@
                                     <attributedString key="attributedTitle"/>
                                 </state>
                                 <connections>
-                                    <action selector="OnTapBuyGameButton:" destination="Ype-Mf-Odz" eventType="touchUpInside" id="cwJ-0e-jbx"/>
+                                    <segue destination="oFw-ny-mNX" kind="push" id="cX9-8D-cHI"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" id="pHQ-bR-4XX">
@@ -522,6 +637,7 @@
                         <outlet property="button2" destination="7sb-D3-jP7" id="a4b-uP-d8a"/>
                         <outlet property="button3" destination="drx-Vc-dci" id="pSa-ya-S0l"/>
                         <outlet property="button4" destination="uMU-ND-x8Q" id="4B1-kz-tWn"/>
+                        <outlet property="debugButton" destination="HKW-c3-399" id="9f9-79-PLP"/>
                         <outlet property="divider" destination="DfI-xk-VeF" id="gsD-PU-FGe"/>
                         <outlet property="logo" destination="cOw-Vj-hjh" id="0rN-Yn-tLf"/>
                         <segue destination="MmH-K3-vAA" kind="push" identifier="mainMenuToWorldSegue" id="By0-3l-TgG"/>
@@ -541,6 +657,7 @@
         <image name="White.png" width="60" height="60"/>
         <image name="Yellow.png" width="60" height="60"/>
         <image name="buttonBuyFullGame.png" width="200" height="75"/>
+        <image name="buttonBuyGamePrice.png" width="200" height="75"/>
         <image name="buttonCredits.png" width="200" height="75"/>
         <image name="buttonPlayGame.png" width="200" height="75"/>
         <image name="buttonSettings.png" width="200" height="75"/>
@@ -548,6 +665,6 @@
         <image name="helpButton.png" width="75" height="35"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="eYq-DS-mDC"/>
+        <segue reference="gm5-HK-yF9"/>
     </inferredMetricsTieBreakers>
 </document>
