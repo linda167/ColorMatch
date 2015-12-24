@@ -11,6 +11,7 @@
 #import "MainGameViewController.h"
 #import "UserData.h"
 #import "SoundManager.h"
+#import "Appirater.h"
 #import <StoreKit/StoreKit.h>
 
 @interface WelcomeScreenViewController()
@@ -179,6 +180,7 @@
      }
      completion:^(BOOL finished)
      {
+         [Appirater appLaunched:YES];
      }];
 }
 

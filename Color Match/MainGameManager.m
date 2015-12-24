@@ -17,6 +17,7 @@
 #import "SoundManager.h"
 #import "FullLevelId.h"
 #import "CommonUtils.h"
+@import iAd;
 
 @interface MainGameManager ()
 

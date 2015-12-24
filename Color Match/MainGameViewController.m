@@ -17,6 +17,7 @@
 #import "MainGameManager.h"
 #import "TutorialGameManager.h"
 #import "SoundManager.h"
+@import iAd;
 
 @interface MainGameViewController ()
 @property int worldId;
