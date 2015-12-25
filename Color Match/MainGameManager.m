@@ -17,6 +17,7 @@
 #import "SoundManager.h"
 #import "FullLevelId.h"
 #import "CommonUtils.h"
+#import <Google/Analytics.h>
 @import iAd;
 
 @interface MainGameManager ()
@@ -47,7 +48,6 @@
         
         // Ad initialization
         [self cycleInterstitial];
-
     }
     
     return self;
@@ -69,6 +69,13 @@
     
     // Reset ad state
     self.adPendingState = None;
+    
+    // Instrument
+    NSMutableString *levelString = [UserData getLevelString:self.worldId levelId:self.levelId];
+    NSString *name = [NSString stringWithFormat:@"Game level %@", levelString];
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:name];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
 }
 
 // Render new board to view given current parameters
@@ -445,6 +452,17 @@
                           otherButtonTitles:nil];
     [alert addButtonWithTitle:@"Next Level"];
     [alert show];
+    
+    // Instrument
+    NSString *name = [@"Complete level " stringByAppendingString:levelString];
+    NSString *moveCount = [NSString stringWithFormat:@"%ld moves", (long)self.movesCount];
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    NSDate *timerDate = [NSDate dateWithTimeIntervalSince1970:self.timeInterval];
+    NSString *timeInSeconds = [NSString stringWithFormat:@"%d seconds", (int)[timerDate timeIntervalSince1970]];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:name
+                   action:timeInSeconds
+                   label:moveCount
+                   value:[NSNumber numberWithInt:stars]] build]];
 }
 
 -(NSString*)getStarsEarnedMessage:(int)stars
@@ -739,5 +757,24 @@
 }
 
 #pragma mark -
+
+- (void)navigatedBack
+{
+    // Game considered abandoned if move count is more than 0
+    if (self.movesCount > 0)
+    {
+        // Instrument
+        NSMutableString *levelString = [UserData getLevelString:self.worldId levelId:self.levelId];
+        NSString *name = [@"Abandoned level " stringByAppendingString:levelString];
+        NSString *moveCount = [NSString stringWithFormat:@"%ld moves", (long)self.movesCount];
+        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        NSDate *timerDate = [NSDate dateWithTimeIntervalSince1970:self.timeInterval];
+        NSString *timeInSeconds = [NSString stringWithFormat:@"%d seconds", (int)[timerDate timeIntervalSince1970]];
+        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:name
+                                                              action:timeInSeconds
+                                                               label:moveCount
+                                                               value:@1] build]];
+    }
+}
 
 @end

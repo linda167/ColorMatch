@@ -10,6 +10,7 @@
 #import "SoundManager.h"
 #import "PaymentManager.h"
 #import <QuartzCore/QuartzCore.h>
+#import <Google/Analytics.h>
 
 @interface PurchaseGameViewController ()
 
@@ -26,6 +27,15 @@
     self.titleLabel.center = CGPointMake(centerWidth, self.titleLabel.center.y);
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    // Instrument
+    NSString *name = @"Purchase full game view";
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:name];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -35,6 +45,12 @@
 {
     [[SoundManager sharedManager] playSound:@"menuSelect.mp3" looping:NO];
     [[PaymentManager instance] BuyGame];
+    
+    // Instrument
+    NSString *name = @"Purchase game pressed";
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:name];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
 }
 
 /*

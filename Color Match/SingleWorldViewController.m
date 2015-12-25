@@ -13,6 +13,7 @@
 #import "MainGameViewController.h"
 #import "WorldViewController.h"
 #import "SoundManager.h"
+#import <Google/Analytics.h>
 
 @interface SingleWorldViewController ()
 @property int worldId;
@@ -108,6 +109,12 @@
 -(void)onViewShown
 {
     [self updateProgression];
+    
+    // Instrument
+    NSString *name = [NSString stringWithFormat:@"World %d", self.worldId];
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:name];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
 }
 
 - (void)didReceiveMemoryWarning

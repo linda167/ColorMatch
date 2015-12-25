@@ -17,6 +17,7 @@
 #import "MainGameManager.h"
 #import "TutorialGameManager.h"
 #import "SoundManager.h"
+#import <Google/Analytics.h>
 @import iAd;
 
 @interface MainGameViewController ()
@@ -47,6 +48,8 @@
     if (self.isMovingFromParentViewController)
     {
         [[SoundManager sharedManager] playSound:@"backSelect.mp3" looping:NO];
+        
+        [self.mainGameManager navigatedBack];
     }
 }
 

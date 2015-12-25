@@ -9,6 +9,7 @@
 #import "HelpScreenViewController.h"
 #import "MainGameViewController.h"
 #import "ViewControllerUtils.h"
+#import <Google/Analytics.h>
 
 @interface HelpScreenViewController ()
 @property int worldId;
@@ -193,6 +194,12 @@
     [self loadScrollViewWithPage:page - 1];
     [self loadScrollViewWithPage:page];
     [self loadScrollViewWithPage:page + 1];
+    
+    // Instrument
+    NSString *name = [NSString stringWithFormat:@"Help page %d", page+1];
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:name];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
 }
 
 - (void)scrollToCurrentPage:(bool)animated

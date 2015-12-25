@@ -9,6 +9,7 @@
 #import "CMAppDelegate.h"
 #import "SoundManager.h"
 #import "Appirater.h"
+#import <Google/Analytics.h>
 @import CFNetwork;
 @import SystemConfiguration;
 @import StoreKit;
@@ -18,11 +19,21 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    
+    // Appirater configuration
     [Appirater setAppId:@"1023172389"];
     [Appirater setDaysUntilPrompt:0];
     [Appirater setUsesUntilPrompt:4];
     [Appirater setSignificantEventsUntilPrompt:-1];
     [Appirater setTimeBeforeReminding:2];
+    
+    // Google analytics configuration
+    NSError *configureError;
+    [[GGLContext sharedInstance] configureWithError:&configureError];
+    NSAssert(!configureError, @"Error configuring Google services: %@", configureError);
+    
+    GAI *gai = [GAI sharedInstance];
+    gai.trackUncaughtExceptions = YES;
     
     return YES;
 }

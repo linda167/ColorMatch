@@ -16,6 +16,7 @@
 #import "ZonerCellButton.h"
 #import "ConverterCellButton.h"
 #import "ShifterCell.h"
+#import <Google/Analytics.h>
 
 @interface TutorialGameManager ()
 @property UILabel *dialogText;
@@ -45,11 +46,23 @@
     // Add skip button
     UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:@"Skip Tutorial" style:UIBarButtonItemStyleDone target:self action:@selector(OnSkipButtonPressed)];
     self.viewController.navigationItem.rightBarButtonItem = rightButton;
+    
+    // Instrument
+    NSString *name = [NSString stringWithFormat:@"Tutorial %d", self.worldId];
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:name];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
 }
 
 - (void)OnSkipButtonPressed
 {
     [self completeTutorialAndStartGame];
+    
+    // Instrument
+    NSString *name = [NSString stringWithFormat:@"Tutorial %d skipped", self.worldId];
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:name];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
 }
 
 - (void)startTimer
@@ -2115,6 +2128,11 @@
     [self setTutorialDialogText:@"This is it, the final world!\n\nThese last levels combine everything you've learned up to this point.\n\nUnleash your puzzle skills and claim victory!"];
     
     [self fadeInDialogText:showBeginButton delay:1];
+}
+
+- (void)navigatedBack
+{
+    // NOOP
 }
 
 @end

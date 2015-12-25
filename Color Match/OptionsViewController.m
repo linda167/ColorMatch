@@ -12,6 +12,7 @@
 #import "SoundManager.h"
 #import "PaymentManager.h"
 #import <QuartzCore/QuartzCore.h>
+#import <Google/Analytics.h>
 
 @interface OptionsViewController ()
 @property UIButton *soundCheckButton;
@@ -79,6 +80,15 @@
     }
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    // Instrument
+    NSString *name = @"Settings view";
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:name];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
@@ -140,6 +150,14 @@
     
     // Play new music
     [[UserData sharedUserData] startMusic];
+    
+    // Instrument
+    NSString *name = @"Music selection changed";
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:name
+          action:songName
+           label:nil
+           value:@1] build]];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -189,6 +207,15 @@
     [[UserData sharedUserData] storeIsSoundEnabled:isSoundEnabled];
     
     [[SoundManager sharedManager] playSound:@"menuSelect.mp3" looping:NO forcePlay:true];
+    
+    // Instrument
+    int soundEnabled = isSoundEnabled ? 1 : 0;
+    NSString *name = @"Sound enabled changed";
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:name
+          action:@"Change"
+           label:nil
+           value:[NSNumber numberWithInt:soundEnabled]] build]];
 }
 
 - (IBAction)musicCheckBoxPressed:(id)sender
@@ -216,11 +243,26 @@
     }
     
     [self.tableView reloadData];
+    
+    // Instrument
+    int musicEnabled = isMusicEnabled ? 1 : 0;
+    NSString *name = @"Music enabled changed";
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:name
+          action:@"Change"
+           label:nil
+           value:[NSNumber numberWithInt:musicEnabled]] build]];
 }
 
 - (IBAction)restorePurchase:(id)sender
 {
     [[PaymentManager instance] RestorePurchase];
+    
+    // Instrument
+    NSString *name = @"Restore purchase pressed";
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:name];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
 }
 
 - (void)didReceiveMemoryWarning {

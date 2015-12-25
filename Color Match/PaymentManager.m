@@ -9,6 +9,7 @@
 #import "PaymentManager.h"
 #import "UserData.h"
 #import <StoreKit/StoreKit.h>
+#import <Google/Analytics.h>
 
 @interface PaymentManager() <SKProductsRequestDelegate, SKPaymentTransactionObserver>
 @end
@@ -132,6 +133,12 @@
 - (void)handlePurchaseComplete
 {
     [self handlePurchaseOrRestoreComplete];
+    
+    // Instrument
+    NSString *name = @"Purchase game successful";
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:name];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
 }
 
 - (void)handleRestoreComplete
@@ -147,6 +154,12 @@
                               otherButtonTitles:nil];
         [alert show];
         [self handlePurchaseOrRestoreComplete];
+        
+        // Instrument
+        NSString *name = @"Restore purchase successful";
+        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker set:kGAIScreenName value:name];
+        [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
     }
 }
 

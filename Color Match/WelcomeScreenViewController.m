@@ -13,6 +13,7 @@
 #import "SoundManager.h"
 #import "Appirater.h"
 #import <StoreKit/StoreKit.h>
+#import <Google/Analytics.h>
 
 @interface WelcomeScreenViewController()
 @property UIView *logoView;
@@ -189,6 +190,15 @@
     [self.navigationController setNavigationBarHidden:YES animated:animated];
     
     [super viewWillAppear:animated];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    // Instrument
+    NSString *name = @"Welcome screen";
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:name];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
 }
 
 - (void)viewWillDisappear:(BOOL)animated

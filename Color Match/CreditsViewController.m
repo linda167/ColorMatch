@@ -7,6 +7,7 @@
 //
 
 #import "CreditsViewController.h"
+#import <Google/Analytics.h>
 
 @interface CreditsViewController ()
 @property int yOffset;
@@ -93,6 +94,15 @@
     self.text2 = [self addTextRow:@"Linda Chen Gray" bold:true size:18 yOffset:26 addToSelfView:true];
     
     [self runBlockAfterDelay:2.5 block:showCredtis2];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    // Instrument
+    NSString *name = @"Credits view";
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:name];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
 }
 
 - (void)runBlockAfterDelay:(NSTimeInterval)delay block:(void (^)(void))block

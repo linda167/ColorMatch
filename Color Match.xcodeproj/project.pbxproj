@@ -1592,6 +1592,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Linda Chen (GDU7TKF4WJ)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Linda Chen (GDU7TKF4WJ)";
+				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Color Match/Color Match-Prefix.pch";
 				INFOPLIST_FILE = "Color Match/Color Match-Info.plist";
@@ -1610,6 +1611,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Linda Chen (GDU7TKF4WJ)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Linda Chen (GDU7TKF4WJ)";
+				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Color Match/Color Match-Prefix.pch";
 				INFOPLIST_FILE = "Color Match/Color Match-Info.plist";
