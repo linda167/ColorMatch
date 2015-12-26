@@ -18,6 +18,7 @@
 #import "FullLevelId.h"
 #import "CommonUtils.h"
 #import <Google/Analytics.h>
+#import "SCLAlertView.h"
 @import iAd;
 
 @interface MainGameManager ()
@@ -430,66 +431,78 @@
         stars = [self storeLevelCompleteProgress];
     }
     
-    // Create the title string
-    NSString *levelString = [[NSString alloc] init];
-    if (![LevelsManager IsRandomLevel:self.worldId levelId:self.levelId])
+    // Show dialog after delay
+    void (^showDialog)(void) = ^(void)
     {
-        levelString = [[UserData getLevelString:self.worldId levelId:self.levelId] stringByAppendingString:@" "];
-    }
-    NSString *titleMessage = [[@"Level "
-                               stringByAppendingString:levelString]
-                              stringByAppendingString:@"Complete: "];
-    
-    // Show victory message
-    NSString *starsEarnedMessage = [self getStarsEarnedMessage:stars];
-    NSString *victoryMessage = [[[[@"Nicely done! \n\nMoves: " stringByAppendingString:self.viewController.MovesLabel.text] stringByAppendingString:@"\nTime taken: "]
-        stringByAppendingString:self.viewController.TimerLabel.text]
-        stringByAppendingString:starsEarnedMessage];
-    UIAlertView *alert = [[UIAlertView alloc]
-                          initWithTitle:titleMessage
-                          message:victoryMessage
-                          delegate: self cancelButtonTitle:@"Cancel"
-                          otherButtonTitles:nil];
-    [alert addButtonWithTitle:@"Next Level"];
-    [alert show];
+        [self showVictoryDialog:stars];
+    };
+    [CommonUtils runBlockAfterDelay:0.2 block:showDialog];
     
     // Instrument
+    NSString *levelString = [UserData getLevelString:self.worldId levelId:self.levelId];
+    if (![LevelsManager IsRandomLevel:self.worldId levelId:self.levelId])
+    {
+        levelString = [UserData getLevelString:self.worldId levelId:self.levelId];
+    }
+    
     NSString *name = [@"Complete level " stringByAppendingString:levelString];
     NSString *moveCount = [NSString stringWithFormat:@"%ld moves", (long)self.movesCount];
     id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
     NSDate *timerDate = [NSDate dateWithTimeIntervalSince1970:self.timeInterval];
     NSString *timeInSeconds = [NSString stringWithFormat:@"%d seconds", (int)[timerDate timeIntervalSince1970]];
     [tracker send:[[GAIDictionaryBuilder createEventWithCategory:name
-                   action:timeInSeconds
-                   label:moveCount
-                   value:[NSNumber numberWithInt:stars]] build]];
+                                                          action:timeInSeconds
+                                                           label:moveCount
+                                                           value:[NSNumber numberWithInt:stars]] build]];
 }
 
--(NSString*)getStarsEarnedMessage:(int)stars
+-(void)showVictoryDialog:(int)stars
 {
+    NSString *titleMessage = @"Level Complete!";
+    NSString *congratMessage = [CommonUtils GetRandomWinMessage];
+    NSString *tipMessage = [CommonUtils GetRandomTip];
+    NSString *victoryMessage = [NSString stringWithFormat:@"%@ %@",
+                                congratMessage,
+                                tipMessage];
     
-    NSString *starsMessage;
-    if (![LevelsManager IsRandomLevel:self.worldId levelId:self.levelId])
+    // Set up alert view
+    SCLAlertView *alert = [[SCLAlertView alloc] init];
+    alert.hideAnimationType = SlideOutToBottom;
+    
+    [alert addButton:@"Next Level" actionBlock:^(void)
+     {
+         [self nextLevelButtonPressed];
+     }];
+    
+    [alert addButton:@"Retry Level" actionBlock:^(void)
+     {
+         [self retryLevelButtonPressed:stars];
+     }];
+    
+    UIImage *starsImage;
+    if (stars == 3)
     {
-        NSString *rainbowString = stars > 3 ? @" rainbow" : @"";
-        if (stars > 3)
-            stars = 3;
-        
-        starsMessage = [[[NSString stringWithFormat:@"\n\nYou have earned %d", stars]
-                         stringByAppendingString:rainbowString ]
-                        stringByAppendingString: stars > 1 ? @" stars!" : @" star!"];
+        starsImage = [UIImage imageNamed:@"_3stars@2x.png"];
+    }
+    else if (stars == 2)
+    {
+        starsImage = [UIImage imageNamed:@"_2stars@2x.png"];
     }
     else
     {
-        starsMessage = @"";
+        starsImage = [UIImage imageNamed:@"_1stars@2x.png"];
     }
     
-    return starsMessage;
+    UIColor *viewColor = UIColorFromHEX(0x22B573);
+    [alert showCustom:self.viewController image:starsImage color:viewColor title:titleMessage subTitle:victoryMessage closeButtonTitle:nil duration:0.0f];
 }
 
 -(int)storeLevelCompleteProgress
 {
     int stars = [LevelsManager CalculateStarsEarned:_boardParameters.gridSize time:self.timeInterval worldId:self.worldId levelId:self.levelId];
+    
+    if (stars > 3)
+        stars = 3;
     
     [[UserData sharedUserData] storeLevelComplete:self.worldId levelId:self.levelId stars:stars];
     
@@ -598,28 +611,49 @@
     return true;
 }
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+- (void)nextLevelButtonPressed
 {
     bool gamePurchased = [[UserData sharedUserData] getGamePurchased];
     
     if (!gamePurchased)
     {
-        if (buttonIndex == 0)
-        {
-            self.adPendingState = PendingCancel;
-        }
-        else
-        {
-            self.adPendingState = PendingNextGame;
-        }
+        self.adPendingState = PendingNextGame;
         
         // Present Ad
         [self presentInterlude];
     }
-    else if (buttonIndex == 1)
+    else
     {
         [self NextLevel];
     }
+}
+
+- (void)resetBoardAndStartLevel
+{
+    [self removeExistingBoard];
+    [self resetActionBar];
+    
+    // Re-generate board cells
+    [self loadBoardCellTypes];
+    
+    [self getNextLevelParameters:self.worldId levelId:self.levelId];
+    
+    [self StartNewGame];
+}
+
+- (void)retryLevelButtonPressed:(int)stars
+{
+    [self resetBoardAndStartLevel];
+    
+    // Instrument
+    NSString *levelString = [UserData getLevelString:self.worldId levelId:self.levelId];
+    
+    NSString *name = [@"Retry level " stringByAppendingString:levelString];
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:name
+                                                          action:nil
+                                                           label:nil
+                                                           value:[NSNumber numberWithInt:stars]] build]];
 }
 
 - (void)NextLevel
@@ -634,15 +668,7 @@
         self.worldId = nextLevelId.worldId;
         self.levelId = nextLevelId.levelId;
         
-        [self removeExistingBoard];
-        [self resetActionBar];
-        
-        // Re-generate board cells
-        [self loadBoardCellTypes];
-        
-        [self getNextLevelParameters:nextLevelId.worldId levelId:nextLevelId.levelId];
-        
-        [self StartNewGame];
+        [self resetBoardAndStartLevel];
     }
     else
     {

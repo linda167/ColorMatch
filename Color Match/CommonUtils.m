@@ -23,6 +23,38 @@
  7 - Brown
  ------------------------------------------*/
 
+static NSArray *tipsList;
+static NSArray *winMessageList;
+
++(NSString*)GetRandomTip
+{
+    if (tipsList == nil)
+    {
+        tipsList = [[NSArray alloc] initWithObjects:
+         @"Tip: Purchasing the full game will remove ads and unlock all levels",
+         @"Tip: Use the white color to clear inputs in the play field",
+         nil];
+    }
+    
+    int index = arc4random()%tipsList.count;
+    return [@"\n\n" stringByAppendingString:[tipsList objectAtIndex:index]];
+}
+
++(NSString*)GetRandomWinMessage
+{
+    if (winMessageList == nil)
+    {
+        winMessageList = [[NSArray alloc] initWithObjects:
+                    @"Nicely done!",
+                    @"Great job!",
+                    @"Way to go!",
+                    nil];
+    }
+    
+    int index = arc4random()%winMessageList.count;
+    return [winMessageList objectAtIndex:index];
+}
+
 +(int)CombineColorsList:(NSMutableArray*)colorList
 {
     NSMutableArray* dedupedColorList = [self RemoveDuplicatesAndWhite:colorList];
@@ -393,6 +425,12 @@
                           cancelButtonTitle:@"OK"
                           otherButtonTitles:nil];
     [alert show];
+}
+
++(void)runBlockAfterDelay:(NSTimeInterval)delay block:(void (^)(void))block
+{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC*delay),
+                   dispatch_get_main_queue(), block);
 }
 
 @end

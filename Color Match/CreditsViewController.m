@@ -65,7 +65,7 @@
         self.text2 = [self addTextRow:@"Linda Chen Gray" bold:true size:18 yOffset:26 addToSelfView:true];
         self.text3 = [self addTextRow:@"Ben Gray" bold:true size:18 yOffset:26 addToSelfView:true];
         
-        [self runBlockAfterDelay:2.5 block:showCredtis5];
+        [CommonUtils runBlockAfterDelay:2.5 block:showCredtis5];
     };
     
     void (^showCredtis3)(void) = ^(void)
@@ -76,7 +76,7 @@
         self.text2 = [self addTextRow:@"Eric Stover" bold:true size:18 yOffset:26 addToSelfView:true];
         self.text3 = [self addTextRow:@"ericjstover.com" bold:false size:16 yOffset:26 addToSelfView:true];
         
-        [self runBlockAfterDelay:2.5 block:showCredtis4];
+        [CommonUtils runBlockAfterDelay:2.5 block:showCredtis4];
     };
     
     void (^showCredtis2)(void) = ^(void)
@@ -86,14 +86,14 @@
         self.text1 = [self addTextRow:@"GAME CONCEPT AND DESIGN" bold:false size:17 yOffset:26 addToSelfView:true];
         self.text2 = [self addTextRow:@"Ben Gray" bold:true size:18 yOffset:26 addToSelfView:true];
         
-        [self runBlockAfterDelay:2.5 block:showCredtis3];
+        [CommonUtils runBlockAfterDelay:2.5 block:showCredtis3];
     };
     
     self.yOffset = self.view.frame.size.height / 2;
     self.text1 = [self addTextRow:@"SOFTWARE ENGINEERING" bold:false size:17 yOffset:26 addToSelfView:true];
     self.text2 = [self addTextRow:@"Linda Chen Gray" bold:true size:18 yOffset:26 addToSelfView:true];
     
-    [self runBlockAfterDelay:2.5 block:showCredtis2];
+    [CommonUtils runBlockAfterDelay:2.5 block:showCredtis2];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -103,12 +103,6 @@
     id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
     [tracker set:kGAIScreenName value:name];
     [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
-}
-
-- (void)runBlockAfterDelay:(NSTimeInterval)delay block:(void (^)(void))block
-{
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC*delay),
-        dispatch_get_main_queue(), block);
 }
 
 - (void)populateScrollView

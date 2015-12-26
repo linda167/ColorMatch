@@ -60,9 +60,6 @@
 		BF1188B31C23D0490001D485 /* CreditsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF1188B21C23D0490001D485 /* CreditsViewController.m */; };
 		BF18EAEC1C2A6D7D00BA3492 /* PurchaseGameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF18EAEB1C2A6D7D00BA3492 /* PurchaseGameViewController.m */; };
 		BF18EAEE1C2A792D00BA3492 /* buttonBuyGamePrice@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF18EAED1C2A792D00BA3492 /* buttonBuyGamePrice@2x.png */; };
-		BF18EAF51C2B576200BA3492 /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = BF18EAF11C2B576200BA3492 /* Appirater.m */; };
-		BF18EAF61C2B576200BA3492 /* Appirater.podspec.json in Resources */ = {isa = PBXBuildFile; fileRef = BF18EAF21C2B576200BA3492 /* Appirater.podspec.json */; };
-		BF18EAF71C2B576200BA3492 /* en.lproj in Resources */ = {isa = PBXBuildFile; fileRef = BF18EAF41C2B576200BA3492 /* en.lproj */; };
 		BF18EAF91C2B92AF00BA3492 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BF18EAF81C2B92AF00BA3492 /* GoogleService-Info.plist */; };
 		BF2DF3921B64678100AFD920 /* circleFill.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BF2DF3901B64678100AFD920 /* circleFill.mp3 */; };
 		BF2DF3931B64678100AFD920 /* intro.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BF2DF3911B64678100AFD920 /* intro.mp3 */; };
@@ -247,6 +244,10 @@
 		BFA3A2CF1944386400C1BB7D /* LevelSelectButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BFA3A2CE1944386400C1BB7D /* LevelSelectButton.m */; };
 		BFA3A2D21944B6B900C1BB7D /* UserData.m in Sources */ = {isa = PBXBuildFile; fileRef = BFA3A2D11944B6B900C1BB7D /* UserData.m */; };
 		BFA76143197B623400AF6723 /* converterGoal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFA76142197B623400AF6723 /* converterGoal@2x.png */; };
+		BFBC31CD1C2D271A000A204F /* _1stars@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFBC31CA1C2D271A000A204F /* _1stars@2x.png */; };
+		BFBC31CE1C2D271A000A204F /* _2stars@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFBC31CB1C2D271A000A204F /* _2stars@2x.png */; };
+		BFBC31CF1C2D271A000A204F /* _3stars@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFBC31CC1C2D271A000A204F /* _3stars@2x.png */; };
+		BFBC31D31C2E6929000A204F /* appirater in Resources */ = {isa = PBXBuildFile; fileRef = BFBC31D21C2E6929000A204F /* appirater */; };
 		BFE467DE1B3BC7A700C286F1 /* DiverterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BFE467DD1B3BC7A700C286F1 /* DiverterCell.m */; };
 		BFE467E31B3F85D800C286F1 /* HelpScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFE467E21B3F85D800C286F1 /* HelpScreenViewController.m */; };
 		BFE467E71B3FA15300C286F1 /* 00pauseColorMix@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFE467E61B3FA15300C286F1 /* 00pauseColorMix@2x.png */; };
@@ -353,11 +354,6 @@
 		BF18EAEA1C2A6D7D00BA3492 /* PurchaseGameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PurchaseGameViewController.h; sourceTree = "<group>"; };
 		BF18EAEB1C2A6D7D00BA3492 /* PurchaseGameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PurchaseGameViewController.m; sourceTree = "<group>"; };
 		BF18EAED1C2A792D00BA3492 /* buttonBuyGamePrice@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "buttonBuyGamePrice@2x.png"; sourceTree = "<group>"; };
-		BF18EAF01C2B576200BA3492 /* Appirater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Appirater.h; path = Appirater/Appirater.h; sourceTree = "<group>"; };
-		BF18EAF11C2B576200BA3492 /* Appirater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Appirater.m; path = Appirater/Appirater.m; sourceTree = "<group>"; };
-		BF18EAF21C2B576200BA3492 /* Appirater.podspec.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = Appirater.podspec.json; path = Appirater/Appirater.podspec.json; sourceTree = "<group>"; };
-		BF18EAF31C2B576200BA3492 /* AppiraterDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppiraterDelegate.h; path = Appirater/AppiraterDelegate.h; sourceTree = "<group>"; };
-		BF18EAF41C2B576200BA3492 /* en.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; name = en.lproj; path = Appirater/en.lproj; sourceTree = "<group>"; };
 		BF18EAF81C2B92AF00BA3492 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BF2DF3901B64678100AFD920 /* circleFill.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = circleFill.mp3; path = Sounds/Misc/circleFill.mp3; sourceTree = SOURCE_ROOT; };
 		BF2DF3911B64678100AFD920 /* intro.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = intro.mp3; path = Sounds/Misc/intro.mp3; sourceTree = SOURCE_ROOT; };
@@ -565,6 +561,10 @@
 		BFA3A2D01944B6B900C1BB7D /* UserData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserData.h; sourceTree = "<group>"; };
 		BFA3A2D11944B6B900C1BB7D /* UserData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserData.m; sourceTree = "<group>"; };
 		BFA76142197B623400AF6723 /* converterGoal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "converterGoal@2x.png"; sourceTree = "<group>"; };
+		BFBC31CA1C2D271A000A204F /* _1stars@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "_1stars@2x.png"; sourceTree = "<group>"; };
+		BFBC31CB1C2D271A000A204F /* _2stars@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "_2stars@2x.png"; sourceTree = "<group>"; };
+		BFBC31CC1C2D271A000A204F /* _3stars@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "_3stars@2x.png"; sourceTree = "<group>"; };
+		BFBC31D21C2E6929000A204F /* appirater */ = {isa = PBXFileReference; lastKnownFileType = folder; path = appirater; sourceTree = "<group>"; };
 		BFE467DC1B3BC7A700C286F1 /* DiverterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiverterCell.h; sourceTree = "<group>"; };
 		BFE467DD1B3BC7A700C286F1 /* DiverterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiverterCell.m; sourceTree = "<group>"; };
 		BFE467E11B3F85D800C286F1 /* HelpScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpScreenViewController.h; sourceTree = "<group>"; };
@@ -663,7 +663,7 @@
 		AF2C22281874B8B700082561 /* Color Match */ = {
 			isa = PBXGroup;
 			children = (
-				BF18EAEF1C2B573C00BA3492 /* Appirater */,
+				BFBC31D21C2E6929000A204F /* appirater */,
 				BF43A9671B537E670054A6D0 /* Music */,
 				BF43A9441B51F94B0054A6D0 /* Sounds */,
 				AF2C225A1874B95000082561 /* Images */,
@@ -711,6 +711,9 @@
 		AF2C225A1874B95000082561 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				BFBC31CA1C2D271A000A204F /* _1stars@2x.png */,
+				BFBC31CB1C2D271A000A204F /* _2stars@2x.png */,
+				BFBC31CC1C2D271A000A204F /* _3stars@2x.png */,
 				BF18EAED1C2A792D00BA3492 /* buttonBuyGamePrice@2x.png */,
 				BF85B7641B89AD6E00018E25 /* checkedBox@2x.png */,
 				BF85B7651B89AD6E00018E25 /* uncheckedBox@2x.png */,
@@ -895,18 +898,6 @@
 			);
 			name = Images;
 			path = ../Images;
-			sourceTree = "<group>";
-		};
-		BF18EAEF1C2B573C00BA3492 /* Appirater */ = {
-			isa = PBXGroup;
-			children = (
-				BF18EAF01C2B576200BA3492 /* Appirater.h */,
-				BF18EAF11C2B576200BA3492 /* Appirater.m */,
-				BF18EAF21C2B576200BA3492 /* Appirater.podspec.json */,
-				BF18EAF31C2B576200BA3492 /* AppiraterDelegate.h */,
-				BF18EAF41C2B576200BA3492 /* en.lproj */,
-			);
-			name = Appirater;
 			sourceTree = "<group>";
 		};
 		BF43A9441B51F94B0054A6D0 /* Sounds */ = {
@@ -1163,6 +1154,7 @@
 				BFE467F81B4100CE00C286F1 /* 03pauseConnector@2x.png in Resources */,
 				BF18EAF91C2B92AF00BA3492 /* GoogleService-Info.plist in Resources */,
 				BF43A9651B5353AC0054A6D0 /* levelFinish.mp3 in Resources */,
+				BFBC31D31C2E6929000A204F /* appirater in Resources */,
 				BFE467FB1B4100CE00C286F1 /* 06pauseConverter@2x.png in Resources */,
 				BF980877196E664E00BAF9ED /* transporterOutputDownWhite@2x.png in Resources */,
 				BF98087F196E664E00BAF9ED /* transporterOutputRightWhite@2x.png in Resources */,
@@ -1212,6 +1204,7 @@
 				BF18EAEE1C2A792D00BA3492 /* buttonBuyGamePrice@2x.png in Resources */,
 				BF85C84B1A4F5B4A00A494B6 /* shifterInnerBlue@2x.png in Resources */,
 				BF85C8511A4F5B4A00A494B6 /* shifterInnerYellow@2x.png in Resources */,
+				BFBC31CF1C2D271A000A204F /* _3stars@2x.png in Resources */,
 				BF90799919560FE3000E6E58 /* connectorInnerYellow@2x.png in Resources */,
 				BF85C82F1A47BABE00A494B6 /* converterTopToDownRed@2x.png in Resources */,
 				BF90797A1953DF94000E6E58 /* zonerYellow@2x.png in Resources */,
@@ -1242,6 +1235,7 @@
 				BF90799719560FE3000E6E58 /* connectorInnerRed@2x.png in Resources */,
 				BFE467FC1B4100CE00C286F1 /* 07pauseTransporter@2x.png in Resources */,
 				BF980868196E664E00BAF9ED /* transporterInputLeftYellow@2x.png in Resources */,
+				BFBC31CD1C2D271A000A204F /* _1stars@2x.png in Resources */,
 				AFADA22A1877D20D00FADA22 /* FilledCircleRed.png in Resources */,
 				BF97FFF01A5913D300ABA450 /* backgroundImage.png in Resources */,
 				BF980875196E664E00BAF9ED /* transporterOutputDownPurple@2x.png in Resources */,
@@ -1261,7 +1255,6 @@
 				BF90796B194D6E42000E6E58 /* 1stars@2x.png in Resources */,
 				BF85C84C1A4F5B4A00A494B6 /* shifterInnerBrown@2x.png in Resources */,
 				BF43A9661B5353AC0054A6D0 /* menuSelect.mp3 in Resources */,
-				BF18EAF61C2B576200BA3492 /* Appirater.podspec.json in Resources */,
 				BFE468011B46420500C286F1 /* levelLock@2x.png in Resources */,
 				BF98086E196E664E00BAF9ED /* transporterInputTopRed@2x.png in Resources */,
 				BF2DF3921B64678100AFD920 /* circleFill.mp3 in Resources */,
@@ -1289,7 +1282,6 @@
 				BFA3A2BD1931401700C1BB7D /* ReflectorArrowLtDRed@2x.png in Resources */,
 				BF43A9491B51F9720054A6D0 /* blueSelect.mp3 in Resources */,
 				BF98086F196E664E00BAF9ED /* transporterInputTopWhite@2x.png in Resources */,
-				BF18EAF71C2B576200BA3492 /* en.lproj in Resources */,
 				BF90799819560FE3000E6E58 /* connectorInnerWhite@2x.png in Resources */,
 				BF98087A196E664E00BAF9ED /* transporterOutputRightBrown@2x.png in Resources */,
 				BF9079B9195E1040000E6E58 /* FilledCircleBlue@2x.png in Resources */,
@@ -1314,6 +1306,7 @@
 				BF9079C5195E1819000E6E58 /* BlueSelected@2x.png in Resources */,
 				BF98087D196E664E00BAF9ED /* transporterOutputRightPurple@2x.png in Resources */,
 				BF85C82D1A47BABE00A494B6 /* converterLeftToRightYellow@2x.png in Resources */,
+				BFBC31CE1C2D271A000A204F /* _2stars@2x.png in Resources */,
 				BF90796A194D6E42000E6E58 /* 0stars@2x.png in Resources */,
 				BF90799219560FE3000E6E58 /* connectorInnerBlue@2x.png in Resources */,
 				BFA3A2B4192D899D00C1BB7D /* ReflectorArrowLtD@2x.png in Resources */,
@@ -1436,7 +1429,6 @@
 				BFE467E31B3F85D800C286F1 /* HelpScreenViewController.m in Sources */,
 				BF9079A019564F29000E6E58 /* ConnectorCell.m in Sources */,
 				BF85B7631B8557DB00018E25 /* FullLevelId.m in Sources */,
-				BF18EAF51C2B576200BA3492 /* Appirater.m in Sources */,
 				BF1188B31C23D0490001D485 /* CreditsViewController.m in Sources */,
 				BF85B76D1B8AB94300018E25 /* ViewControllerUtils.m in Sources */,
 				BF9807AB196721BA00BAF9ED /* TransporterGroup.m in Sources */,
