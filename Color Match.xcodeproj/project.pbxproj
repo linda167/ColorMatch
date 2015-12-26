@@ -247,7 +247,8 @@
 		BFBC31CD1C2D271A000A204F /* _1stars@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFBC31CA1C2D271A000A204F /* _1stars@2x.png */; };
 		BFBC31CE1C2D271A000A204F /* _2stars@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFBC31CB1C2D271A000A204F /* _2stars@2x.png */; };
 		BFBC31CF1C2D271A000A204F /* _3stars@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFBC31CC1C2D271A000A204F /* _3stars@2x.png */; };
-		BFBC31D31C2E6929000A204F /* appirater in Resources */ = {isa = PBXBuildFile; fileRef = BFBC31D21C2E6929000A204F /* appirater */; };
+		BFBC31E11C2E6CAC000A204F /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = BFBC31DD1C2E6CAC000A204F /* Appirater.m */; };
+		BFBC31E21C2E6CAC000A204F /* Appirater.podspec.json in Resources */ = {isa = PBXBuildFile; fileRef = BFBC31DF1C2E6CAC000A204F /* Appirater.podspec.json */; };
 		BFE467DE1B3BC7A700C286F1 /* DiverterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BFE467DD1B3BC7A700C286F1 /* DiverterCell.m */; };
 		BFE467E31B3F85D800C286F1 /* HelpScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFE467E21B3F85D800C286F1 /* HelpScreenViewController.m */; };
 		BFE467E71B3FA15300C286F1 /* 00pauseColorMix@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFE467E61B3FA15300C286F1 /* 00pauseColorMix@2x.png */; };
@@ -564,7 +565,10 @@
 		BFBC31CA1C2D271A000A204F /* _1stars@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "_1stars@2x.png"; sourceTree = "<group>"; };
 		BFBC31CB1C2D271A000A204F /* _2stars@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "_2stars@2x.png"; sourceTree = "<group>"; };
 		BFBC31CC1C2D271A000A204F /* _3stars@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "_3stars@2x.png"; sourceTree = "<group>"; };
-		BFBC31D21C2E6929000A204F /* appirater */ = {isa = PBXFileReference; lastKnownFileType = folder; path = appirater; sourceTree = "<group>"; };
+		BFBC31DD1C2E6CAC000A204F /* Appirater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Appirater.m; path = appirater/Appirater.m; sourceTree = "<group>"; };
+		BFBC31DE1C2E6CAC000A204F /* Appirater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Appirater.h; path = appirater/Appirater.h; sourceTree = "<group>"; };
+		BFBC31DF1C2E6CAC000A204F /* Appirater.podspec.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = Appirater.podspec.json; path = appirater/Appirater.podspec.json; sourceTree = "<group>"; };
+		BFBC31E01C2E6CAC000A204F /* AppiraterDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppiraterDelegate.h; path = appirater/AppiraterDelegate.h; sourceTree = "<group>"; };
 		BFE467DC1B3BC7A700C286F1 /* DiverterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiverterCell.h; sourceTree = "<group>"; };
 		BFE467DD1B3BC7A700C286F1 /* DiverterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiverterCell.m; sourceTree = "<group>"; };
 		BFE467E11B3F85D800C286F1 /* HelpScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpScreenViewController.h; sourceTree = "<group>"; };
@@ -663,7 +667,7 @@
 		AF2C22281874B8B700082561 /* Color Match */ = {
 			isa = PBXGroup;
 			children = (
-				BFBC31D21C2E6929000A204F /* appirater */,
+				BFBC31DC1C2E6C80000A204F /* Appirater */,
 				BF43A9671B537E670054A6D0 /* Music */,
 				BF43A9441B51F94B0054A6D0 /* Sounds */,
 				AF2C225A1874B95000082561 /* Images */,
@@ -1038,6 +1042,17 @@
 			name = Common;
 			sourceTree = "<group>";
 		};
+		BFBC31DC1C2E6C80000A204F /* Appirater */ = {
+			isa = PBXGroup;
+			children = (
+				BFBC31DD1C2E6CAC000A204F /* Appirater.m */,
+				BFBC31DE1C2E6CAC000A204F /* Appirater.h */,
+				BFBC31DF1C2E6CAC000A204F /* Appirater.podspec.json */,
+				BFBC31E01C2E6CAC000A204F /* AppiraterDelegate.h */,
+			);
+			name = Appirater;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1127,6 +1142,7 @@
 				BF980876196E664E00BAF9ED /* transporterOutputDownRed@2x.png in Resources */,
 				AFADA21F1877D20D00FADA22 /* BlockOrange.png in Resources */,
 				BF9079C4195E1819000E6E58 /* Blue@2x.png in Resources */,
+				BFBC31E21C2E6CAC000A204F /* Appirater.podspec.json in Resources */,
 				BF9079D91963B954000E6E58 /* splitterBlue@2x.png in Resources */,
 				BF85C85E1A5106CD00A494B6 /* transporterGoalInputTop@2x.png in Resources */,
 				BF85C85D1A5106CD00A494B6 /* transporterGoalInputLeft@2x.png in Resources */,
@@ -1154,7 +1170,6 @@
 				BFE467F81B4100CE00C286F1 /* 03pauseConnector@2x.png in Resources */,
 				BF18EAF91C2B92AF00BA3492 /* GoogleService-Info.plist in Resources */,
 				BF43A9651B5353AC0054A6D0 /* levelFinish.mp3 in Resources */,
-				BFBC31D31C2E6929000A204F /* appirater in Resources */,
 				BFE467FB1B4100CE00C286F1 /* 06pauseConverter@2x.png in Resources */,
 				BF980877196E664E00BAF9ED /* transporterOutputDownWhite@2x.png in Resources */,
 				BF98087F196E664E00BAF9ED /* transporterOutputRightWhite@2x.png in Resources */,
@@ -1429,6 +1444,7 @@
 				BFE467E31B3F85D800C286F1 /* HelpScreenViewController.m in Sources */,
 				BF9079A019564F29000E6E58 /* ConnectorCell.m in Sources */,
 				BF85B7631B8557DB00018E25 /* FullLevelId.m in Sources */,
+				BFBC31E11C2E6CAC000A204F /* Appirater.m in Sources */,
 				BF1188B31C23D0490001D485 /* CreditsViewController.m in Sources */,
 				BF85B76D1B8AB94300018E25 /* ViewControllerUtils.m in Sources */,
 				BF9807AB196721BA00BAF9ED /* TransporterGroup.m in Sources */,
