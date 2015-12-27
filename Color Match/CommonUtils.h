@@ -29,6 +29,6 @@
 +(void) ShowLockedLevelMessage:(int)worldId levelId:(int)levelId isFromPreviousLevel:(bool)isFromPreviousLevel;
 +(void)runBlockAfterDelay:(NSTimeInterval)delay block:(void (^)(void))block;
 +(NSString*)GetRandomTip;
-+(NSString*)GetRandomWinMessage;
++(NSString*)GetRandomWinMessage:(int)stars;
 
 @end

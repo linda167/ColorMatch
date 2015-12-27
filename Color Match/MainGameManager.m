@@ -459,7 +459,7 @@
 -(void)showVictoryDialog:(int)stars
 {
     NSString *titleMessage = @"Level Complete!";
-    NSString *congratMessage = [CommonUtils GetRandomWinMessage];
+    NSString *congratMessage = [CommonUtils GetRandomWinMessage:stars];
     NSString *tipMessage = [CommonUtils GetRandomTip];
     NSString *victoryMessage = [NSString stringWithFormat:@"%@ %@",
                                 congratMessage,

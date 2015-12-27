@@ -55,6 +55,11 @@
     }
 }
 
+- (IBAction)DebugPurchaseFullGame:(id)sender
+{
+    [[UserData sharedUserData] storeGamePurchased:true];
+}
+
 /*
 #pragma mark - Navigation
 

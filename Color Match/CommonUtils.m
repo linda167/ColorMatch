@@ -23,36 +23,128 @@
  7 - Brown
  ------------------------------------------*/
 
+static NSArray *freeGameTipsList;
 static NSArray *tipsList;
-static NSArray *winMessageList;
+static NSArray *winMessageListForThreeStar;
+static NSArray *winMessageListForOneTwoStar;
 
 +(NSString*)GetRandomTip
 {
     if (tipsList == nil)
     {
+        freeGameTipsList = [[NSArray alloc] initWithObjects:
+                            @"Tip: Purchasing the full game will remove ads and unlock all levels",
+                            @"Tip: Hate ads? Buy the full game today!",
+                            nil];
+        
         tipsList = [[NSArray alloc] initWithObjects:
-         @"Tip: Purchasing the full game will remove ads and unlock all levels",
-         @"Tip: Use the white color to clear inputs in the play field",
-         nil];
+                    @"Tip: Use the white color to clear inputs in the play field.",
+                    @"Did You Know: You can change the background music in the settings menu.",
+                    @"Tip: Some puzzles require white to finish.",
+                    @"Fun Fact: Color Dash was inspired by a Color Theory college class.",
+                    @"Tip: The \"Help\" button will show you all the possible color mixes.",
+                    @"Tip: The small circles on the Connector will tell you what color they all share.",
+                    @"Tip: The Zoner adds color to all surrounding cells. It can be tricky!",
+                    @"Tip: Tap the Converter to change the flow of color going through it.",
+                    @"Tip: Transporters change color depending on the colors going in and out of it.",
+                    @"Tip: Shifters always follow the same color sequence; Blue, Red, Yellow, Blue.",
+                    @"Fun Fact: Color Dash was made by only two people! We totally got married too!",
+                    @"Did You Know: Moves are tracked but not counted against you.",
+                    @"Did You Know: You can earn more stars by completing a level faster.",
+                    @"Did You Know: The \"Help\" button also acts as a pause to catch your breath.",
+                    @"Tip: Tutorials can be skipped. But don't blame us if you get confused later.",
+                    @"Tip: Finishing the first 4 levels are required to play the rest of the world.",
+                    @"Fun Fact: Ben conceived Color Dash in 2010 as a PC browser game.",
+                    @"Tip: You can access the first 4 levels of every world even if you don't buy the game.",
+                    @"Tip: Don't remember how a special spell works? Use the \"Help\" button.",
+                    @"Did You Know: You can disable sounds and background music on the settings page.",
+                    @"Did You Know: The \"credits\" page is awesome! You should check it out.",
+                    @"Fun Fact: Cool people read these messages.",
+                    @"Fun Fact: Linda built a working prototype of Color Dash from scratch in just two days!",
+                    @"Did You Know: Ben reads every rating review on the store. Let us hear from you!",
+                    @"Fun Fact: Babies can scream very loudly when they are hungry and/or tired.",
+                    @"Fun Fact: Dogs do not see in black and white. They can see yellows, blues, and purples.",
+                    @"Tip: The little arrows around the Splitter will remind you of the original color added to it.",
+                    @"Tip: If you see a \"plus\" symbol in the play field, that means you can directly add color to it.",
+                    @"Fun Fact: There is no actually dashing in Color Dash.",
+                    @"Did You Know: If enough people buy the game, we'll add new content. Spread the word!",
+                    nil];
     }
     
+    if ([[UserData sharedUserData] getGamePurchased])
+    {
+        return [self GetRanDomTipFromTipsList];
+    }
+    else
+    {
+        // User has not purchased full game yet
+        int rand = arc4random()%3;
+        if (rand == 0)
+        {
+            // Show free tip
+            int index = arc4random()%freeGameTipsList.count;
+            return [@"\n\n" stringByAppendingString:[freeGameTipsList objectAtIndex:index]];
+        }
+        else
+        {
+            return [self GetRanDomTipFromTipsList];
+        }
+    }
+}
+
++(NSString*)GetRanDomTipFromTipsList
+{
     int index = arc4random()%tipsList.count;
     return [@"\n\n" stringByAppendingString:[tipsList objectAtIndex:index]];
 }
 
-+(NSString*)GetRandomWinMessage
++(NSString*)GetRandomWinMessage:(int)stars
 {
-    if (winMessageList == nil)
+    if (stars == 3)
+        return [CommonUtils GetRandomWinMessageForThreeStar];
+    else
+        return [CommonUtils GetRandomWinMessageForOneTwoStar];
+}
+
++(NSString*)GetRandomWinMessageForThreeStar
+{
+    if (winMessageListForThreeStar == nil)
     {
-        winMessageList = [[NSArray alloc] initWithObjects:
-                    @"Nicely done!",
-                    @"Great job!",
-                    @"Way to go!",
-                    nil];
+        winMessageListForThreeStar = [[NSArray alloc] initWithObjects:
+                          @"Nicely done!",
+                          @"Great job!",
+                          @"Amazing!",
+                          @"Fantastic!",
+                          @"Sublime!",
+                          @"Phenomenal!",
+                          @"Extraordinary!",
+                          @"You're the best!",
+                          @"Masterful!",
+                          nil];
     }
     
-    int index = arc4random()%winMessageList.count;
-    return [winMessageList objectAtIndex:index];
+    int index = arc4random()%winMessageListForThreeStar.count;
+    return [winMessageListForThreeStar objectAtIndex:index];
+}
+
++(NSString*)GetRandomWinMessageForOneTwoStar
+{
+    if (winMessageListForOneTwoStar == nil)
+    {
+        winMessageListForOneTwoStar = [[NSArray alloc] initWithObjects:
+                                       @"Not bad.",
+                                       @"Good.",
+                                       @"A solid performance.",
+                                       @"Keep it up.",
+                                       @"Rock on.",
+                                       @"Way to go.",
+                                       @"Tip-top.",
+                                       @"Soundly done.",
+                                       nil];
+    }
+    
+    int index = arc4random()%winMessageListForOneTwoStar.count;
+    return [winMessageListForOneTwoStar objectAtIndex:index];
 }
 
 +(int)CombineColorsList:(NSMutableArray*)colorList
