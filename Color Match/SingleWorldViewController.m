@@ -266,7 +266,7 @@
     
     if (((LevelSelectButton*)sender).isLocked)
     {
-        [CommonUtils ShowLockedLevelMessage:self.worldId levelId:((LevelSelectButton*)sender).levelId isFromPreviousLevel:false];
+        [CommonUtils ShowLockedLevelMessage:self.worldId levelId:((LevelSelectButton*)sender).levelId isFromPreviousLevel:false viewController:self.parentWorldController];
     }
     else
     {

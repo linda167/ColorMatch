@@ -8,6 +8,8 @@
 
 #import "CommonUtils.h"
 #import "UserData.h"
+#import "SCLAlertView.h"
+#import "PurchaseGameViewController.h"
 
 @implementation CommonUtils
 
@@ -506,17 +508,20 @@ static NSArray *winMessageListForOneTwoStar;
     return false;
 }
 
-+(void) ShowLockedLevelMessage:(int)worldId levelId:(int)levelId isFromPreviousLevel:(bool)isFromPreviousLevel
++(void) ShowLockedLevelMessage:(int)worldId levelId:(int)levelId isFromPreviousLevel:(bool)isFromPreviousLevel viewController:(UIViewController*)viewController
 {
-    // TODO: Replace with better UI in the future
     NSString* lockString = [[UserData sharedUserData] getLevelLockedMessage:worldId levelId:levelId isFromPreviousLevel:isFromPreviousLevel];
-    UIAlertView *alert = [[UIAlertView alloc]
-                          initWithTitle:@"Level Locked"
-                          message:lockString
-                          delegate:self
-                          cancelButtonTitle:@"OK"
-                          otherButtonTitles:nil];
-    [alert show];
+    
+    SCLAlertView *alert = [[SCLAlertView alloc] init];
+    
+    [alert addButton:@"Purchase Full Game" actionBlock:^(void)
+     {
+         UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
+         PurchaseGameViewController *purchaseGameView = (PurchaseGameViewController*)[storyBoard instantiateViewControllerWithIdentifier:@"purchaseGameScreen"];
+         [viewController.navigationController pushViewController:purchaseGameView animated:YES];
+     }];
+    
+    [alert showNotice:viewController title:@"Level Locked" subTitle:lockString closeButtonTitle:@"OK" duration:0.0f];
 }
 
 +(void)runBlockAfterDelay:(NSTimeInterval)delay block:(void (^)(void))block

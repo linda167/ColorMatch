@@ -601,7 +601,12 @@
             ColorCell *goalColorCell = [goalRow objectAtIndex:j];
             ColorCell *userColorCell = [userBoardRow objectAtIndex:j];
             
-            if ([ColorCell isGoalTargetCell:goalColorCell.cellType] && goalColorCell.currentColor != userColorCell.currentColor)
+            if (![ColorCell isGoalTargetCell:goalColorCell.cellType])
+            {
+                continue;
+            }
+            
+            if (goalColorCell.currentColor != userColorCell.currentColor)
             {
                 return false;
             }
@@ -673,7 +678,7 @@
     else
     {
         // Level is locked
-        [CommonUtils ShowLockedLevelMessage:nextLevelId.worldId levelId:nextLevelId.levelId isFromPreviousLevel:true];
+        [CommonUtils ShowLockedLevelMessage:nextLevelId.worldId levelId:nextLevelId.levelId isFromPreviousLevel:true viewController:self.viewController];
     }
 }
 
