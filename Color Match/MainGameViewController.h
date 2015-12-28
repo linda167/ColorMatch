@@ -35,5 +35,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *HelpButton;
 @property (weak, nonatomic) IBOutlet UIView *topSectionContainer;
 @property (weak, nonatomic) IBOutlet UIImageView *ColorButtonBarContainer;
+@property int worldId;
+@property int levelId;
 
 @end

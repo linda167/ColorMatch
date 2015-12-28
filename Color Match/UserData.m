@@ -244,9 +244,11 @@ static NSString *const LastLevelCompletedInWorldKey = @"LastLevelCompletedInWorl
     }
 }
 
--(NSString*)getLevelLockedMessage:(int)worldId levelId:(int)levelId isFromPreviousLevel:(bool)isFromPreviousLevel
+-(NSString*)getLevelLockedMessage:(int)worldId levelId:(int)levelId isFromPreviousLevel:(bool)isFromPreviousLevel reasonIsNeedPurchase:(bool*)reasonIsNeedPurchase
 {
     assert([self getIsLevelLocked:worldId levelId:levelId]);
+    
+    *reasonIsNeedPurchase = false;
     
     NSString* mustCompletePreviousWorld = @"You must complete the first four levels of the previous world to unlock levels in this world.";
     
@@ -278,6 +280,7 @@ static NSString *const LastLevelCompletedInWorldKey = @"LastLevelCompletedInWorl
     {
         if (worldId == 10)
         {
+            *reasonIsNeedPurchase = true;
             return mustPurchaseFullGame;
         }
         else if (levelId >= 1 && levelId <= 4)
@@ -286,11 +289,14 @@ static NSString *const LastLevelCompletedInWorldKey = @"LastLevelCompletedInWorl
             return [self getIsWorldLocked:worldId] ?mustCompletePreviousWorld :
                 mustCompletePreviousLevel;
         }
+        else if (worldId <= 2)
+        {
+            return mustCompleteFirstFourLevel;
+        }
         else
         {
-            return worldId <= 2 ?
-                mustCompleteFirstFourLevel :
-                mustPurchaseFullGame;
+            *reasonIsNeedPurchase = true;
+            return mustPurchaseFullGame;
         }
     }
 }

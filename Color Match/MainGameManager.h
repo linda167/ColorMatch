@@ -32,6 +32,7 @@ typedef NS_ENUM(NSUInteger, AdPendingState)
 @property BoardCells *boardCells;
 @property MainGameViewController *viewController;
 @property int worldId;
+@property int levelId;
 
 - (id)initWithParameters:(MainGameViewController*)viewController size:(int)size worldId:(int)worldId levelId:(int)levelId;
 - (void)StartNewGame;

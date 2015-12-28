@@ -21,8 +21,6 @@
 @import iAd;
 
 @interface MainGameViewController ()
-@property int worldId;
-@property int levelId;
 @property int size;
 @property bool isAdPresenting;
 @end
@@ -92,13 +90,15 @@
 
 - (void)createGameManagerAndStartNewGame
 {
+    int size = [LevelsManager GetGameSizeForWorld:self.worldId levelId:self.levelId];
+    
     if ([self isTutorialLevel:self.worldId levelId:self.levelId])
     {
-        self.mainGameManager = [[TutorialGameManager alloc] initWithParameters:self size:self.size worldId:self.worldId levelId:self.levelId];
+        self.mainGameManager = [[TutorialGameManager alloc] initWithParameters:self size:size worldId:self.worldId levelId:self.levelId];
     }
     else
     {
-        self.mainGameManager = [[MainGameManager alloc] initWithParameters:self size:self.size worldId:self.worldId levelId:self.levelId];
+        self.mainGameManager = [[MainGameManager alloc] initWithParameters:self size:size worldId:self.worldId levelId:self.levelId];
     }
     
     // Start new game

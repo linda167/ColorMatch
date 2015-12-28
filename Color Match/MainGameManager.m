@@ -19,6 +19,7 @@
 #import "CommonUtils.h"
 #import <Google/Analytics.h>
 #import "SCLAlertView.h"
+#import "CreditsViewController.h"
 @import iAd;
 
 @interface MainGameManager ()
@@ -27,7 +28,6 @@
 @property NSDate *startTime;
 @property NSInteger movesCount;
 @property GoalBoard *goalBoard;
-@property int levelId;
 @property NSTimeInterval timeInterval;
 @property HelpScreenViewController *helpScreenViewController;
 @property bool timerPaused;
@@ -458,6 +458,72 @@
 
 -(void)showVictoryDialog:(int)stars
 {
+    FullLevelId *nextLevelId = [self getNextLevelId];
+    
+    if (nextLevelId.worldId > 10)
+    {
+        [self showLastLevelVictoryDialog:stars];
+    }
+    else
+    {
+        [self showNormalVictoryDialog:stars];
+    }
+}
+
+-(void)showLastLevelVictoryDialog:(int)stars
+{
+    NSString *titleMessage = @"Level Complete!";
+    NSString *congratMessage = [CommonUtils GetRandomWinMessage:stars];
+    NSString *tipMessage = @"\n\nYou have completed the game!";
+    NSString *victoryMessage = [NSString stringWithFormat:@"%@ %@",
+                                congratMessage,
+                                tipMessage];
+    
+    // Set up alert view
+    SCLAlertView *alert = [[SCLAlertView alloc] init];
+    alert.hideAnimationType = SlideOutToBottom;
+    
+    [alert alertIsDismissed:^{
+        FullLevelId *nextLevelId = [self getNextLevelId];
+        if (nextLevelId.worldId > 10)
+        {
+            // This is the last world. Go to credits
+            UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
+            CreditsViewController *creditsView = (CreditsViewController*)[storyBoard instantiateViewControllerWithIdentifier:@"creditsScreen"];
+            [self.viewController.navigationController pushViewController:creditsView animated:YES];
+            
+            // Fix backstack
+            UIViewController *firstView = (UIViewController*)[self.viewController.navigationController.viewControllers objectAtIndex:0];
+            NSArray *newStack = [[NSArray alloc] initWithObjects:firstView,creditsView,nil];
+            self.viewController.navigationController.viewControllers = newStack;
+        }
+    }];
+    
+    UIImage *starsImage = [self getStarsImageForWinDialog:stars];
+    UIColor *viewColor = UIColorFromHEX(0x22B573);
+    [alert showCustom:self.viewController image:starsImage color:viewColor title:titleMessage subTitle:victoryMessage closeButtonTitle:@"View Credits" duration:0.0f];
+}
+
+-(UIImage*)getStarsImageForWinDialog:(int)stars
+{
+    UIImage *starsImage;
+    if (stars == 3)
+    {
+        starsImage = [UIImage imageNamed:@"_3stars@2x.png"];
+    }
+    else if (stars == 2)
+    {
+        starsImage = [UIImage imageNamed:@"_2stars@2x.png"];
+    }
+    else
+    {
+        starsImage = [UIImage imageNamed:@"_1stars@2x.png"];
+    }
+    return starsImage;
+}
+
+-(void)showNormalVictoryDialog:(int)stars
+{
     NSString *titleMessage = @"Level Complete!";
     NSString *congratMessage = [CommonUtils GetRandomWinMessage:stars];
     NSString *tipMessage = [CommonUtils GetRandomTip];
@@ -479,19 +545,7 @@
          [self retryLevelButtonPressed:stars];
      }];
     
-    UIImage *starsImage;
-    if (stars == 3)
-    {
-        starsImage = [UIImage imageNamed:@"_3stars@2x.png"];
-    }
-    else if (stars == 2)
-    {
-        starsImage = [UIImage imageNamed:@"_2stars@2x.png"];
-    }
-    else
-    {
-        starsImage = [UIImage imageNamed:@"_1stars@2x.png"];
-    }
+    UIImage *starsImage = [self getStarsImageForWinDialog:stars];
     
     UIColor *viewColor = UIColorFromHEX(0x22B573);
     [alert showCustom:self.viewController image:starsImage color:viewColor title:titleMessage subTitle:victoryMessage closeButtonTitle:nil duration:0.0f];
@@ -642,8 +696,10 @@
     [self loadBoardCellTypes];
     
     [self getNextLevelParameters:self.worldId levelId:self.levelId];
+    self.viewController.worldId = self.worldId;
+    self.viewController.levelId = self.levelId;
     
-    [self StartNewGame];
+    [self.viewController createGameManagerAndStartNewGame];
 }
 
 - (void)retryLevelButtonPressed:(int)stars
@@ -678,7 +734,7 @@
     else
     {
         // Level is locked
-        [CommonUtils ShowLockedLevelMessage:nextLevelId.worldId levelId:nextLevelId.levelId isFromPreviousLevel:true viewController:self.viewController];
+        [CommonUtils ShowLockedLevelMessage:nextLevelId.worldId levelId:nextLevelId.levelId isFromPreviousLevel:true viewController:self.viewController triggerBackOnDismiss:true];
     }
 }
 
@@ -698,8 +754,6 @@
     {
         // Transition to next world
         return [[FullLevelId alloc] init:self.worldId+1 levelId:1];
-        
-        // TODO:Bug#26 Need to handle last world
     }
 }
 

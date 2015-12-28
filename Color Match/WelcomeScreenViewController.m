@@ -12,6 +12,7 @@
 #import "UserData.h"
 #import "SoundManager.h"
 #import "Appirater.h"
+#import "WorldViewController.h"
 #import <StoreKit/StoreKit.h>
 #import <Google/Analytics.h>
 
@@ -224,6 +225,12 @@
     {
         // If tutorial is not complete for world 1, go directly to level 1-1
         [self performSegueWithIdentifier:@"mainMenuToFirstLevelSegue" sender:self];
+        
+        UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
+        WorldViewController *worldView = (WorldViewController*)[storyBoard instantiateViewControllerWithIdentifier:@"worldViewScreen"];
+        NSMutableArray *backStack = [[NSMutableArray alloc] initWithArray:self.navigationController.viewControllers];
+        [backStack insertObject:worldView atIndex:1];
+        self.navigationController.viewControllers = backStack;
     }
     else
     {

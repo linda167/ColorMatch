@@ -35,8 +35,8 @@ static NSArray *winMessageListForOneTwoStar;
     if (tipsList == nil)
     {
         freeGameTipsList = [[NSArray alloc] initWithObjects:
-                            @"Tip: Purchasing the full game will remove ads and unlock all levels",
-                            @"Tip: Hate ads? Buy the full game today!",
+                            @"Tip: For only $0.99, you can  remove ads and unlock all levels",
+                            @"Tip: Hate ads? Buy the full game today for only $0.99!",
                             nil];
         
         tipsList = [[NSArray alloc] initWithObjects:
@@ -58,7 +58,7 @@ static NSArray *winMessageListForOneTwoStar;
                     @"Tip: Finishing the first 4 levels are required to play the rest of the world.",
                     @"Fun Fact: Ben conceived Color Dash in 2010 as a PC browser game.",
                     @"Tip: You can access the first 4 levels of every world even if you don't buy the game.",
-                    @"Tip: Don't remember how a special spell works? Use the \"Help\" button.",
+                    @"Tip: Don't remember how a special cell works? Use the \"Help\" button.",
                     @"Did You Know: You can disable sounds and background music on the settings page.",
                     @"Did You Know: The \"credits\" page is awesome! You should check it out.",
                     @"Fun Fact: Cool people read these messages.",
@@ -508,18 +508,29 @@ static NSArray *winMessageListForOneTwoStar;
     return false;
 }
 
-+(void) ShowLockedLevelMessage:(int)worldId levelId:(int)levelId isFromPreviousLevel:(bool)isFromPreviousLevel viewController:(UIViewController*)viewController
++(void) ShowLockedLevelMessage:(int)worldId levelId:(int)levelId isFromPreviousLevel:(bool)isFromPreviousLevel viewController:(UIViewController*)viewController triggerBackOnDismiss:(bool)triggerBackOnDismiss
 {
-    NSString* lockString = [[UserData sharedUserData] getLevelLockedMessage:worldId levelId:levelId isFromPreviousLevel:isFromPreviousLevel];
+    bool reasonIsNeedPurchase;
+    NSString* lockString = [[UserData sharedUserData] getLevelLockedMessage:worldId levelId:levelId isFromPreviousLevel:isFromPreviousLevel reasonIsNeedPurchase:&reasonIsNeedPurchase];
     
     SCLAlertView *alert = [[SCLAlertView alloc] init];
     
-    [alert addButton:@"Purchase Full Game" actionBlock:^(void)
-     {
-         UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
-         PurchaseGameViewController *purchaseGameView = (PurchaseGameViewController*)[storyBoard instantiateViewControllerWithIdentifier:@"purchaseGameScreen"];
-         [viewController.navigationController pushViewController:purchaseGameView animated:YES];
-     }];
+    if (reasonIsNeedPurchase)
+    {
+        [alert addButton:@"Purchase Full Game" actionBlock:^(void)
+         {
+             UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
+             PurchaseGameViewController *purchaseGameView = (PurchaseGameViewController*)[storyBoard instantiateViewControllerWithIdentifier:@"purchaseGameScreen"];
+             [viewController.navigationController pushViewController:purchaseGameView animated:YES];
+         }];
+    }
+    
+    [alert alertIsDismissed:^{
+        if (triggerBackOnDismiss)
+        {
+            [viewController.navigationController popViewControllerAnimated:YES];
+        }
+    }];
     
     [alert showNotice:viewController title:@"Level Locked" subTitle:lockString closeButtonTitle:@"OK" duration:0.0f];
 }

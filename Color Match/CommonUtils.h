@@ -26,7 +26,7 @@
 +(bool) IsTransporterInput:(CellType)cellType;
 +(bool) IsTransporterCell:(CellType)cellType;
 +(UIImage *) GetShifterInnerImageForColor:(int)color;
-+(void) ShowLockedLevelMessage:(int)worldId levelId:(int)levelId isFromPreviousLevel:(bool)isFromPreviousLevel viewController:(UIViewController*)viewController;
++(void) ShowLockedLevelMessage:(int)worldId levelId:(int)levelId isFromPreviousLevel:(bool)isFromPreviousLevel viewController:(UIViewController*)viewController triggerBackOnDismiss:(bool)triggerBackOnDismiss;
 +(void)runBlockAfterDelay:(NSTimeInterval)delay block:(void (^)(void))block;
 +(NSString*)GetRandomTip;
 +(NSString*)GetRandomWinMessage:(int)stars;

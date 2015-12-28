@@ -172,7 +172,7 @@
         <!--World View Controller-->
         <scene sceneID="Rkm-CB-rML">
             <objects>
-                <viewController id="MmH-K3-vAA" customClass="WorldViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="worldViewScreen" id="MmH-K3-vAA" customClass="WorldViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Wkh-FA-63l">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -224,7 +224,7 @@
         <!--Credits View Controller-->
         <scene sceneID="l6K-7x-eaf">
             <objects>
-                <viewController id="NBj-EE-8p6" customClass="CreditsViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="creditsScreen" id="NBj-EE-8p6" customClass="CreditsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mGl-A5-4un">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -674,6 +674,6 @@
         <image name="helpButton.png" width="75" height="35"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="gm5-HK-yF9"/>
+        <segue reference="eYq-DS-mDC"/>
     </inferredMetricsTieBreakers>
 </document>
