@@ -72,6 +72,17 @@
     
     self.view.backgroundColor = [UIColor colorWithPatternImage:image];
     
+    // Change navigation bar appearance
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    // Change navigation bar appearance
+    [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
+    
+    [super viewWillAppear:animated];
+    
     // Get last world that we completed a level
     int lastLevelCompletedInWorld = [[UserData sharedUserData] getLastLevelCompletedInWorld];
     if (lastLevelCompletedInWorld > 1)
@@ -88,16 +99,6 @@
         [self scrollToCurrentPage:false /* animated */ ];
     }
     
-    // Change navigation bar appearance
-    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    // Change navigation bar appearance
-    [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
-    
-    [super viewWillAppear:animated];
     [[self getCurrentPageViewController] onViewShown];
 }
 

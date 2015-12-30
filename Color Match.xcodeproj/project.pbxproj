@@ -45,7 +45,6 @@
 		AFADA2321877D20D00FADA22 /* YellowSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = AFADA21C1877D20D00FADA22 /* YellowSelected.png */; };
 		AFADA23518791E4400FADA22 /* GridColorButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AFADA23418791E4400FADA22 /* GridColorButton.m */; };
 		AFB75A9B188339C900CAB736 /* GameLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = AFB75A9A188339C900CAB736 /* GameLogo.png */; };
-		AFB75A9F18834ECD00CAB736 /* AppIcon120.png in Resources */ = {isa = PBXBuildFile; fileRef = AFB75A9D18834ECD00CAB736 /* AppIcon120.png */; };
 		AFB896811881C0C7003FAEF4 /* GoalBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB896801881C0C7003FAEF4 /* GoalBoard.m */; };
 		AFB896851881E011003FAEF4 /* ColorBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB896841881E011003FAEF4 /* ColorBoard.m */; };
 		AFB896881881E2E6003FAEF4 /* CommonUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB896871881E2E6003FAEF4 /* CommonUtils.m */; };
@@ -249,6 +248,8 @@
 		BFBC31CF1C2D271A000A204F /* _3stars@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFBC31CC1C2D271A000A204F /* _3stars@2x.png */; };
 		BFBC31E11C2E6CAC000A204F /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = BFBC31DD1C2E6CAC000A204F /* Appirater.m */; };
 		BFBC31E21C2E6CAC000A204F /* Appirater.podspec.json in Resources */ = {isa = PBXBuildFile; fileRef = BFBC31DF1C2E6CAC000A204F /* Appirater.podspec.json */; };
+		BFBC31E81C3215E4000A204F /* AppIcon120@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFBC31E71C3215E4000A204F /* AppIcon120@2x.png */; };
+		BFBC31EA1C321A33000A204F /* AppIcon180@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFBC31E91C321A33000A204F /* AppIcon180@3x.png */; };
 		BFE467DE1B3BC7A700C286F1 /* DiverterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BFE467DD1B3BC7A700C286F1 /* DiverterCell.m */; };
 		BFE467E31B3F85D800C286F1 /* HelpScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFE467E21B3F85D800C286F1 /* HelpScreenViewController.m */; };
 		BFE467E71B3FA15300C286F1 /* 00pauseColorMix@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFE467E61B3FA15300C286F1 /* 00pauseColorMix@2x.png */; };
@@ -327,7 +328,6 @@
 		AFADA23318791E4400FADA22 /* GridColorButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridColorButton.h; sourceTree = "<group>"; };
 		AFADA23418791E4400FADA22 /* GridColorButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridColorButton.m; sourceTree = "<group>"; };
 		AFB75A9A188339C900CAB736 /* GameLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GameLogo.png; sourceTree = "<group>"; };
-		AFB75A9D18834ECD00CAB736 /* AppIcon120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIcon120.png; sourceTree = "<group>"; };
 		AFB8967F1881C0C7003FAEF4 /* GoalBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoalBoard.h; sourceTree = "<group>"; };
 		AFB896801881C0C7003FAEF4 /* GoalBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoalBoard.m; sourceTree = "<group>"; };
 		AFB896821881C288003FAEF4 /* CommonTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonTypes.h; sourceTree = "<group>"; };
@@ -569,6 +569,8 @@
 		BFBC31DE1C2E6CAC000A204F /* Appirater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Appirater.h; path = appirater/Appirater.h; sourceTree = "<group>"; };
 		BFBC31DF1C2E6CAC000A204F /* Appirater.podspec.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = Appirater.podspec.json; path = appirater/Appirater.podspec.json; sourceTree = "<group>"; };
 		BFBC31E01C2E6CAC000A204F /* AppiraterDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppiraterDelegate.h; path = appirater/AppiraterDelegate.h; sourceTree = "<group>"; };
+		BFBC31E71C3215E4000A204F /* AppIcon120@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon120@2x.png"; sourceTree = "<group>"; };
+		BFBC31E91C321A33000A204F /* AppIcon180@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon180@3x.png"; sourceTree = "<group>"; };
 		BFE467DC1B3BC7A700C286F1 /* DiverterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiverterCell.h; sourceTree = "<group>"; };
 		BFE467DD1B3BC7A700C286F1 /* DiverterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiverterCell.m; sourceTree = "<group>"; };
 		BFE467E11B3F85D800C286F1 /* HelpScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpScreenViewController.h; sourceTree = "<group>"; };
@@ -715,6 +717,8 @@
 		AF2C225A1874B95000082561 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				BFBC31E91C321A33000A204F /* AppIcon180@3x.png */,
+				BFBC31E71C3215E4000A204F /* AppIcon120@2x.png */,
 				BFBC31CA1C2D271A000A204F /* _1stars@2x.png */,
 				BFBC31CB1C2D271A000A204F /* _2stars@2x.png */,
 				BFBC31CC1C2D271A000A204F /* _3stars@2x.png */,
@@ -876,7 +880,6 @@
 				BF874D14192B2CBB001701A2 /* ReflectorTtRGoal@2x.png */,
 				BF874D0D192B28C1001701A2 /* ReflectorLtDGoal@2x.png */,
 				BF0D4BD019293E5500AACB5A /* BlockClear.png */,
-				AFB75A9D18834ECD00CAB736 /* AppIcon120.png */,
 				AFB75A9A188339C900CAB736 /* GameLogo.png */,
 				AFADA2071877D20D00FADA22 /* BlockBlue.png */,
 				AFADA2081877D20D00FADA22 /* BlockGreen.png */,
@@ -1179,6 +1182,7 @@
 				AFADA22E1877D20D00FADA22 /* RedSelected.png in Resources */,
 				BF85B7661B89AD6E00018E25 /* checkedBox@2x.png in Resources */,
 				BF85C8621A56071900A494B6 /* divider.png in Resources */,
+				BFBC31E81C3215E4000A204F /* AppIcon120@2x.png in Resources */,
 				BF43A94B1B51F9720054A6D0 /* whiteSelect.mp3 in Resources */,
 				BFE467EB1B40AE4700C286F1 /* helpButton@2x.png in Resources */,
 				BF98088E1974F13D00BAF9ED /* ReflectorArrowTtRGreen@2x.png in Resources */,
@@ -1276,7 +1280,6 @@
 				BF9079E619664916000E6E58 /* converterBlue@2x.png in Resources */,
 				BF85C83E1A4E9C5300A494B6 /* shifterOuterRed@2x.png in Resources */,
 				BF85C82E1A47BABE00A494B6 /* converterTopToDownBlue@2x.png in Resources */,
-				AFB75A9F18834ECD00CAB736 /* AppIcon120.png in Resources */,
 				BFE468141B4872B600C286F1 /* beginButton@2x.png in Resources */,
 				BFE468121B48679F00C286F1 /* TutorialPointerBig@2x.png in Resources */,
 				AF2C222D1874B8B700082561 /* InfoPlist.strings in Resources */,
@@ -1317,6 +1320,7 @@
 				BFE467F71B4100CE00C286F1 /* 02pauseSplitter@2x.png in Resources */,
 				BF9079E919664916000E6E58 /* converterYellow@2x.png in Resources */,
 				BFE467F61B4100CE00C286F1 /* 01pauseReflector@2x.png in Resources */,
+				BFBC31EA1C321A33000A204F /* AppIcon180@3x.png in Resources */,
 				BF9079821953EE21000E6E58 /* BlockBrown.png in Resources */,
 				BF9079C5195E1819000E6E58 /* BlueSelected@2x.png in Resources */,
 				BF98087D196E664E00BAF9ED /* transporterOutputRightPurple@2x.png in Resources */,

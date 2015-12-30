@@ -71,6 +71,9 @@
     // Reset ad state
     self.adPendingState = None;
     
+    // Mark this world as the one to auto scroll to in the world view
+    [[UserData sharedUserData] storeLastLevelCompletedInWorld:self.worldId];
+    
     // Instrument
     NSMutableString *levelString = [UserData getLevelString:self.worldId levelId:self.levelId];
     NSString *name = [NSString stringWithFormat:@"Game level %@", levelString];
@@ -860,6 +863,11 @@
                                                                label:moveCount
                                                                value:@1] build]];
     }
+}
+
+- (void)OnTapTopContainer
+{
+    // NOOP in base class
 }
 
 @end

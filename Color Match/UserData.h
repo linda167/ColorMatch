@@ -20,6 +20,7 @@
 -(int)getStarCount:(int)worldId levelId:(int)levelId;
 -(void)wipeData;
 -(int)getLastLevelCompletedInWorld;
+-(void)storeLastLevelCompletedInWorld:(int)worldId;
 -(void)storeTutorialComplete:(int)worldId;
 -(bool)getTutorialComplete:(int)worldId;
 -(void)storeGamePurchased:(bool)purchased;

@@ -86,6 +86,15 @@
     self.blueButton.frame = CGRectOffset(self.blueButton.frame, buttonOffset, 0);
     self.redButton.frame = CGRectOffset(self.redButton.frame, buttonOffset, 0);
     self.yellowButton.frame = CGRectOffset(self.yellowButton.frame, buttonOffset, 0);
+    
+    // Add tap event to top region view
+    UITapGestureRecognizer *tapTopSectionGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(OnTapTopContainer)];
+    [self.topSectionContainer addGestureRecognizer:tapTopSectionGesture];
+}
+
+- (void)OnTapTopContainer
+{
+    [self.mainGameManager OnTapTopContainer];
 }
 
 - (void)createGameManagerAndStartNewGame

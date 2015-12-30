@@ -52,5 +52,6 @@ typedef NS_ENUM(NSUInteger, AdPendingState)
 - (IBAction)shifterCellPressed:(id)sender;
 - (void)resumeGameAfterAd;
 - (void)navigatedBack;
+- (void)OnTapTopContainer;
 
 @end

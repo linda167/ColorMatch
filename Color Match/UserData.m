@@ -71,8 +71,13 @@ static NSString *const LastLevelCompletedInWorldKey = @"LastLevelCompletedInWorl
     }
     
     // Store last level complete
-    [self.userData setInteger:worldId forKey:LastLevelCompletedInWorldKey];
+    [self storeLastLevelCompletedInWorld:worldId];
     [self.userData synchronize];
+}
+
+-(void)storeLastLevelCompletedInWorld:(int)worldId
+{
+    [self.userData setInteger:worldId forKey:LastLevelCompletedInWorldKey];
 }
 
 -(int)getLastLevelCompletedInWorld
@@ -171,7 +176,6 @@ static NSString *const LastLevelCompletedInWorldKey = @"LastLevelCompletedInWorl
         return [[self musicTracks] objectAtIndex:0];
     }
 }
-
 
 -(bool)isFirstFourLevelsOfWorldCompleted:(int)worldId
 {

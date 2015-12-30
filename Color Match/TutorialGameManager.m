@@ -32,6 +32,9 @@
 @property (nonatomic, strong) void (^waitingDelegate)(void);
 @property UIButton* beginButton;
 @property bool tutorialComplete;
+@property bool topContainerWaitingPress;
+@property bool bottomContainerWaitingPress;
+@property UIView* bottomPlayfieldContainer;
 @end
 
 @implementation TutorialGameManager
@@ -278,6 +281,16 @@
      }];
 }
 
+- (void)addContainerForBottomPlayfield
+{
+    self.bottomPlayfieldContainer = [[UIView alloc] initWithFrame:self.viewController.GridContainerView.frame];
+    [self.viewController.view addSubview:self.bottomPlayfieldContainer];
+    
+    // Add tap handler
+    UITapGestureRecognizer *tapBottomSectionGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(OnTapBottomPlayfieldContainer)];
+    [self.bottomPlayfieldContainer addGestureRecognizer:tapBottomSectionGesture];
+}
+
 - (void)hideBottomPlayField:(bool)hide
 {
     self.viewController.GridContainerView.hidden = hide;
@@ -428,7 +441,6 @@
     self.dialogText.textColor = [UIColor colorWithRed:(61/255.0) green:(61/255.0) blue:(61/255.0) alpha:1];;
     self.dialogText.numberOfLines = 0;
     self.dialogText.textAlignment = NSTextAlignmentCenter;
-    self.dialogText.alpha = 0;
     [self centerDialogTextInTopContainer];
     
     [self.viewController.topSectionContainer addSubview:self.dialogText];
@@ -662,6 +674,11 @@
     [self.pointerImageViewBig removeFromSuperview];
     [self.pointerImageViewSmall removeFromSuperview];
     
+    if (self.bottomPlayfieldContainer != nil)
+    {
+        [self.bottomPlayfieldContainer removeFromSuperview];
+    }
+    
     if (self.beginButton != NULL)
     {
         [self.beginButton removeFromSuperview];
@@ -671,6 +688,12 @@
     
     // Start game
     [self.viewController createGameManagerAndStartNewGame];
+    
+    // Instrument
+    NSString *name = [NSString stringWithFormat:@"Tutorial %d completed", self.worldId];
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:name];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
 }
 
 - (IBAction)beginButtonPressed:(id)sender
@@ -693,17 +716,10 @@
 {
     void (^showBeginImage)(void) = ^(void)
     {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
         // Create the begin button
         [self createBeginButton];
         CGPoint center = CGPointMake(self.viewController.view.frame.size.width / 2, self.dialogText.frame.origin.y + self.dialogText.frame.size.height + 45);
         [self.beginButton setCenter: center];
-        
-        [self fadeInBeginButton:1];
     };
     
     void (^showFinalText)(void) = ^(void)
@@ -714,66 +730,43 @@
         }
         
         // Move text to center
+        self.dialogText.alpha = 1.0;
         [self.dialogText setCenter:self.viewController.view.center];
         
         [self setTutorialDialogText:@"That's basically it. \n\n There will be more to learn, but we can cover that later. \n\n When you're ready, tap the \"Begin\" button below. \n\n Good luck!"];
-        [self fadeInDialogText:showBeginImage delay:0.8];
+        showBeginImage();
     };
     
     void (^fadeOutEntireUI)(void) = ^(void)
     {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
-        [self animateHideTopSectionContainer:showFinalText hide:true delay:1];
-        [self animateHideUpperPlayField:NULL hide:true delay:1];
-        [self animateHideColorButtonBar:NULL hide:true delay:1];
+        self.dialogText.alpha = 0;
+        [self animateHideTopSectionContainer:showFinalText hide:true delay:0];
+        [self animateHideUpperPlayField:NULL hide:true delay:0];
+        [self animateHideColorButtonBar:NULL hide:true delay:0];
     };
     
-    void (^fadeOutTextAndPointer)(void) = ^(void)
+    void (^tapToFadeOutUI)(void) = ^(void)
     {
         if (self.tutorialComplete)
         {
             return;
         }
         
-        [self fadeOutDialogText:NULL delay:3];
-        [self fadeInBigPointerImage:fadeOutEntireUI delay:2.5 fadeIn:false];
+        self.waitingDelegate = fadeOutEntireUI;
+        self.bottomContainerWaitingPress = true;
     };
     
     void (^showBigPointerImage)(void) = ^(void)
     {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
         [self.pointerImageViewBig setCenter:self.viewController.GoalContainerView.center];
-        [self fadeInBigPointerImage:fadeOutTextAndPointer delay:0.5 fadeIn:true];
+        [self fadeInBigPointerImage:tapToFadeOutUI delay:0.5 fadeIn:true];
     };
     
     void (^showText12)(void) = ^(void)
     {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
         [self setTutorialDialogText:@"Here is the target board you're trying to match."];
         
-        [self fadeInDialogText:showBigPointerImage delay:0.8];
-    };
-    
-    void (^fadeOutText12)(void) = ^(void)
-    {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
-        [self fadeOutDialogText:showText12 delay:2.5];
+        showBigPointerImage();
     };
     
     void (^showBottomText)(void) = ^(void)
@@ -790,100 +783,56 @@
         gridContainerViewCenter.y -= 50;
         [self.dialogText setCenter:gridContainerViewCenter];
         
+        self.dialogText.alpha = 1.0;
         [self setTutorialDialogText:@"Check out the upper part of the play field."];
-        [self fadeInDialogText:fadeOutText12 delay:0.8];
+        
+        self.waitingDelegate = showText12;
+        self.bottomContainerWaitingPress = true;
     };
     
     void (^showTopUIHideBottom)(void) = ^(void)
     {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
+        self.dialogText.alpha = 0;
         
         // Animate show upper playfield
         [self hideUpperPlayField:false];
-        [self animateHideUpperPlayField:showBottomText hide:false delay:1];
+        [self animateHideUpperPlayField:nil hide:false delay:0];
         
         // Animate hide lower playfield
-        [self animateHideBottomPlayField:NULL hide:true delay:1];
-    };
-    
-    void (^fadeOutText11)(void) = ^(void)
-    {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
+        [self animateHideBottomPlayField:showBottomText hide:true delay:0.5];
         
-        [self fadeOutDialogText:showTopUIHideBottom delay:1.5];
+        // Add capture container for bottom playfield
+        [self addContainerForBottomPlayfield];
     };
     
     void (^showText11)(void) = ^(void)
     {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
         [self setTutorialDialogText:@"And finally..."];
         
-        [self fadeInDialogText:fadeOutText11 delay:0.8];
-    };
-    
-    void (^fadeOutText10)(void) = ^(void)
-    {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
-        [self fadeOutDialogText:showText11 delay:3];
+        self.waitingDelegate = showTopUIHideBottom;
+        self.topContainerWaitingPress = true;
     };
     
     void (^showText10)(void) = ^(void)
     {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
         [self setTutorialDialogText:@"Don't worry if you don't know the color mixes. You can view all the color combinations from the help menu."];
         
-        [self fadeInDialogText:fadeOutText10 delay:0.8];
-    };
-    
-    void (^fadeOutText9)(void) = ^(void)
-    {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
-        [self fadeOutDialogText:showText10 delay:2.5];
+        self.waitingDelegate = showText11;
+        self.topContainerWaitingPress = true;
     };
     
     void (^showText9)(void) = ^(void)
     {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
         self.pointerImageViewSmall.alpha = 0;
         
         [self setTutorialDialogText:@"What's this?! The square where the blue and yellow intersect has turned green!"];
         
-        [self fadeInDialogText:fadeOutText9 delay:0.5];
+        self.waitingDelegate = showText10;
+        self.topContainerWaitingPress = true;
     };
     
     void (^showPointerOverCircle2)(void) = ^(void)
     {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
         GridColorButton* gridColorButton = [self.userColorBoard.leftGridColorButtons objectAtIndex:1];
         self.allowGridButtonPress = true;
         
@@ -895,11 +844,6 @@
     
     void (^showPointerOverYellowButton)(void) = ^(void)
     {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
         [self.pointerImageView setCenter:self.viewController.yellowButton.center];
         self.allowColorButtonPress = true;
         [self fadeInPointerImage:NULL delay:0.5 smallPointer:false];
@@ -910,68 +854,30 @@
     
     void (^showText8)(void) = ^(void)
     {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
         [self setTutorialDialogText:@"Try adding yellow to the middle circle on the left."];
         
-        [self fadeInDialogText:showPointerOverYellowButton delay:0.8];
-    };
-    
-    void (^fadeOutText7)(void) = ^(void)
-    {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
-        [self fadeOutDialogText:showText8 delay:2.5];
+        showPointerOverYellowButton();
     };
     
     void (^showText7)(void) = ^(void)
     {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
         [self setTutorialDialogText:@"But there's one more thing to consider. Check out that second set of circles on the left."];
         
-        [self fadeInDialogText:fadeOutText7 delay:0.8];
-    };
-    
-    void (^fadeOutText6)(void) = ^(void)
-    {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
-        [self fadeOutDialogText:showText7 delay:2.0];
+        self.waitingDelegate = showText8;
+        self.topContainerWaitingPress = true;
     };
     
     void (^showText6)(void) = ^(void)
     {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
         self.pointerImageViewSmall.alpha = 0;
         [self setTutorialDialogText:@"Well done! \n\n Notice the entire column filled up with blue."];
         
-        [self fadeInDialogText:fadeOutText6 delay:.5];
+        self.waitingDelegate = showText7;
+        self.topContainerWaitingPress = true;
     };
     
     void (^showPointerOverCircle)(void) = ^(void)
     {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
         GridColorButton* gridColorButton = [self.userColorBoard.topGridColorButtons objectAtIndex:0];
         
         self.allowGridButtonPress = true;
@@ -984,24 +890,9 @@
     
     void (^showText5)(void) = ^(void)
     {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
         [self setTutorialDialogText:@"With blue selected, you can now add color into the play field. \n\n Try tapping on the circle below."];
         
-        [self fadeInDialogText:showPointerOverCircle delay:0.8];
-    };
-    
-    void (^fadeOutText4)(void) = ^(void)
-    {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
-        [self fadeOutDialogText:showText5 delay:2.0];
+        showPointerOverCircle();
     };
     
     void (^showText4)(void) = ^(void)
@@ -1013,19 +904,15 @@
         
         self.pointerImageView.alpha = 0;
         [self setTutorialDialogText:@"Great! \n\n Now what? Glad you asked. \n See those circles?"];
-        [self fadeInDialogText:fadeOutText4 delay:.5];
+        self.waitingDelegate = showText5;
+        self.topContainerWaitingPress = true;
     };
     
     void (^showPointerOverBlueButton)(void) = ^(void)
     {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
         [self.pointerImageView setCenter:self.viewController.blueButton.center];
         self.allowColorButtonPress = true;
-        [self fadeInPointerImage:NULL delay:0.5 smallPointer:false];
+        [self fadeInPointerImage:NULL delay:0.7 smallPointer:false];
         
         self.colorButtonWaitingPress = self.viewController.blueButton;
         self.waitingDelegate = showText4;
@@ -1033,48 +920,20 @@
     
     void (^showText3)(void) = ^(void)
     {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
         [self setTutorialDialogText:@"Let's focus on that blue color in the center. \n\n Go ahead and tap it!"];
-        [self fadeInDialogText:showPointerOverBlueButton delay:0.8];
-    };
-    
-    void (^fadeOutText2)(void) = ^(void)
-    {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
-        [self fadeOutDialogText:showText3 delay:2.5];
+        showPointerOverBlueButton();
     };
     
     void (^showText2)(void) = ^(void)
     {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
         [self setTutorialDialogText:@"Your goal is to add colors to the play field below to match the target board."];
-        [self fadeInDialogText:fadeOutText2 delay:0.8];
+        self.waitingDelegate = showText3;
+        self.topContainerWaitingPress = true;
     };
     
-    void (^fadeOutText1)(void) = ^(void)
-    {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
-        [self fadeOutDialogText:showText2 delay:2];
-    };
-    
-    [self setTutorialDialogText:@"Wecome to Color Dash!"];
-    [self fadeInDialogText:fadeOutText1 delay:1];
+    [self setTutorialDialogText:@"Wecome to Color Dash! \n\n (Tap here to continue.)"];
+    self.waitingDelegate = showText2;
+    self.topContainerWaitingPress = true;
 }
 
 - (void)showBeginButtonCommon
@@ -1089,60 +948,30 @@
     CGPoint center = CGPointMake(self.viewController.view.frame.size.width / 2, self.dialogText.frame.origin.y + self.dialogText.frame.size.height + self.viewController.topSectionContainer.frame.origin.y + 40
                                  );
     [self.beginButton setCenter: center];
-    
-    [self fadeInBeginButton:0.5];
 }
 
 - (void)runWorld2Tutorial
 {
-    void (^showBeginButton)(void) = ^(void)
-    {
-        [self showBeginButtonCommon];
-    };
-    
     void (^showText5)(void) = ^(void)
     {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
         [self setTutorialDialogText:@"Can you master the Reflector?"];
         [self.dialogText sizeToFit];
         [self.dialogText setCenter:CGPointMake(self.viewController.view.frame.size.width / 2, 65)];
         
-        [self fadeInDialogText:showBeginButton delay:0.8];
-    };
-    
-    void (^fadeOutText4)(void) = ^(void)
-    {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
-        [self fadeOutDialogText:showText5 delay:3];
+        [self showBeginButtonCommon];
     };
     
     void (^showText4)(void) = ^(void)
     {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
         self.pointerImageViewSmall.alpha = 0;
         [self setTutorialDialogText:@"Excellent! \n\n Notice that the color bends to the right instead of going down."];
-        [self fadeInDialogText:fadeOutText4 delay:0.5];
+        
+        self.waitingDelegate = showText5;
+        self.topContainerWaitingPress = true;
     };
     
     void (^showPointerOverCircle)(void) = ^(void)
     {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
         self.pointerImageView.alpha = 0;
         
         GridColorButton* gridColorButton = [self.userColorBoard.topGridColorButtons objectAtIndex:1];
@@ -1157,11 +986,6 @@
     
     void (^showPointerOverRedButton)(void) = ^(void)
     {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
         [self.pointerImageView setCenter:self.viewController.redButton.center];
         self.allowColorButtonPress = true;
         [self fadeInPointerImage:NULL delay:1 smallPointer:false];
@@ -1172,136 +996,71 @@
     
     void (^showText3)(void) = ^(void)
     {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
         self.pointerImageViewSmall.alpha = 0;
         [self setTutorialDialogText:@"Watch what happens when we add red color to the circle above the Reflector."];
-        [self fadeInDialogText:showPointerOverRedButton delay:0.8];
-    };
-    
-    void (^fadeOutText2)(void) = ^(void)
-    {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
-        [self fadeOutDialogText:showText3 delay:2.5];
+        showPointerOverRedButton();
     };
     
     void (^showText2)(void) = ^(void)
     {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
         [self setTutorialDialogText:@"That's called a Reflector. It takes color from one direction and redirects it."];
-        [self fadeInDialogText:fadeOutText2 delay:0.8];
+        self.waitingDelegate = showText3;
+        self.topContainerWaitingPress = true;
     };
     
-    void (^fadeOutText1)(void) = ^(void)
+    void (^tapToShowText2)(void) = ^(void)
     {
         if (self.tutorialComplete)
         {
             return;
         }
         
-        [self fadeOutDialogText:showText2 delay:1.5];
+        self.waitingDelegate = showText2;
+        self.topContainerWaitingPress = true;
     };
     
     void (^showPointerOverArrow)(void) = ^(void)
     {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
         NSMutableArray *colorRow = [self.userColorBoard.colorCellSections objectAtIndex:1];
         ColorCell *userColorCell = [colorRow objectAtIndex:1];
         
         [self.pointerImageViewSmall setCenter:userColorCell.image.center];
-        [self fadeInPointerImage:fadeOutText1 delay:1.5 smallPointer:true];
+        [self fadeInPointerImage:tapToShowText2 delay:1 smallPointer:true];
     };
     
     [self setTutorialDialogText:@"Not bad so far, but are you ready for a twist? \n\n See that arrow in the middle of the board?"];
-    [self fadeInDialogText:showPointerOverArrow delay:1];
+    showPointerOverArrow();
 }
 
 - (void)runWorld3Tutorial
 {
-    void (^showBeginButton)(void) = ^(void)
-    {
-        [self showBeginButtonCommon];
-    };
-    
     void (^showText6)(void) = ^(void)
     {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
         [self setTutorialDialogText:@"Don't split your attention on these tricky new levels!"];
         [self.dialogText sizeToFit];
         [self.dialogText setCenter:CGPointMake(self.viewController.view.frame.size.width / 2, 65)];
         
-        [self fadeInDialogText:showBeginButton delay:0.5];
-    };
-    
-    void (^fadeOutText5)(void) = ^(void)
-    {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
-        [self fadeOutDialogText:showText6 delay:3];
+        [self showBeginButtonCommon];
     };
     
     void (^showText5)(void) = ^(void)
     {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
         [self setTutorialDialogText:@"Be aware that if you mix all three colors, you will end up with the color brown."];
-        [self fadeInDialogText:fadeOutText5 delay:0.5];
-    };
-    
-    void (^fadeOutText4)(void) = ^(void)
-    {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
-        [self fadeOutDialogText:showText5 delay:3];
+        self.waitingDelegate = showText6;
+        self.topContainerWaitingPress = true;
     };
     
     void (^showText4)(void) = ^(void)
     {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
         self.pointerImageViewSmall.alpha = 0;
         [self setTutorialDialogText:@"Great work! \n\n The Splitter will add color to the four diagonal cells around it."];
-        [self fadeInDialogText:fadeOutText4 delay:0.5];
+        
+        self.waitingDelegate = showText5;
+        self.topContainerWaitingPress = true;
     };
     
     void (^showPointerOverCell2)(void) = ^(void)
     {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
         NSMutableArray *colorRow = [self.userColorBoard.colorCellSections objectAtIndex:1];
         SplitterCell *userColorCell = [colorRow objectAtIndex:1];
         
@@ -1315,11 +1074,6 @@
     
     void (^showPointerOverYellowButton)(void) = ^(void)
     {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
         [self.pointerImageView setCenter:self.viewController.yellowButton.center];
         self.allowColorButtonPress = true;
         [self fadeInPointerImage:NULL delay:0.5 smallPointer:false];
@@ -1335,132 +1089,74 @@
             return;
         }
         
-        [self setTutorialDialogText:@"Try adding some yellow directly to it."];
-        [self fadeInDialogText:showPointerOverYellowButton delay:0.8];
-    };
-    
-    void (^fadeOutPointerAndText)(void) = ^(void)
-    {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
+        self.pointerImageViewSmall.alpha = 0;
         
-        [self fadeOutDialogText:showText3 delay:2];
-        [self fadeOutPointerImage:NULL delay:2 smallPointer:true];
+        [self setTutorialDialogText:@"Try adding some yellow directly to it."];
+        showPointerOverYellowButton();
     };
     
     void (^showText2)(void) = ^(void)
     {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
         [self setTutorialDialogText:@"That's called a Splitter."];
-        [self fadeInDialogText:fadeOutPointerAndText delay:0.8];
+        self.waitingDelegate = showText3;
+        self.topContainerWaitingPress = true;
     };
     
-    void (^fadeOutText1)(void) = ^(void)
+    void (^tapToShowText2)(void) = ^(void)
     {
         if (self.tutorialComplete)
         {
             return;
         }
 
-        [self fadeOutDialogText:showText2 delay:2];
+        self.waitingDelegate = showText2;
+        self.topContainerWaitingPress = true;
     };
     
     void (^showPointerOverCell)(void) = ^(void)
     {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
         NSMutableArray *colorRow = [self.userColorBoard.colorCellSections objectAtIndex:1];
         ColorCell *userColorCell = [colorRow objectAtIndex:1];
         
         [self.pointerImageViewSmall setCenter:userColorCell.image.center];
-        [self fadeInPointerImage:fadeOutText1 delay:1.5 smallPointer:true];
+        [self fadeInPointerImage:tapToShowText2 delay:1.5 smallPointer:true];
     };
     
     [self setTutorialDialogText:@"Let's change things up a bit. \n\n See that cell in the middle of the board?"];
-    [self fadeInDialogText:showPointerOverCell delay:1];
+    showPointerOverCell();
 }
 
 - (void)runWorld4Tutorial
 {
-    void (^showBeginButton)(void) = ^(void)
-    {
-        [self showBeginButtonCommon];
-    };
-    
     void (^showText5)(void) = ^(void)
     {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
         [self setTutorialDialogText:@"Get out there and connect away!"];
         [self.dialogText sizeToFit];
         [self.dialogText setCenter:CGPointMake(self.viewController.view.frame.size.width / 2, 65)];
         
-        [self fadeInDialogText:showBeginButton delay:0.8];
-    };
-    
-    void (^fadeOutText4)(void) = ^(void)
-    {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
-        [self fadeOutDialogText:showText5 delay:3];
+        [self showBeginButtonCommon];
     };
     
     void (^showText4)(void) = ^(void)
     {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
         self.pointerImageViewSmall.alpha = 0;
         [self setTutorialDialogText:@"Those smaller circles around the Connector are there to remind you of what color you added."];
-        [self fadeInDialogText:fadeOutText4 delay:0.8];
-    };
-    
-    void (^fadeOutText3)(void) = ^(void)
-    {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
         
-        [self fadeOutDialogText:showText4 delay:2.5];
+        self.waitingDelegate = showText5;
+        self.topContainerWaitingPress = true;
     };
     
     void (^showText3)(void) = ^(void)
     {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
         self.pointerImageViewSmall.alpha = 0;
         [self setTutorialDialogText:@"Sweet!\n\nConnectors all share the same color."];
-        [self fadeInDialogText:fadeOutText3 delay:0.5];
+        
+        self.waitingDelegate = showText4;
+        self.topContainerWaitingPress = true;
     };
     
     void (^showPointerOverCell)(void) = ^(void)
     {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
         NSMutableArray *colorRow = [self.userColorBoard.colorCellSections objectAtIndex:1];
         ColorCell *userColorCell = [colorRow objectAtIndex:0];
         
@@ -1474,11 +1170,6 @@
     
     void (^showPointerOverBlueButton)(void) = ^(void)
     {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
         [self.pointerImageView setCenter:self.viewController.blueButton.center];
         self.allowColorButtonPress = true;
         [self fadeInPointerImage:NULL delay:0.5 smallPointer:false];
@@ -1489,119 +1180,65 @@
     
     void (^showText2)(void) = ^(void)
     {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
         [self setTutorialDialogText:@"Try adding blue to this Connector cell."];
-        [self fadeInDialogText:showPointerOverBlueButton delay:0.8];
-    };
-    
-    void (^fadeOutText1)(void) = ^(void)
-    {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
-        [self fadeOutDialogText:showText2 delay:2];
+        showPointerOverBlueButton();
     };
     
     [self setTutorialDialogText:@"It's time to bring things together with the Connector."];
-    [self fadeInDialogText:fadeOutText1 delay:1];
+    self.waitingDelegate = showText2;
+    self.topContainerWaitingPress = true;
 }
 
 - (void)runWorld5Tutorial
 {
-    void (^showBeginButton)(void) = ^(void)
-    {
-        [self showBeginButtonCommon];
-    };
-    
     void (^showText4)(void) = ^(void)
     {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
         [self setTutorialDialogText:@"Divert all your focus to crushing these levels!"];
         [self.dialogText sizeToFit];
         [self.dialogText setCenter:CGPointMake(self.viewController.view.frame.size.width / 2, 65)];
         
-        [self fadeInDialogText:showBeginButton delay:0.8];
-    };
-    
-    void (^fadeOutText3)(void) = ^(void)
-    {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
-        [self fadeOutDialogText:showText4 delay:2];
+        [self showBeginButtonCommon];
     };
     
     void (^showText3)(void) = ^(void)
     {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
         [self setTutorialDialogText:@"It diverts flows from both directions at the same time."];
-        [self fadeInDialogText:fadeOutText3 delay:0.8];
-    };
-    
-    void (^fadeOutText2)(void) = ^(void)
-    {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
         
-        [self fadeOutDialogText:showText3 delay:2];
+        self.waitingDelegate = showText4;
+        self.topContainerWaitingPress = true;
     };
     
     void (^showText2)(void) = ^(void)
     {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
+        self.pointerImageViewSmall.alpha = 0;
         [self setTutorialDialogText:@"As you may have already guessed, the Diverter is like a double Reflector."];
-        [self fadeInDialogText:fadeOutText2 delay:0.8];
+        
+        self.waitingDelegate = showText3;
+        self.topContainerWaitingPress = true;
     };
     
-    void (^fadeOutPointerAndText)(void) = ^(void)
+    void (^tapToShowText2)(void) = ^(void)
     {
         if (self.tutorialComplete)
         {
             return;
         }
         
-        [self fadeOutDialogText:showText2 delay:2];
-        [self fadeOutPointerImage:NULL delay:2 smallPointer:true];
+        self.waitingDelegate = showText2;
+        self.topContainerWaitingPress = true;
     };
     
     void (^showPointerOverCell)(void) = ^(void)
     {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
         NSMutableArray *colorRow = [self.userColorBoard.colorCellSections objectAtIndex:1];
         ColorCell *userColorCell = [colorRow objectAtIndex:1];
         
         [self.pointerImageViewSmall setCenter:userColorCell.image.center];
-        [self fadeInPointerImage:fadeOutPointerAndText delay:0.5 smallPointer:true];
+        [self fadeInPointerImage:tapToShowText2 delay:.7 smallPointer:true];
     };
     
     [self setTutorialDialogText:@"It's time to put a spin on an old classic ... introducing the Diverter!"];
-    [self fadeInDialogText:showPointerOverCell delay:1];
+    showPointerOverCell();
     
     // Preset colors from left and top
     GridColorButton *gridColorButton = [self.userColorBoard.topGridColorButtons objectAtIndex:1];
@@ -1615,54 +1252,25 @@
 
 - (void)runWorld6Tutorial
 {
-    void (^showBeginButton)(void) = ^(void)
-    {
-        [self showBeginButtonCommon];
-    };
-    
     void (^showText5)(void) = ^(void)
     {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
         [self setTutorialDialogText:@"Try not to zone out!"];
         [self.dialogText sizeToFit];
         [self.dialogText setCenter:CGPointMake(self.viewController.view.frame.size.width / 2, 65)];
         
-        [self fadeInDialogText:showBeginButton delay:0.8];
-    };
-    
-    void (^fadeOutText4)(void) = ^(void)
-    {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
-        [self fadeOutDialogText:showText5 delay:2];
+        [self showBeginButtonCommon];
     };
     
     void (^showText4)(void) = ^(void)
     {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
         self.pointerImageViewSmall.alpha = 0;
         [self setTutorialDialogText:@"Whoa! That's a lot of red!"];
-        [self fadeInDialogText:fadeOutText4 delay:0.5];
+        self.waitingDelegate = showText5;
+        self.topContainerWaitingPress = true;
     };
     
     void (^showPointerOverCell)(void) = ^(void)
     {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
         NSMutableArray *colorRow = [self.userColorBoard.colorCellSections objectAtIndex:1];
         ColorCell *userColorCell = [colorRow objectAtIndex:1];
         
@@ -1676,11 +1284,6 @@
     
     void (^showPointerOverRedButton)(void) = ^(void)
     {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
         [self.pointerImageView setCenter:self.viewController.redButton.center];
         self.allowColorButtonPress = true;
         [self fadeInPointerImage:NULL delay:0.5 smallPointer:false];
@@ -1691,100 +1294,44 @@
     
     void (^showText3)(void) = ^(void)
     {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
         [self setTutorialDialogText:@"Give it a try!\n\nAdd some red to the Zoner."];
-        [self fadeInDialogText:showPointerOverRedButton delay:0.8];
-    };
-    
-    void (^fadeOutText2)(void) = ^(void)
-    {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
-        [self fadeOutDialogText:showText3 delay:2];
+        showPointerOverRedButton();
     };
     
     void (^showText2)(void) = ^(void)
     {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
         [self setTutorialDialogText:@"Adding color to it will spread the color into all surrounding cells."];
-        [self fadeInDialogText:fadeOutText2 delay:0.8];
-    };
-    
-    void (^fadeOutText)(void) = ^(void)
-    {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
-        [self fadeOutDialogText:showText2 delay:2];
+        self.waitingDelegate = showText3;
+        self.topContainerWaitingPress = true;
     };
     
     [self setTutorialDialogText:@"Remember the splitter?\n\nMeet its powered up cousin,\nthe Zoner!"];
-    [self fadeInDialogText:fadeOutText delay:1];
+    
+    self.waitingDelegate = showText2;
+    self.topContainerWaitingPress = true;
 }
 
 - (void)runWorld7Tutorial
 {
-    void (^showBeginButton)(void) = ^(void)
-    {
-        [self showBeginButtonCommon];
-    };
-    
     void (^showText5)(void) = ^(void)
     {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
         [self setTutorialDialogText:@"Time to convert some levels\ninto stars!"];
         [self.dialogText sizeToFit];
         [self.dialogText setCenter:CGPointMake(self.viewController.view.frame.size.width / 2, 65)];
         
-        [self fadeInDialogText:showBeginButton delay:0.8];
-    };
-    
-    void (^fadeOutText4)(void) = ^(void)
-    {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
-        [self fadeOutDialogText:showText5 delay:2.5];
+        [self showBeginButtonCommon];
     };
     
     void (^showText4)(void) = ^(void)
     {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
         self.pointerImageViewSmall.alpha = 0;
         [self setTutorialDialogText:@"Bam! The red is stopped while the yellow now flows freely."];
-        [self fadeInDialogText:fadeOutText4 delay:0.5];
+        self.waitingDelegate = showText5;
+        self.topContainerWaitingPress = true;
     };
     
     void (^showPointerOverCell)(void) = ^(void)
     {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
         NSMutableArray *colorRow = [self.userColorBoard.colorCellSections objectAtIndex:1];
         ColorCell *userColorCell = [colorRow objectAtIndex:1];
         
@@ -1798,48 +1345,20 @@
     
     void (^showText3)(void) = ^(void)
     {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
         [self setTutorialDialogText:@"Give it a try!"];
-        [self fadeInDialogText:showPointerOverCell delay:0.8];
-    };
-    
-    void (^fadeOutText2)(void) = ^(void)
-    {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
-        [self fadeOutDialogText:showText3 delay:3];
+        showPointerOverCell();
     };
     
     void (^showText2)(void) = ^(void)
     {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
         [self setTutorialDialogText:@"Simply tap the Converter to change the direction of color flowing through it."];
-        [self fadeInDialogText:fadeOutText2 delay:0.8];
-    };
-    
-    void (^fadeOutText)(void) = ^(void)
-    {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
-        [self fadeOutDialogText:showText2 delay:2];
+        self.waitingDelegate = showText3;
+        self.topContainerWaitingPress = true;
     };
     
     [self setTutorialDialogText:@"Time to switch gears with the Converter."];
-    [self fadeInDialogText:fadeOutText delay:1];
+    self.waitingDelegate = showText2;
+    self.topContainerWaitingPress = true;
     
     // Preset colors from left and top
     GridColorButton *gridColorButton = [self.userColorBoard.topGridColorButtons objectAtIndex:1];
@@ -1853,76 +1372,33 @@
 
 - (void)runWorld8Tutorial
 {
-    void (^showBeginButton)(void) = ^(void)
-    {
-        [self showBeginButtonCommon];
-    };
-    
     void (^showText6)(void) = ^(void)
     {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
         [self setTutorialDialogText:@"Boldly go where no color has gone before!"];
         [self.dialogText sizeToFit];
         [self.dialogText setCenter:CGPointMake(self.viewController.view.frame.size.width / 2, 65)];
         
-        [self fadeInDialogText:showBeginButton delay:0.8];
-    };
-    
-    void (^fadeOutText5)(void) = ^(void)
-    {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
-        [self fadeOutDialogText:showText6 delay:3.5];
+        [self showBeginButtonCommon];
     };
     
     void (^showText5)(void) = ^(void)
     {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
         self.pointerImageViewSmall.alpha = 0;
         [self setTutorialDialogText:@"The Transporter changes to the color it's taking in or letting out. This will be helpful later."];
-        [self fadeInDialogText:fadeOutText5 delay:0.8];
-    };
-    
-    void (^fadeOutText4)(void) = ^(void)
-    {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
-        [self fadeOutDialogText:showText5 delay:3];
+        self.waitingDelegate = showText6;
+        self.topContainerWaitingPress = true;
     };
     
     void (^showText4)(void) = ^(void)
     {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
         self.pointerImageViewSmall.alpha = 0;
         [self setTutorialDialogText:@"Boom! The yellow goes in the bottom Transporter and out the top Transporter."];
-        [self fadeInDialogText:fadeOutText4 delay:0.8];
+        self.waitingDelegate = showText5;
+        self.topContainerWaitingPress = true;
     };
     
     void (^showPointerOverCircle)(void) = ^(void)
     {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
         self.pointerImageView.alpha = 0;
         
         GridColorButton* gridColorButton = [self.userColorBoard.topGridColorButtons objectAtIndex:1];
@@ -1937,11 +1413,6 @@
     
     void (^showPointerOverYellowButton)(void) = ^(void)
     {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
         [self.pointerImageView setCenter:self.viewController.yellowButton.center];
         self.allowColorButtonPress = true;
         [self fadeInPointerImage:NULL delay:0.5 smallPointer:false];
@@ -1952,100 +1423,43 @@
     
     void (^showText3)(void) = ^(void)
     {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
         [self setTutorialDialogText:@"Try adding yellow to the top middle circle."];
-        [self fadeInDialogText:showPointerOverYellowButton delay:0.8];
-    };
-    
-    void (^fadeOutText2)(void) = ^(void)
-    {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
-        [self fadeOutDialogText:showText3 delay:3];
+        showPointerOverYellowButton();
     };
     
     void (^showText2)(void) = ^(void)
     {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
         [self setTutorialDialogText:@"Color goes in one transporter and out another.\n\nSee for yourself."];
-        [self fadeInDialogText:fadeOutText2 delay:0.8];
-    };
-    
-    void (^fadeOutText)(void) = ^(void)
-    {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
-        [self fadeOutDialogText:showText2 delay:2];
+        self.waitingDelegate = showText3;
+        self.topContainerWaitingPress = true;
     };
     
     [self setTutorialDialogText:@"Beam me up, Scotty!\nIntroducing the Transporter!"];
-    [self fadeInDialogText:fadeOutText delay:1];
+    self.waitingDelegate = showText2;
+    self.topContainerWaitingPress = true;
 }
 
 - (void)runWorld9Tutorial
 {
-    void (^showBeginButton)(void) = ^(void)
-    {
-        [self showBeginButtonCommon];
-    };
-    
     void (^showText5)(void) = ^(void)
     {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
         [self setTutorialDialogText:@"Shift things into high gear!"];
         [self.dialogText sizeToFit];
         [self.dialogText setCenter:CGPointMake(self.viewController.view.frame.size.width / 2, 65)];
         
-        [self fadeInDialogText:showBeginButton delay:0.8];
-    };
-    
-    void (^fadeOutText4)(void) = ^(void)
-    {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
-        [self fadeOutDialogText:showText5 delay:4];
+        [self showBeginButtonCommon];
     };
     
     void (^showText4)(void) = ^(void)
     {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
         self.pointerImageViewSmall.alpha = 0;
         [self setTutorialDialogText:@"It turned red! But the other Shifters changed too.\n\nThe order of change is always:\nblue -> red -> yellow -> blue"];
-        [self fadeInDialogText:fadeOutText4 delay:0.5];
+        self.waitingDelegate = showText5;
+        self.topContainerWaitingPress = true;
     };
     
     void (^showPointerOverCell)(void) = ^(void)
     {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
         NSMutableArray *colorRow = [self.userColorBoard.colorCellSections objectAtIndex:2];
         ColorCell *userColorCell = [colorRow objectAtIndex:1];
         
@@ -2059,48 +1473,20 @@
     
     void (^showText3)(void) = ^(void)
     {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
         [self setTutorialDialogText:@"Give it a go by touching the\nblue Shifter."];
-        [self fadeInDialogText:showPointerOverCell delay:0.8];
-    };
-    
-    void (^fadeOutText2)(void) = ^(void)
-    {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
-        [self fadeOutDialogText:showText3 delay:3];
+        showPointerOverCell();
     };
     
     void (^showText2)(void) = ^(void)
     {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
         [self setTutorialDialogText:@"Shifters are all linked and pass color between them."];
-        [self fadeInDialogText:fadeOutText2 delay:0.8];
-    };
-    
-    void (^fadeOutText)(void) = ^(void)
-    {
-        if (self.tutorialComplete)
-        {
-            return;
-        }
-        
-        [self fadeOutDialogText:showText2 delay:2];
+        self.waitingDelegate = showText3;
+        self.topContainerWaitingPress = true;
     };
     
     [self setTutorialDialogText:@"Last but not least, we have\nthe Shifter!"];
-    [self fadeInDialogText:fadeOutText delay:1];
+    self.waitingDelegate = showText2;
+    self.topContainerWaitingPress = true;
 }
 
 - (void)runWorld10Tutorial
@@ -2111,8 +1497,6 @@
         [self createBeginButton];
         CGPoint center = CGPointMake(self.viewController.view.frame.size.width / 2, self.dialogText.frame.origin.y + self.dialogText.frame.size.height + 45);
         [self.beginButton setCenter: center];
-        
-        [self fadeInBeginButton:2.5];
     };
     
     [self hideUpperPlayField:true];
@@ -2127,12 +1511,30 @@
     
     [self setTutorialDialogText:@"This is it, the final world!\n\nThese last levels combine everything you've learned up to this point.\n\nUnleash your puzzle skills and claim victory!"];
     
-    [self fadeInDialogText:showBeginButton delay:1];
+    showBeginButton();
 }
 
 - (void)navigatedBack
 {
     // NOOP
+}
+
+- (void)OnTapTopContainer
+{
+    if (self.topContainerWaitingPress)
+    {
+        self.topContainerWaitingPress = false;
+        self.waitingDelegate();
+    }
+}
+
+- (void)OnTapBottomPlayfieldContainer
+{
+    if (self.bottomContainerWaitingPress)
+    {
+        self.bottomContainerWaitingPress = false;
+        self.waitingDelegate();
+    }
 }
 
 @end
