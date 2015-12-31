@@ -225,7 +225,12 @@ static NSString *const LastLevelCompletedInWorldKey = @"LastLevelCompletedInWorl
     bool gamePurchased = [self getGamePurchased];
     int previousLevelId = levelId - 1;
     
-    if (levelId == 1)
+    if (worldId == 10 && gamePurchased)
+    {
+        // If game is purchased, and world 10 is is unlocked, all levels in world 10 is unlocked
+        return false;
+    }
+    else if (levelId == 1)
     {
         return false;
     }

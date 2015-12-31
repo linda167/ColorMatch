@@ -48,7 +48,7 @@ static NSArray *winMessageListForOneTwoStar;
                     @"Tip: The small circles on the Connector will tell you what color they all share.",
                     @"Tip: The Zoner adds color to all surrounding cells. It can be tricky!",
                     @"Tip: Tap the Converter to change the flow of color going through it.",
-                    @"Tip: Transporters change color depending on the colors going in and out of it.",
+                    @"Tip: Transporters change color depending on the colors going in and out of them.",
                     @"Tip: Shifters always follow the same color sequence; Blue, Red, Yellow, Blue.",
                     @"Fun Fact: Color Dash was made by only two people! We totally got married too!",
                     @"Did You Know: Moves are tracked but not counted against you.",
@@ -68,7 +68,7 @@ static NSArray *winMessageListForOneTwoStar;
                     @"Fun Fact: Dogs do not see in black and white. They can see yellows, blues, and purples.",
                     @"Tip: The little arrows around the Splitter will remind you of the original color added to it.",
                     @"Tip: If you see a \"plus\" symbol in the play field, that means you can directly add color to it.",
-                    @"Fun Fact: There is no actually dashing in Color Dash.",
+                    @"Fun Fact: There is no actual dashing in Color Dash.",
                     @"Did You Know: If enough people buy the game, we'll add new content. Spread the word!",
                     nil];
     }

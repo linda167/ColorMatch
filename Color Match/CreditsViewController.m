@@ -126,7 +126,7 @@
     self.yOffset += sectionOffset;
     [self addTextRow:@"\"Happy\"" bold:true size:16 yOffset:22];
     [self addTextRow:@"syncopika" bold:false size:18 yOffset:22];
-    [self addTextRow:@"opengameart.org/content/syncopika" bold:false size:16 yOffset:22];
+    [self addTextRow:@"greenbearmusic.bandcamp.com" bold:false size:16 yOffset:22];
     self.yOffset += bigSectionOffset;
     
     [self addTextRow:@"SOUND EFFECTS" bold:false size:17 yOffset:26];
