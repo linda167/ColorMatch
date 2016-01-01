@@ -1608,9 +1608,11 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Color Match/Color Match-Prefix.pch";
 				INFOPLIST_FILE = "Color Match/Color Match-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sunspark.colordash;
 				PRODUCT_NAME = "Color Dash";
 				PROVISIONING_PROFILE = "f497611b-0287-4c7b-be33-771a5f95e439";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1627,9 +1629,11 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Color Match/Color Match-Prefix.pch";
 				INFOPLIST_FILE = "Color Match/Color Match-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sunspark.colordash;
 				PRODUCT_NAME = "Color Dash";
 				PROVISIONING_PROFILE = "f497611b-0287-4c7b-be33-771a5f95e439";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

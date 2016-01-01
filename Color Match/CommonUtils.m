@@ -29,14 +29,16 @@ static NSArray *freeGameTipsList;
 static NSArray *tipsList;
 static NSArray *winMessageListForThreeStar;
 static NSArray *winMessageListForOneTwoStar;
+static bool isIphone4S;
 
 +(NSString*)GetRandomTip
 {
     if (tipsList == nil)
     {
         freeGameTipsList = [[NSArray alloc] initWithObjects:
-                            @"Tip: For only $0.99, you can  remove ads and unlock all levels",
+                            @"Tip: For only $0.99, you can remove ads and unlock all levels",
                             @"Tip: Hate ads? Buy the full game today for only $0.99!",
+                            @"Tip: You can access the first 4 levels of every world even if you don't buy the game.",
                             nil];
         
         tipsList = [[NSArray alloc] initWithObjects:
@@ -57,7 +59,6 @@ static NSArray *winMessageListForOneTwoStar;
                     @"Tip: Tutorials can be skipped. But don't blame us if you get confused later.",
                     @"Tip: Finishing the first 4 levels are required to play the rest of the world.",
                     @"Fun Fact: Ben conceived Color Dash in 2010 as a PC browser game.",
-                    @"Tip: You can access the first 4 levels of every world even if you don't buy the game.",
                     @"Tip: Don't remember how a special cell works? Use the \"Help\" button.",
                     @"Did You Know: You can disable sounds and background music on the settings page.",
                     @"Did You Know: The \"credits\" page is awesome! You should check it out.",
@@ -539,6 +540,16 @@ static NSArray *winMessageListForOneTwoStar;
 {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC*delay),
                    dispatch_get_main_queue(), block);
+}
+
++(void)determineIphone4S:(UIView*)view
+{
+    isIphone4S = view.frame.size.height == 480;
+}
+
++(bool)IsIphone4S
+{
+    return isIphone4S;
 }
 
 @end

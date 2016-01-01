@@ -30,5 +30,7 @@
 +(void)runBlockAfterDelay:(NSTimeInterval)delay block:(void (^)(void))block;
 +(NSString*)GetRandomTip;
 +(NSString*)GetRandomWinMessage:(int)stars;
++(void)determineIphone4S:(UIView*)view;
++(bool)IsIphone4S;
 
 @end

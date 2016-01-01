@@ -117,18 +117,20 @@
     struct BoardParameters boardParameters;
     boardParameters.gridSize = size;
     
+    bool isIphone4S = [CommonUtils IsIphone4S];
+    
     switch (size)
     {
         case 3:
-            boardParameters.colorCellSize = 50;
-            boardParameters.colorCellSpacing = 14;
+            boardParameters.colorCellSize = isIphone4S ? 40 : 50;
+            boardParameters.colorCellSpacing = isIphone4S ? 5 : 14;
             boardParameters.yOffsetForFirstTopGridButton= 4;
             boardParameters.xOffsetForFirstLeftGridButton = 31;
             boardParameters.emptyPaddingInGridButton = 13;
             boardParameters.goalColorCellSize = 46;
             boardParameters.goalColorCellSpacing = 8;
             boardParameters.xAdjustmentForColorCells = -4;
-            boardParameters.reflectorArrowCellSize = 49;
+            boardParameters.reflectorArrowCellSize = isIphone4S ? 39: 49;
             boardParameters.reflectorLeftToDownArrowXAdjustment = 2;
             boardParameters.reflectorLeftToDownArrowYAdjustment = 6;
             boardParameters.reflectorTopToRightArrowXAdjustment = 6;
@@ -147,27 +149,27 @@
             boardParameters.transporterMechanicUpperBound = 1;
             boardParameters.transporterPerGroupLowerBound = 1;
             boardParameters.transporterPerGroupUpperBound = 1;
-            boardParameters.transporterArrowSize = 43;
+            boardParameters.transporterArrowSize = isIphone4S ? 33 : 43;
             boardParameters.transporterArrowDownXAdjustment = 4;
-            boardParameters.transporterArrowDownYAdjustment = -16;
+            boardParameters.transporterArrowDownYAdjustment = isIphone4S ? -18 : -16;
             boardParameters.transporterArrowDownYAdjustment2 = 7;
             boardParameters.transporterArrowRightXAdjustment = 7;
-            boardParameters.transporterArrowRightXAdjustment2 = -16;
+            boardParameters.transporterArrowRightXAdjustment2 = isIphone4S ? -18 : -16;
             boardParameters.transporterArrowRightYAdjustment = 4;
             break;
         case 4:
-            boardParameters.colorCellSize = 40;
-            boardParameters.colorCellSpacing = 10;
+            boardParameters.colorCellSize = isIphone4S ? 32 : 40;
+            boardParameters.colorCellSpacing = isIphone4S ? 5 : 10;
             boardParameters.yOffsetForFirstTopGridButton= 6;
             boardParameters.xOffsetForFirstLeftGridButton = 27;
             boardParameters.emptyPaddingInGridButton = 11;
             boardParameters.goalColorCellSize = 34;
             boardParameters.goalColorCellSpacing = 6;
             boardParameters.xAdjustmentForColorCells = -6;
-            boardParameters.reflectorArrowCellSize = 39;
+            boardParameters.reflectorArrowCellSize = isIphone4S ? 31 : 39;
             boardParameters.reflectorLeftToDownArrowXAdjustment = 2;
-            boardParameters.reflectorLeftToDownArrowYAdjustment = 8;
-            boardParameters.reflectorTopToRightArrowXAdjustment = 8;
+            boardParameters.reflectorLeftToDownArrowYAdjustment = isIphone4S ? 5 : 8;
+            boardParameters.reflectorTopToRightArrowXAdjustment = isIphone4S ? 5 : 8;
             boardParameters.reflectorTopToRightArrowYAdjustment = 2;
             boardParameters.reflectorMechanicLowerBound = 1;
             boardParameters.reflectorMechanicUpperBound = 2;
@@ -183,7 +185,7 @@
             boardParameters.transporterMechanicUpperBound = 1;
             boardParameters.transporterPerGroupLowerBound = 1;
             boardParameters.transporterPerGroupUpperBound = 2;
-            boardParameters.transporterArrowSize = 35;
+            boardParameters.transporterArrowSize = isIphone4S ? 27 : 35;
             boardParameters.transporterArrowDownXAdjustment = 3;
             boardParameters.transporterArrowDownYAdjustment = -14;
             boardParameters.transporterArrowDownYAdjustment2 = 7;
@@ -192,19 +194,19 @@
             boardParameters.transporterArrowRightYAdjustment = 3;
             break;
         case 5:
-            boardParameters.colorCellSize = 35;
-            boardParameters.colorCellSpacing = 8;
-            boardParameters.yOffsetForFirstTopGridButton= 0;
+            boardParameters.colorCellSize = isIphone4S ? 26 : 35;
+            boardParameters.colorCellSpacing = isIphone4S ? 3 : 8;
+            boardParameters.yOffsetForFirstTopGridButton= isIphone4S ? 2 : 0;
             boardParameters.xOffsetForFirstLeftGridButton = 20;
             boardParameters.emptyPaddingInGridButton = 9;
             boardParameters.goalColorCellSize = 27;
             boardParameters.goalColorCellSpacing = 4;
             boardParameters.xAdjustmentForColorCells = 0;
-            boardParameters.reflectorArrowCellSize = 35;
-            boardParameters.reflectorLeftToDownArrowXAdjustment = 1;
-            boardParameters.reflectorLeftToDownArrowYAdjustment = 5;
-            boardParameters.reflectorTopToRightArrowXAdjustment = 5;
-            boardParameters.reflectorTopToRightArrowYAdjustment = 1;
+            boardParameters.reflectorArrowCellSize = isIphone4S ? 27 : 35;
+            boardParameters.reflectorLeftToDownArrowXAdjustment = isIphone4S ? 1 : 1;
+            boardParameters.reflectorLeftToDownArrowYAdjustment = isIphone4S ? 3 : 5;
+            boardParameters.reflectorTopToRightArrowXAdjustment = isIphone4S ? 3 : 5;
+            boardParameters.reflectorTopToRightArrowYAdjustment = isIphone4S ? 1 : 1;
             boardParameters.reflectorMechanicLowerBound = 2;
             boardParameters.reflectorMechanicUpperBound = 4;
             boardParameters.zonerMechanicLowerBound = 2;
@@ -219,13 +221,13 @@
             boardParameters.transporterMechanicUpperBound = 1;
             boardParameters.transporterPerGroupLowerBound = 1;
             boardParameters.transporterPerGroupUpperBound = 2;
-            boardParameters.transporterArrowSize = 29;
-            boardParameters.transporterArrowDownXAdjustment = 4;
+            boardParameters.transporterArrowSize = isIphone4S ? 23 : 29;
+            boardParameters.transporterArrowDownXAdjustment = isIphone4S ? 2 : 4;
             boardParameters.transporterArrowDownYAdjustment = -12;
             boardParameters.transporterArrowDownYAdjustment2 = 7;
             boardParameters.transporterArrowRightXAdjustment = 7;
             boardParameters.transporterArrowRightXAdjustment2 = -10;
-            boardParameters.transporterArrowRightYAdjustment = 4;
+            boardParameters.transporterArrowRightYAdjustment = isIphone4S ? 2 : 4;
             break;
         default:
             [NSException raise:@"Invalid input" format:@"Invalid board size"];

@@ -467,6 +467,14 @@
     self.pointerImageViewSmall = [[UIImageView alloc] initWithImage:pointerImageSmall];
     self.pointerImageViewSmall.alpha = 0;
     
+    if ([CommonUtils IsIphone4S])
+    {
+        CGRect frame = self.pointerImageViewSmall.frame;
+        frame.size.width = 0.75 * frame.size.width;
+        frame.size.height = 0.75 * frame.size.height;
+        self.pointerImageViewSmall.frame = frame;
+    }
+    
     [self.viewController.GridContainerView addSubview:self.pointerImageViewSmall];
 }
 
@@ -1305,7 +1313,7 @@
         self.topContainerWaitingPress = true;
     };
     
-    [self setTutorialDialogText:@"Remember the splitter?\n\nMeet its powered up cousin,\nthe Zoner!"];
+    [self setTutorialDialogText:@"Remember the Splitter?\n\nMeet its powered up cousin,\nthe Zoner!"];
     
     self.waitingDelegate = showText2;
     self.topContainerWaitingPress = true;

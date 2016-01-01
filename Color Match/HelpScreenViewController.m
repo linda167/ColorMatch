@@ -122,12 +122,25 @@
     
     if ((NSNull *) imageView == [NSNull null])
     {
-        int viewportWidth = self.view.frame.size.width;
+        bool isIphone4S = [CommonUtils IsIphone4S];
+        
         UIImage* image = [self getImageForPage:page];
-        int imageHeight = image.size.height;
+        int viewportWidth = self.view.frame.size.width;
+        int imageHeight;
+        
+        if (isIphone4S)
+        {
+            viewportWidth = .85 * viewportWidth;
+        }
+        
         double proportion = image.size.width / viewportWidth;
         imageHeight = image.size.height / proportion;
+        
         imageView = [[UIImageView alloc] initWithFrame:CGRectMake(self.scrollView.frame.size.width * page, 0, viewportWidth, imageHeight)];
+        [imageView setCenter:CGPointMake(self.view.center.x + self.scrollView.frame.size.width * page, self.view.center.y)];
+        CGRect frame = imageView.frame;
+        frame.origin.y = 0;
+        imageView.frame = frame;
         imageView.image = image;
         [self.helpSubViews replaceObjectAtIndex:page withObject:imageView];
         

@@ -33,6 +33,8 @@
 
 - (void)initUIElements
 {
+    [CommonUtils determineIphone4S:self.view];
+    
     // Hide elements to be animated in
     _divider.alpha = 0;
     _button1.alpha = 0;
@@ -135,7 +137,7 @@
      options:UIViewAnimationOptionCurveLinear
      animations:^
      {
-         _logo.center = CGPointMake(_logo.center.x, 182);
+         _logo.center = CGPointMake(_logo.center.x, 162);
      }
      completion:^(BOOL finished)
      {
@@ -144,6 +146,8 @@
 }
 
 - (void)fadeInDivider {
+    
+    _divider.center = CGPointMake(_divider.center.x, _logo.center.y + _divider.frame.size.height / 2 +  66);
     
     // Fade in divider
     [UIView

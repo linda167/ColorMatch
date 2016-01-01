@@ -125,6 +125,9 @@
 
 - (void)renderWorldTitleDisplay
 {
+    bool isIphone4S = [CommonUtils IsIphone4S];
+    int titleYOffset = isIphone4S ? 25 : 40;
+    
     UILabel *worldTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
     worldTitle.font = [UIFont fontWithName:@"Futura-Medium" size:20.0];
     worldTitle.textColor = [UIColor whiteColor];
@@ -133,13 +136,14 @@
     
     worldTitle.text = [NSString stringWithFormat: @"World %d", self.worldId];
     [worldTitle sizeToFit];
-    [worldTitle setCenter:CGPointMake(self.view.frame.size.width / 2, 40)];
+    [worldTitle setCenter:CGPointMake(self.view.frame.size.width / 2, titleYOffset)];
     
     [self.view addSubview:worldTitle];
 }
 
 - (void)renderLevelsDisplay
 {
+    bool isIphone4S = [CommonUtils IsIphone4S];
     int rowsToRender = 0;
     int colsToRender = 0;
         
@@ -148,9 +152,9 @@
     rowsToRender = levelCount % colsToRender;
     
     int totalLevelsToRender = [LevelsManager GetLevelCountForWorld:self.worldId];
-    int heightBetweenRows = 95;
+    int heightBetweenRows = isIphone4S ? 78 : 95;
     int widthBetweenCols = 75;
-    int yOffsetInitial = 75;
+    int yOffsetInitial = isIphone4S ? 50 : 75;
     int size = 60;
     
     // Calculate initial xOffset based on screen size
