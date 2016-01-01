@@ -118,12 +118,26 @@
     boardParameters.gridSize = size;
     
     bool isIphone4S = [CommonUtils IsIphone4S];
+    bool isIphone6Plus = [CommonUtils IsIphone6Plus];
     
     switch (size)
     {
         case 3:
             boardParameters.colorCellSize = isIphone4S ? 40 : 50;
-            boardParameters.colorCellSpacing = isIphone4S ? 5 : 14;
+            
+            if (isIphone4S)
+            {
+                boardParameters.colorCellSpacing = 5;
+            }
+            else if (isIphone6Plus)
+            {
+                boardParameters.colorCellSpacing = 25;
+            }
+            else
+            {
+                boardParameters.colorCellSpacing = 14;
+            }
+            
             boardParameters.yOffsetForFirstTopGridButton= 4;
             boardParameters.xOffsetForFirstLeftGridButton = 31;
             boardParameters.emptyPaddingInGridButton = 13;
@@ -159,7 +173,20 @@
             break;
         case 4:
             boardParameters.colorCellSize = isIphone4S ? 32 : 40;
-            boardParameters.colorCellSpacing = isIphone4S ? 5 : 10;
+            
+            if (isIphone4S)
+            {
+                boardParameters.colorCellSpacing = 5;
+            }
+            else if (isIphone6Plus)
+            {
+                boardParameters.colorCellSpacing = 20;
+            }
+            else
+            {
+                boardParameters.colorCellSpacing = 10;
+            }
+            
             boardParameters.yOffsetForFirstTopGridButton= 6;
             boardParameters.xOffsetForFirstLeftGridButton = 27;
             boardParameters.emptyPaddingInGridButton = 11;
@@ -195,7 +222,20 @@
             break;
         case 5:
             boardParameters.colorCellSize = isIphone4S ? 26 : 35;
-            boardParameters.colorCellSpacing = isIphone4S ? 3 : 8;
+            
+            if (isIphone4S)
+            {
+                boardParameters.colorCellSpacing = 3;
+            }
+            else if (isIphone6Plus)
+            {
+                boardParameters.colorCellSpacing = 16;
+            }
+            else
+            {
+                boardParameters.colorCellSpacing = 8;
+            }
+            
             boardParameters.yOffsetForFirstTopGridButton= isIphone4S ? 2 : 0;
             boardParameters.xOffsetForFirstLeftGridButton = 20;
             boardParameters.emptyPaddingInGridButton = 9;

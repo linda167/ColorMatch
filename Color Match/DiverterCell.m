@@ -22,15 +22,25 @@
     return self;
 }
 
--(void)addInputColor:(NSNumber*)color cellsAffected:(NSMutableArray*)cellsAffected isHorizontal:(bool)isHorizontal
+-(void)addInputColor:(NSNumber*)color cellsAffected:(NSMutableArray*)cellsAffected isHorizontal:(bool)isHorizontal isFromSpecialCell:(bool)isFromSpecialCell
 {
+    if (isFromSpecialCell)
+    {
+        return;
+    }
+    
     ColorCell* cellToPassColor = isHorizontal ? self.leftToDownLine : self.topToRightLine;
 
     [cellToPassColor addInputColor:color cellsAffected:NULL isHorizontal:isHorizontal];
 }
 
--(void)removeInputColor:(NSNumber*)color cellsAffected:(NSMutableArray*)cellsAffected isHorizontal:(bool)isHorizontal
+-(void)removeInputColor:(NSNumber*)color cellsAffected:(NSMutableArray*)cellsAffected isHorizontal:(bool)isHorizontal isFromSpecialCell:(bool)isFromSpecialCell
 {
+    if (isFromSpecialCell)
+    {
+        return;
+    }
+    
     ColorCell* cellToPassColor = isHorizontal ? self.leftToDownLine : self.topToRightLine;
     
     [cellToPassColor removeInputColor:color cellsAffected:NULL isHorizontal:isHorizontal];

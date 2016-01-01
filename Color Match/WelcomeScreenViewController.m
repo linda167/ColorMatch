@@ -34,6 +34,7 @@
 - (void)initUIElements
 {
     [CommonUtils determineIphone4S:self.view];
+    [CommonUtils determineIphone6Plus:self.view];
     
     // Hide elements to be animated in
     _divider.alpha = 0;
@@ -128,6 +129,8 @@
     // Play sound:
     [[SoundManager sharedManager] playSound:@"intro.mp3" looping:NO];
     
+    int logoCenterY = [CommonUtils IsIphone6Plus] ? 200 : 162;
+    
     // Drop down logo
     [UIView
      animateWithDuration:.80
@@ -137,7 +140,7 @@
      options:UIViewAnimationOptionCurveLinear
      animations:^
      {
-         _logo.center = CGPointMake(_logo.center.x, 162);
+         _logo.center = CGPointMake(_logo.center.x, logoCenterY);
      }
      completion:^(BOOL finished)
      {

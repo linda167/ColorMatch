@@ -21,7 +21,9 @@
 +(bool)isGoalTargetCell:(CellType)cellType;
 -(id)init:(int)cellType;
 -(void)addInputColor: (NSNumber *)color cellsAffected:(NSMutableArray*)cellsAffected isHorizontal:(bool)isHorizontal;
+-(void)addInputColor:(NSNumber*)color cellsAffected:(NSMutableArray*)cellsAffected isHorizontal:(bool)isHorizontal isFromSpecialCell:(bool)isFromSpecialCell;
 -(void)removeInputColor: (NSNumber *)color cellsAffected:(NSMutableArray*)cellsAffected isHorizontal:(bool)isHorizontal;
+-(void)removeInputColor:(NSNumber*)color cellsAffected:(NSMutableArray*)cellsAffected isHorizontal:(bool)isHorizontal isFromSpecialCell:(bool)isFromSpecialCell;
 -(void)removeAllInputColors;
 -(void)recalculateSpecialCellImage;
 -(void)recalculateOutputColor;

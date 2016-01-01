@@ -35,6 +35,11 @@
     return cellType == NormalCell || cellType == Connector || cellType == Shifter;
 }
 
+-(bool)isReflectorOrDiverter
+{
+    return self.cellType == ReflectorLeftToDown || self.cellType == ReflectorTopToRight || self.cellType == Diverter;
+}
+
 -(void)recalculateSpecialCellImage
 {
     if (self.cellType == Connector)
@@ -49,7 +54,14 @@
 
 -(void)addInputColor:(NSNumber*)color cellsAffected:(NSMutableArray*)cellsAffected isHorizontal:(bool)isHorizontal
 {
-    if (![ColorCell doesCellSupportCombineColor:self.cellType])
+    [self addInputColor:color cellsAffected:cellsAffected isHorizontal:isHorizontal isFromSpecialCell:false];
+}
+
+-(void)addInputColor:(NSNumber*)color cellsAffected:(NSMutableArray*)cellsAffected isHorizontal:(bool)isHorizontal isFromSpecialCell:(bool)isFromSpecialCell
+{
+    // Special cells don't apply to reflectors or diverters
+    if (![ColorCell doesCellSupportCombineColor:self.cellType] ||
+        (isFromSpecialCell && [self isReflectorOrDiverter]))
     {
         return;
     }
@@ -66,7 +78,14 @@
 
 -(void)removeInputColor:(NSNumber*)color cellsAffected:(NSMutableArray*)cellsAffected isHorizontal:(bool)isHorizontal
 {
-    if (![ColorCell doesCellSupportCombineColor:self.cellType])
+    [self removeInputColor:color cellsAffected:cellsAffected isHorizontal:isHorizontal isFromSpecialCell:false];
+}
+
+-(void)removeInputColor:(NSNumber*)color cellsAffected:(NSMutableArray*)cellsAffected isHorizontal:(bool)isHorizontal isFromSpecialCell:(bool)isFromSpecialCell
+{
+    // Special cells don't apply to reflectors or diverters
+    if (![ColorCell doesCellSupportCombineColor:self.cellType] ||
+        (isFromSpecialCell && [self isReflectorOrDiverter]))
     {
         return;
     }

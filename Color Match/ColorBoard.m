@@ -280,35 +280,45 @@
     return NULL;
 }
 
--(void)addColorToSingleCell:(ColorCell*)colorCell color:(int)color cellsAffected:(NSMutableArray*)cellsAffected isHorizontal:(bool)isHorizontal
+-(void)addColorToSingleCell:(ColorCell*)colorCell color:(int)color cellsAffected:(NSMutableArray*)cellsAffected isHorizontal:(bool)isHorizontal isFromSpecialCell:(bool)isFromSpecialCell
 {
-    [colorCell addInputColor:[NSNumber numberWithInt:color] cellsAffected:cellsAffected isHorizontal:isHorizontal];
+    [colorCell addInputColor:[NSNumber numberWithInt:color] cellsAffected:cellsAffected isHorizontal:isHorizontal isFromSpecialCell:isFromSpecialCell];
 }
 
--(void)removeColorFromSingleCell:(ColorCell*)colorCell color:(int)color cellsAffected:(NSMutableArray*)cellsAffected isHorizontal:(bool)isHorizontal
+-(void)removeColorFromSingleCell:(ColorCell*)colorCell color:(int)color cellsAffected:(NSMutableArray*)cellsAffected isHorizontal:(bool)isHorizontal isFromSpecialCell:(bool)isFromSpecialCell
 {
     [colorCell removeInputColor:[NSNumber numberWithInt:color] cellsAffected:cellsAffected isHorizontal:isHorizontal];
 }
 
 -(void)applyColorToSingleCell:(ColorCell*)colorCell color:(int)color cellsAffected:(NSMutableArray*)cellsAffected isAdd:(bool)isAdd isHorizontal:(bool)isHorizontal
 {
+    [self applyColorToSingleCell:colorCell color:color cellsAffected:cellsAffected isAdd:isAdd isHorizontal:isHorizontal isFromSpecialCell:false];
+}
+
+-(void)applyColorToSingleCell:(ColorCell*)colorCell color:(int)color cellsAffected:(NSMutableArray*)cellsAffected isAdd:(bool)isAdd isHorizontal:(bool)isHorizontal isFromSpecialCell:(bool)isFromSpecialCell
+{
     if (isAdd)
     {
-        [self addColorToSingleCell:colorCell color:color cellsAffected:cellsAffected isHorizontal:isHorizontal];
+        [self addColorToSingleCell:colorCell color:color cellsAffected:cellsAffected isHorizontal:isHorizontal isFromSpecialCell:isFromSpecialCell];
     }
     else
     {
-        [self removeColorFromSingleCell:colorCell color:color cellsAffected:cellsAffected isHorizontal:isHorizontal];
+        [self removeColorFromSingleCell:colorCell color:color cellsAffected:cellsAffected isHorizontal:isHorizontal isFromSpecialCell:isFromSpecialCell];
     }
 }
 
 -(void)applyColorToSingleCellAtIndex:(int)rowValue col:(int)colValue color:(int)color cellsAffected:(NSMutableArray*)cellsAffected isAdd:(bool)isAdd
 {
+    [self applyColorToSingleCellAtIndex:rowValue col:colValue color:color cellsAffected:cellsAffected isAdd:isAdd isFromSpecialCell:false];
+}
+
+-(void)applyColorToSingleCellAtIndex:(int)rowValue col:(int)colValue color:(int)color cellsAffected:(NSMutableArray*)cellsAffected isAdd:(bool)isAdd isFromSpecialCell:(bool)isFromSpecialCell
+{
     NSArray *row = [self.colorCellSections objectAtIndex:rowValue];
     ColorCell *colorCell = [row objectAtIndex:colValue];
     
     // Direction doesn't matter
-    [self applyColorToSingleCell:colorCell color:color cellsAffected:cellsAffected isAdd:isAdd isHorizontal:true];
+    [self applyColorToSingleCell:colorCell color:color cellsAffected:cellsAffected isAdd:isAdd isHorizontal:true isFromSpecialCell:isFromSpecialCell];
 }
 
 -(UIView*)getUIViewForCell:(int)cellType xOffset:(int)xOffset yOffset:(int)yOffset size:(int)size colorCell:(ColorCell*)colorCell
@@ -485,13 +495,13 @@
         // Apply to top left
         if (col > 0)
         {
-            [self applyColorToSingleCellAtIndex:row-1 col:col-1 color:splitterCell.inputColor cellsAffected:cellsAffected isAdd:isAdd];
+            [self applyColorToSingleCellAtIndex:row-1 col:col-1 color:splitterCell.inputColor cellsAffected:cellsAffected isAdd:isAdd isFromSpecialCell:true];
         }
         
         // Apply to top right
         if (col < self.boardParameters.gridSize - 1)
         {
-            [self applyColorToSingleCellAtIndex:row-1 col:col+1 color:splitterCell.inputColor cellsAffected:cellsAffected isAdd:isAdd];
+            [self applyColorToSingleCellAtIndex:row-1 col:col+1 color:splitterCell.inputColor cellsAffected:cellsAffected isAdd:isAdd isFromSpecialCell:true];
         }
     }
     
@@ -501,13 +511,13 @@
         // Apply to bottom left
         if (col > 0)
         {
-            [self applyColorToSingleCellAtIndex:row+1 col:col-1 color:splitterCell.inputColor cellsAffected:cellsAffected isAdd:isAdd];
+            [self applyColorToSingleCellAtIndex:row+1 col:col-1 color:splitterCell.inputColor cellsAffected:cellsAffected isAdd:isAdd isFromSpecialCell:true];
         }
         
         // Apply to bottom right
         if (col < self.boardParameters.gridSize - 1)
         {
-            [self applyColorToSingleCellAtIndex:row+1 col:col+1 color:splitterCell.inputColor cellsAffected:cellsAffected isAdd:isAdd];
+            [self applyColorToSingleCellAtIndex:row+1 col:col+1 color:splitterCell.inputColor cellsAffected:cellsAffected isAdd:isAdd isFromSpecialCell:true];
         }
     }
 }
@@ -560,29 +570,29 @@
         // Apply to top left
         if (col > 0)
         {
-            [self applyColorToSingleCellAtIndex:row-1 col:col-1 color:zonerCell.inputColor cellsAffected:cellsAffected isAdd:isAdd];
+            [self applyColorToSingleCellAtIndex:row-1 col:col-1 color:zonerCell.inputColor cellsAffected:cellsAffected isAdd:isAdd isFromSpecialCell:true];
         }
         
         // Apply to top
-        [self applyColorToSingleCellAtIndex:row-1 col:col color:zonerCell.inputColor cellsAffected:cellsAffected isAdd:isAdd];\
+        [self applyColorToSingleCellAtIndex:row-1 col:col color:zonerCell.inputColor cellsAffected:cellsAffected isAdd:isAdd isFromSpecialCell:true];
         
         // Apply to top right
         if (col < self.boardParameters.gridSize - 1)
         {
-            [self applyColorToSingleCellAtIndex:row-1 col:col+1 color:zonerCell.inputColor cellsAffected:cellsAffected isAdd:isAdd];
+            [self applyColorToSingleCellAtIndex:row-1 col:col+1 color:zonerCell.inputColor cellsAffected:cellsAffected isAdd:isAdd isFromSpecialCell:true];
         }
     }
     
     // Apply to left
     if (col > 0)
     {
-        [self applyColorToSingleCellAtIndex:row col:col-1 color:zonerCell.inputColor cellsAffected:cellsAffected isAdd:isAdd];
+        [self applyColorToSingleCellAtIndex:row col:col-1 color:zonerCell.inputColor cellsAffected:cellsAffected isAdd:isAdd isFromSpecialCell:true];
     }
     
     // Apply to right
     if (col < self.boardParameters.gridSize - 1)
     {
-        [self applyColorToSingleCellAtIndex:row col:col+1 color:zonerCell.inputColor cellsAffected:cellsAffected isAdd:isAdd];
+        [self applyColorToSingleCellAtIndex:row col:col+1 color:zonerCell.inputColor cellsAffected:cellsAffected isAdd:isAdd isFromSpecialCell:true];
     }
     
     // Apply to bottom
@@ -591,16 +601,16 @@
         // Apply to bottom left
         if (col > 0)
         {
-            [self applyColorToSingleCellAtIndex:row+1 col:col-1 color:zonerCell.inputColor cellsAffected:cellsAffected isAdd:isAdd];
+            [self applyColorToSingleCellAtIndex:row+1 col:col-1 color:zonerCell.inputColor cellsAffected:cellsAffected isAdd:isAdd isFromSpecialCell:true];
         }
         
         // Apply to bottom
-        [self applyColorToSingleCellAtIndex:row+1 col:col color:zonerCell.inputColor cellsAffected:cellsAffected isAdd:isAdd];
+        [self applyColorToSingleCellAtIndex:row+1 col:col color:zonerCell.inputColor cellsAffected:cellsAffected isAdd:isAdd isFromSpecialCell:true];
         
         // Apply to bottom right
         if (col < self.boardParameters.gridSize - 1)
         {
-            [self applyColorToSingleCellAtIndex:row+1 col:col+1 color:zonerCell.inputColor cellsAffected:cellsAffected isAdd:isAdd];
+            [self applyColorToSingleCellAtIndex:row+1 col:col+1 color:zonerCell.inputColor cellsAffected:cellsAffected isAdd:isAdd isFromSpecialCell:true];
         }
     }
 }

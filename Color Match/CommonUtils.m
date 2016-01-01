@@ -30,6 +30,7 @@ static NSArray *tipsList;
 static NSArray *winMessageListForThreeStar;
 static NSArray *winMessageListForOneTwoStar;
 static bool isIphone4S;
+static bool isIphone6Plus;
 
 +(NSString*)GetRandomTip
 {
@@ -550,6 +551,16 @@ static bool isIphone4S;
 +(bool)IsIphone4S
 {
     return isIphone4S;
+}
+
++(void)determineIphone6Plus:(UIView*)view
+{
+    isIphone6Plus = view.frame.size.height == 736;
+}
+
++(bool)IsIphone6Plus
+{
+    return isIphone6Plus;
 }
 
 @end

@@ -32,5 +32,7 @@
 +(NSString*)GetRandomWinMessage:(int)stars;
 +(void)determineIphone4S:(UIView*)view;
 +(bool)IsIphone4S;
++(void)determineIphone6Plus:(UIView*)view;
++(bool)IsIphone6Plus;
 
 @end

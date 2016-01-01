@@ -126,7 +126,21 @@
 - (void)renderWorldTitleDisplay
 {
     bool isIphone4S = [CommonUtils IsIphone4S];
-    int titleYOffset = isIphone4S ? 25 : 40;
+    bool isIphone6Plus = [CommonUtils IsIphone6Plus];
+    int titleYOffset;
+    
+    if (isIphone4S)
+    {
+        titleYOffset = 25;
+    }
+    else if (isIphone6Plus)
+    {
+        titleYOffset = 55;
+    }
+    else
+    {
+        titleYOffset = 40;
+    }
     
     UILabel *worldTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
     worldTitle.font = [UIFont fontWithName:@"Futura-Medium" size:20.0];
@@ -144,6 +158,8 @@
 - (void)renderLevelsDisplay
 {
     bool isIphone4S = [CommonUtils IsIphone4S];
+    bool isIphone6Plus = [CommonUtils IsIphone6Plus];
+    
     int rowsToRender = 0;
     int colsToRender = 0;
         
@@ -152,9 +168,35 @@
     rowsToRender = levelCount % colsToRender;
     
     int totalLevelsToRender = [LevelsManager GetLevelCountForWorld:self.worldId];
-    int heightBetweenRows = isIphone4S ? 78 : 95;
-    int widthBetweenCols = 75;
-    int yOffsetInitial = isIphone4S ? 50 : 75;
+    int heightBetweenRows;
+    if (isIphone4S)
+    {
+        heightBetweenRows = 78;
+    }
+    else if (isIphone6Plus)
+    {
+        heightBetweenRows = 110;
+    }
+    else
+    {
+        heightBetweenRows = 95;
+    }
+    
+    int widthBetweenCols = isIphone6Plus ? 85 : 75;
+    int yOffsetInitial;
+    if (isIphone4S)
+    {
+        yOffsetInitial = 50;
+    }
+    else if (isIphone6Plus)
+    {
+        yOffsetInitial = 100;
+    }
+    else
+    {
+        yOffsetInitial = 75;
+    }
+        
     int size = 60;
     
     // Calculate initial xOffset based on screen size
