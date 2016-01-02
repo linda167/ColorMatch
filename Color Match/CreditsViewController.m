@@ -182,7 +182,7 @@
     [self addTextRow:@"The PA forums" bold:false size:16 yOffset:22];
     [self addTextRow:@"Daisy the Dog" bold:false size:16 yOffset:22];
     [self addTextRow:@"Our family and friends" bold:false size:16 yOffset:22];
-    [self addTextRow:@"And of course, you for playing the game!" bold:false size:16 yOffset:22];
+    [self addTextRow:@"And of course, you, for playing the game!" bold:false size:16 yOffset:22];
     
     // Set scrollView content size
     self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width, self.yOffset);

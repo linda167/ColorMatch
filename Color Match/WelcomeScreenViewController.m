@@ -43,6 +43,9 @@
     _button3.alpha = 0;
     _button4.alpha = 0;
     
+    // Turn off debug menu
+    _debugButton.alpha = 0;
+    
     // Center UI elements
     int centerWidth = self.view.frame.size.width / 2;
     _logo.center = CGPointMake(centerWidth, _logo.center.y);

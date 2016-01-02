@@ -686,10 +686,10 @@
 		AF2C22291874B8B700082561 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				BF18EAF81C2B92AF00BA3492 /* GoogleService-Info.plist */,
-				BF7E0ECB1C20F46F00EEB567 /* Images.xcassets */,
-				AF2C222A1874B8B700082561 /* Color Match-Info.plist */,
 				AF2C222B1874B8B700082561 /* InfoPlist.strings */,
+				BF7E0ECB1C20F46F00EEB567 /* Images.xcassets */,
+				BF18EAF81C2B92AF00BA3492 /* GoogleService-Info.plist */,
+				AF2C222A1874B8B700082561 /* Color Match-Info.plist */,
 				AF2C222E1874B8B700082561 /* main.m */,
 				AF2C22301874B8B700082561 /* Color Match-Prefix.pch */,
 			);
@@ -1609,7 +1609,7 @@
 				GCC_PREFIX_HEADER = "Color Match/Color Match-Prefix.pch";
 				INFOPLIST_FILE = "Color Match/Color Match-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.sunspark.colordash;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sunspark.colordashfull;
 				PRODUCT_NAME = "Color Dash";
 				PROVISIONING_PROFILE = "f497611b-0287-4c7b-be33-771a5f95e439";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1630,7 +1630,7 @@
 				GCC_PREFIX_HEADER = "Color Match/Color Match-Prefix.pch";
 				INFOPLIST_FILE = "Color Match/Color Match-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.sunspark.colordash;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sunspark.colordashfull;
 				PRODUCT_NAME = "Color Dash";
 				PROVISIONING_PROFILE = "f497611b-0287-4c7b-be33-771a5f95e439";
 				TARGETED_DEVICE_FAMILY = 1;
