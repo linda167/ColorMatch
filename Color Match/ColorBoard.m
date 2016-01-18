@@ -287,7 +287,7 @@
 
 -(void)removeColorFromSingleCell:(ColorCell*)colorCell color:(int)color cellsAffected:(NSMutableArray*)cellsAffected isHorizontal:(bool)isHorizontal isFromSpecialCell:(bool)isFromSpecialCell
 {
-    [colorCell removeInputColor:[NSNumber numberWithInt:color] cellsAffected:cellsAffected isHorizontal:isHorizontal];
+    [colorCell removeInputColor:[NSNumber numberWithInt:color] cellsAffected:cellsAffected isHorizontal:isHorizontal isFromSpecialCell:isFromSpecialCell];
 }
 
 -(void)applyColorToSingleCell:(ColorCell*)colorCell color:(int)color cellsAffected:(NSMutableArray*)cellsAffected isAdd:(bool)isAdd isHorizontal:(bool)isHorizontal
