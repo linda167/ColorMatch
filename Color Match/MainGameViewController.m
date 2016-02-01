@@ -22,7 +22,6 @@
 
 @interface MainGameViewController ()
 @property int size;
-@property bool isAdPresenting;
 @end
 
 @implementation MainGameViewController
@@ -48,15 +47,6 @@
         [[SoundManager sharedManager] playSound:@"backSelect.mp3" looping:NO];
         
         [self.mainGameManager navigatedBack];
-    }
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    if (self.isAdPresenting)
-    {
-        self.isAdPresenting = false;
-        [self.mainGameManager resumeGameAfterAd];
     }
 }
 
@@ -156,17 +146,6 @@
 - (void)CloseHelpMenu
 {
     [self.mainGameManager CloseHelpMenu];
-}
-
-- (void)PresentAd
-{
-    self.interstitialPresentationPolicy = ADInterstitialPresentationPolicyManual;
-    self.isAdPresenting = [self requestInterstitialAdPresentation];
-    
-    if (!self.isAdPresenting)
-    {
-        [self.mainGameManager resumeGameAfterAd];
-    }
 }
 
 @end

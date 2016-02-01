@@ -31,6 +31,19 @@ static NSArray *winMessageListForThreeStar;
 static NSArray *winMessageListForOneTwoStar;
 static bool isIphone4S;
 static bool isIphone6Plus;
+static NSDate *lastTimeAdShown;
+
++(bool)shouldShowAd
+{
+    NSDate *now = [NSDate date];
+    if (lastTimeAdShown == nil || [now timeIntervalSinceDate:lastTimeAdShown] > 120)
+    {
+        lastTimeAdShown = now;
+        return true;
+    }
+    
+    return false;
+}
 
 +(NSString*)GetRandomTip
 {
@@ -519,7 +532,7 @@ static bool isIphone6Plus;
     
     if (reasonIsNeedPurchase)
     {
-        [alert addButton:@"Purchase Full Game" actionBlock:^(void)
+        [alert addButton:@"Buy Full Game ($0.99)" actionBlock:^(void)
          {
              UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
              PurchaseGameViewController *purchaseGameView = (PurchaseGameViewController*)[storyBoard instantiateViewControllerWithIdentifier:@"purchaseGameScreen"];

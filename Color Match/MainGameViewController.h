@@ -17,7 +17,6 @@
 - (void)OnUserActionTaken;
 - (void)CloseHelpMenu;
 - (void)createGameManagerAndStartNewGame;
-- (void)PresentAd;
 
 @property (weak, nonatomic) IBOutlet UIView *GridContainerView;
 @property (weak, nonatomic) IBOutlet UIView *GoalContainerView;

@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "UserColorBoard.h"
 #import "BoardCells.h"
+@import GoogleMobileAds;
 
 #define UIColorFromHEX(rgbValue) [UIColor \
 colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \

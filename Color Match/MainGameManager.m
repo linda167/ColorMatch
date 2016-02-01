@@ -20,9 +20,9 @@
 #import <Google/Analytics.h>
 #import "SCLAlertView.h"
 #import "CreditsViewController.h"
-@import iAd;
+@import GoogleMobileAds;
 
-@interface MainGameManager ()
+@interface MainGameManager () <GADInterstitialDelegate>
 
 @property NSTimer *stopWatchTimer;
 @property NSDate *startTime;
@@ -31,7 +31,7 @@
 @property NSTimeInterval timeInterval;
 @property HelpScreenViewController *helpScreenViewController;
 @property bool timerPaused;
-@property ADInterstitialAd *interstitial;
+@property(nonatomic, strong) GADInterstitial *interstitial;
 @property AdPendingState adPendingState;
 @end
 
@@ -862,19 +862,29 @@
 
 - (void)cycleInterstitial
 {
-    self.interstitial = [[ADInterstitialAd alloc] init];
+    self.interstitial = [[GADInterstitial alloc] initWithAdUnitID:@"ca-app-pub-7449410278277334/1916784201"];
+    self.interstitial.delegate = self;
+    
+    GADRequest *request = [GADRequest request];
+    request.testDevices = @[@"c064e2cc00e4cf55a71f55b0edffc535"];
+    [self.interstitial loadRequest:request];
 }
 
 - (void)presentInterlude
 {
-    if (self.interstitial.loaded)
+    if ([CommonUtils shouldShowAd] && [self.interstitial isReady])
     {
-        [self.viewController PresentAd];
+        [self.interstitial presentFromRootViewController:self.viewController];
     }
     else
     {
         [self resumeGameAfterAd];
     }
+}
+
+- (void)interstitialDidDismissScreen:(GADInterstitial*)interstitial
+{
+    [self resumeGameAfterAd];
 }
 
 - (void)resumeGameAfterAd

@@ -13,6 +13,7 @@
 #import "SoundManager.h"
 #import "Appirater.h"
 #import "WorldViewController.h"
+#import "PurchaseGameViewController.h"
 #import <StoreKit/StoreKit.h>
 #import <Google/Analytics.h>
 
@@ -271,6 +272,13 @@
     _button4.frame = _button3.frame;
     _button3.frame = _button2.frame;
     _button2.hidden = true;
+    
+    // Pop buy game screen as needed
+    UIViewController *topView = (UIViewController*)[self.navigationController.viewControllers objectAtIndex:self.navigationController.viewControllers.count -1];
+    if ([topView isKindOfClass:[PurchaseGameViewController class]])
+    {
+        [self.navigationController popViewControllerAnimated:true];
+    }
 }
 
 @end

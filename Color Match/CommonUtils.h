@@ -34,5 +34,6 @@
 +(bool)IsIphone4S;
 +(void)determineIphone6Plus:(UIView*)view;
 +(bool)IsIphone6Plus;
++(bool)shouldShowAd;
 
 @end
