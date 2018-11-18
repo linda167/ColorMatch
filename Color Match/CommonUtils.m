@@ -50,11 +50,10 @@ static NSDate *lastTimeAdShown;
     if (tipsList == nil)
     {
         freeGameTipsList = [[NSArray alloc] initWithObjects:
-                            @"Tip: For only $0.99, you can remove ads and unlock all levels",
-                            @"Tip: Hate ads? Buy the full game today for only $0.99!",
-                            @"Tip: You can access the first 4 levels of every world even if you don't buy the game.",
+                            @"Tip: Hate the ads? Permanently remove them for only $0.99!",
                             nil];
         
+        // TODO: lindach: Update tips based on tutorial completed
         tipsList = [[NSArray alloc] initWithObjects:
                     @"Tip: Use the white color to clear inputs in the play field.",
                     @"Did You Know: You can change the background music in the settings menu.",
@@ -95,7 +94,7 @@ static NSDate *lastTimeAdShown;
     else
     {
         // User has not purchased full game yet
-        int rand = arc4random()%3;
+        int rand = arc4random()%5;
         if (rand == 0)
         {
             // Show free tip
@@ -525,20 +524,9 @@ static NSDate *lastTimeAdShown;
 
 +(void) ShowLockedLevelMessage:(int)worldId levelId:(int)levelId isFromPreviousLevel:(bool)isFromPreviousLevel viewController:(UIViewController*)viewController triggerBackOnDismiss:(bool)triggerBackOnDismiss
 {
-    bool reasonIsNeedPurchase;
-    NSString* lockString = [[UserData sharedUserData] getLevelLockedMessage:worldId levelId:levelId isFromPreviousLevel:isFromPreviousLevel reasonIsNeedPurchase:&reasonIsNeedPurchase];
+    NSString* lockString = [[UserData sharedUserData] getLevelLockedMessage:worldId levelId:levelId isFromPreviousLevel:isFromPreviousLevel];
     
     SCLAlertView *alert = [[SCLAlertView alloc] init];
-    
-    if (reasonIsNeedPurchase)
-    {
-        [alert addButton:@"Buy Full Game ($0.99)" actionBlock:^(void)
-         {
-             UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
-             PurchaseGameViewController *purchaseGameView = (PurchaseGameViewController*)[storyBoard instantiateViewControllerWithIdentifier:@"purchaseGameScreen"];
-             [viewController.navigationController pushViewController:purchaseGameView animated:YES];
-         }];
-    }
     
     [alert alertIsDismissed:^{
         if (triggerBackOnDismiss)

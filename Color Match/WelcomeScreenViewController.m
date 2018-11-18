@@ -44,8 +44,9 @@
     _button3.alpha = 0;
     _button4.alpha = 0;
     
+    // TODO: lindach: Turn off debug mode
     // Turn off debug menu
-    _debugButton.alpha = 0;
+    _debugButton.alpha = 1;
     
     // Center UI elements
     int centerWidth = self.view.frame.size.width / 2;

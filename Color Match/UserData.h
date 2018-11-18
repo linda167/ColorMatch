@@ -27,7 +27,7 @@
 -(bool)getGamePurchased;
 -(bool)getIsLevelLocked:(int)worldId levelId:(int)levelId;
 -(bool)getIsWorldLocked:(int)worldId;
--(NSString*)getLevelLockedMessage:(int)worldId levelId:(int)levelId isFromPreviousLevel:(bool)isFromPreviousLevel reasonIsNeedPurchase:(bool*)reasonIsNeedPurchase;
+-(NSString*)getLevelLockedMessage:(int)worldId levelId:(int)levelId isFromPreviousLevel:(bool)isFromPreviousLevel;
 -(void)storeIsSoundEnabled:(bool)enabled;
 -(bool)getIsSoundEnabled;
 -(void)storeIsMusicEnabled:(bool)enabled;

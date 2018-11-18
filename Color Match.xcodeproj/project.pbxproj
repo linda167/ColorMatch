@@ -63,6 +63,7 @@
 		BF2DF3921B64678100AFD920 /* circleFill.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BF2DF3901B64678100AFD920 /* circleFill.mp3 */; };
 		BF2DF3931B64678100AFD920 /* intro.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BF2DF3911B64678100AFD920 /* intro.mp3 */; };
 		BF2DF3951B65D56700AFD920 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF2DF3941B65D56700AFD920 /* StoreKit.framework */; };
+		BF340B3421A20FB200C7741A /* removeAds@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF340B3321A20FB100C7741A /* removeAds@2x.png */; };
 		BF43A9431B51F5E00054A6D0 /* SoundManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BF43A9421B51F5E00054A6D0 /* SoundManager.m */; };
 		BF43A9491B51F9720054A6D0 /* blueSelect.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BF43A9451B51F9720054A6D0 /* blueSelect.mp3 */; };
 		BF43A94A1B51F9720054A6D0 /* redSelect.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BF43A9461B51F9720054A6D0 /* redSelect.mp3 */; };
@@ -359,6 +360,7 @@
 		BF2DF3901B64678100AFD920 /* circleFill.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = circleFill.mp3; path = Sounds/Misc/circleFill.mp3; sourceTree = SOURCE_ROOT; };
 		BF2DF3911B64678100AFD920 /* intro.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = intro.mp3; path = Sounds/Misc/intro.mp3; sourceTree = SOURCE_ROOT; };
 		BF2DF3941B65D56700AFD920 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		BF340B3321A20FB100C7741A /* removeAds@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "removeAds@2x.png"; sourceTree = "<group>"; };
 		BF43A9411B51F5E00054A6D0 /* SoundManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundManager.h; sourceTree = "<group>"; };
 		BF43A9421B51F5E00054A6D0 /* SoundManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoundManager.m; sourceTree = "<group>"; };
 		BF43A9451B51F9720054A6D0 /* blueSelect.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = blueSelect.mp3; path = Sounds/Colors/blueSelect.mp3; sourceTree = SOURCE_ROOT; };
@@ -717,6 +719,7 @@
 		AF2C225A1874B95000082561 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				BF340B3321A20FB100C7741A /* removeAds@2x.png */,
 				BFBC31E91C321A33000A204F /* AppIcon180@3x.png */,
 				BFBC31E71C3215E4000A204F /* AppIcon120@2x.png */,
 				BFBC31CA1C2D271A000A204F /* _1stars@2x.png */,
@@ -1230,6 +1233,7 @@
 				BF9079DB1963B954000E6E58 /* splitterYellow@2x.png in Resources */,
 				BF9808851974EA4C00BAF9ED /* ReflectorArrowLtDBrown@2x.png in Resources */,
 				AFADA2231877D20D00FADA22 /* BlockYellow.png in Resources */,
+				BF340B3421A20FB200C7741A /* removeAds@2x.png in Resources */,
 				BF43A94C1B51F9720054A6D0 /* yellowSelect.mp3 in Resources */,
 				BF90799419560FE3000E6E58 /* connectorInnerGreen@2x.png in Resources */,
 				BF9079CF19626C0D000E6E58 /* splitterWhite@2x.png in Resources */,
@@ -1612,6 +1616,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.sunspark.colordash;
 				PRODUCT_NAME = "Color Dash";
 				PROVISIONING_PROFILE = "";
+				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1633,6 +1638,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.sunspark.colordash;
 				PRODUCT_NAME = "Color Dash";
 				PROVISIONING_PROFILE = "";
+				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};

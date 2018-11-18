@@ -57,22 +57,7 @@
 +(int)GetLevelsAbleToBeCompleted:(int)worldId
 {
     int levelCountForWorld = [LevelsManager GetLevelCountForWorld:worldId];
-    
-    if ([[UserData sharedUserData] getGamePurchased])
-    {
-        return levelCountForWorld;
-    }
-    else
-    {
-        if ([[UserData sharedUserData] getIsWorldLocked:worldId])
-            return 0;
-        else if (worldId <= 2)
-            return levelCountForWorld;
-        else if (worldId == 10)
-            return 0;
-        else
-            return 4;
-    }
+    return levelCountForWorld;
 }
 
 +(int)GetTotalWorldCount

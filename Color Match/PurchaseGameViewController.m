@@ -30,7 +30,7 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     // Instrument
-    NSString *name = @"Purchase full game view";
+    NSString *name = @"Remove ads view";
     id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
     [tracker set:kGAIScreenName value:name];
     [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
@@ -47,7 +47,7 @@
     [[PaymentManager instance] BuyGame];
     
     // Instrument
-    NSString *name = @"Purchase game pressed";
+    NSString *name = @"Remove ads pressed";
     id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
     [tracker set:kGAIScreenName value:name];
     [tracker send:[[GAIDictionaryBuilder createScreenView] build]];

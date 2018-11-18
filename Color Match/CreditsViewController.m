@@ -165,9 +165,10 @@
     [self addTextRow:@"freesound.org/people/univ_lyon3" bold:false size:16 yOffset:22];
     self.yOffset += bigSectionOffset;
     
-    [self addTextRow:@"PRODUCTION BABY" bold:false size:17 yOffset:26];
+    [self addTextRow:@"PRODUCTION BABIES" bold:false size:17 yOffset:26];
     [self addTextRow:@"Abigail Olivia Gray" bold:true size:18 yOffset:26];
-    [self addTextRow:@"We love you so much honey!" bold:false size:16 yOffset:26];
+    [self addTextRow:@"Luke Maoqi Gray" bold:true size:18 yOffset:26];
+    [self addTextRow:@"We love you both very much!" bold:false size:16 yOffset:26];
     self.yOffset += bigSectionOffset;
     
     [self addTextRow:@"SPECIAL THANKS" bold:false size:17 yOffset:26];

@@ -135,7 +135,7 @@
     [self handlePurchaseOrRestoreComplete];
     
     // Instrument
-    NSString *name = @"Purchase game successful";
+    NSString *name = @"Remove ads successful";
     id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
     [tracker set:kGAIScreenName value:name];
     [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
@@ -147,8 +147,8 @@
     if (!isPurchased)
     {
         UIAlertView *alert = [[UIAlertView alloc]
-                              initWithTitle:@"Purchase Successful"
-                              message:@"Your purchases were restored successfully."
+                              initWithTitle:@"Remove Ads Successful"
+                              message:@"Ads have been fully removed."
                               delegate:self
                               cancelButtonTitle:@"OK"
                               otherButtonTitles:nil];
@@ -156,7 +156,7 @@
         [self handlePurchaseOrRestoreComplete];
         
         // Instrument
-        NSString *name = @"Restore purchase successful";
+        NSString *name = @"Remove ads successful";
         id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
         [tracker set:kGAIScreenName value:name];
         [tracker send:[[GAIDictionaryBuilder createScreenView] build]];

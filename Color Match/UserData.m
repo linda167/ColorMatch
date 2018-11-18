@@ -187,29 +187,15 @@ static NSString *const LastLevelCompletedInWorldKey = @"LastLevelCompletedInWorl
 
 -(bool)getIsWorldLocked:(int)worldId
 {
-    bool gamePurchased = [self getGamePurchased];
-    
     int previousWorldId = worldId - 1;
     if (worldId == 1)
     {
         return false;
     }
-    else if (worldId > 1 && worldId < 10)
+    else if (worldId > 1)
     {
         // The world is unlocked if first four levels of previous world are complete
         return ![self isFirstFourLevelsOfWorldCompleted:previousWorldId];
-    }
-    else if (worldId == 10)
-    {
-        if (!gamePurchased)
-        {
-            // World 10 is locked if game not purchased
-            return true;
-        }
-        else
-        {
-            return ![self isFirstFourLevelsOfWorldCompleted:previousWorldId];
-        }
     }
     
     return false;
@@ -222,15 +208,9 @@ static NSString *const LastLevelCompletedInWorldKey = @"LastLevelCompletedInWorl
         return true;
     }
     
-    bool gamePurchased = [self getGamePurchased];
     int previousLevelId = levelId - 1;
     
-    if (worldId == 10 && gamePurchased)
-    {
-        // If game is purchased, and world 10 is is unlocked, all levels in world 10 is unlocked
-        return false;
-    }
-    else if (levelId == 1)
+    if (levelId == 1)
     {
         return false;
     }
@@ -240,24 +220,14 @@ static NSString *const LastLevelCompletedInWorldKey = @"LastLevelCompletedInWorl
     }
     else // Level greater than 4
     {
-        if (!gamePurchased && worldId > 2)
-        {
-            // Demo version only first 2 worlds can be fully unlocked
-            return true;
-        }
-        else
-        {
-            // Otherwise all levels are unlocked if first 4 levels are complete
-            return ![self getLevelCompleteState:worldId levelId:4];
-        }
+        // All levels are unlocked if first 4 levels are complete
+        return ![self getLevelCompleteState:worldId levelId:4];
     }
 }
 
--(NSString*)getLevelLockedMessage:(int)worldId levelId:(int)levelId isFromPreviousLevel:(bool)isFromPreviousLevel reasonIsNeedPurchase:(bool*)reasonIsNeedPurchase
+-(NSString*)getLevelLockedMessage:(int)worldId levelId:(int)levelId isFromPreviousLevel:(bool)isFromPreviousLevel
 {
     assert([self getIsLevelLocked:worldId levelId:levelId]);
-    
-    *reasonIsNeedPurchase = false;
     
     NSString* mustCompletePreviousWorld = @"You must complete the first four levels of the previous world to unlock levels in this world.";
     
@@ -265,48 +235,17 @@ static NSString *const LastLevelCompletedInWorldKey = @"LastLevelCompletedInWorl
     
     NSString* mustCompleteFirstFourLevel = @"You must complete the first four levels of this world to unlock this level.";
     
-    NSString* mustPurchaseFullGame = isFromPreviousLevel ?
-        @"You must purchase the full game to unlock the next level." :
-        @"You must purchase the full game to unlock this level.";
-    
-    bool gamePurchased = [self getGamePurchased];
-    if (gamePurchased)
+    if ([self getIsWorldLocked:worldId])
     {
-        if ([self getIsWorldLocked:worldId])
-        {
-            return mustCompletePreviousWorld;
-        }
-        else if (levelId > 1 && levelId <= 4)
-        {
-            return mustCompletePreviousLevel;
-        }
-        else
-        {
-            return mustCompleteFirstFourLevel;
-        }
+        return mustCompletePreviousWorld;
+    }
+    else if (levelId > 1 && levelId <= 4)
+    {
+        return mustCompletePreviousLevel;
     }
     else
     {
-        if (worldId == 10)
-        {
-            *reasonIsNeedPurchase = true;
-            return mustPurchaseFullGame;
-        }
-        else if (levelId >= 1 && levelId <= 4)
-        {
-            // First 4 levels, must complete previous world's first four levels
-            return [self getIsWorldLocked:worldId] ?mustCompletePreviousWorld :
-                mustCompletePreviousLevel;
-        }
-        else if (worldId <= 2)
-        {
-            return mustCompleteFirstFourLevel;
-        }
-        else
-        {
-            *reasonIsNeedPurchase = true;
-            return mustPurchaseFullGame;
-        }
+        return mustCompleteFirstFourLevel;
     }
 }
 
