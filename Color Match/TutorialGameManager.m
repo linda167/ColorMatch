@@ -1517,7 +1517,7 @@
     [self.viewController.view addSubview:self.dialogText];
     [self.dialogText setCenter:self.viewController.view.center];
     
-    [self setTutorialDialogText:@"This is it, the final world!\n\nThese last levels combine everything you've learned up to this point.\n\nUnleash your puzzle skills and claim victory!"];
+    [self setTutorialDialogText:@"Great job on making it this far!\n\nFrom here on out, the levels will combine everything you've learned up to this point.\n\nUnleash your puzzle skills and claim victory!"];
     
     showBeginButton();
 }

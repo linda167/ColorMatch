@@ -26,7 +26,7 @@
  ------------------------------------------*/
 
 static NSArray *freeGameTipsList;
-static NSArray *tipsList;
+static NSMutableArray *tipsList;
 static NSArray *winMessageListForThreeStar;
 static NSArray *winMessageListForOneTwoStar;
 static bool isIphone4S;
@@ -54,17 +54,12 @@ static NSDate *lastTimeAdShown;
                             nil];
         
         // TODO: lindach: Update tips based on tutorial completed
-        tipsList = [[NSArray alloc] initWithObjects:
+        tipsList = [[NSMutableArray alloc] initWithObjects:
                     @"Tip: Use the white color to clear inputs in the play field.",
                     @"Did You Know: You can change the background music in the settings menu.",
                     @"Tip: Some puzzles require white to finish.",
                     @"Fun Fact: Color Dash was inspired by a Color Theory college class.",
                     @"Tip: The \"Help\" button will show you all the possible color mixes.",
-                    @"Tip: The small circles on the Connector will tell you what color they all share.",
-                    @"Tip: The Zoner adds color to all surrounding cells. It can be tricky!",
-                    @"Tip: Tap the Converter to change the flow of color going through it.",
-                    @"Tip: Transporters change color depending on the colors going in and out of them.",
-                    @"Tip: Shifters always follow the same color sequence; Blue, Red, Yellow, Blue.",
                     @"Fun Fact: Color Dash was made by only two people! We totally got married too!",
                     @"Did You Know: Moves are tracked but not counted against you.",
                     @"Did You Know: You can earn more stars by completing a level faster.",
@@ -80,11 +75,41 @@ static NSDate *lastTimeAdShown;
                     @"Did You Know: Ben reads every rating review on the store. Let us hear from you!",
                     @"Fun Fact: Babies can scream very loudly when they are hungry and/or tired.",
                     @"Fun Fact: Dogs do not see in black and white. They can see yellows, blues, and purples.",
-                    @"Tip: The little arrows around the Splitter will remind you of the original color added to it.",
                     @"Tip: If you see a \"plus\" symbol in the play field, that means you can directly add color to it.",
                     @"Fun Fact: There is no actual dashing in Color Dash.",
                     @"Did You Know: If enough people buy the game, we'll add new content. Spread the word!",
                     nil];
+    }
+    
+    // Add completion-based tips
+    if ([[UserData sharedUserData] getTutorialComplete:3])
+    {
+        [tipsList addObject:@"Tip: The little arrows around the Splitter will remind you of the original color added to it."];
+    }
+    
+    if ([[UserData sharedUserData] getTutorialComplete:4])
+    {
+        [tipsList addObject:@"Tip: The small circles on the Connector will tell you what color they all share."];
+    }
+    
+    if ([[UserData sharedUserData] getTutorialComplete:6])
+    {
+        [tipsList addObject:@"Tip: The Zoner adds color to all surrounding cells. It can be tricky!"];
+    }
+    
+    if ([[UserData sharedUserData] getTutorialComplete:7])
+    {
+        [tipsList addObject:@"Tip: Tap the Converter to change the flow of color going through it."];
+    }
+    
+    if ([[UserData sharedUserData] getTutorialComplete:8])
+    {
+        [tipsList addObject:@"Tip: Transporters change color depending on the colors going in and out of them."];
+    }
+    
+    if ([[UserData sharedUserData] getTutorialComplete:9])
+    {
+        [tipsList addObject:@"Tip: Shifters always follow the same color sequence; Blue, Red, Yellow, Blue."];
     }
     
     if ([[UserData sharedUserData] getGamePurchased])
