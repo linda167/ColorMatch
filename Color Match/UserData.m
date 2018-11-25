@@ -192,10 +192,15 @@ static NSString *const LastLevelCompletedInWorldKey = @"LastLevelCompletedInWorl
     {
         return false;
     }
-    else if (worldId > 1)
+    else if (worldId > 1 && worldId <= 10)
     {
         // The world is unlocked if first four levels of previous world are complete
         return ![self isFirstFourLevelsOfWorldCompleted:previousWorldId];
+    }
+    else
+    {
+        // Worlds 11+ are unlocked if first four levels of world 9 are unlocked, which means they unlocked all mechanics
+        return ![self isFirstFourLevelsOfWorldCompleted:9];
     }
     
     return false;
@@ -206,6 +211,12 @@ static NSString *const LastLevelCompletedInWorldKey = @"LastLevelCompletedInWorl
     if ([self getIsWorldLocked:worldId])
     {
         return true;
+    }
+    
+    // World 10 and above, all levels are unlcoked if world is unlocked
+    if (worldId >= 10)
+    {
+        return false;
     }
     
     int previousLevelId = levelId - 1;

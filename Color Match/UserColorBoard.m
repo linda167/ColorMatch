@@ -190,6 +190,97 @@
     }
 }
 
+-(ColorCell*)GetCellForNextConnectionPoint:(int)currentRow currentCol:(int)currentCol currentX:(int)currentX currentY:(int)currentY isHorizontal:(BOOL)isHorizontal
+{
+    // NOTE: Ideally this should be refactored to share with next method
+    if (isHorizontal)
+    {
+        NSArray *row = [self.colorCellSections objectAtIndex:currentRow];
+        
+        bool connectionFound = false;
+        for (int i = currentCol+1; i < row.count; i++)
+        {
+            ColorCell *colorCell = [row objectAtIndex:i];
+            
+            if (colorCell.cellType == ReflectorLeftToDown || colorCell.cellType == Diverter)
+            {
+                return colorCell;
+            }
+            else if (colorCell.cellType == ReflectorTopToRight ||
+                     colorCell.cellType == TransporterOutputRight ||
+                     colorCell.cellType == Converter)
+            {
+                if (i > currentCol + 1)
+                {
+                    // Draw line to closest cell to the left that would need a line
+                    ColorCell *colorCell = [self FindClosestCellReceivingLinesToLeft:currentRow colStartVal:currentCol colEndVal:i];
+                    
+                    if (colorCell != NULL)
+                    {
+                        return colorCell;
+                    }
+                }
+            }
+            else if (colorCell.cellType == TransporterInputLeft)
+            {
+                // Draw line to cell
+                return [row objectAtIndex:i];
+            }
+        }
+        
+        if (!connectionFound)
+        {
+            // If no special connection found, then the connection is to the right most cell that supports combining color
+            return [self FindRightmostGoalTargetCell:currentRow];
+        }
+    }
+    else    // if vertical
+    {
+        bool connectionFound = false;
+        for (int i=currentRow+1; i<self.colorCellSections.count; i++)
+        {
+            NSArray *row = [self.colorCellSections objectAtIndex:i];
+            ColorCell *colorCell = [row objectAtIndex:currentCol];
+            
+            if (colorCell.cellType == ReflectorLeftToDown ||
+                colorCell.cellType == TransporterOutputDown ||
+                colorCell.cellType == Converter)
+            {
+                if (i > currentRow + 1)
+                {
+                    // Draw line to closest cell above that would need a line
+                    ColorCell *colorCell = [self FindClosestCellReceivingLinesOnTop:currentCol rowStartVal:currentRow rowEndVal:i];
+                    if (colorCell != NULL)
+                    {
+                        return colorCell;
+                    }
+                }
+            }
+            else if (colorCell.cellType == ReflectorTopToRight ||
+                     colorCell.cellType == Diverter)
+            {
+                return colorCell;
+            }
+            else if (colorCell.cellType == Converter)
+            {
+                return colorCell;
+            }
+            else if (colorCell.cellType == TransporterInputTop)
+            {
+                return colorCell;
+            }
+        }
+        
+        if (!connectionFound)
+        {
+            // If no special connection found, then the connection is to the bottom most cell that supports combining color
+            return [self FindBottommostGoalTargetCell:currentCol];
+        }
+    }
+    
+    return nil;
+}
+
 -(void)DrawLineToNextConnectionPoint:(int)currentRow currentCol:(int)currentCol currentX:(int)currentX currentY:(int)currentY isHorizontal:(BOOL)isHorizontal lineInfo:(LineInfo*)lineInfo
 {
     if (isHorizontal)
@@ -200,6 +291,7 @@
         for (int i = currentCol+1; i < row.count; i++)
         {
             ColorCell *colorCell = [row objectAtIndex:i];
+            
             if (colorCell.cellType == ReflectorLeftToDown || colorCell.cellType == Diverter)
             {
                 // Draw line to reflector
@@ -234,6 +326,7 @@
                 // Draw line to cell
                 ColorCell *colorCell = [row objectAtIndex:i];
                 [self DrawHorizontalLineToConnection:colorCell lineInfo:lineInfo currentY:currentY drawToCenter:true];
+                [self updateSpecialImageVisibility:colorCell shouldHide:false];
                 
                 connectionFound = true;
                 break;
@@ -284,10 +377,19 @@
                 connectionFound = true;
                 break;
             }
-            else if (colorCell.cellType == Converter || colorCell.cellType == TransporterInputTop)
+            else if (colorCell.cellType == Converter)
             {
                 // Draw line to converter
                 [self DrawVerticalLineToConnection:colorCell lineInfo:lineInfo currentX:currentX drawToCenter:true];
+                
+                connectionFound = true;
+                break;
+            }
+            else if (colorCell.cellType == TransporterInputTop)
+            {
+                // Draw line to converter
+                [self DrawVerticalLineToConnection:colorCell lineInfo:lineInfo currentX:currentX drawToCenter:true];
+                [self updateSpecialImageVisibility:colorCell shouldHide:false];
                 
                 connectionFound = true;
                 break;
@@ -523,6 +625,15 @@
     {
         // Line already exists so replace instead
         [self.connectorLines replaceConverterLine:lineInfo index:index];
+    }
+    
+    // Update special cells on the path of when we remove the previous converter line
+    int previousConverterLineIsHorizontal = !isHorizontal;
+    ColorCell *previousNextConnectionPoint = [self GetCellForNextConnectionPoint:rowValue currentCol:colValue currentX:leftX currentY:leftY isHorizontal:previousConverterLineIsHorizontal];
+    if ((previousNextConnectionPoint.cellType == TransporterInputLeft && previousConverterLineIsHorizontal) ||
+        (previousNextConnectionPoint.cellType == TransporterInputTop && !previousConverterLineIsHorizontal))
+    {
+        [self updateSpecialImageVisibility:previousNextConnectionPoint shouldHide:true];
     }
 }
 
@@ -808,6 +919,7 @@
 -(void)GetSpecialImage1ForCell:(ColorCell*)colorCell boardCells:(BoardCells*)boardCells
 {
     UIImage *specialImage = NULL;
+    bool isImageDefaultHidden = false;
     int x, y, size;
     switch (colorCell.cellType)
     {
@@ -847,6 +959,7 @@
             size = self.boardParameters.transporterArrowSize;
             x = colorCell.image.frame.origin.x + self.boardParameters.transporterArrowDownXAdjustment;
             y = colorCell.image.frame.origin.y + self.boardParameters.transporterArrowDownYAdjustment;
+            isImageDefaultHidden = true;
             break;
         
         case TransporterOutputRight:
@@ -861,6 +974,7 @@
             size = self.boardParameters.transporterArrowSize;
             x = colorCell.image.frame.origin.x + self.boardParameters.transporterArrowRightXAdjustment2;
             y = colorCell.image.frame.origin.y + self.boardParameters.transporterArrowRightYAdjustment;
+            isImageDefaultHidden = true;
             break;
             
         case TransporterOutputDown:
@@ -877,7 +991,8 @@
     }
     
     UIImageView *specialImageView = [[UIImageView alloc] initWithFrame:CGRectMake(x, y, size, size)];
-    
+    specialImageView.hidden = isImageDefaultHidden;
+
     specialImageView.image = specialImage;
     colorCell.specialImage = specialImageView;
     [self.containerView addSubview:specialImageView];
@@ -1138,6 +1253,7 @@
     [self.connectorLines updateConverterLine:lineIndex color:[CommonUtils GetUIColorForColor:newColorToApply]];
     
     // Remove color from current direction
+    // TODO: lindach: Need to update here?
     int oldColorToRemove = isDirectionRight ? converterCell.verticalColorInput : converterCell.horizontalColorInput;
     if (oldColorToRemove != 0)
     {

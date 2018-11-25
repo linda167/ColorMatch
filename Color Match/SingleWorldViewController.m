@@ -100,7 +100,7 @@
     
     // Do any additional setup after loading the view.
     [self renderWorldTitleDisplay];
-    if (self.worldId < 11)
+    if (self.worldId <= [LevelsManager GetTotalWorldCount])
     {
         [self renderLevelsDisplay];
     }

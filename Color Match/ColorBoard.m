@@ -108,6 +108,9 @@
                 }
             }
             
+            // TODO: lindach: Need to check completing last level of world 10, go to world 11
+            // TODO: lindach: Need to check completing very last level go to credits
+            
             if (colorCell.cellType == ReflectorLeftToDown || colorCell.cellType == Diverter)
             {
                 // Trigger apply color vertically down
@@ -210,10 +213,8 @@
     if ([self isKindOfClass:[UserColorBoard class]])
     {
         // Change transporter input image
-        [transporterCell.image setImage:[self getTransporterImageWithColor:transporterCell color:color]];
-        
-        // Change special image, direction doesn't matter
-        [self updateSpecialCellImagesOnApplyColor:transporterCell color:color isHorizontal:true cellsAffected:cellsAffected];
+        [transporterCell.image setImage:[self getTransporterImageWithColor:transporterCell color:transporterGroup.currentColor]];
+        [self updateSpecialCellImagesOnApplyColor:transporterCell color:transporterGroup.currentColor isHorizontal:true cellsAffected:cellsAffected];
     }
 
     for (TransporterCell *outputCell in transporterGroup.teleporterOutputs)
@@ -224,11 +225,7 @@
             [cellsAffected addObject:outputCell.image];
         }
         
-        // Only need to change output cell on add
-        if (isAdd)
-        {
-            [self updateTransporterOutputCell:outputCell transporterGroup:transporterGroup cellsAffected:cellsAffected];
-        }
+        [self updateTransporterOutputCell:outputCell transporterGroup:transporterGroup cellsAffected:cellsAffected];
         
         bool outputHorizontal = outputCell.cellType == TransporterOutputRight;
         
@@ -266,6 +263,12 @@
             [cellsAffected addObject:colorCell.specialImage2];
         }
     }
+}
+
+-(void)updateSpecialImageVisibility:(ColorCell*)colorCell shouldHide:(bool)shouldHide
+{
+    UIImageView *specialImageView = colorCell.specialImage;
+    specialImageView.hidden = shouldHide;
 }
 
 -(UIImage*)updateSpecialImageForCellWithColor:(ColorCell*)colorCell color:(int)color isHorizontal:(BOOL)isHorizontal

@@ -106,8 +106,10 @@
 
 - (bool)isTutorialLevel:(int)worldId levelId:(int)levelId
 {
+    // No tutorial for worlds 11+
     return levelId == 1 &&
-        ![[UserData sharedUserData] getTutorialComplete:self.worldId];
+        ![[UserData sharedUserData] getTutorialComplete:self.worldId] &&
+        worldId <= 10;
 }
 
 - (void)SetParametersForNewGame:(int)size worldId:(int)worldId levelId:(int)levelId

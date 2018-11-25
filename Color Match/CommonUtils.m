@@ -53,7 +53,6 @@ static NSDate *lastTimeAdShown;
                             @"Tip: Hate the ads? Permanently remove them for only $0.99!",
                             nil];
         
-        // TODO: lindach: Update tips based on tutorial completed
         tipsList = [[NSMutableArray alloc] initWithObjects:
                     @"Tip: Use the white color to clear inputs in the play field.",
                     @"Did You Know: You can change the background music in the settings menu.",

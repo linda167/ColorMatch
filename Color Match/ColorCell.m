@@ -98,6 +98,7 @@
     
     [_colorInputs removeObjectAtIndex:existingColorIndex];
     [self recalculateOutputColor];
+    [self recalculateSpecialCellImage];
     
     if (cellsAffected != NULL)
     {
