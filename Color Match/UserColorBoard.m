@@ -1253,7 +1253,6 @@
     [self.connectorLines updateConverterLine:lineIndex color:[CommonUtils GetUIColorForColor:newColorToApply]];
     
     // Remove color from current direction
-    // TODO: lindach: Need to update here?
     int oldColorToRemove = isDirectionRight ? converterCell.verticalColorInput : converterCell.horizontalColorInput;
     if (oldColorToRemove != 0)
     {

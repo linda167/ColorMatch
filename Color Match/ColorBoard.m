@@ -108,9 +108,6 @@
                 }
             }
             
-            // TODO: lindach: Need to check completing last level of world 10, go to world 11
-            // TODO: lindach: Need to check completing very last level go to credits
-            
             if (colorCell.cellType == ReflectorLeftToDown || colorCell.cellType == Diverter)
             {
                 // Trigger apply color vertically down

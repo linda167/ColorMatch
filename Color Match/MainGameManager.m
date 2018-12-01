@@ -505,7 +505,7 @@
 {
     FullLevelId *nextLevelId = [self getNextLevelId];
     
-    if (nextLevelId.worldId > 10)
+    if (nextLevelId.worldId > 11)
     {
         [self showLastLevelVictoryDialog:stars];
     }
@@ -530,18 +530,16 @@
     
     [alert alertIsDismissed:^{
         FullLevelId *nextLevelId = [self getNextLevelId];
-        if (nextLevelId.worldId > 10)
-        {
-            // This is the last world. Go to credits
-            UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
-            CreditsViewController *creditsView = (CreditsViewController*)[storyBoard instantiateViewControllerWithIdentifier:@"creditsScreen"];
-            [self.viewController.navigationController pushViewController:creditsView animated:YES];
-            
-            // Fix backstack
-            UIViewController *firstView = (UIViewController*)[self.viewController.navigationController.viewControllers objectAtIndex:0];
-            NSArray *newStack = [[NSArray alloc] initWithObjects:firstView,creditsView,nil];
-            self.viewController.navigationController.viewControllers = newStack;
-        }
+        
+        // This is the last world. Go to credits
+        UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
+        CreditsViewController *creditsView = (CreditsViewController*)[storyBoard instantiateViewControllerWithIdentifier:@"creditsScreen"];
+        [self.viewController.navigationController pushViewController:creditsView animated:YES];
+        
+        // Fix backstack
+        UIViewController *firstView = (UIViewController*)[self.viewController.navigationController.viewControllers objectAtIndex:0];
+        NSArray *newStack = [[NSArray alloc] initWithObjects:firstView,creditsView,nil];
+        self.viewController.navigationController.viewControllers = newStack;
     }];
     
     UIImage *starsImage = [self getStarsImageForWinDialog:stars];
